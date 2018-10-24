@@ -1,0 +1,16 @@
+PODS:
+  - YNExposure (0.0.1)
+
+DEPENDENCIES:
+  - YNExposure (from `../`)
+
+EXTERNAL SOURCES:
+  YNExposure:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  YNExposure: 3a09c890a9b13e7f9e76bdbba190e10a0d7bb32f
+
+PODFILE CHECKSUM: 4ba742b1eb4f483ce7612444342ae5fb2306f4cd
+
+COCOAPODS: 1.5.3
