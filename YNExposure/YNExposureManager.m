@@ -10,12 +10,15 @@
 
 @interface YNExposureManager()
 @property (nonatomic, strong) NSHashTable<UIView *> *ynExposureViewHashTable;
-@property (nonatomic, strong) NSTimer *timer;
 @end
 
-@implementation YNExposureManager
+@implementation YNExposureManager{
+    dispatch_source_t _timer;
+    dispatch_queue_t _queue;
+}
 
 MACRO_SINGLETON_PATTERN_M({
+    self->_queue = dispatch_queue_create("com.shopee.yanni.YNExposure.timer_queue", NULL);
     self.ynExposureViewHashTable = [NSHashTable<UIView *> weakObjectsHashTable];
     self.interval = 0.5;
 })
@@ -54,7 +57,7 @@ MACRO_SINGLETON_PATTERN_M({
 
 - (void)detectExposure
 {
-    
+    NSLog(@"%@", [NSThread currentThread]);
 }
 
 #pragma mark - Timer
@@ -62,9 +65,9 @@ MACRO_SINGLETON_PATTERN_M({
 - (void)updateTimerStatusWhenViewsTableChange
 {
     NSArray *views = [self.ynExposureViewHashTable allObjects];
-    if (views.count > 0 && self.timer == nil) {
+    if (views.count > 0 && self->_timer == nil) {
         [self startTimer];
-    } else if(views.count == 0 && self.timer != nil){
+    } else if(views.count == 0 && self->_timer != nil){
         [self stopTimer];
     }
 }
@@ -77,19 +80,26 @@ MACRO_SINGLETON_PATTERN_M({
 
 - (void)startTimer
 {
-    NSAssert(self.timer == nil, @"self.timer must be nil when call startTimer");
-    if (self.timer) {
+    NSAssert(self->_timer == nil, @"self->_timer must be nil when call startTimer");
+    if (self->_timer) {
         return;
     }
-    self.timer = [NSTimer timerWithTimeInterval:self.interval target:self selector:@selector(detectExposure) userInfo:nil repeats:YES];
-    [[NSRunLoop mainRunLoop] addTimer:self.timer forMode:NSDefaultRunLoopMode];
+    
+    dispatch_source_t timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, self->_queue);
+    dispatch_source_set_timer(timer, DISPATCH_TIME_NOW, self.interval * NSEC_PER_SEC, 0 * NSEC_PER_SEC);
+    dispatch_source_set_event_handler(timer, ^{
+        [self detectExposure];
+    });
+    dispatch_resume(timer);
+    
+    self->_timer = timer;
 }
 
 - (void)stopTimer
 {
-    if (self.timer) {
-        [self.timer invalidate];
-        self.timer = nil;
+    if (self->_timer) {
+        dispatch_source_cancel(self->_timer);
+        self->_timer = nil;
     }
 }
 
