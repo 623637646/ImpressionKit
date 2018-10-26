@@ -16,6 +16,6 @@ typedef void(^YNExposureBlock)(CGFloat areaRatio);
 
 - (void)ynex_execute:(YNExposureBlock)block delay:(NSTimeInterval)delay minAreaRatio:(CGFloat)minAreaRatio;
 
-- (void)ynex_reset;
+- (void)ynex_resetExecute;
 
 @end

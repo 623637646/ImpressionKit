@@ -19,7 +19,7 @@
     self.ynex_minAreaRatio = minAreaRatio;
 }
 
-- (void)ynex_reset
+- (void)ynex_resetExecute
 {
     
 }

@@ -1,15 +1,22 @@
 PODS:
-  - YNExposure (0.0.1)
+  - Aspects (1.4.1)
+  - YNExposure (0.0.1):
+    - Aspects (= 1.4.1)
 
 DEPENDENCIES:
   - YNExposure (from `../`)
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - Aspects
 
 EXTERNAL SOURCES:
   YNExposure:
     :path: "../"
 
 SPEC CHECKSUMS:
-  YNExposure: 3a09c890a9b13e7f9e76bdbba190e10a0d7bb32f
+  Aspects: 7595ba96a6727a58ebcbfc954497fc5d2fdde546
+  YNExposure: 49a1732e3ade73b272bc9dd7577dbceacf364369
 
 PODFILE CHECKSUM: 4ba742b1eb4f483ce7612444342ae5fb2306f4cd
 

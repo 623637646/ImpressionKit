@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		55C0F7524D44608BFC41F6E8 /* libPods-YNExposure.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0864239623B5A7EEB82E1AE6 /* libPods-YNExposure.a */; };
 		5C4017B72180774E0041D59C /* UIView+YNExposurePrivate.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C4017B52180774E0041D59C /* UIView+YNExposurePrivate.h */; };
 		5C4017B82180774E0041D59C /* UIView+YNExposurePrivate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C4017B62180774E0041D59C /* UIView+YNExposurePrivate.m */; };
 		5CFF020F21806C9700E322D7 /* YNExposure.h in Headers */ = {isa = PBXBuildFile; fileRef = 5CFF020D21806C9700E322D7 /* YNExposure.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -15,6 +16,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		06FE30168FF33F78B5D476A3 /* Pods-YNExposure.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YNExposure.debug.xcconfig"; path = "Pods/Target Support Files/Pods-YNExposure/Pods-YNExposure.debug.xcconfig"; sourceTree = "<group>"; };
+		0864239623B5A7EEB82E1AE6 /* libPods-YNExposure.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-YNExposure.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5C4017B52180774E0041D59C /* UIView+YNExposurePrivate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIView+YNExposurePrivate.h"; sourceTree = "<group>"; };
 		5C4017B62180774E0041D59C /* UIView+YNExposurePrivate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIView+YNExposurePrivate.m"; sourceTree = "<group>"; };
 		5CFF020A21806C9700E322D7 /* YNExposure.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = YNExposure.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -22,6 +25,7 @@
 		5CFF020E21806C9700E322D7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5CFF023B2180719800E322D7 /* UIView+YNExposure.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIView+YNExposure.h"; sourceTree = "<group>"; };
 		5CFF023C2180719800E322D7 /* UIView+YNExposure.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIView+YNExposure.m"; sourceTree = "<group>"; };
+		8AFA968848EADF0AF83FDF34 /* Pods-YNExposure.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YNExposure.release.xcconfig"; path = "Pods/Target Support Files/Pods-YNExposure/Pods-YNExposure.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,6 +33,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				55C0F7524D44608BFC41F6E8 /* libPods-YNExposure.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -49,6 +54,8 @@
 			children = (
 				5CFF020C21806C9700E322D7 /* YNExposure */,
 				5CFF020B21806C9700E322D7 /* Products */,
+				95A9B6676EFF244A6D1BC811 /* Pods */,
+				C69777FEC6E9EB8782029491 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -80,6 +87,23 @@
 			path = Classes;
 			sourceTree = "<group>";
 		};
+		95A9B6676EFF244A6D1BC811 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				06FE30168FF33F78B5D476A3 /* Pods-YNExposure.debug.xcconfig */,
+				8AFA968848EADF0AF83FDF34 /* Pods-YNExposure.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		C69777FEC6E9EB8782029491 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				0864239623B5A7EEB82E1AE6 /* libPods-YNExposure.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -100,6 +124,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 5CFF021221806C9700E322D7 /* Build configuration list for PBXNativeTarget "YNExposure" */;
 			buildPhases = (
+				2A6B2086161EADCDB3DC8481 /* [CP] Check Pods Manifest.lock */,
 				5CFF020521806C9700E322D7 /* Sources */,
 				5CFF020621806C9700E322D7 /* Frameworks */,
 				5CFF020721806C9700E322D7 /* Headers */,
@@ -154,6 +179,31 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		2A6B2086161EADCDB3DC8481 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-YNExposure-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		5CFF020521806C9700E322D7 /* Sources */ = {
@@ -286,6 +336,7 @@
 		};
 		5CFF021321806C9700E322D7 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 06FE30168FF33F78B5D476A3 /* Pods-YNExposure.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
@@ -310,6 +361,7 @@
 		};
 		5CFF021421806C9700E322D7 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8AFA968848EADF0AF83FDF34 /* Pods-YNExposure.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
