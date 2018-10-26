@@ -65,7 +65,7 @@ Pod::Spec.new do |s|
   #
 
   # s.platform     = :ios
-  # s.platform     = :ios, "5.0"
+  s.platform     = :ios, "8.0"
 
   #  When using multiple platforms
   # s.ios.deployment_target = "5.0"
@@ -91,7 +91,7 @@ Pod::Spec.new do |s|
   #  Not including the public_header_files will make all headers public.
   #
 
-  s.source_files  = "YNExposure/Classes/**/*.{h,m}"
+  s.source_files  = "YNExposure/**/*.{h,m}"
   # s.exclude_files = "YNExposure/Classes/Exclude"
 
   s.public_header_files = "YNExposure/YNExposure.h", "YNExposure/Public/**/*.h"

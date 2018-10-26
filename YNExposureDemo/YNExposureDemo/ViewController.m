@@ -25,7 +25,10 @@
     view.backgroundColor = [UIColor redColor];
     [scrollView addSubview:view];
     
-    view.ynex_isExposured;
+    NSError *error = nil;
+    [view ynex_execute:^(CGFloat areaRatio) {
+        NSLog(@"execute!!!");
+    } delay:1 minAreaRatio:1 error:&error];
 }
 
 

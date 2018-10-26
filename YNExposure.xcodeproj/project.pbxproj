@@ -10,6 +10,9 @@
 		55C0F7524D44608BFC41F6E8 /* libPods-YNExposure.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0864239623B5A7EEB82E1AE6 /* libPods-YNExposure.a */; };
 		5C4017B72180774E0041D59C /* UIView+YNExposurePrivate.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C4017B52180774E0041D59C /* UIView+YNExposurePrivate.h */; };
 		5C4017B82180774E0041D59C /* UIView+YNExposurePrivate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C4017B62180774E0041D59C /* UIView+YNExposurePrivate.m */; };
+		5CAB2B2D2182F7BD003B5867 /* YNExposureManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 5CAB2B2B2182F7BD003B5867 /* YNExposureManager.h */; };
+		5CAB2B2E2182F7BD003B5867 /* YNExposureManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CAB2B2C2182F7BD003B5867 /* YNExposureManager.m */; };
+		5CAB2B302182F871003B5867 /* YNExposureMacro.h in Headers */ = {isa = PBXBuildFile; fileRef = 5CAB2B2F2182F871003B5867 /* YNExposureMacro.h */; };
 		5CFF020F21806C9700E322D7 /* YNExposure.h in Headers */ = {isa = PBXBuildFile; fileRef = 5CFF020D21806C9700E322D7 /* YNExposure.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5CFF023D2180719800E322D7 /* UIView+YNExposure.h in Headers */ = {isa = PBXBuildFile; fileRef = 5CFF023B2180719800E322D7 /* UIView+YNExposure.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5CFF023E2180719800E322D7 /* UIView+YNExposure.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CFF023C2180719800E322D7 /* UIView+YNExposure.m */; };
@@ -20,6 +23,9 @@
 		0864239623B5A7EEB82E1AE6 /* libPods-YNExposure.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-YNExposure.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5C4017B52180774E0041D59C /* UIView+YNExposurePrivate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIView+YNExposurePrivate.h"; sourceTree = "<group>"; };
 		5C4017B62180774E0041D59C /* UIView+YNExposurePrivate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIView+YNExposurePrivate.m"; sourceTree = "<group>"; };
+		5CAB2B2B2182F7BD003B5867 /* YNExposureManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YNExposureManager.h; sourceTree = "<group>"; };
+		5CAB2B2C2182F7BD003B5867 /* YNExposureManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YNExposureManager.m; sourceTree = "<group>"; };
+		5CAB2B2F2182F871003B5867 /* YNExposureMacro.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YNExposureMacro.h; sourceTree = "<group>"; };
 		5CFF020A21806C9700E322D7 /* YNExposure.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = YNExposure.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5CFF020D21806C9700E322D7 /* YNExposure.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YNExposure.h; sourceTree = "<group>"; };
 		5CFF020E21806C9700E322D7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -43,6 +49,7 @@
 		5C4017B921807D590041D59C /* Public */ = {
 			isa = PBXGroup;
 			children = (
+				5CFF020D21806C9700E322D7 /* YNExposure.h */,
 				5CFF023B2180719800E322D7 /* UIView+YNExposure.h */,
 				5CFF023C2180719800E322D7 /* UIView+YNExposure.m */,
 			);
@@ -71,20 +78,14 @@
 			isa = PBXGroup;
 			children = (
 				5C4017B921807D590041D59C /* Public */,
-				5CFF023A2180718B00E322D7 /* Classes */,
-				5CFF020D21806C9700E322D7 /* YNExposure.h */,
+				5C4017B52180774E0041D59C /* UIView+YNExposurePrivate.h */,
+				5C4017B62180774E0041D59C /* UIView+YNExposurePrivate.m */,
+				5CAB2B2B2182F7BD003B5867 /* YNExposureManager.h */,
+				5CAB2B2C2182F7BD003B5867 /* YNExposureManager.m */,
+				5CAB2B2F2182F871003B5867 /* YNExposureMacro.h */,
 				5CFF020E21806C9700E322D7 /* Info.plist */,
 			);
 			path = YNExposure;
-			sourceTree = "<group>";
-		};
-		5CFF023A2180718B00E322D7 /* Classes */ = {
-			isa = PBXGroup;
-			children = (
-				5C4017B52180774E0041D59C /* UIView+YNExposurePrivate.h */,
-				5C4017B62180774E0041D59C /* UIView+YNExposurePrivate.m */,
-			);
-			path = Classes;
 			sourceTree = "<group>";
 		};
 		95A9B6676EFF244A6D1BC811 /* Pods */ = {
@@ -113,7 +114,9 @@
 			files = (
 				5CFF020F21806C9700E322D7 /* YNExposure.h in Headers */,
 				5CFF023D2180719800E322D7 /* UIView+YNExposure.h in Headers */,
+				5CAB2B2D2182F7BD003B5867 /* YNExposureManager.h in Headers */,
 				5C4017B72180774E0041D59C /* UIView+YNExposurePrivate.h in Headers */,
+				5CAB2B302182F871003B5867 /* YNExposureMacro.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -186,15 +189,11 @@
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputFileListPaths = (
-			);
 			inputPaths = (
 				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
 				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
 			outputPaths = (
 				"$(DERIVED_FILE_DIR)/Pods-YNExposure-checkManifestLockResult.txt",
 			);
@@ -211,6 +210,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5C4017B82180774E0041D59C /* UIView+YNExposurePrivate.m in Sources */,
+				5CAB2B2E2182F7BD003B5867 /* YNExposureManager.m in Sources */,
 				5CFF023E2180719800E322D7 /* UIView+YNExposure.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
