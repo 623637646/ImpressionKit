@@ -29,7 +29,7 @@
     NSError *error = nil;
     [view ynex_execute:^(CGFloat areaRatio) {
         NSLog(@"execute!!!");
-    } delay:1 minAreaRatio:1 error:&error];
+    } delay:5 minAreaRatio:1 error:&error];
 }
 
 

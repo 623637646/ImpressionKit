@@ -9,10 +9,21 @@
 #import "YNEeposureTestingView.h"
 #import <YNExposure/YNExposure.h>
 
+@interface UIView(YNEeposureTestingViewPrivate)
+@property (nonatomic, copy) NSDate *ynex_lastShowedDate;
+@property (nonatomic, assign) NSTimeInterval ynex_delay;
+@end
+
+@implementation UIView(YNEeposureTestingViewPrivate)
+@dynamic ynex_lastShowedDate;
+@dynamic ynex_delay;
+@end
+
 static void *YNEeposureTestingViewContext = &YNEeposureTestingViewContext;
 
 @interface YNEeposureTestingView()
-
+@property (nonatomic, weak) NSTimer *timer;
+@property (nonatomic, weak) UILabel *label;
 @end
 
 @implementation YNEeposureTestingView
@@ -21,30 +32,44 @@ static void *YNEeposureTestingViewContext = &YNEeposureTestingViewContext;
 {
     self = [super initWithFrame:frame];
     if (self) {
-        [self addObserver:self forKeyPath:@"ynex_isExposured" options:NSKeyValueObservingOptionNew context:YNEeposureTestingViewContext];
+        __weak typeof(self) wself = self;
+        self.timer = [NSTimer scheduledTimerWithTimeInterval:0.1 repeats:YES block:^(NSTimer * _Nonnull timer) {
+            __strong typeof(self) self = wself;
+            [self updateUI];
+        }];
+
+        UILabel *label = [[UILabel alloc] initWithFrame:self.bounds];
+        label.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+        label.font = [UIFont systemFontOfSize:12];
+        label.textColor = [UIColor blackColor];
+        label.textAlignment = NSTextAlignmentCenter;
+        [self addSubview:label];
+        self.label = label;
     }
     return self;
 }
 
--(void)dealloc
+- (void)dealloc
 {
-    [self removeObserver:self forKeyPath:@"ynex_isExposured"];
+    if (self.timer) {
+        [self.timer invalidate];
+        self.timer = nil;
+    }
 }
 
--(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context
+- (void)updateUI
 {
-    if (context != YNEeposureTestingViewContext) {
-        [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
-        return;
-    }
-    if ([keyPath isEqualToString:@"ynex_isExposured"]) {
-        BOOL isExposured = [[change objectForKey:NSKeyValueChangeNewKey] boolValue];
-        if (isExposured) {
-            self.backgroundColor = [UIColor greenColor];
+    if (self.ynex_isExposured) {
+        self.backgroundColor = [UIColor greenColor];
+        self.label.text = nil;
+    } else {
+        self.backgroundColor = [UIColor lightGrayColor];
+        if (self.ynex_lastShowedDate == nil) {
+            self.label.text = nil;
         } else {
-            self.backgroundColor = [UIColor lightGrayColor];
+            NSTimeInterval interval = [[NSDate date] timeIntervalSinceDate:self.ynex_lastShowedDate];
+            self.label.text = [NSString stringWithFormat:@"%.1f", self.ynex_delay - interval];
         }
-        return;
     }
 }
 
