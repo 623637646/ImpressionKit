@@ -38,7 +38,9 @@ NSString *const YNExposureErrorDomin = @"com.shopee.yanni.YNExposure";
     self.ynex_minAreaRatio = minAreaRatio;
     
     // aspect
+    __weak typeof(self) wself = self;
     [self aspect_hookSelector:@selector(didMoveToWindow) withOptions:AspectPositionAfter usingBlock:^(id<AspectInfo> aspectInfo) {
+        __strong typeof(self) self = wself;
         if (self.window == nil) {
             [[YNExposureManager sharedInstance] removeView:self];
         } else {
@@ -56,24 +58,60 @@ NSString *const YNExposureErrorDomin = @"com.shopee.yanni.YNExposure";
     
 }
 
+#pragma mark - Helper
+
+- (BOOL)ynex_showedOnScreen
+{
+    return [self ynex_ratioOnScreen] > 0;
+}
+
+- (CGFloat)ynex_ratioOnScreen
+{
+    if (self.hidden || self.alpha <= 0) {
+        return 0;
+    }
+    
+    if ([self isKindOfClass:UIWindow.class] && self.superview == nil) {
+        // Used as a window!
+        UIScreen *screen = ((UIWindow *)self).screen;
+        if (screen == nil) {
+            return 0;
+        }
+        CGRect intersection = CGRectIntersection(self.frame, screen.bounds);
+        return (intersection.size.width * intersection.size.height) / (self.bounds.size.width * self.bounds.size.height);
+    } else {
+        // Used as a view!
+        UIWindow *window = self.window;
+        if (window == nil || window.hidden == YES || window.alpha <= 0) {
+            return 0;
+        }
+        
+        // If super view hidden or alpha <= 0, self can't show
+        UIView *superView = self.superview;
+        NSAssert(superView != nil, @"superview is nil");
+        while (superView != nil) {
+            if (superView.hidden || superView.alpha <= 0) {
+                return 0;
+            }
+            superView = superView.superview;
+        }
+        
+        // Calculation
+        CGRect frameInWindow = [self convertRect:self.bounds toView:window];
+        CGRect frameInScreen = CGRectMake(frameInWindow.origin.x + window.frame.origin.x, frameInWindow.origin.y + window.frame.origin.y, frameInWindow.size.width, frameInWindow.size.height);
+        CGRect intersection = CGRectIntersection(frameInScreen, window.screen.bounds);
+        return (intersection.size.width * intersection.size.height) / (self.bounds.size.width * self.bounds.size.height);
+    }
+}
+
 #pragma mark - setter getter
 
--(void)setYnex_isExposured:(BOOL)ynex_isExposured
-{
-    objc_setAssociatedObject(self, @selector(ynex_isExposured), @(ynex_isExposured), OBJC_ASSOCIATION_COPY_NONATOMIC);
-}
-
--(BOOL)ynex_isExposured
-{
-    return [objc_getAssociatedObject(self, @selector(ynex_isExposured)) boolValue];
-}
-
-- (void)setYnex_interval:(NSTimeInterval)ynex_interval
++ (void)setYnex_interval:(NSTimeInterval)ynex_interval
 {
     [YNExposureManager sharedInstance].interval = ynex_interval;
 }
 
--(NSTimeInterval)ynex_interval
++ (NSTimeInterval)ynex_interval
 {
     return [YNExposureManager sharedInstance].interval;
 }

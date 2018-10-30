@@ -11,6 +11,15 @@
 
 @implementation UIView (YNExposurePrivate)
 
+- (void)setYnex_isExposured:(BOOL)ynex_isExposured
+{
+    objc_setAssociatedObject(self, @selector(ynex_isExposured), @(ynex_isExposured), OBJC_ASSOCIATION_COPY_NONATOMIC);
+}
+
+- (BOOL)ynex_isExposured
+{
+    return [objc_getAssociatedObject(self, @selector(ynex_isExposured)) boolValue];
+}
 
 - (void)setYnex_exposureBlock:(YNExposureBlock)ynex_exposureBlock
 {
@@ -40,6 +49,16 @@
 - (CGFloat)ynex_minAreaRatio
 {
     return [objc_getAssociatedObject(self, @selector(ynex_minAreaRatio)) floatValue];
+}
+
+-(void)setYnex_lastShowedDate:(NSDate *)ynex_lastShowedDate
+{
+    objc_setAssociatedObject(self, @selector(ynex_lastShowedDate), ynex_lastShowedDate, OBJC_ASSOCIATION_COPY_NONATOMIC);
+}
+
+-(NSDate *)ynex_lastShowedDate
+{
+    return objc_getAssociatedObject(self, @selector(ynex_lastShowedDate));
 }
 
 @end
