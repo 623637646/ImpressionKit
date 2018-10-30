@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5CDED9392188552800065254 /* YNEeposureTestingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CDED9382188552800065254 /* YNEeposureTestingView.m */; };
 		5CFF022321806DAE00E322D7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CFF022221806DAE00E322D7 /* AppDelegate.m */; };
 		5CFF022621806DAE00E322D7 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CFF022521806DAE00E322D7 /* ViewController.m */; };
 		5CFF022921806DAE00E322D7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5CFF022721806DAE00E322D7 /* Main.storyboard */; };
@@ -19,6 +20,8 @@
 /* Begin PBXFileReference section */
 		17DB434E884E75C20DBB4599 /* Pods-YNExposureDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YNExposureDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-YNExposureDemo/Pods-YNExposureDemo.release.xcconfig"; sourceTree = "<group>"; };
 		4057F9FAD75CA74791EB6F8B /* Pods-YNExposureDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YNExposureDemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-YNExposureDemo/Pods-YNExposureDemo.debug.xcconfig"; sourceTree = "<group>"; };
+		5CDED9372188552800065254 /* YNEeposureTestingView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YNEeposureTestingView.h; sourceTree = "<group>"; };
+		5CDED9382188552800065254 /* YNEeposureTestingView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YNEeposureTestingView.m; sourceTree = "<group>"; };
 		5CFF021E21806DAE00E322D7 /* YNExposureDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YNExposureDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5CFF022121806DAE00E322D7 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		5CFF022221806DAE00E322D7 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -83,6 +86,8 @@
 				5CFF022C21806DAE00E322D7 /* LaunchScreen.storyboard */,
 				5CFF022F21806DAE00E322D7 /* Info.plist */,
 				5CFF023021806DAE00E322D7 /* main.m */,
+				5CDED9372188552800065254 /* YNEeposureTestingView.h */,
+				5CDED9382188552800065254 /* YNEeposureTestingView.m */,
 			);
 			path = YNExposureDemo;
 			sourceTree = "<group>";
@@ -189,6 +194,7 @@
 			files = (
 				5CFF022621806DAE00E322D7 /* ViewController.m in Sources */,
 				5CFF023121806DAE00E322D7 /* main.m in Sources */,
+				5CDED9392188552800065254 /* YNEeposureTestingView.m in Sources */,
 				5CFF022321806DAE00E322D7 /* AppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

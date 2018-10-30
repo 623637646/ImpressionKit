@@ -8,6 +8,7 @@
 
 #import "ViewController.h"
 #import <YNExposure/YNExposure.h>
+#import "YNEeposureTestingView.h"
 
 @interface ViewController ()
 
@@ -21,7 +22,7 @@
     scrollView.contentSize = CGSizeMake(scrollView.frame.size.width, scrollView.frame.size.height * 2);
     [self.view addSubview:scrollView];
     
-    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(50, scrollView.frame.size.height + 50, 50, 50)];
+    YNEeposureTestingView *view = [[YNEeposureTestingView alloc] initWithFrame:CGRectMake(50, scrollView.frame.size.height + 50, 50, 50)];
     view.backgroundColor = [UIColor redColor];
     [scrollView addSubview:view];
     

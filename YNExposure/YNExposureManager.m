@@ -20,7 +20,8 @@
 }
 
 MACRO_SINGLETON_PATTERN_M({
-    self->_queue = dispatch_queue_create("com.shopee.yanni.YNExposure.timer_queue", NULL);
+//    self->_queue = dispatch_queue_create("com.shopee.yanni.YNExposure.timer_queue", NULL);
+    self->_queue = dispatch_get_main_queue();
     self.ynExposureViewHashTable = [NSHashTable<UIView *> weakObjectsHashTable];
     self.interval = 0.5;
 })
@@ -104,9 +105,10 @@ MACRO_SINGLETON_PATTERN_M({
         // exposuree
         view.ynex_lastShowedDate = nil;
         view.ynex_isExposured = YES;
-        dispatch_sync(dispatch_get_main_queue(), ^{
-            view.ynex_exposureBlock(ratioOnScreen);
-        });
+//        dispatch_sync(dispatch_get_main_queue(), ^{
+//            view.ynex_exposureBlock(ratioOnScreen);
+//        });
+        view.ynex_exposureBlock(ratioOnScreen);
         [self.ynExposureViewHashTable removeObject:view];
     }
 }
