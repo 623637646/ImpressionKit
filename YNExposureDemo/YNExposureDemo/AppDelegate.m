@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import <YNExposure/YNExposure.h>
+#import "YNExposureDemoViewController.h"
 
 @interface AppDelegate ()
 
@@ -17,6 +18,16 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:[[YNExposureDemoViewController alloc] init]];
+    
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    self.window.rootViewController = navigationController;
+    self.window.backgroundColor = [UIColor whiteColor];
+    [self.window makeKeyAndVisible];
+    
+    // TODO: 性能监控视图
+    
     UIView.ynex_interval = 0.1;
     return YES;
 }

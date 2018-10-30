@@ -1,5 +1,5 @@
 //
-//  YNEeposureTestingView.h
+//  YNExposureDemoTestingView.h
 //  YNExposureDemo
 //
 //  Created by Wang Ya on 30/10/18.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface YNEeposureTestingView : UIView
+@interface YNExposureDemoTestingView : UIView
 
 @end

@@ -1,38 +1,39 @@
 //
-//  YNEeposureTestingView.m
+//  YNExposureDemoTestingView.m
 //  YNExposureDemo
 //
 //  Created by Wang Ya on 30/10/18.
 //  Copyright © 2018 Shopee. All rights reserved.
 //
 
-#import "YNEeposureTestingView.h"
+#import "YNExposureDemoTestingView.h"
 #import <YNExposure/YNExposure.h>
 
-@interface UIView(YNEeposureTestingViewPrivate)
+@interface UIView(YNExposureDemoTestingViewPrivate)
 @property (nonatomic, copy) NSDate *ynex_lastShowedDate;
 @property (nonatomic, assign) NSTimeInterval ynex_delay;
 @end
 
-@implementation UIView(YNEeposureTestingViewPrivate)
+@implementation UIView(YNExposureDemoTestingViewPrivate)
 @dynamic ynex_lastShowedDate;
 @dynamic ynex_delay;
 @end
 
-static void *YNEeposureTestingViewContext = &YNEeposureTestingViewContext;
+static void *YNExposureDemoTestingViewContext = &YNExposureDemoTestingViewContext;
 
-@interface YNEeposureTestingView()
+@interface YNExposureDemoTestingView()
 @property (nonatomic, weak) NSTimer *timer;
 @property (nonatomic, weak) UILabel *label;
 @end
 
-@implementation YNEeposureTestingView
+@implementation YNExposureDemoTestingView
 
 - (instancetype)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     if (self) {
         __weak typeof(self) wself = self;
+        // TODO: 消除Demo的性能影响（主要是这里，刷新UI的Timer）
         self.timer = [NSTimer scheduledTimerWithTimeInterval:0.1 repeats:YES block:^(NSTimer * _Nonnull timer) {
             __strong typeof(self) self = wself;
             [self updateUI];
