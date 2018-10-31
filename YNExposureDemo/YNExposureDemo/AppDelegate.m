@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 #import <YNExposure/YNExposure.h>
 #import "YNExposureDemoViewController.h"
+#import <GDPerformanceView/GDPerformanceMonitor.h>
 
 @interface AppDelegate ()
 
@@ -18,6 +19,9 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    [[GDPerformanceMonitor sharedInstance] startMonitoring];
+    
+    UIView.ynex_interval = 0.1;
     
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:[[YNExposureDemoViewController alloc] init]];
     
@@ -26,9 +30,6 @@
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     
-    // TODO: 性能监控视图
-    
-    UIView.ynex_interval = 0.1;
     return YES;
 }
 
