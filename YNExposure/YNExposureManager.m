@@ -74,6 +74,7 @@ MACRO_SINGLETON_PATTERN_M({
 - (void)detectExposure
 {
     // TODO: 检测到如果没有view了，应该暂停timer
+    // TODO: 偶现view没有曝光
     NSDate *now = [NSDate date];
     NSArray *views = self.ynExposureViewHashTable.allObjects;
     for (UIView *view in views) {
