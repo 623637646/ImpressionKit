@@ -55,7 +55,11 @@ NSString *const YNExposureErrorDomin = @"com.shopee.yanni.YNExposure";
 
 - (void)ynex_resetExecute
 {
-    
+    self.ynex_isExposured = NO;
+    self.ynex_lastShowedDate = nil;
+    if (self.window != nil) {
+        [[YNExposureManager sharedInstance] addView:self];
+    }
 }
 
 #pragma mark - Helper

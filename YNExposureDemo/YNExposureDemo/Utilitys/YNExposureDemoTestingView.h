@@ -10,4 +10,6 @@
 
 @interface YNExposureDemoTestingView : UIView
 
+- (void)reset;
+
 @end

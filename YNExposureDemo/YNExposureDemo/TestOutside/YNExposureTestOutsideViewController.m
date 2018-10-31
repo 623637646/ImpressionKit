@@ -7,6 +7,7 @@
 //
 
 #import "YNExposureTestOutsideViewController.h"
+#import "YNExposureDemoTestingCollectionViewCell.h"
 
 @interface YNExposureTestOutsideViewController ()<UICollectionViewDataSource, UICollectionViewDelegate>
 
@@ -19,38 +20,26 @@
     self.view.backgroundColor = [UIColor whiteColor];
     
     UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
-    layout.itemSize = CGSizeMake(self.view.bounds.size.width, 44);
+    layout.itemSize = CGSizeMake(88, 88);
     
     UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:self.view.bounds collectionViewLayout:layout];
     collectionView.backgroundColor = [UIColor colorWithWhite:0.9 alpha:1];
     collectionView.delegate = self;
     collectionView.dataSource = self;
-    [collectionView registerClass:YNExposureDemoTitleCollectionViewCell.class forCellWithReuseIdentifier:[YNExposureDemoTitleCollectionViewCell description]];
+    [collectionView registerClass:YNExposureDemoTestingCollectionViewCell.class forCellWithReuseIdentifier:[YNExposureDemoTestingCollectionViewCell description]];
     [self.view addSubview:collectionView];
-    
-    
-//    YNExposureDemoTestingView *view = [[YNExposureDemoTestingView alloc] initWithFrame:CGRectMake(50, scrollView.frame.size.height + 50, 50, 50)];
-//    view.backgroundColor = [UIColor redColor];
-//    [scrollView addSubview:view];
-//
-//    NSError *error = nil;
-//    [view ynex_execute:^(CGFloat areaRatio) {
-//
-//    } delay:5 minAreaRatio:1 error:&error];
 }
 
 #pragma mark - UICollectionViewDataSource
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return self.demos.count;
+    return 300;
 }
 
 - (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSArray *array = [self.demos objectAtIndex:indexPath.row];
-    YNExposureDemoTitleCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:[YNExposureDemoTitleCollectionViewCell description] forIndexPath:indexPath];
-    cell.title = array[0];
+    YNExposureDemoTestingCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:[YNExposureDemoTestingCollectionViewCell description] forIndexPath:indexPath];
     return cell;
 }
 @end

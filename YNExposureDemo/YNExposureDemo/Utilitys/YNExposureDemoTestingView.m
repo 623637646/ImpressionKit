@@ -32,13 +32,8 @@ static void *YNExposureDemoTestingViewContext = &YNExposureDemoTestingViewContex
 {
     self = [super initWithFrame:frame];
     if (self) {
-        __weak typeof(self) wself = self;
-        // TODO: 消除Demo的性能影响（主要是这里，刷新UI的Timer）
-        self.timer = [NSTimer scheduledTimerWithTimeInterval:0.1 repeats:YES block:^(NSTimer * _Nonnull timer) {
-            __strong typeof(self) self = wself;
-            [self updateUI];
-        }];
-
+        self.backgroundColor = [UIColor whiteColor];
+        
         UILabel *label = [[UILabel alloc] initWithFrame:self.bounds];
         label.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         label.font = [UIFont systemFontOfSize:12];
@@ -46,6 +41,19 @@ static void *YNExposureDemoTestingViewContext = &YNExposureDemoTestingViewContex
         label.textAlignment = NSTextAlignmentCenter;
         [self addSubview:label];
         self.label = label;
+        
+        NSError *error = nil;
+        [self ynex_execute:^(CGFloat areaRatio) {
+            
+        } delay:5 minAreaRatio:1 error:&error];
+        NSAssert(error == nil, @"error is not nil");
+        
+        __weak typeof(self) wself = self;
+        // TODO: 消除Demo的性能影响（主要是这里，刷新UI的Timer）
+        self.timer = [NSTimer scheduledTimerWithTimeInterval:0.1 repeats:YES block:^(NSTimer * _Nonnull timer) {
+            __strong typeof(self) self = wself;
+            [self updateUI];
+        }];
     }
     return self;
 }
@@ -58,13 +66,18 @@ static void *YNExposureDemoTestingViewContext = &YNExposureDemoTestingViewContex
     }
 }
 
+- (void)reset
+{
+    [self ynex_resetExecute];
+}
+
 - (void)updateUI
 {
     if (self.ynex_isExposured) {
         self.backgroundColor = [UIColor greenColor];
         self.label.text = nil;
     } else {
-        self.backgroundColor = [UIColor lightGrayColor];
+        self.backgroundColor = [UIColor whiteColor];
         if (self.ynex_lastShowedDate == nil) {
             self.label.text = nil;
         } else {
