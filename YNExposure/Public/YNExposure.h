@@ -15,5 +15,6 @@ FOUNDATION_EXPORT double YNExposureVersionNumber;
 FOUNDATION_EXPORT const unsigned char YNExposureVersionString[];
 
 // In this header, you should import all the public headers of your framework using statements like #import <YNExposure/PublicHeader.h>
+#import <YNExposure/YNExposureConfig.h>
 #import <YNExposure/UIView+YNExposure.h>
 

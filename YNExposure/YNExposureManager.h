@@ -12,8 +12,6 @@
 @interface YNExposureManager : NSObject
 MACRO_SINGLETON_PATTERN_H
 
-@property (nonatomic, assign) NSTimeInterval interval;
-
 - (void)addView:(UIView *)view;
 - (void)removeView:(UIView *)view;
 

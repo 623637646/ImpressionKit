@@ -20,9 +20,6 @@ typedef void(^YNExposureBlock)(CGFloat areaRatio);
 
 @interface UIView (YNExposure)
 
-// The detect interval, default is 0.5s
-@property (nonatomic, assign, class) NSTimeInterval ynex_interval;
-
 @property (nonatomic, assign, readonly) BOOL ynex_isExposured;
 
 // block should not be nil, delay should >= 0, minAreaRatio should > 0 and <=1

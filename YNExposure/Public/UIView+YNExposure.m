@@ -108,16 +108,4 @@ NSString *const YNExposureErrorDomin = @"com.shopee.yanni.YNExposure";
     }
 }
 
-#pragma mark - setter getter
-
-+ (void)setYnex_interval:(NSTimeInterval)ynex_interval
-{
-    [YNExposureManager sharedInstance].interval = ynex_interval;
-}
-
-+ (NSTimeInterval)ynex_interval
-{
-    return [YNExposureManager sharedInstance].interval;
-}
-
 @end

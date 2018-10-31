@@ -9,6 +9,8 @@
 #import "YNExposureManager.h"
 #import "UIView+YNExposure.h"
 #import "UIView+YNExposurePrivate.h"
+#import "YNExposureNotificationCenter.h"
+#import "YNExposureConfig.h"
 
 @interface YNExposureManager()
 @property (nonatomic, strong) NSHashTable<UIView *> *ynExposureViewHashTable;
@@ -23,7 +25,12 @@ MACRO_SINGLETON_PATTERN_M({
 //    self->_queue = dispatch_queue_create("com.shopee.yanni.YNExposure.timer_queue", NULL);
     self->_queue = dispatch_get_main_queue();
     self.ynExposureViewHashTable = [NSHashTable<UIView *> weakObjectsHashTable];
-    self.interval = 0.5;
+    
+    __weak typeof(self) wself = self;
+    [[YNExposureNotificationCenter sharedInstance] addObserverForName:YNExposureConfigNotificationIntervalChanged object:nil queue:nil usingBlock:^(NSNotification * _Nonnull note) {
+        __strong typeof(self) self = wself;
+        [self resetUpTimer];
+    }];
 })
 
 -(void)dealloc
@@ -32,16 +39,6 @@ MACRO_SINGLETON_PATTERN_M({
         dispatch_source_cancel(self->_timer);
         self->_timer = nil;
     }
-}
-
-#pragma setter getter
--(void)setInterval:(NSTimeInterval)interval
-{
-    if (interval == _interval) {
-        return;
-    }
-    _interval = interval;
-    [self resetUpTimer];
 }
 
 #pragma mark - Public
@@ -76,6 +73,7 @@ MACRO_SINGLETON_PATTERN_M({
 
 - (void)detectExposure
 {
+    // TODO: 检测到如果没有view了，应该暂停timer
     NSDate *now = [NSDate date];
     NSArray *views = self.ynExposureViewHashTable.allObjects;
     for (UIView *view in views) {
@@ -139,7 +137,7 @@ MACRO_SINGLETON_PATTERN_M({
     }
     
     dispatch_source_t timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, self->_queue);
-    dispatch_source_set_timer(timer, DISPATCH_TIME_NOW, self.interval * NSEC_PER_SEC, 0 * NSEC_PER_SEC);
+    dispatch_source_set_timer(timer, DISPATCH_TIME_NOW, [YNExposureConfig sharedInstance].interval * NSEC_PER_SEC, 0 * NSEC_PER_SEC);
     __weak typeof(self) wself= self;
     dispatch_source_set_event_handler(timer, ^{
         __strong typeof(self) self = wself;

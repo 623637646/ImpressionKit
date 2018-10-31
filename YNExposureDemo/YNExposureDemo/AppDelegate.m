@@ -21,7 +21,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     [[GDPerformanceMonitor sharedInstance] startMonitoring];
     
-    UIView.ynex_interval = 0.1;
+    [YNExposureConfig sharedInstance].interval = 0.1;
     
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:[[YNExposureDemoViewController alloc] init]];
     

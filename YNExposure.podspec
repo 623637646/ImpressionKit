@@ -94,7 +94,7 @@ Pod::Spec.new do |s|
   s.source_files  = "YNExposure/**/*.{h,m}"
   # s.exclude_files = "YNExposure/Classes/Exclude"
 
-  s.public_header_files = "YNExposure/YNExposure.h", "YNExposure/Public/**/*.h"
+  s.public_header_files = "YNExposure/Public/**/*.h"
 
 
   # ――― Resources ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
