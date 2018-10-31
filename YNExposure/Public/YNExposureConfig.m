@@ -14,7 +14,7 @@ NSString *const YNExposureConfigNotificationIntervalChanged = @"YNExposureConfig
 @implementation YNExposureConfig
 
 MACRO_SINGLETON_PATTERN_M({
-    self.interval = 0.2;
+    self->_interval = 0.2;
 })
 
 - (void)setInterval:(NSTimeInterval)interval
