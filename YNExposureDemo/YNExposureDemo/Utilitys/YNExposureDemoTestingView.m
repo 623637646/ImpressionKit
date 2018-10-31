@@ -10,20 +10,16 @@
 #import <YNExposure/YNExposure.h>
 
 @interface UIView(YNExposureDemoTestingViewPrivate)
-@property (nonatomic, copy) NSDate *ynex_lastShowedDate;
-@property (nonatomic, assign) NSTimeInterval ynex_delay;
+@property (nonatomic, assign) BOOL ynex_isExposured;
 @end
 
 @implementation UIView(YNExposureDemoTestingViewPrivate)
-@dynamic ynex_lastShowedDate;
-@dynamic ynex_delay;
+@dynamic ynex_isExposured;
 @end
 
 static void *YNExposureDemoTestingViewContext = &YNExposureDemoTestingViewContext;
 
 @interface YNExposureDemoTestingView()
-@property (nonatomic, weak) NSTimer *timer;
-@property (nonatomic, weak) UILabel *label;
 @end
 
 @implementation YNExposureDemoTestingView
@@ -34,36 +30,13 @@ static void *YNExposureDemoTestingViewContext = &YNExposureDemoTestingViewContex
     if (self) {
         self.backgroundColor = [UIColor whiteColor];
         
-        UILabel *label = [[UILabel alloc] initWithFrame:self.bounds];
-        label.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-        label.font = [UIFont systemFontOfSize:12];
-        label.textColor = [UIColor blackColor];
-        label.textAlignment = NSTextAlignmentCenter;
-        [self addSubview:label];
-        self.label = label;
-        
         NSError *error = nil;
         [self ynex_execute:^(CGFloat areaRatio) {
             
-        } delay:5 minAreaRatio:1 error:&error];
+        } delay:1 minAreaRatio:1 error:&error];
         NSAssert(error == nil, @"error is not nil");
-        
-        __weak typeof(self) wself = self;
-        // TODO: 消除Demo的性能影响（主要是这里，刷新UI的Timer）
-        self.timer = [NSTimer scheduledTimerWithTimeInterval:0.1 repeats:YES block:^(NSTimer * _Nonnull timer) {
-            __strong typeof(self) self = wself;
-            [self updateUI];
-        }];
     }
     return self;
-}
-
-- (void)dealloc
-{
-    if (self.timer) {
-        [self.timer invalidate];
-        self.timer = nil;
-    }
 }
 
 - (void)reset
@@ -71,19 +44,13 @@ static void *YNExposureDemoTestingViewContext = &YNExposureDemoTestingViewContex
     [self ynex_resetExecute];
 }
 
-- (void)updateUI
+-(void)setYnex_isExposured:(BOOL)ynex_isExposured
 {
+    [super setYnex_isExposured:ynex_isExposured];
     if (self.ynex_isExposured) {
         self.backgroundColor = [UIColor greenColor];
-        self.label.text = nil;
     } else {
         self.backgroundColor = [UIColor whiteColor];
-        if (self.ynex_lastShowedDate == nil) {
-            self.label.text = nil;
-        } else {
-            NSTimeInterval interval = [[NSDate date] timeIntervalSinceDate:self.ynex_lastShowedDate];
-            self.label.text = [NSString stringWithFormat:@"%.1f", self.ynex_delay - interval];
-        }
     }
 }
 
