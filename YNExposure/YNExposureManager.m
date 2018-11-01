@@ -7,7 +7,6 @@
 //
 
 #import "YNExposureManager.h"
-#import "UIView+YNExposure.h"
 #import "UIView+YNExposurePrivate.h"
 #import "YNExposureNotificationCenter.h"
 #import "YNExposureConfig.h"
