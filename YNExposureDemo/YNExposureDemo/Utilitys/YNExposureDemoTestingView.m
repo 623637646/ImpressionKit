@@ -61,19 +61,19 @@ static void *YNExposureDemoTestingViewContext = &YNExposureDemoTestingViewContex
     self.backgroundColor = [UIColor whiteColor];
 }
 
--(void)setYnex_lastShowedDate:(NSDate *)ynex_lastShowedDate
+- (void)setYnex_lastShowedDate:(NSDate *)ynex_lastShowedDate
 {
     [super setYnex_lastShowedDate:ynex_lastShowedDate];
     [self updateBackendColor];
 }
 
--(void)setYnex_isExposured:(BOOL)ynex_isExposured
+- (void)setYnex_isExposured:(BOOL)ynex_isExposured
 {
     [super setYnex_isExposured:ynex_isExposured];
     [self updateBackendColor];
 }
 
--(void) updateBackendColor
+- (void)updateBackendColor
 {
     if (self.ynex_isExposured) {
         self.backgroundColor = [UIColor greenColor];
