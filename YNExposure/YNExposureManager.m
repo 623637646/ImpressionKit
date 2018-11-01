@@ -146,6 +146,7 @@ MACRO_SINGLETON_PATTERN_M({
     dispatch_resume(timer);
     
     self->_timer = timer;
+    YNLog(@"YNExposureManager startTimer");
 }
 
 - (void)stopTimer
@@ -153,6 +154,7 @@ MACRO_SINGLETON_PATTERN_M({
     if (self->_timer) {
         dispatch_source_cancel(self->_timer);
         self->_timer = nil;
+        YNLog(@"YNExposureManager stopTimer");
     }
 }
 

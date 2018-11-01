@@ -9,6 +9,7 @@
 #ifndef YNExposureMacro_h
 #define YNExposureMacro_h
 
+// Singleton pattern
 #define MACRO_SINGLETON_PATTERN_H \
 + (instancetype)sharedInstance;\
 - (instancetype)init NS_UNAVAILABLE;\
@@ -58,5 +59,14 @@ MACRO_SINGLETON_PATTERN_INTT\
 }\
 return self;\
 }
+
+// log
+#define YNLog(...) do {\
+if ([YNExposureConfig sharedInstance].log) {\
+NSLog(__VA_ARGS__);\
+}\
+}while(0)
+
+
 
 #endif /* YNExposureMacro_h */
