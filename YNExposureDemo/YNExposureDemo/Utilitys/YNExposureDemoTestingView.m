@@ -25,6 +25,7 @@
 static void *YNExposureDemoTestingViewContext = &YNExposureDemoTestingViewContext;
 
 @interface YNExposureDemoTestingView()
+@property (nonatomic, weak) UILabel *label;
 @end
 
 @implementation YNExposureDemoTestingView
@@ -33,10 +34,20 @@ static void *YNExposureDemoTestingViewContext = &YNExposureDemoTestingViewContex
 {
     self = [super initWithFrame:frame];
     if (self) {
+        UILabel *label = [[UILabel alloc] initWithFrame:self.bounds];
+        label.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+        label.font = [UIFont systemFontOfSize:12];
+        label.textColor = [UIColor blackColor];
+        label.textAlignment = NSTextAlignmentCenter;
+        [self addSubview:label];
+        self.label = label;
+        
         NSError *error = nil;
+        __weak typeof(self) wself = self;
         [self ynex_execute:^(CGFloat areaRatio) {
-            
-        } delay:2 minAreaRatio:1 error:&error];
+            __strong typeof(self) self = wself;
+            self.label.text = [NSString stringWithFormat:@"%0.1f%%", areaRatio * 100];
+        } delay:2 minAreaRatio:0.1 error:&error];
         NSAssert(error == nil, @"error is not nil");
     }
     return self;
@@ -45,6 +56,9 @@ static void *YNExposureDemoTestingViewContext = &YNExposureDemoTestingViewContex
 - (void)reset
 {
     [self ynex_resetExecute];
+    [self.layer removeAllAnimations];
+    self.label.text = nil;
+    self.backgroundColor = [UIColor whiteColor];
 }
 
 -(void)setYnex_lastShowedDate:(NSDate *)ynex_lastShowedDate
@@ -61,7 +75,6 @@ static void *YNExposureDemoTestingViewContext = &YNExposureDemoTestingViewContex
 
 -(void) updateBackendColor
 {
-    [self.layer removeAllAnimations];
     if (self.ynex_isExposured) {
         self.backgroundColor = [UIColor greenColor];
         return;
