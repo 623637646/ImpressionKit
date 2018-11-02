@@ -47,7 +47,7 @@ static void *YNExposureDemoTestingViewContext = &YNExposureDemoTestingViewContex
         [self ynex_execute:^(CGFloat areaRatio) {
             __strong typeof(self) self = wself;
             self.label.text = [NSString stringWithFormat:@"%0.1f%%", areaRatio * 100];
-        } delay:2 minAreaRatio:0.1 error:&error];
+        } delay:2 minAreaRatio:0.5 error:&error];
         NSAssert(error == nil, @"error is not nil");
     }
     return self;

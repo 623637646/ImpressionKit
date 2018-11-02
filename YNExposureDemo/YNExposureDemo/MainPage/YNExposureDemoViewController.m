@@ -11,6 +11,7 @@
 #import "YNExposureDemoTestingView.h"
 #import "YNExposureTestOutsideViewController.h"
 #import "YNExposureDemoTitleCollectionViewCell.h"
+#import "YNExposureTestOutsideWithReuseViewController.h"
 
 @interface YNExposureDemoViewController ()<UICollectionViewDataSource, UICollectionViewDelegate>
 @property (nonatomic, copy) NSArray<NSArray *> *demos;
@@ -24,7 +25,8 @@
     if (self) {
         self.title = @"Exposure Demo";
         self.demos = @[
-                    @[@"Test out side of screen",YNExposureTestOutsideViewController.class],
+                       @[@"Test out side of screen",YNExposureTestOutsideViewController.class],
+                       @[@"Test out side of screen with reuse",YNExposureTestOutsideWithReuseViewController.class],
                     ];
     }
     return self;
