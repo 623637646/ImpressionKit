@@ -76,6 +76,18 @@ MACRO_SINGLETON_PATTERN_M({
     // TODO: 偶现view没有曝光
     NSDate *now = [NSDate date];
     NSArray *views = self.ynExposureViewHashTable.allObjects;
+    
+    // log
+    if ([YNExposureConfig sharedInstance].log) {
+        static NSInteger indexForLog = 0;
+        if (indexForLog == (NSInteger)(1 / [YNExposureConfig sharedInstance].interval)) {
+            YNLog(@"YNExposureManager has %lu views", views.count);
+            indexForLog = 0;
+        } else {
+            indexForLog ++;
+        }
+    }
+    
     for (UIView *view in views) {
         if (view.ynex_isExposured) {
             // has been exposured
