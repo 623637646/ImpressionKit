@@ -88,6 +88,11 @@ MACRO_SINGLETON_PATTERN_M({
         }
     }
     
+    if (views.count == 0) {
+        [self stopTimer];
+        return;
+    }
+    
     for (UIView *view in views) {
         if (view.ynex_isExposured) {
             // has been exposured
