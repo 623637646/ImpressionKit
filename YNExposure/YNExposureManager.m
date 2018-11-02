@@ -72,7 +72,6 @@ MACRO_SINGLETON_PATTERN_M({
 
 - (void)detectExposure
 {
-    // TODO: 检测到如果没有view了，应该暂停timer
     // TODO: 偶现view没有曝光
     NSDate *now = [NSDate date];
     NSArray *views = self.ynExposureViewHashTable.allObjects;
@@ -81,7 +80,7 @@ MACRO_SINGLETON_PATTERN_M({
     if ([YNExposureConfig sharedInstance].log) {
         static NSInteger indexForLog = 0;
         if (indexForLog == (NSInteger)(1 / [YNExposureConfig sharedInstance].interval)) {
-            YNLog(@"YNExposureManager has %lu views", views.count);
+            YNLog(@"YNExposureManager has %@ views", @(views.count));
             indexForLog = 0;
         } else {
             indexForLog ++;
