@@ -28,6 +28,9 @@ NSString *const YNExposureErrorDomin = @"com.shopee.yanni.YNExposure";
         return NO;
     }
     
+    // reset
+    [self ynex_resetExecute];
+    
     // property
     self.ynex_exposureBlock = block;
     self.ynex_delay = delay;
