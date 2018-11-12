@@ -9,6 +9,7 @@
 #import "YNExposureTestOutsideWithReuseViewController.h"
 #import <YNExposure/YNExposure.h>
 #import <CHTCollectionViewWaterfallLayout/CHTCollectionViewWaterfallLayout.h>
+#import "YNExposureTestOutsideWithReuseCollectionViewCell.h"
 
 @interface YNExposureTestOutsideWithReuseViewController ()<UICollectionViewDataSource, CHTCollectionViewDelegateWaterfallLayout>
 @property (nonatomic, strong) NSMutableSet<NSIndexPath *> *exposuredIndexPaths;
@@ -30,7 +31,7 @@
     collectionView.backgroundColor = [UIColor colorWithWhite:0.9 alpha:1];
     collectionView.delegate = self;
     collectionView.dataSource = self;
-    [collectionView registerClass:UICollectionViewCell.class forCellWithReuseIdentifier:[UICollectionViewCell description]];
+    [collectionView registerClass:YNExposureTestOutsideWithReuseCollectionViewCell.class forCellWithReuseIdentifier:[YNExposureTestOutsideWithReuseCollectionViewCell description]];
     [self.view addSubview:collectionView];
 }
 
@@ -50,21 +51,20 @@
 
 - (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:[UICollectionViewCell description] forIndexPath:indexPath];
-    cell.layer.borderColor = [UIColor grayColor].CGColor;
-    cell.layer.borderWidth = 0.5;
-    if ([self.exposuredIndexPaths containsObject:indexPath]) {
-        cell.backgroundColor = [UIColor greenColor];
-    } else {
-        cell.backgroundColor = [UIColor whiteColor];
-        NSError *error = nil;
-        __weak typeof(self) wself = self;
-        [cell ynex_execute:^(CGFloat areaRatio) {
-            __strong typeof(self) self = wself;
-            [self.exposuredIndexPaths addObject:indexPath];
-        } delay:2 minAreaRatio:0.5 error:&error];
-        NSAssert(error == nil, @"error is not nil");
-    }
+    YNExposureTestOutsideWithReuseCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:[YNExposureTestOutsideWithReuseCollectionViewCell description] forIndexPath:indexPath];
+    
+    NSError *error = nil;
+    __weak typeof(self) wself = self;
+    __weak typeof(cell) wcell = cell;
+    [cell ynex_execute:^(CGFloat areaRatio) {
+        __strong typeof(self) self = wself;
+        __strong typeof(cell) cell = wcell;
+        [self.exposuredIndexPaths addObject:indexPath];
+        cell.isExposuredByIndex = YES;
+    } delay:2 minAreaRatio:0.5 error:&error];
+    NSAssert(error == nil, @"error is not nil");
+    
+    cell.isExposuredByIndex = [self.exposuredIndexPaths containsObject:indexPath];
     return cell;
 }
 @end

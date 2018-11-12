@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface YNExposureTestOutsideView : UIView
-
+// TODO reset
 - (void)reset;
 
 @end

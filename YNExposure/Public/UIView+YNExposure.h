@@ -27,6 +27,9 @@ typedef void(^YNExposureBlock)(CGFloat areaRatio);
 // reset
 - (void)ynex_resetExecute;
 
+// cancel
+- (void)ynex_cancelExecute;
+
 #pragma mark - Helper
 
 // is showed on screen

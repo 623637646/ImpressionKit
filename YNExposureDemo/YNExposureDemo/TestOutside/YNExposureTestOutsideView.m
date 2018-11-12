@@ -8,19 +8,7 @@
 
 #import "YNExposureTestOutsideView.h"
 #import <YNExposure/YNExposure.h>
-
-@interface UIView(YNExposureTestOutsideViewPrivate)
-@property (nonatomic, assign) BOOL ynex_isExposured;
-@property (nonatomic, copy) NSDate *ynex_lastShowedDate;
-@property (nonatomic, assign) NSTimeInterval ynex_delay;
-
-@end
-
-@implementation UIView(YNExposureTestOutsideViewPrivate)
-@dynamic ynex_isExposured;
-@dynamic ynex_lastShowedDate;
-@dynamic ynex_delay;
-@end
+#import "UIView+YNExposureViewPrivate.h"
 
 static void *YNExposureTestOutsideViewContext = &YNExposureTestOutsideViewContext;
 

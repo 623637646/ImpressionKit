@@ -60,6 +60,18 @@ NSString *const YNExposureErrorDomin = @"com.shopee.yanni.YNExposure";
     }
 }
 
+- (void)ynex_cancelExecute
+{
+    self.ynex_exposureBlock = nil;
+    self.ynex_delay = 0;
+    self.ynex_minAreaRatio = 0;
+    if (self.ynex_token != nil) {
+        [self.ynex_token remove];
+        self.ynex_token = nil;
+    }
+    [[YNExposureManager sharedInstance] removeView:self];
+}
+
 #pragma mark - Helper
 
 - (BOOL)ynex_showedOnScreen

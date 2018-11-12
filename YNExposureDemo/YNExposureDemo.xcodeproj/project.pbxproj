@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5C078620219920AD0076A3BA /* UIView+YNExposureViewPrivate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C07861F219920AD0076A3BA /* UIView+YNExposureViewPrivate.m */; };
+		5C0786232199210F0076A3BA /* YNExposureTestOutsideWithReuseCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C0786222199210F0076A3BA /* YNExposureTestOutsideWithReuseCollectionViewCell.m */; };
 		5C216705218C2C8500371F24 /* YNExposureTestOutsideWithReuseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C216704218C2C8500371F24 /* YNExposureTestOutsideWithReuseViewController.m */; };
 		5CDED9392188552800065254 /* YNExposureTestOutsideView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CDED9382188552800065254 /* YNExposureTestOutsideView.m */; };
 		5CDED93F2188726400065254 /* YNExposureTestOutsideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CDED93E2188726400065254 /* YNExposureTestOutsideViewController.m */; };
@@ -22,6 +24,10 @@
 /* Begin PBXFileReference section */
 		17DB434E884E75C20DBB4599 /* Pods-YNExposureDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YNExposureDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-YNExposureDemo/Pods-YNExposureDemo.release.xcconfig"; sourceTree = "<group>"; };
 		4057F9FAD75CA74791EB6F8B /* Pods-YNExposureDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YNExposureDemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-YNExposureDemo/Pods-YNExposureDemo.debug.xcconfig"; sourceTree = "<group>"; };
+		5C07861E219920AD0076A3BA /* UIView+YNExposureViewPrivate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIView+YNExposureViewPrivate.h"; sourceTree = "<group>"; };
+		5C07861F219920AD0076A3BA /* UIView+YNExposureViewPrivate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIView+YNExposureViewPrivate.m"; sourceTree = "<group>"; };
+		5C0786212199210F0076A3BA /* YNExposureTestOutsideWithReuseCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YNExposureTestOutsideWithReuseCollectionViewCell.h; sourceTree = "<group>"; };
+		5C0786222199210F0076A3BA /* YNExposureTestOutsideWithReuseCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YNExposureTestOutsideWithReuseCollectionViewCell.m; sourceTree = "<group>"; };
 		5C216703218C2C8500371F24 /* YNExposureTestOutsideWithReuseViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YNExposureTestOutsideWithReuseViewController.h; sourceTree = "<group>"; };
 		5C216704218C2C8500371F24 /* YNExposureTestOutsideWithReuseViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YNExposureTestOutsideWithReuseViewController.m; sourceTree = "<group>"; };
 		5CDED9372188552800065254 /* YNExposureTestOutsideView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YNExposureTestOutsideView.h; sourceTree = "<group>"; };
@@ -68,6 +74,8 @@
 			children = (
 				5C216703218C2C8500371F24 /* YNExposureTestOutsideWithReuseViewController.h */,
 				5C216704218C2C8500371F24 /* YNExposureTestOutsideWithReuseViewController.m */,
+				5C0786212199210F0076A3BA /* YNExposureTestOutsideWithReuseCollectionViewCell.h */,
+				5C0786222199210F0076A3BA /* YNExposureTestOutsideWithReuseCollectionViewCell.m */,
 			);
 			path = TestOutsideWithReuse;
 			sourceTree = "<group>";
@@ -124,6 +132,8 @@
 				5CFF022C21806DAE00E322D7 /* LaunchScreen.storyboard */,
 				5CFF022F21806DAE00E322D7 /* Info.plist */,
 				5CFF023021806DAE00E322D7 /* main.m */,
+				5C07861E219920AD0076A3BA /* UIView+YNExposureViewPrivate.h */,
+				5C07861F219920AD0076A3BA /* UIView+YNExposureViewPrivate.m */,
 			);
 			path = YNExposureDemo;
 			sourceTree = "<group>";
@@ -232,6 +242,8 @@
 				5CFF023121806DAE00E322D7 /* main.m in Sources */,
 				5CDED9392188552800065254 /* YNExposureTestOutsideView.m in Sources */,
 				5CDED942218874D800065254 /* YNExposureDemoTitleCollectionViewCell.m in Sources */,
+				5C078620219920AD0076A3BA /* UIView+YNExposureViewPrivate.m in Sources */,
+				5C0786232199210F0076A3BA /* YNExposureTestOutsideWithReuseCollectionViewCell.m in Sources */,
 				5CFF022321806DAE00E322D7 /* AppDelegate.m in Sources */,
 				5C216705218C2C8500371F24 /* YNExposureTestOutsideWithReuseViewController.m in Sources */,
 			);
