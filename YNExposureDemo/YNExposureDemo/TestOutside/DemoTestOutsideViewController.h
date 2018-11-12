@@ -1,5 +1,5 @@
 //
-//  YNExposureTestOutsideViewController.h
+//  DemoTestOutsideViewController.h
 //  YNExposureDemo
 //
 //  Created by Wang Ya on 30/10/18.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface YNExposureTestOutsideViewController : UIViewController
+@interface DemoTestOutsideViewController : UIViewController
 
 @end

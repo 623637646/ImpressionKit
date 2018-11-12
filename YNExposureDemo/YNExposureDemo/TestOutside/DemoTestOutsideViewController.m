@@ -1,21 +1,21 @@
 //
-//  YNExposureTestOutsideViewController.m
+//  DemoTestOutsideViewController.m
 //  YNExposureDemo
 //
 //  Created by Wang Ya on 30/10/18.
 //  Copyright © 2018 Shopee. All rights reserved.
 //
 
-#import "YNExposureTestOutsideViewController.h"
-#import "YNExposureTestOutsideView.h"
+#import "DemoTestOutsideViewController.h"
+#import "DemoTestOutsideView.h"
 
 #define column 4
 
-@interface YNExposureTestOutsideViewController ()
+@interface DemoTestOutsideViewController ()
 
 @end
 
-@implementation YNExposureTestOutsideViewController
+@implementation DemoTestOutsideViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -47,7 +47,7 @@
         CGFloat height = width + arc4random() % (int)width;
         CGRect frame = CGRectMake(x, y, width, height);
         frames[index] = frame;
-        YNExposureTestOutsideView *view = [[YNExposureTestOutsideView alloc] initWithFrame:frame];
+        DemoTestOutsideView *view = [[DemoTestOutsideView alloc] initWithFrame:frame];
         [views addObject:view];
         [scrollView addSubview:view];
     }

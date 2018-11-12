@@ -1,5 +1,5 @@
 //
-//  YNExposureTestOutsideView.h
+//  DemoTitleCollectionViewCell.h
 //  YNExposureDemo
 //
 //  Created by Wang Ya on 30/10/18.
@@ -8,8 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface YNExposureTestOutsideView : UIView
-// TODO reset
-- (void)reset;
-
+@interface DemoTitleCollectionViewCell : UICollectionViewCell
+@property (nonatomic, copy) NSString *title;
 @end

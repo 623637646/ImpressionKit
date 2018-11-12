@@ -1,5 +1,5 @@
 //
-//  YNExposureTestOutsideWithReuseCollectionViewCell.h
+//  DemoTestOutsideWithReuseCollectionViewCell.h
 //  YNExposureDemo
 //
 //  Created by Wang Ya on 12/11/18.
@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface YNExposureTestOutsideWithReuseCollectionViewCell : UICollectionViewCell
+@interface DemoTestOutsideWithReuseCollectionViewCell : UICollectionViewCell
 
 @property (nonatomic, assign) BOOL isExposuredByIndex;
 
