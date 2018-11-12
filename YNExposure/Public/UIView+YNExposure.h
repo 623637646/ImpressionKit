@@ -12,7 +12,6 @@ extern NSString *const YNExposureErrorDomin;
 
 typedef enum : NSUInteger {
     YNExposureErrorCodeParameterInvaild,
-    YNExposureErrorCodeAlreadySignup,
 } YNExposureErrorCode;
 
 

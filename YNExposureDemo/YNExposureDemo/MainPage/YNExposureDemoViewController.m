@@ -8,7 +8,7 @@
 
 #import "YNExposureDemoViewController.h"
 #import <YNExposure/YNExposure.h>
-#import "YNExposureDemoTestingView.h"
+#import "YNExposureTestOutsideView.h"
 #import "YNExposureTestOutsideViewController.h"
 #import "YNExposureDemoTitleCollectionViewCell.h"
 #import "YNExposureTestOutsideWithReuseViewController.h"

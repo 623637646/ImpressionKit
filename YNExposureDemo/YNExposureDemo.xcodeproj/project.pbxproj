@@ -8,10 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		5C216705218C2C8500371F24 /* YNExposureTestOutsideWithReuseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C216704218C2C8500371F24 /* YNExposureTestOutsideWithReuseViewController.m */; };
-		5CDED9392188552800065254 /* YNExposureDemoTestingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CDED9382188552800065254 /* YNExposureDemoTestingView.m */; };
+		5CDED9392188552800065254 /* YNExposureTestOutsideView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CDED9382188552800065254 /* YNExposureTestOutsideView.m */; };
 		5CDED93F2188726400065254 /* YNExposureTestOutsideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CDED93E2188726400065254 /* YNExposureTestOutsideViewController.m */; };
 		5CDED942218874D800065254 /* YNExposureDemoTitleCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CDED941218874D800065254 /* YNExposureDemoTitleCollectionViewCell.m */; };
-		5CEDA0CA21895DE3000AE742 /* YNExposureDemoTestingCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CEDA0C921895DE3000AE742 /* YNExposureDemoTestingCollectionViewCell.m */; };
 		5CFF022321806DAE00E322D7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CFF022221806DAE00E322D7 /* AppDelegate.m */; };
 		5CFF022621806DAE00E322D7 /* YNExposureDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CFF022521806DAE00E322D7 /* YNExposureDemoViewController.m */; };
 		5CFF022B21806DAE00E322D7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5CFF022A21806DAE00E322D7 /* Assets.xcassets */; };
@@ -25,14 +24,12 @@
 		4057F9FAD75CA74791EB6F8B /* Pods-YNExposureDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YNExposureDemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-YNExposureDemo/Pods-YNExposureDemo.debug.xcconfig"; sourceTree = "<group>"; };
 		5C216703218C2C8500371F24 /* YNExposureTestOutsideWithReuseViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YNExposureTestOutsideWithReuseViewController.h; sourceTree = "<group>"; };
 		5C216704218C2C8500371F24 /* YNExposureTestOutsideWithReuseViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YNExposureTestOutsideWithReuseViewController.m; sourceTree = "<group>"; };
-		5CDED9372188552800065254 /* YNExposureDemoTestingView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YNExposureDemoTestingView.h; sourceTree = "<group>"; };
-		5CDED9382188552800065254 /* YNExposureDemoTestingView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YNExposureDemoTestingView.m; sourceTree = "<group>"; };
+		5CDED9372188552800065254 /* YNExposureTestOutsideView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YNExposureTestOutsideView.h; sourceTree = "<group>"; };
+		5CDED9382188552800065254 /* YNExposureTestOutsideView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YNExposureTestOutsideView.m; sourceTree = "<group>"; };
 		5CDED93D2188726400065254 /* YNExposureTestOutsideViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YNExposureTestOutsideViewController.h; sourceTree = "<group>"; };
 		5CDED93E2188726400065254 /* YNExposureTestOutsideViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YNExposureTestOutsideViewController.m; sourceTree = "<group>"; };
 		5CDED940218874D800065254 /* YNExposureDemoTitleCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YNExposureDemoTitleCollectionViewCell.h; sourceTree = "<group>"; };
 		5CDED941218874D800065254 /* YNExposureDemoTitleCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YNExposureDemoTitleCollectionViewCell.m; sourceTree = "<group>"; };
-		5CEDA0C821895DE3000AE742 /* YNExposureDemoTestingCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YNExposureDemoTestingCollectionViewCell.h; sourceTree = "<group>"; };
-		5CEDA0C921895DE3000AE742 /* YNExposureDemoTestingCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YNExposureDemoTestingCollectionViewCell.m; sourceTree = "<group>"; };
 		5CFF021E21806DAE00E322D7 /* YNExposureDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YNExposureDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5CFF022121806DAE00E322D7 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		5CFF022221806DAE00E322D7 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -91,19 +88,10 @@
 			children = (
 				5CDED93D2188726400065254 /* YNExposureTestOutsideViewController.h */,
 				5CDED93E2188726400065254 /* YNExposureTestOutsideViewController.m */,
+				5CDED9372188552800065254 /* YNExposureTestOutsideView.h */,
+				5CDED9382188552800065254 /* YNExposureTestOutsideView.m */,
 			);
 			path = TestOutside;
-			sourceTree = "<group>";
-		};
-		5CEDA0C721895D81000AE742 /* Utilitys */ = {
-			isa = PBXGroup;
-			children = (
-				5CDED9372188552800065254 /* YNExposureDemoTestingView.h */,
-				5CDED9382188552800065254 /* YNExposureDemoTestingView.m */,
-				5CEDA0C821895DE3000AE742 /* YNExposureDemoTestingCollectionViewCell.h */,
-				5CEDA0C921895DE3000AE742 /* YNExposureDemoTestingCollectionViewCell.m */,
-			);
-			path = Utilitys;
 			sourceTree = "<group>";
 		};
 		5CFF021521806DAE00E322D7 = {
@@ -128,7 +116,6 @@
 			isa = PBXGroup;
 			children = (
 				5CDED9432188789600065254 /* MainPage */,
-				5CEDA0C721895D81000AE742 /* Utilitys */,
 				5CDED944218878A600065254 /* TestOutside */,
 				5C2166FC218C2B2700371F24 /* TestOutsideWithReuse */,
 				5CFF022121806DAE00E322D7 /* AppDelegate.h */,
@@ -241,10 +228,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				5CFF022621806DAE00E322D7 /* YNExposureDemoViewController.m in Sources */,
-				5CEDA0CA21895DE3000AE742 /* YNExposureDemoTestingCollectionViewCell.m in Sources */,
 				5CDED93F2188726400065254 /* YNExposureTestOutsideViewController.m in Sources */,
 				5CFF023121806DAE00E322D7 /* main.m in Sources */,
-				5CDED9392188552800065254 /* YNExposureDemoTestingView.m in Sources */,
+				5CDED9392188552800065254 /* YNExposureTestOutsideView.m in Sources */,
 				5CDED942218874D800065254 /* YNExposureDemoTitleCollectionViewCell.m in Sources */,
 				5CFF022321806DAE00E322D7 /* AppDelegate.m in Sources */,
 				5C216705218C2C8500371F24 /* YNExposureTestOutsideWithReuseViewController.m in Sources */,

@@ -1,39 +1,42 @@
 //
-//  YNExposureDemoTestingView.m
+//  YNExposureTestOutsideView.m
 //  YNExposureDemo
 //
 //  Created by Wang Ya on 30/10/18.
 //  Copyright © 2018 Shopee. All rights reserved.
 //
 
-#import "YNExposureDemoTestingView.h"
+#import "YNExposureTestOutsideView.h"
 #import <YNExposure/YNExposure.h>
 
-@interface UIView(YNExposureDemoTestingViewPrivate)
+@interface UIView(YNExposureTestOutsideViewPrivate)
 @property (nonatomic, assign) BOOL ynex_isExposured;
 @property (nonatomic, copy) NSDate *ynex_lastShowedDate;
 @property (nonatomic, assign) NSTimeInterval ynex_delay;
 
 @end
 
-@implementation UIView(YNExposureDemoTestingViewPrivate)
+@implementation UIView(YNExposureTestOutsideViewPrivate)
 @dynamic ynex_isExposured;
 @dynamic ynex_lastShowedDate;
 @dynamic ynex_delay;
 @end
 
-static void *YNExposureDemoTestingViewContext = &YNExposureDemoTestingViewContext;
+static void *YNExposureTestOutsideViewContext = &YNExposureTestOutsideViewContext;
 
-@interface YNExposureDemoTestingView()
+@interface YNExposureTestOutsideView()
 @property (nonatomic, weak) UILabel *label;
 @end
 
-@implementation YNExposureDemoTestingView
+@implementation YNExposureTestOutsideView
 
 - (instancetype)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     if (self) {
+        self.layer.borderColor = [UIColor grayColor].CGColor;
+        self.layer.borderWidth = 0.5;
+        
         UILabel *label = [[UILabel alloc] initWithFrame:self.bounds];
         label.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         label.font = [UIFont systemFontOfSize:12];

@@ -27,10 +27,6 @@ NSString *const YNExposureErrorDomin = @"com.shopee.yanni.YNExposure";
         *error = [NSError errorWithDomain:YNExposureErrorDomin code:YNExposureErrorCodeParameterInvaild userInfo:nil];
         return NO;
     }
-    if (self.ynex_exposureBlock != nil) {
-        *error = [NSError errorWithDomain:YNExposureErrorDomin code:YNExposureErrorCodeAlreadySignup userInfo:nil];
-        return NO;
-    }
     
     // property
     self.ynex_exposureBlock = block;
@@ -38,17 +34,19 @@ NSString *const YNExposureErrorDomin = @"com.shopee.yanni.YNExposure";
     self.ynex_minAreaRatio = minAreaRatio;
     
     // aspect
-    __weak typeof(self) wself = self;
-    [self aspect_hookSelector:@selector(didMoveToWindow) withOptions:AspectPositionAfter usingBlock:^(id<AspectInfo> aspectInfo) {
-        __strong typeof(self) self = wself;
-        if (self.window == nil) {
-            [[YNExposureManager sharedInstance] removeView:self];
-        } else {
-            [[YNExposureManager sharedInstance] addView:self];
+    if (self.ynex_token == nil) {
+        __weak typeof(self) wself = self;
+        self.ynex_token = [self aspect_hookSelector:@selector(didMoveToWindow) withOptions:AspectPositionAfter usingBlock:^(id<AspectInfo> aspectInfo) {
+            __strong typeof(self) self = wself;
+            if (self.window == nil) {
+                [[YNExposureManager sharedInstance] removeView:self];
+            } else {
+                [[YNExposureManager sharedInstance] addView:self];
+            }
+        } error:error];
+        if (*error != nil) {
+            return NO;
         }
-    } error:error];
-    if (*error != nil) {
-        return NO;
     }
     return YES;
 }

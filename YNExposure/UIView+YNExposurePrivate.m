@@ -61,4 +61,15 @@
     return [objc_getAssociatedObject(self, @selector(ynex_minAreaRatio)) floatValue];
 }
 
+-(void)setYnex_token:(id<AspectToken>)ynex_token
+{
+    objc_setAssociatedObject(self, @selector(ynex_token), ynex_token, OBJC_ASSOCIATION_RETAIN);
+}
+
+-(id<AspectToken>)ynex_token
+{
+    return objc_getAssociatedObject(self, @selector(ynex_token));
+
+}
+
 @end

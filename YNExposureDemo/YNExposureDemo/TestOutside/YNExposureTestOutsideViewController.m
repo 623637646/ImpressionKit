@@ -7,7 +7,7 @@
 //
 
 #import "YNExposureTestOutsideViewController.h"
-#import "YNExposureDemoTestingView.h"
+#import "YNExposureTestOutsideView.h"
 
 #define column 4
 
@@ -47,9 +47,7 @@
         CGFloat height = width + arc4random() % (int)width;
         CGRect frame = CGRectMake(x, y, width, height);
         frames[index] = frame;
-        YNExposureDemoTestingView *view = [[YNExposureDemoTestingView alloc] initWithFrame:frame];
-        view.layer.borderColor = [UIColor grayColor].CGColor;
-        view.layer.borderWidth = 0.5;
+        YNExposureTestOutsideView *view = [[YNExposureTestOutsideView alloc] initWithFrame:frame];
         [views addObject:view];
         [scrollView addSubview:view];
     }

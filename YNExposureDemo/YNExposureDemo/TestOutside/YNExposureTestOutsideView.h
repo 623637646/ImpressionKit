@@ -1,5 +1,5 @@
 //
-//  YNExposureDemoTestingView.h
+//  YNExposureTestOutsideView.h
 //  YNExposureDemo
 //
 //  Created by Wang Ya on 30/10/18.
@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface YNExposureDemoTestingView : UIView
+@interface YNExposureTestOutsideView : UIView
 
 - (void)reset;
 

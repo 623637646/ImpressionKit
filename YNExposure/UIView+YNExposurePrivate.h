@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "UIView+YNExposure.h"
+#import <Aspects/Aspects.h>
 
 @interface UIView (YNExposurePrivate)
 
@@ -17,4 +18,5 @@
 @property (nonatomic, copy) YNExposureBlock ynex_exposureBlock;
 @property (nonatomic, assign) NSTimeInterval ynex_delay;
 @property (nonatomic, assign) CGFloat ynex_minAreaRatio;
+@property (atomic, strong) id<AspectToken> ynex_token;
 @end
