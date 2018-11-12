@@ -1,15 +1,15 @@
 //
-//  DemoTestOutsideWithReuseCollectionViewCell.m
+//  YNExposureTestOutsideWithReuseCollectionViewCell.m
 //  YNExposureDemo
 //
 //  Created by Wang Ya on 12/11/18.
 //  Copyright © 2018 Shopee. All rights reserved.
 //
 
-#import "DemoTestOutsideWithReuseCollectionViewCell.h"
+#import "YNExposureTestOutsideWithReuseCollectionViewCell.h"
 #import "UIView+YNExposureViewPrivate.h"
 
-@implementation DemoTestOutsideWithReuseCollectionViewCell
+@implementation YNExposureTestOutsideWithReuseCollectionViewCell
 
 - (instancetype)initWithFrame:(CGRect)frame
 {

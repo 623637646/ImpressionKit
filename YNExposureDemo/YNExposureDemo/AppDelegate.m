@@ -8,7 +8,7 @@
 
 #import "AppDelegate.h"
 #import <YNExposure/YNExposure.h>
-#import "DemoViewController.h"
+#import "YNExposureDemoViewController.h"
 #import <GDPerformanceView/GDPerformanceMonitor.h>
 
 @interface AppDelegate ()
@@ -24,7 +24,7 @@
     [YNExposureConfig sharedInstance].interval = 0.1;
     [YNExposureConfig sharedInstance].log = YES;
 
-    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:[[DemoViewController alloc] init]];
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:[[YNExposureDemoViewController alloc] init]];
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.rootViewController = navigationController;

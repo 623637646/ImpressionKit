@@ -1,5 +1,5 @@
 //
-//  DemoViewController.h
+//  YNExposureDemoViewController.h
 //  YNExposureDemo
 //
 //  Created by Wang Ya on 24/10/18.
@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface DemoViewController : UIViewController
+@interface YNExposureDemoViewController : UIViewController
 
 
 @end

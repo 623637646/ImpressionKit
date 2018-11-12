@@ -1,18 +1,18 @@
 //
-//  DemoTitleCollectionViewCell.m
+//  YNExposureDemoTitleCollectionViewCell.m
 //  YNExposureDemo
 //
 //  Created by Wang Ya on 30/10/18.
 //  Copyright © 2018 Shopee. All rights reserved.
 //
 
-#import "DemoTitleCollectionViewCell.h"
+#import "YNExposureDemoTitleCollectionViewCell.h"
 
-@interface DemoTitleCollectionViewCell()
+@interface YNExposureDemoTitleCollectionViewCell()
 @property (nonatomic, weak) UILabel *label;
 @end
 
-@implementation DemoTitleCollectionViewCell
+@implementation YNExposureDemoTitleCollectionViewCell
 
 - (instancetype)initWithFrame:(CGRect)frame
 {

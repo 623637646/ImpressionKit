@@ -1,22 +1,22 @@
 //
-//  DemoViewController.m
+//  YNExposureDemoViewController.m
 //  YNExposureDemo
 //
 //  Created by Wang Ya on 24/10/18.
 //  Copyright © 2018 Shopee. All rights reserved.
 //
 
-#import "DemoViewController.h"
-#import "DemoTestOutsideView.h"
-#import "DemoTestOutsideViewController.h"
-#import "DemoTitleCollectionViewCell.h"
-#import "DemoTestOutsideWithReuseViewController.h"
+#import "YNExposureDemoViewController.h"
+#import "YNExposureTestOutsideView.h"
+#import "YNExposureTestOutsideViewController.h"
+#import "YNExposureDemoTitleCollectionViewCell.h"
+#import "YNExposureTestOutsideWithReuseViewController.h"
 
-@interface DemoViewController ()<UICollectionViewDataSource, UICollectionViewDelegate>
+@interface YNExposureDemoViewController ()<UICollectionViewDataSource, UICollectionViewDelegate>
 @property (nonatomic, copy) NSArray<NSArray *> *demos;
 @end
 
-@implementation DemoViewController
+@implementation YNExposureDemoViewController
 
 - (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -24,8 +24,8 @@
     if (self) {
         self.title = @"Exposure Demo";
         self.demos = @[
-                       @[@"Test out side of screen",DemoTestOutsideViewController.class],
-                       @[@"Test out side of screen with reuse",DemoTestOutsideWithReuseViewController.class],
+                       @[@"Test out side of screen",YNExposureTestOutsideViewController.class],
+                       @[@"Test out side of screen with reuse",YNExposureTestOutsideWithReuseViewController.class],
                     ];
     }
     return self;
@@ -41,7 +41,7 @@
     collectionView.backgroundColor = [UIColor colorWithWhite:0.9 alpha:1];
     collectionView.delegate = self;
     collectionView.dataSource = self;
-    [collectionView registerClass:DemoTitleCollectionViewCell.class forCellWithReuseIdentifier:[DemoTitleCollectionViewCell description]];
+    [collectionView registerClass:YNExposureDemoTitleCollectionViewCell.class forCellWithReuseIdentifier:[YNExposureDemoTitleCollectionViewCell description]];
     [self.view addSubview:collectionView];
 }
 
@@ -55,7 +55,7 @@
 - (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     NSArray *array = [self.demos objectAtIndex:indexPath.row];
-    DemoTitleCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:[DemoTitleCollectionViewCell description] forIndexPath:indexPath];
+    YNExposureDemoTitleCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:[YNExposureDemoTitleCollectionViewCell description] forIndexPath:indexPath];
     cell.title = array[0];
     return cell;
 }

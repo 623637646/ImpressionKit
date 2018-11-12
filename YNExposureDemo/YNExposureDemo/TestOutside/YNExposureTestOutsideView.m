@@ -1,22 +1,22 @@
 //
-//  DemoTestOutsideView.m
+//  YNExposureTestOutsideView.m
 //  YNExposureDemo
 //
 //  Created by Wang Ya on 30/10/18.
 //  Copyright © 2018 Shopee. All rights reserved.
 //
 
-#import "DemoTestOutsideView.h"
+#import "YNExposureTestOutsideView.h"
 #import <YNExposure/YNExposure.h>
 #import "UIView+YNExposureViewPrivate.h"
 
 static void *YNExposureTestOutsideViewContext = &YNExposureTestOutsideViewContext;
 
-@interface DemoTestOutsideView()
+@interface YNExposureTestOutsideView()
 @property (nonatomic, weak) UILabel *label;
 @end
 
-@implementation DemoTestOutsideView
+@implementation YNExposureTestOutsideView
 
 - (instancetype)initWithFrame:(CGRect)frame
 {
