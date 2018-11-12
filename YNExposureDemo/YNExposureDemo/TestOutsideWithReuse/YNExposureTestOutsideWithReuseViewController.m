@@ -12,6 +12,7 @@
 #import "YNExposureTestOutsideWithReuseCollectionViewCell.h"
 
 @interface YNExposureTestOutsideWithReuseViewController ()<UICollectionViewDataSource, CHTCollectionViewDelegateWaterfallLayout>
+@property (nonatomic, weak) UICollectionView *collectionView;
 @property (nonatomic, strong) NSMutableSet<NSIndexPath *> *exposuredIndexPaths;
 @end
 
@@ -19,6 +20,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    UIBarButtonItem *resetButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Reset" style:UIBarButtonItemStylePlain target:self action:@selector(resetButtonClick:)];
+    self.navigationItem.rightBarButtonItem = resetButtonItem;
+
     self.exposuredIndexPaths = [[NSMutableSet<NSIndexPath *> alloc] init];
     self.view.backgroundColor = [UIColor whiteColor];
     
@@ -33,6 +38,14 @@
     collectionView.dataSource = self;
     [collectionView registerClass:YNExposureTestOutsideWithReuseCollectionViewCell.class forCellWithReuseIdentifier:[YNExposureTestOutsideWithReuseCollectionViewCell description]];
     [self.view addSubview:collectionView];
+    self.collectionView = collectionView;
+}
+
+- (void)resetButtonClick:(id)sender
+{
+    [self.exposuredIndexPaths removeAllObjects];
+    [self.collectionView reloadData];
+    [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:0 inSection:0] atScrollPosition:UICollectionViewScrollPositionTop animated:NO];
 }
 
 #pragma mark - CHTCollectionViewDelegateWaterfallLayout

@@ -12,7 +12,7 @@
 #define column 4
 
 @interface YNExposureTestOutsideViewController ()
-
+@property (nonatomic, strong) NSArray *testViews;
 @end
 
 @implementation YNExposureTestOutsideViewController
@@ -20,6 +20,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
+    
+    UIBarButtonItem *resetButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Reset" style:UIBarButtonItemStylePlain target:self action:@selector(resetButtonClick:)];
+    self.navigationItem.rightBarButtonItem = resetButtonItem;
     
     UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:self.view.bounds];
     [self.view addSubview:scrollView];
@@ -53,6 +56,15 @@
     }
     
     scrollView.contentSize = CGSizeMake(scrollView.frame.size.width, views.lastObject.frame.origin.y + views.lastObject.frame.size.height);
+    
+    self.testViews = views;
+}
+
+- (void)resetButtonClick:(id)sender
+{
+    for (YNExposureTestOutsideView *view in self.testViews) {
+        [view reset];
+    }
 }
 
 

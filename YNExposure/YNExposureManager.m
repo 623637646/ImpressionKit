@@ -72,7 +72,6 @@ MACRO_SINGLETON_PATTERN_M({
 
 - (void)detectExposure
 {
-    // TODO: 偶现view没有曝光
     NSDate *now = [NSDate date];
     NSArray *views = self.ynExposureViewHashTable.allObjects;
     
