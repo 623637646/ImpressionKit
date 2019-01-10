@@ -10,6 +10,7 @@
 		5C078620219920AD0076A3BA /* UIView+YNExposureViewPrivate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C07861F219920AD0076A3BA /* UIView+YNExposureViewPrivate.m */; };
 		5C0786232199210F0076A3BA /* YNDemoReusedCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C0786222199210F0076A3BA /* YNDemoReusedCollectionViewCell.m */; };
 		5C216705218C2C8500371F24 /* YNDemoReusedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C216704218C2C8500371F24 /* YNDemoReusedViewController.m */; };
+		5C29ED6B21E6F7D000F2687D /* YNDemoDisappearViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C29ED6A21E6F7D000F2687D /* YNDemoDisappearViewController.m */; };
 		5CDED9392188552800065254 /* YNDemoNonReusedView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CDED9382188552800065254 /* YNDemoNonReusedView.m */; };
 		5CDED93F2188726400065254 /* YNDemoNonReusedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CDED93E2188726400065254 /* YNDemoNonReusedViewController.m */; };
 		5CDED942218874D800065254 /* YNDemoTitleCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CDED941218874D800065254 /* YNDemoTitleCollectionViewCell.m */; };
@@ -30,6 +31,8 @@
 		5C0786222199210F0076A3BA /* YNDemoReusedCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YNDemoReusedCollectionViewCell.m; sourceTree = "<group>"; };
 		5C216703218C2C8500371F24 /* YNDemoReusedViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YNDemoReusedViewController.h; sourceTree = "<group>"; };
 		5C216704218C2C8500371F24 /* YNDemoReusedViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YNDemoReusedViewController.m; sourceTree = "<group>"; };
+		5C29ED6921E6F7D000F2687D /* YNDemoDisappearViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YNDemoDisappearViewController.h; sourceTree = "<group>"; };
+		5C29ED6A21E6F7D000F2687D /* YNDemoDisappearViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YNDemoDisappearViewController.m; sourceTree = "<group>"; };
 		5CDED9372188552800065254 /* YNDemoNonReusedView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YNDemoNonReusedView.h; sourceTree = "<group>"; };
 		5CDED9382188552800065254 /* YNDemoNonReusedView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YNDemoNonReusedView.m; sourceTree = "<group>"; };
 		5CDED93D2188726400065254 /* YNDemoNonReusedViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YNDemoNonReusedViewController.h; sourceTree = "<group>"; };
@@ -80,6 +83,15 @@
 			path = ReusedViews;
 			sourceTree = "<group>";
 		};
+		5C29ED6821E6F78D00F2687D /* ViewControllerDisappear */ = {
+			isa = PBXGroup;
+			children = (
+				5C29ED6921E6F7D000F2687D /* YNDemoDisappearViewController.h */,
+				5C29ED6A21E6F7D000F2687D /* YNDemoDisappearViewController.m */,
+			);
+			path = ViewControllerDisappear;
+			sourceTree = "<group>";
+		};
 		5CDED9432188789600065254 /* MainPage */ = {
 			isa = PBXGroup;
 			children = (
@@ -126,6 +138,7 @@
 				5CDED9432188789600065254 /* MainPage */,
 				5CDED944218878A600065254 /* NonReusedViews */,
 				5C2166FC218C2B2700371F24 /* ReusedViews */,
+				5C29ED6821E6F78D00F2687D /* ViewControllerDisappear */,
 				5CFF022121806DAE00E322D7 /* AppDelegate.h */,
 				5CFF022221806DAE00E322D7 /* AppDelegate.m */,
 				5CFF022A21806DAE00E322D7 /* Assets.xcassets */,
@@ -243,6 +256,7 @@
 				5CDED9392188552800065254 /* YNDemoNonReusedView.m in Sources */,
 				5CDED942218874D800065254 /* YNDemoTitleCollectionViewCell.m in Sources */,
 				5C078620219920AD0076A3BA /* UIView+YNExposureViewPrivate.m in Sources */,
+				5C29ED6B21E6F7D000F2687D /* YNDemoDisappearViewController.m in Sources */,
 				5C0786232199210F0076A3BA /* YNDemoReusedCollectionViewCell.m in Sources */,
 				5CFF022321806DAE00E322D7 /* AppDelegate.m in Sources */,
 				5C216705218C2C8500371F24 /* YNDemoReusedViewController.m in Sources */,

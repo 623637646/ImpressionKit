@@ -10,6 +10,7 @@
 #import "YNDemoNonReusedViewController.h"
 #import "YNDemoTitleCollectionViewCell.h"
 #import "YNDemoReusedViewController.h"
+#import "YNDemoDisappearViewController.h"
 
 @interface YNDemoViewController ()<UICollectionViewDataSource, UICollectionViewDelegate>
 @property (nonatomic, copy) NSArray<NSArray *> *demos;
@@ -23,8 +24,9 @@
     if (self) {
         self.title = @"Exposure Demo";
         self.demos = @[
-                       @[@"non-reused views",YNDemoNonReusedViewController.class],
-                       @[@"reused views",YNDemoReusedViewController.class],
+                       @[@"non-reused views", YNDemoNonReusedViewController.class],
+                       @[@"reused views", YNDemoReusedViewController.class],
+                       @[@"view controller disappear", YNDemoDisappearViewController.class]
                     ];
     }
     return self;
