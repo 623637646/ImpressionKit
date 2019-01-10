@@ -11,6 +11,7 @@
 #import "YNDemoTitleCollectionViewCell.h"
 #import "YNDemoReusedViewController.h"
 #import "YNDemoDisappearViewController.h"
+#import "YNDemoCoverViewController.h"
 
 @interface YNDemoViewController ()<UICollectionViewDataSource, UICollectionViewDelegate>
 @property (nonatomic, copy) NSArray<NSArray *> *demos;
@@ -26,7 +27,8 @@
         self.demos = @[
                        @[@"non-reused views", YNDemoNonReusedViewController.class],
                        @[@"reused views", YNDemoReusedViewController.class],
-                       @[@"view controller disappear", YNDemoDisappearViewController.class]
+                       @[@"view controller disappear", YNDemoDisappearViewController.class],
+                       @[@"cover view", YNDemoCoverViewController.class]
                     ];
     }
     return self;
