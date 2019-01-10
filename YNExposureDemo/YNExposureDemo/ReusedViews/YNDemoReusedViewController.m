@@ -1,22 +1,22 @@
 //
-//  YNExposureTestOutsideWithReuseViewController.m
+//  YNDemoReusedViewController.m
 //  YNExposureDemo
 //
 //  Created by Wang Ya on 2/11/18.
 //  Copyright © 2018 Shopee. All rights reserved.
 //
 
-#import "YNExposureTestOutsideWithReuseViewController.h"
+#import "YNDemoReusedViewController.h"
 #import <YNExposure/YNExposure.h>
 #import <CHTCollectionViewWaterfallLayout/CHTCollectionViewWaterfallLayout.h>
-#import "YNExposureTestOutsideWithReuseCollectionViewCell.h"
+#import "YNDemoReusedCollectionViewCell.h"
 
-@interface YNExposureTestOutsideWithReuseViewController ()<UICollectionViewDataSource, CHTCollectionViewDelegateWaterfallLayout>
+@interface YNDemoReusedViewController ()<UICollectionViewDataSource, CHTCollectionViewDelegateWaterfallLayout>
 @property (nonatomic, weak) UICollectionView *collectionView;
 @property (nonatomic, strong) NSMutableSet<NSIndexPath *> *exposuredIndexPaths;
 @end
 
-@implementation YNExposureTestOutsideWithReuseViewController
+@implementation YNDemoReusedViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -36,7 +36,7 @@
     collectionView.backgroundColor = [UIColor colorWithWhite:0.9 alpha:1];
     collectionView.delegate = self;
     collectionView.dataSource = self;
-    [collectionView registerClass:YNExposureTestOutsideWithReuseCollectionViewCell.class forCellWithReuseIdentifier:[YNExposureTestOutsideWithReuseCollectionViewCell description]];
+    [collectionView registerClass:YNDemoReusedCollectionViewCell.class forCellWithReuseIdentifier:[YNDemoReusedCollectionViewCell description]];
     [self.view addSubview:collectionView];
     self.collectionView = collectionView;
 }
@@ -64,7 +64,7 @@
 
 - (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    YNExposureTestOutsideWithReuseCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:[YNExposureTestOutsideWithReuseCollectionViewCell description] forIndexPath:indexPath];
+    YNDemoReusedCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:[YNDemoReusedCollectionViewCell description] forIndexPath:indexPath];
     
     NSError *error = nil;
     __weak typeof(self) wself = self;

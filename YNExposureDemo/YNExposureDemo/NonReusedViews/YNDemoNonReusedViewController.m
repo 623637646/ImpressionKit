@@ -1,21 +1,21 @@
 //
-//  YNExposureTestOutsideViewController.m
+//  YNDemoNonReusedViewController.m
 //  YNExposureDemo
 //
 //  Created by Wang Ya on 30/10/18.
 //  Copyright © 2018 Shopee. All rights reserved.
 //
 
-#import "YNExposureTestOutsideViewController.h"
-#import "YNExposureTestOutsideView.h"
+#import "YNDemoNonReusedViewController.h"
+#import "YNDemoNonReusedView.h"
 
 #define column 4
 
-@interface YNExposureTestOutsideViewController ()
+@interface YNDemoNonReusedViewController ()
 @property (nonatomic, strong) NSArray *testViews;
 @end
 
-@implementation YNExposureTestOutsideViewController
+@implementation YNDemoNonReusedViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -50,7 +50,7 @@
         CGFloat height = width + arc4random() % (int)width;
         CGRect frame = CGRectMake(x, y, width, height);
         frames[index] = frame;
-        YNExposureTestOutsideView *view = [[YNExposureTestOutsideView alloc] initWithFrame:frame];
+        YNDemoNonReusedView *view = [[YNDemoNonReusedView alloc] initWithFrame:frame];
         [views addObject:view];
         [scrollView addSubview:view];
     }
@@ -62,7 +62,7 @@
 
 - (void)resetButtonClick:(id)sender
 {
-    for (YNExposureTestOutsideView *view in self.testViews) {
+    for (YNDemoNonReusedView *view in self.testViews) {
         [view reset];
     }
 }

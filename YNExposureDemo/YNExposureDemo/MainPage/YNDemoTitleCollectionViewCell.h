@@ -1,5 +1,5 @@
 //
-//  YNExposureDemoTitleCollectionViewCell.h
+//  YNDemoTitleCollectionViewCell.h
 //  YNExposureDemo
 //
 //  Created by Wang Ya on 30/10/18.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface YNExposureDemoTitleCollectionViewCell : UICollectionViewCell
+@interface YNDemoTitleCollectionViewCell : UICollectionViewCell
 @property (nonatomic, copy) NSString *title;
 @end

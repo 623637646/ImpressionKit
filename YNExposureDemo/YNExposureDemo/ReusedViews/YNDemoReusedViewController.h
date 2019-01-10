@@ -1,5 +1,5 @@
 //
-//  YNExposureTestOutsideWithReuseViewController.h
+//  YNDemoReusedViewController.h
 //  YNExposureDemo
 //
 //  Created by Wang Ya on 2/11/18.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface YNExposureTestOutsideWithReuseViewController : UIViewController
+@interface YNDemoReusedViewController : UIViewController
 
 @end
