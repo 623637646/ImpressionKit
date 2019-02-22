@@ -39,6 +39,7 @@
     
     UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
     layout.itemSize = CGSizeMake(self.view.bounds.size.width, 44);
+    layout.minimumLineSpacing = 0;
     
     UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:self.view.bounds collectionViewLayout:layout];
     collectionView.backgroundColor = [UIColor colorWithWhite:0.9 alpha:1];

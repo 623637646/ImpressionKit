@@ -25,8 +25,14 @@
         label.font = [UIFont systemFontOfSize:12];
         label.textColor = [UIColor blackColor];
         label.textAlignment = NSTextAlignmentCenter;
-        [self addSubview:label];
+        [self.contentView addSubview:label];
         self.label = label;
+        
+        UIView *dividingView = [[UIView alloc] initWithFrame:CGRectMake(20, frame.size.height - 0.5, frame.size.width - 20, 0.5)];
+        dividingView.backgroundColor = [UIColor lightGrayColor];
+        dividingView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+        [self.contentView addSubview:dividingView];
+        
     }
     return self;
 }
