@@ -10,8 +10,6 @@
 #import <YNExposure/YNExposure.h>
 #import "UIView+YNExposureViewPrivate.h"
 
-static void *YNDemoNonReusedViewContext = &YNDemoNonReusedViewContext;
-
 @interface YNDemoNonReusedView()
 @property (nonatomic, weak) UILabel *label;
 @end
