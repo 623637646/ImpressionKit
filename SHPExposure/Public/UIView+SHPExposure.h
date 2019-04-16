@@ -10,9 +10,9 @@
 
 extern NSString *const SHPExposureErrorDomin;
 
-typedef enum : NSUInteger {
+typedef NS_ENUM(NSUInteger, SHPExposureErrorCode) {
     SHPExposureErrorCodeParameterInvaild,
-} SHPExposureErrorCode;
+};
 
 
 typedef void(^SHPExposureBlock)(CGFloat areaRatio);
