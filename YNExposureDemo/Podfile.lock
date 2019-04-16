@@ -5,7 +5,7 @@ PODS:
   - CHTCollectionViewWaterfallLayout/ObjC (0.9.7)
   - GDPerformanceView (1.3.1)
   - YNExposure (0.0.1):
-    - Aspects (= 1.4.1)
+    - Aspects (~> 1.4.1)
 
 DEPENDENCIES:
   - CHTCollectionViewWaterfallLayout (~> 0.9.7)
@@ -26,7 +26,7 @@ SPEC CHECKSUMS:
   Aspects: 7595ba96a6727a58ebcbfc954497fc5d2fdde546
   CHTCollectionViewWaterfallLayout: 9d11068fafecac106695bb5a5d6d0f738483b598
   GDPerformanceView: d70d646bf7022a3dfd64222e4966f403bfffef19
-  YNExposure: d187f4cdd8201a2927b1c62e3a9f7bbcce80ea91
+  YNExposure: 9b3407c4c88fa3f9a15b32132c6efdbf6f17febb
 
 PODFILE CHECKSUM: d4c4e64638102b9692f6908c8535434fa99f0516
 
