@@ -28,7 +28,7 @@ Pod::Spec.new do |s|
   					Exposure in UIView...
                    DESC
 
-  s.homepage     = "https://github.com/623637646/SHPExposure"
+  s.homepage     = "https://git.garena.com/shopee/ios/shopee-exposure-kit"
   # s.screenshots  = "www.example.com/screenshots_1.gif", "www.example.com/screenshots_2.gif"
 
 
@@ -80,7 +80,7 @@ Pod::Spec.new do |s|
   #  Supports git, hg, bzr, svn and HTTP.
   #
 
-  s.source       = { :git => "https://github.com/623637646/SHPExposure.git", :tag => "#{s.version}" }
+  s.source       = { :git => "https://git.garena.com/shopee/ios/shopee-exposure-kit.git", :tag => "#{s.version}" }
 
 
   # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
