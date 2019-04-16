@@ -65,19 +65,22 @@
 - (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     SHPDemoReusedCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:[SHPDemoReusedCollectionViewCell description] forIndexPath:indexPath];
-    
-    NSError *error = nil;
-    __weak typeof(self) wself = self;
-    __weak typeof(cell) wcell = cell;
-    [cell shpex_execute:^(CGFloat areaRatio) {
-        __strong typeof(self) self = wself;
-        __strong typeof(cell) cell = wcell;
-        [self.exposuredIndexPaths addObject:indexPath];
-        cell.isExposuredByIndex = YES;
-    } delay:2 minAreaRatio:0.5 error:&error];
-    NSAssert(error == nil, @"error is not nil");
-    
-    cell.isExposuredByIndex = [self.exposuredIndexPaths containsObject:indexPath];
+    BOOL isExposuredByIndex = [self.exposuredIndexPaths containsObject:indexPath];
+    if (isExposuredByIndex) {
+        [cell shpex_cancelExecute];
+    } else {
+        NSError *error = nil;
+        __weak typeof(self) wself = self;
+        __weak typeof(cell) wcell = cell;
+        [cell shpex_execute:^(CGFloat areaRatio) {
+            __strong typeof(self) self = wself;
+            __strong typeof(cell) cell = wcell;
+            [self.exposuredIndexPaths addObject:indexPath];
+            cell.isExposuredByIndex = YES;
+        } delay:2 minAreaRatio:0.5 error:&error];
+        NSAssert(error == nil, @"error is not nil");
+    }
+    cell.isExposuredByIndex = isExposuredByIndex;
     return cell;
 }
 @end
