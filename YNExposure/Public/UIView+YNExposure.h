@@ -10,9 +10,9 @@
 
 extern NSString *const YNExposureErrorDomin;
 
-typedef enum : NSUInteger {
+typedef NS_ENUM(NSUInteger, YNExposureErrorCode) {
     YNExposureErrorCodeParameterInvaild,
-} YNExposureErrorCode;
+};
 
 
 typedef void(^YNExposureBlock)(CGFloat areaRatio);
