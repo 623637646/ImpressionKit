@@ -1,7 +1,7 @@
 inhibit_all_warnings!
 platform :ios, '8.0'
 
-target 'YNExposure' do
+target 'SHPExposure' do
   pod 'Aspects', '1.4.1'
 end
 
