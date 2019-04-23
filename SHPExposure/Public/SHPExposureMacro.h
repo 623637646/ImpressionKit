@@ -62,7 +62,7 @@ return self;\
 
 // log
 #define SHPLog(...) do {\
-if ([SHPExposureConfig sharedInstance].log) {\
+if ([SHPExposureConfig sharedInstance].loggingEnabled) {\
 NSLog(__VA_ARGS__);\
 }\
 }while(0)

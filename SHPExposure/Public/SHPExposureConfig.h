@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import "SHPExposureMacro.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 extern NSString *const SHPExposureConfigNotificationIntervalChanged;
 
 @interface SHPExposureConfig : NSObject
@@ -18,6 +20,8 @@ MACRO_SINGLETON_PATTERN_H
 @property (nonatomic, assign) NSTimeInterval interval;
 
 // print log
-@property (nonatomic, assign) BOOL log;
+@property (nonatomic, assign) BOOL loggingEnabled;
 
 @end
+
+NS_ASSUME_NONNULL_END

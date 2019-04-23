@@ -11,18 +11,16 @@
 #import "SHPExposureNotificationCenter.h"
 #import "SHPExposureConfig.h"
 
-@interface SHPExposureManager()
+@interface SHPExposureManager ()
 @property (nonatomic, strong) NSHashTable<UIView *> *shpExposureViewHashTable;
+@property (nonatomic, strong) dispatch_source_t timer;
+@property (nonatomic, strong) dispatch_queue_t queue;
 @end
 
-@implementation SHPExposureManager{
-    dispatch_source_t _timer;
-    dispatch_queue_t _queue;
-}
+@implementation SHPExposureManager
 
 MACRO_SINGLETON_PATTERN_M({
-//    self->_queue = dispatch_queue_create("com.shopee.yanni.SHPExposure.timer_queue", NULL);
-    self->_queue = dispatch_get_main_queue();
+    self.queue = dispatch_get_main_queue();
     self.shpExposureViewHashTable = [NSHashTable<UIView *> weakObjectsHashTable];
     
     __weak typeof(self) wself = self;
@@ -32,11 +30,11 @@ MACRO_SINGLETON_PATTERN_M({
     }];
 })
 
--(void)dealloc
+- (void)dealloc
 {
-    if (self->_timer) {
-        dispatch_source_cancel(self->_timer);
-        self->_timer = nil;
+    if (self.timer) {
+        dispatch_source_cancel(self.timer);
+        self.timer = nil;
     }
 }
 
@@ -76,7 +74,7 @@ MACRO_SINGLETON_PATTERN_M({
     NSArray *views = self.shpExposureViewHashTable.allObjects;
     
     // log
-    if ([SHPExposureConfig sharedInstance].log) {
+    if ([SHPExposureConfig sharedInstance].loggingEnabled) {
         static NSInteger indexForLog = 0;
         if (indexForLog == (NSInteger)(1 / [SHPExposureConfig sharedInstance].interval)) {
             SHPLog(@"SHPExposureManager has %@ views", @(views.count));
@@ -118,9 +116,6 @@ MACRO_SINGLETON_PATTERN_M({
         // exposuree
         view.shpex_lastShowedDate = nil;
         view.shpex_isExposured = YES;
-//        dispatch_sync(dispatch_get_main_queue(), ^{
-//            view.shpex_exposureBlock(ratioOnScreen);
-//        });
         view.shpex_exposureBlock(ratioOnScreen);
         [self.shpExposureViewHashTable removeObject:view];
     }
@@ -131,9 +126,9 @@ MACRO_SINGLETON_PATTERN_M({
 - (void)updateTimerStatusWhenViewsTableChange
 {
     NSArray *views = [self.shpExposureViewHashTable allObjects];
-    if (views.count > 0 && self->_timer == nil) {
+    if (views.count > 0 && self.timer == nil) {
         [self startTimer];
-    } else if(views.count == 0 && self->_timer != nil){
+    } else if (views.count == 0 && self.timer != nil){
         [self stopTimer];
     }
 }
@@ -146,12 +141,12 @@ MACRO_SINGLETON_PATTERN_M({
 
 - (void)startTimer
 {
-    NSAssert(self->_timer == nil, @"self->_timer must be nil when call startTimer");
-    if (self->_timer) {
+    NSAssert(self.timer == nil, @"self.timer must be nil when call startTimer");
+    if (self.timer) {
         return;
     }
     
-    dispatch_source_t timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, self->_queue);
+    dispatch_source_t timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, self.queue);
     dispatch_source_set_timer(timer, DISPATCH_TIME_NOW, [SHPExposureConfig sharedInstance].interval * NSEC_PER_SEC, 0 * NSEC_PER_SEC);
     __weak typeof(self) wself= self;
     dispatch_source_set_event_handler(timer, ^{
@@ -160,15 +155,15 @@ MACRO_SINGLETON_PATTERN_M({
     });
     dispatch_resume(timer);
     
-    self->_timer = timer;
+    self.timer = timer;
     SHPLog(@"SHPExposureManager startTimer");
 }
 
 - (void)stopTimer
 {
-    if (self->_timer) {
-        dispatch_source_cancel(self->_timer);
-        self->_timer = nil;
+    if (self.timer) {
+        dispatch_source_cancel(self.timer);
+        self.timer = nil;
         SHPLog(@"SHPExposureManager stopTimer");
     }
 }

@@ -12,7 +12,7 @@
 #import <Aspects/Aspects.h>
 #import "SHPExposureManager.h"
 
-NSString *const SHPExposureErrorDomin = @"com.shopee.yanni.SHPExposure";
+NSString *const SHPExposureErrorDomain = @"com.shopee.SHPExposure";
 
 @implementation UIView (SHPExposure)
 
@@ -24,7 +24,7 @@ NSString *const SHPExposureErrorDomin = @"com.shopee.yanni.SHPExposure";
     NSParameterAssert(minAreaRatio > 0 && minAreaRatio <=1);
     NSParameterAssert(*error == nil);
     if (block == nil || delay < 0 || (minAreaRatio <= 0 || minAreaRatio > 1) || *error != nil) {
-        *error = [NSError errorWithDomain:SHPExposureErrorDomin code:SHPExposureErrorCodeParameterInvaild userInfo:nil];
+        *error = [NSError errorWithDomain:SHPExposureErrorDomain code:SHPExposureErrorCodeParameterInvaild userInfo:nil];
         return NO;
     }
     
@@ -77,7 +77,7 @@ NSString *const SHPExposureErrorDomin = @"com.shopee.yanni.SHPExposure";
 
 #pragma mark - Helper
 
-- (BOOL)shpex_showedOnScreen
+- (BOOL)shpex_isShowingOnScreen
 {
     return [self shpex_ratioOnScreen] > 0;
 }

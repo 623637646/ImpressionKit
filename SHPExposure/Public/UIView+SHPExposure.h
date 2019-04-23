@@ -8,7 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-extern NSString *const SHPExposureErrorDomin;
+NS_ASSUME_NONNULL_BEGIN
+
+extern NSString *const SHPExposureErrorDomain;
 
 typedef NS_ENUM(NSUInteger, SHPExposureErrorCode) {
     SHPExposureErrorCodeParameterInvaild,
@@ -33,9 +35,11 @@ typedef void(^SHPExposureBlock)(CGFloat areaRatio);
 #pragma mark - Helper
 
 // is showed on screen
-- (BOOL)shpex_showedOnScreen;
+- (BOOL)shpex_isShowingOnScreen;
 
 // get ratio on screen
 - (CGFloat)shpex_ratioOnScreen;
 
 @end
+
+NS_ASSUME_NONNULL_END

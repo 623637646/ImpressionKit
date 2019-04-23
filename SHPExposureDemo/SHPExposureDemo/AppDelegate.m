@@ -22,7 +22,7 @@
     [[GDPerformanceMonitor sharedInstance] startMonitoring];
     
     [SHPExposureConfig sharedInstance].interval = 0.1;
-    [SHPExposureConfig sharedInstance].log = YES;
+    [SHPExposureConfig sharedInstance].loggingEnabled = YES;
 
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:[[SHPDemoViewController alloc] init]];
     
