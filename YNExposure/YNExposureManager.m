@@ -12,7 +12,7 @@
 #import "YNExposureConfig.h"
 
 @interface YNExposureManager ()
-@property (nonatomic, strong) NSHashTable<UIView *> *hashTable;
+@property (nonatomic, strong) NSHashTable<UIView *> *exposureViewHashTable;
 @property (nonatomic, strong) dispatch_source_t timer;
 @property (nonatomic, strong) dispatch_queue_t queue;
 @end
@@ -21,7 +21,7 @@
 
 MACRO_SINGLETON_PATTERN_M({
     self.queue = dispatch_get_main_queue();
-    self.hashTable = [NSHashTable<UIView *> weakObjectsHashTable];
+    self.exposureViewHashTable = [NSHashTable<UIView *> weakObjectsHashTable];
     
     __weak typeof(self) wself = self;
     [[YNExposureNotificationCenter sharedInstance] addObserverForName:YNExposureConfigNotificationIntervalChanged object:nil queue:nil usingBlock:^(NSNotification * _Nonnull note) {
@@ -45,11 +45,11 @@ MACRO_SINGLETON_PATTERN_M({
     if (view == nil) {
         return;
     }
-    if ([self.hashTable containsObject:view]) {
+    if ([self.exposureViewHashTable containsObject:view]) {
         return;
     }
     NSAssert(view.ynex_lastShowedDate == nil, @"view.ynex_lastShowedDate should be nil");
-    [self.hashTable addObject:view];
+    [self.exposureViewHashTable addObject:view];
     [self updateTimerStatusWhenViewsTableChange];
 }
 
@@ -58,11 +58,11 @@ MACRO_SINGLETON_PATTERN_M({
     if (view == nil) {
         return;
     }
-    if (![self.hashTable containsObject:view]) {
+    if (![self.exposureViewHashTable containsObject:view]) {
         return;
     }
     view.ynex_lastShowedDate = nil;
-    [self.hashTable removeObject:view];
+    [self.exposureViewHashTable removeObject:view];
     [self updateTimerStatusWhenViewsTableChange];
 }
 
@@ -71,7 +71,7 @@ MACRO_SINGLETON_PATTERN_M({
 - (void)detectExposure
 {
     NSDate *now = [NSDate date];
-    NSArray *views = self.hashTable.allObjects;
+    NSArray *views = self.exposureViewHashTable.allObjects;
     
     // log
     if ([YNExposureConfig sharedInstance].loggingEnabled) {
@@ -92,7 +92,7 @@ MACRO_SINGLETON_PATTERN_M({
     for (UIView *view in views) {
         if (view.ynex_isExposured) {
             // has been exposured
-            [self.hashTable removeObject:view];
+            [self.exposureViewHashTable removeObject:view];
             continue;
         }
         
@@ -117,7 +117,7 @@ MACRO_SINGLETON_PATTERN_M({
         view.ynex_lastShowedDate = nil;
         view.ynex_isExposured = YES;
         view.ynex_exposureBlock(ratioOnScreen);
-        [self.hashTable removeObject:view];
+        [self.exposureViewHashTable removeObject:view];
     }
 }
 
@@ -125,10 +125,10 @@ MACRO_SINGLETON_PATTERN_M({
 
 - (void)updateTimerStatusWhenViewsTableChange
 {
-    NSArray *views = [self.hashTable allObjects];
+    NSArray *views = [self.exposureViewHashTable allObjects];
     if (views.count > 0 && self.timer == nil) {
         [self startTimer];
-    } else if (views.count == 0 && self.timer != nil){
+    } else if (views.count == 0 && self.timer != nil) {
         [self stopTimer];
     }
 }
