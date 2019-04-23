@@ -13,7 +13,7 @@ NSString *const SHPExposureConfigNotificationIntervalChanged = @"SHPExposureConf
 
 @implementation SHPExposureConfig
 
-MACRO_SINGLETON_PATTERN_M({
+SHP_MACRO_SINGLETON_M({
     self->_interval = 0.2;
 })
 

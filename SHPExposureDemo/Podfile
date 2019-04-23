@@ -1,3 +1,7 @@
+source 'https://github.com/CocoaPods/Specs.git'
+source 'http://git.garena.com/ios-dev/btlibrary.git'
+source 'https://git.garena.com/shopee/ios/shopee-specs-library.git'
+
 inhibit_all_warnings!
 platform :ios, '8.0'
 

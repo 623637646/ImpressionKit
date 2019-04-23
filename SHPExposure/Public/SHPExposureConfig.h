@@ -8,13 +8,14 @@
 
 #import <Foundation/Foundation.h>
 #import "SHPExposureMacro.h"
+#import <SHPUtilityKit/SHPUtilityKit.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
 extern NSString *const SHPExposureConfigNotificationIntervalChanged;
 
 @interface SHPExposureConfig : NSObject
-MACRO_SINGLETON_PATTERN_H
+SHP_MACRO_SINGLETON_H
 
 // The detect interval, default is 0.2s
 @property (nonatomic, assign) NSTimeInterval interval;

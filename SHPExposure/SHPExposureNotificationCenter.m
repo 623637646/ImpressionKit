@@ -9,5 +9,5 @@
 #import "SHPExposureNotificationCenter.h"
 
 @implementation SHPExposureNotificationCenter
-MACRO_SINGLETON_PATTERN_M()
+SHP_MACRO_SINGLETON_M()
 @end
