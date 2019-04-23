@@ -62,7 +62,7 @@ return self;\
 
 // log
 #define YNLog(...) do {\
-if ([YNExposureConfig sharedInstance].log) {\
+if ([YNExposureConfig sharedInstance].loggingEnabled) {\
 NSLog(__VA_ARGS__);\
 }\
 }while(0)

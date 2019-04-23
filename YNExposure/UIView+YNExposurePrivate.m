@@ -21,12 +21,12 @@
     return [objc_getAssociatedObject(self, @selector(ynex_isExposured)) boolValue];
 }
 
--(void)setYnex_lastShowedDate:(NSDate *)ynex_lastShowedDate
+- (void)setYnex_lastShowedDate:(NSDate *)ynex_lastShowedDate
 {
     objc_setAssociatedObject(self, @selector(ynex_lastShowedDate), ynex_lastShowedDate, OBJC_ASSOCIATION_COPY_NONATOMIC);
 }
 
--(NSDate *)ynex_lastShowedDate
+- (NSDate *)ynex_lastShowedDate
 {
     return objc_getAssociatedObject(self, @selector(ynex_lastShowedDate));
 }
@@ -41,7 +41,7 @@
     return objc_getAssociatedObject(self, @selector(ynex_exposureBlock));
 }
 
--(void)setYnex_delay:(NSTimeInterval)ynex_delay
+- (void)setYnex_delay:(NSTimeInterval)ynex_delay
 {
     objc_setAssociatedObject(self, @selector(ynex_delay), @(ynex_delay), OBJC_ASSOCIATION_COPY_NONATOMIC);
 }
@@ -61,12 +61,12 @@
     return [objc_getAssociatedObject(self, @selector(ynex_minAreaRatio)) floatValue];
 }
 
--(void)setYnex_token:(id<AspectToken>)ynex_token
+- (void)setYnex_token:(id<AspectToken>)ynex_token
 {
     objc_setAssociatedObject(self, @selector(ynex_token), ynex_token, OBJC_ASSOCIATION_RETAIN);
 }
 
--(id<AspectToken>)ynex_token
+- (id<AspectToken>)ynex_token
 {
     return objc_getAssociatedObject(self, @selector(ynex_token));
 

@@ -9,9 +9,13 @@
 #import <Foundation/Foundation.h>
 #import "YNExposureMacro.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface YNExposureNotificationCenter : NSNotificationCenter
 MACRO_SINGLETON_PATTERN_H
 
 @property (class, readonly, strong) NSNotificationCenter *defaultCenter NS_UNAVAILABLE;
 
 @end
+
+NS_ASSUME_NONNULL_END

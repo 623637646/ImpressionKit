@@ -10,6 +10,8 @@
 #import "UIView+YNExposure.h"
 #import <Aspects/Aspects.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface UIView (YNExposurePrivate)
 
 @property (nonatomic, assign) BOOL ynex_isExposured;
@@ -19,4 +21,7 @@
 @property (nonatomic, assign) NSTimeInterval ynex_delay;
 @property (nonatomic, assign) CGFloat ynex_minAreaRatio;
 @property (atomic, strong) id<AspectToken> ynex_token;
+
 @end
+
+NS_ASSUME_NONNULL_END

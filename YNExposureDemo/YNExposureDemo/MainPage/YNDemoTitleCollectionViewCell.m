@@ -37,12 +37,12 @@
     return self;
 }
 
--(void)setTitle:(NSString *)title
+- (void)setTitle:(NSString *)title
 {
     self.label.text = title;
 }
 
--(NSString *)title
+- (NSString *)title
 {
     return self.label.text;
 }

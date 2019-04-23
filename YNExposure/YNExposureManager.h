@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "YNExposureMacro.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface YNExposureManager : NSObject
 MACRO_SINGLETON_PATTERN_H
 
@@ -16,3 +18,5 @@ MACRO_SINGLETON_PATTERN_H
 - (void)removeView:(UIView *)view;
 
 @end
+
+NS_ASSUME_NONNULL_END

@@ -22,7 +22,7 @@
     [[GDPerformanceMonitor sharedInstance] startMonitoring];
     
     [YNExposureConfig sharedInstance].interval = 0.1;
-    [YNExposureConfig sharedInstance].log = YES;
+    [YNExposureConfig sharedInstance].loggingEnabled = YES;
 
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:[[YNDemoViewController alloc] init]];
     

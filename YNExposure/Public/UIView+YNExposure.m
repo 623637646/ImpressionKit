@@ -12,7 +12,7 @@
 #import <Aspects/Aspects.h>
 #import "YNExposureManager.h"
 
-NSString *const YNExposureErrorDomin = @"com.shopee.yanni.YNExposure";
+NSString *const YNExposureErrorDomain = @"com.shopee.YNExposure";
 
 @implementation UIView (YNExposure)
 
@@ -24,7 +24,7 @@ NSString *const YNExposureErrorDomin = @"com.shopee.yanni.YNExposure";
     NSParameterAssert(minAreaRatio > 0 && minAreaRatio <=1);
     NSParameterAssert(*error == nil);
     if (block == nil || delay < 0 || (minAreaRatio <= 0 || minAreaRatio > 1) || *error != nil) {
-        *error = [NSError errorWithDomain:YNExposureErrorDomin code:YNExposureErrorCodeParameterInvaild userInfo:nil];
+        *error = [NSError errorWithDomain:YNExposureErrorDomain code:YNExposureErrorCodeParameterInvaild userInfo:nil];
         return NO;
     }
     
@@ -77,7 +77,7 @@ NSString *const YNExposureErrorDomin = @"com.shopee.yanni.YNExposure";
 
 #pragma mark - Helper
 
-- (BOOL)ynex_showedOnScreen
+- (BOOL)ynex_isShowingOnScreen
 {
     return [self ynex_ratioOnScreen] > 0;
 }
