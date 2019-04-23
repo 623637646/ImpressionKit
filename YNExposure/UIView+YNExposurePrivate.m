@@ -69,7 +69,6 @@
 - (id<AspectToken>)ynex_token
 {
     return objc_getAssociatedObject(self, @selector(ynex_token));
-
 }
 
 @end
