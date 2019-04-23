@@ -12,7 +12,7 @@
 #import "SHPExposureConfig.h"
 
 @interface SHPExposureManager ()
-@property (nonatomic, strong) NSHashTable<UIView *> *shpExposureViewHashTable;
+@property (nonatomic, strong) NSHashTable<UIView *> *hashTable;
 @property (nonatomic, strong) dispatch_source_t timer;
 @property (nonatomic, strong) dispatch_queue_t queue;
 @end
@@ -21,7 +21,7 @@
 
 MACRO_SINGLETON_PATTERN_M({
     self.queue = dispatch_get_main_queue();
-    self.shpExposureViewHashTable = [NSHashTable<UIView *> weakObjectsHashTable];
+    self.hashTable = [NSHashTable<UIView *> weakObjectsHashTable];
     
     __weak typeof(self) wself = self;
     [[SHPExposureNotificationCenter sharedInstance] addObserverForName:SHPExposureConfigNotificationIntervalChanged object:nil queue:nil usingBlock:^(NSNotification * _Nonnull note) {
@@ -45,11 +45,11 @@ MACRO_SINGLETON_PATTERN_M({
     if (view == nil) {
         return;
     }
-    if ([self.shpExposureViewHashTable containsObject:view]) {
+    if ([self.hashTable containsObject:view]) {
         return;
     }
     NSAssert(view.shpex_lastShowedDate == nil, @"view.shpex_lastShowedDate should be nil");
-    [self.shpExposureViewHashTable addObject:view];
+    [self.hashTable addObject:view];
     [self updateTimerStatusWhenViewsTableChange];
 }
 
@@ -58,11 +58,11 @@ MACRO_SINGLETON_PATTERN_M({
     if (view == nil) {
         return;
     }
-    if (![self.shpExposureViewHashTable containsObject:view]) {
+    if (![self.hashTable containsObject:view]) {
         return;
     }
     view.shpex_lastShowedDate = nil;
-    [self.shpExposureViewHashTable removeObject:view];
+    [self.hashTable removeObject:view];
     [self updateTimerStatusWhenViewsTableChange];
 }
 
@@ -71,7 +71,7 @@ MACRO_SINGLETON_PATTERN_M({
 - (void)detectExposure
 {
     NSDate *now = [NSDate date];
-    NSArray *views = self.shpExposureViewHashTable.allObjects;
+    NSArray *views = self.hashTable.allObjects;
     
     // log
     if ([SHPExposureConfig sharedInstance].loggingEnabled) {
@@ -92,7 +92,7 @@ MACRO_SINGLETON_PATTERN_M({
     for (UIView *view in views) {
         if (view.shpex_isExposured) {
             // has been exposured
-            [self.shpExposureViewHashTable removeObject:view];
+            [self.hashTable removeObject:view];
             continue;
         }
         
@@ -117,7 +117,7 @@ MACRO_SINGLETON_PATTERN_M({
         view.shpex_lastShowedDate = nil;
         view.shpex_isExposured = YES;
         view.shpex_exposureBlock(ratioOnScreen);
-        [self.shpExposureViewHashTable removeObject:view];
+        [self.hashTable removeObject:view];
     }
 }
 
@@ -125,7 +125,7 @@ MACRO_SINGLETON_PATTERN_M({
 
 - (void)updateTimerStatusWhenViewsTableChange
 {
-    NSArray *views = [self.shpExposureViewHashTable allObjects];
+    NSArray *views = [self.hashTable allObjects];
     if (views.count > 0 && self.timer == nil) {
         [self startTimer];
     } else if (views.count == 0 && self.timer != nil){
