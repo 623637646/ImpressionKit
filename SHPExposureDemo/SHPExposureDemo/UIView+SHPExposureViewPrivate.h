@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface UIView (SHPExposureViewPrivate)
-@property (nonatomic, assign) BOOL shpex_isExposured;
+@property (nonatomic, assign) BOOL shpex_isExposureDetected;
 @property (nonatomic, copy) NSDate *shpex_lastShowedDate;
 @property (nonatomic, assign) NSTimeInterval shpex_delay;
 @end

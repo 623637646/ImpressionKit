@@ -9,7 +9,7 @@
 #import "UIView+SHPExposureViewPrivate.h"
 
 @implementation UIView (SHPExposureViewPrivate)
-@dynamic shpex_isExposured;
+@dynamic shpex_isExposureDetected;
 @dynamic shpex_lastShowedDate;
 @dynamic shpex_delay;
 @end

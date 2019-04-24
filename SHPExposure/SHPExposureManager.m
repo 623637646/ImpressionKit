@@ -90,7 +90,7 @@ MACRO_SINGLETON_PATTERN_M({
     }
     
     for (UIView *view in views) {
-        if (view.shpex_isExposured) {
+        if (view.shpex_isExposureDetected) {
             // has been exposured
             [self.exposureViewHashTable removeObject:view];
             continue;
@@ -115,7 +115,7 @@ MACRO_SINGLETON_PATTERN_M({
         }
         // exposuree
         view.shpex_lastShowedDate = nil;
-        view.shpex_isExposured = YES;
+        view.shpex_isExposureDetected = YES;
         view.shpex_exposureBlock(ratioOnScreen);
         [self.exposureViewHashTable removeObject:view];
     }

@@ -16,7 +16,7 @@ NSString *const SHPExposureErrorDomain = @"com.shopee.SHPExposure";
 
 @implementation UIView (SHPExposure)
 
-- (BOOL)shpex_execute:(SHPExposureBlock)block delay:(NSTimeInterval)delay minAreaRatio:(CGFloat)minAreaRatio error:(NSError**)error
+- (BOOL)shpex_executeExposureDetection:(SHPExposureBlock)block delay:(NSTimeInterval)delay minAreaRatio:(CGFloat)minAreaRatio error:(NSError**)error
 {
     // check parameter
     NSParameterAssert(block != nil);
@@ -29,7 +29,7 @@ NSString *const SHPExposureErrorDomain = @"com.shopee.SHPExposure";
     }
     
     // reset
-    [self shpex_resetExecute];
+    [self shpex_resetExecution];
     
     // property
     self.shpex_exposureBlock = block;
@@ -54,16 +54,16 @@ NSString *const SHPExposureErrorDomain = @"com.shopee.SHPExposure";
     return YES;
 }
 
-- (void)shpex_resetExecute
+- (void)shpex_resetExecution
 {
-    self.shpex_isExposured = NO;
+    self.shpex_isExposureDetected = NO;
     self.shpex_lastShowedDate = nil;
     if (self.window != nil) {
         [[SHPExposureManager sharedInstance] addView:self];
     }
 }
 
-- (void)shpex_cancelExecute
+- (void)shpex_cancelExcution
 {
     self.shpex_exposureBlock = nil;
     self.shpex_delay = 0;

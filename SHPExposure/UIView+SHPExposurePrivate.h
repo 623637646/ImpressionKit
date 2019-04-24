@@ -14,7 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface UIView (SHPExposurePrivate)
 
-@property (nonatomic, assign) BOOL shpex_isExposured;
+@property (nonatomic, assign) BOOL shpex_isExposureDetected;
 @property (nonatomic, copy, nullable) NSDate *shpex_lastShowedDate;
 
 @property (nonatomic, copy, nullable) SHPExposureBlock shpex_exposureBlock;

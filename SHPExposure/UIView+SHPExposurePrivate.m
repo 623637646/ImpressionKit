@@ -11,14 +11,14 @@
 
 @implementation UIView (SHPExposurePrivate)
 
-- (void)setShpex_isExposured:(BOOL)shpex_isExposured
+- (void)setShpex_isExposureDetected:(BOOL)shpex_isExposureDetected
 {
-    objc_setAssociatedObject(self, @selector(shpex_isExposured), @(shpex_isExposured), OBJC_ASSOCIATION_COPY_NONATOMIC);
+    objc_setAssociatedObject(self, @selector(shpex_isExposureDetected), @(shpex_isExposureDetected), OBJC_ASSOCIATION_COPY_NONATOMIC);
 }
 
-- (BOOL)shpex_isExposured
+- (BOOL)shpex_isExposureDetected
 {
-    return [objc_getAssociatedObject(self, @selector(shpex_isExposured)) boolValue];
+    return [objc_getAssociatedObject(self, @selector(shpex_isExposureDetected)) boolValue];
 }
 
 - (void)setShpex_lastShowedDate:(NSDate *)shpex_lastShowedDate

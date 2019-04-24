@@ -33,7 +33,7 @@
         
         NSError *error = nil;
         __weak typeof(self) wself = self;
-        [self shpex_execute:^(CGFloat areaRatio) {
+        [self shpex_executeExposureDetection:^(CGFloat areaRatio) {
             __strong typeof(self) self = wself;
             self.label.text = [NSString stringWithFormat:@"%0.1f%%", areaRatio * 100];
         } delay:2 minAreaRatio:0.5 error:&error];
@@ -44,7 +44,7 @@
 
 - (void)reset
 {
-    [self shpex_resetExecute];
+    [self shpex_resetExecution];
     [self.layer removeAllAnimations];
     self.label.text = nil;
     self.backgroundColor = [UIColor whiteColor];
@@ -56,15 +56,15 @@
     [self updateBackendColor];
 }
 
-- (void)setShpex_isExposured:(BOOL)shpex_isExposured
+- (void)setShpex_isExposureDetected:(BOOL)shpex_isExposureDetected
 {
-    [super setShpex_isExposured:shpex_isExposured];
+    [super setShpex_isExposureDetected:shpex_isExposureDetected];
     [self updateBackendColor];
 }
 
 - (void)updateBackendColor
 {
-    if (self.shpex_isExposured) {
+    if (self.shpex_isExposureDetected) {
         self.backgroundColor = [UIColor greenColor];
         return;
     }
