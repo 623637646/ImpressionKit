@@ -11,14 +11,14 @@
 
 @implementation UIView (SHPExposurePrivate)
 
-- (void)setShpex_isExposureDetected:(BOOL)shpex_isExposureDetected
+- (void)setShpex_isExposed:(BOOL)shpex_isExposed
 {
-    objc_setAssociatedObject(self, @selector(shpex_isExposureDetected), @(shpex_isExposureDetected), OBJC_ASSOCIATION_COPY_NONATOMIC);
+    objc_setAssociatedObject(self, @selector(shpex_isExposed), @(shpex_isExposed), OBJC_ASSOCIATION_COPY_NONATOMIC);
 }
 
-- (BOOL)shpex_isExposureDetected
+- (BOOL)shpex_isExposed
 {
-    return [objc_getAssociatedObject(self, @selector(shpex_isExposureDetected)) boolValue];
+    return [objc_getAssociatedObject(self, @selector(shpex_isExposed)) boolValue];
 }
 
 - (void)setShpex_lastShowedDate:(NSDate *)shpex_lastShowedDate
@@ -41,14 +41,14 @@
     return objc_getAssociatedObject(self, @selector(shpex_exposureBlock));
 }
 
-- (void)setShpex_delay:(NSTimeInterval)shpex_delay
+- (void)setShpex_minDurationOnScreen:(NSTimeInterval)shpex_minDurationOnScreen
 {
-    objc_setAssociatedObject(self, @selector(shpex_delay), @(shpex_delay), OBJC_ASSOCIATION_COPY_NONATOMIC);
+    objc_setAssociatedObject(self, @selector(shpex_minDurationOnScreen), @(shpex_minDurationOnScreen), OBJC_ASSOCIATION_COPY_NONATOMIC);
 }
 
-- (NSTimeInterval)shpex_delay
+- (NSTimeInterval)shpex_minDurationOnScreen
 {
-    return [objc_getAssociatedObject(self, @selector(shpex_delay)) doubleValue];
+    return [objc_getAssociatedObject(self, @selector(shpex_minDurationOnScreen)) doubleValue];
 }
 
 - (void)setShpex_minAreaRatio:(CGFloat)shpex_minAreaRatio

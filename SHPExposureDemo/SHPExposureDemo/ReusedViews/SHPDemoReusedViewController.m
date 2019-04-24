@@ -67,17 +67,17 @@
     SHPDemoReusedCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:[SHPDemoReusedCollectionViewCell description] forIndexPath:indexPath];
     BOOL isExposuredByIndex = [self.exposuredIndexPaths containsObject:indexPath];
     if (isExposuredByIndex) {
-        [cell shpex_cancelExcution];
+        [cell shpex_cancelSchedule];
     } else {
         NSError *error = nil;
         __weak typeof(self) wself = self;
         __weak typeof(cell) wcell = cell;
-        [cell shpex_executeExposureDetection:^(CGFloat areaRatio) {
+        [cell shpex_scheduleExposure:^(CGFloat areaRatio) {
             __strong typeof(self) self = wself;
             __strong typeof(cell) cell = wcell;
             [self.exposuredIndexPaths addObject:indexPath];
             cell.isExposuredByIndex = YES;
-        } delay:2 minAreaRatio:0.5 error:&error];
+        } minDurationOnScreen:2 minAreaRatio:0.5 error:&error];
         NSAssert(error == nil, @"error is not nil");
     }
     cell.isExposuredByIndex = isExposuredByIndex;

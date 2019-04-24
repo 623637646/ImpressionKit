@@ -14,11 +14,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface UIView (SHPExposurePrivate)
 
-@property (nonatomic, assign) BOOL shpex_isExposureDetected;
+@property (nonatomic, assign) BOOL shpex_isExposed;
 @property (nonatomic, copy, nullable) NSDate *shpex_lastShowedDate;
 
 @property (nonatomic, copy, nullable) SHPExposureBlock shpex_exposureBlock;
-@property (nonatomic, assign) NSTimeInterval shpex_delay;
+@property (nonatomic, assign) NSTimeInterval shpex_minDurationOnScreen;
 @property (nonatomic, assign) CGFloat shpex_minAreaRatio;
 @property (atomic, strong, nullable) id<AspectToken> shpex_token;
 

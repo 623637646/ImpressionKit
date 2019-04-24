@@ -49,7 +49,7 @@
     }
     if (self.shpex_lastShowedDate != nil) {
         self.backgroundColor = [UIColor whiteColor];
-        [UIView animateWithDuration:self.shpex_delay delay:0 options:UIViewAnimationOptionCurveLinear | UIViewAnimationOptionAllowUserInteraction animations:^{
+        [UIView animateWithDuration:self.shpex_minDurationOnScreen delay:0 options:UIViewAnimationOptionCurveLinear | UIViewAnimationOptionAllowUserInteraction animations:^{
             self.backgroundColor = [UIColor redColor];
         } completion:nil];
         return;

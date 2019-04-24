@@ -21,24 +21,24 @@ typedef void(^SHPExposureBlock)(CGFloat areaRatio);
 
 @interface UIView (SHPExposure)
 
-@property (nonatomic, assign, readonly) BOOL shpex_isExposureDetected;
+@property (nonatomic, assign, readonly) BOOL shpex_isExposed;
 
 // block should not be nil, delay should >= 0, minAreaRatio should > 0 and <=1
-- (BOOL)shpex_executeExposureDetection:(SHPExposureBlock)block delay:(NSTimeInterval)delay minAreaRatio:(CGFloat)minAreaRatio error:(NSError**)error;
+- (BOOL)shpex_scheduleExposure:(SHPExposureBlock)block
+           minDurationOnScreen:(NSTimeInterval)minDurationOnScreen
+                  minAreaRatio:(CGFloat)minAreaRatio
+                         error:(NSError **)error;
 
 // reset
-- (void)shpex_resetExecution;
+- (void)shpex_resetSchedule;
 
 // cancel
-- (void)shpex_cancelExcution;
+- (void)shpex_cancelSchedule;
 
 #pragma mark - Helper
 
-// is showed on screen
-- (BOOL)shpex_isShowingOnScreen;
-
 // get ratio on screen
-- (CGFloat)shpex_ratioOnScreen;
+- (CGFloat)shpex_exposedAreaRatio;
 
 @end
 

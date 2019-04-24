@@ -33,10 +33,10 @@
         
         NSError *error = nil;
         __weak typeof(self) wself = self;
-        [self shpex_executeExposureDetection:^(CGFloat areaRatio) {
+        [self shpex_scheduleExposure:^(CGFloat areaRatio) {
             __strong typeof(self) self = wself;
             self.label.text = [NSString stringWithFormat:@"%0.1f%%", areaRatio * 100];
-        } delay:2 minAreaRatio:0.5 error:&error];
+        } minDurationOnScreen:2 minAreaRatio:0.5 error:&error];
         NSAssert(error == nil, @"error is not nil");
     }
     return self;
@@ -44,7 +44,7 @@
 
 - (void)reset
 {
-    [self shpex_resetExecution];
+    [self shpex_resetSchedule];
     [self.layer removeAllAnimations];
     self.label.text = nil;
     self.backgroundColor = [UIColor whiteColor];
@@ -56,21 +56,21 @@
     [self updateBackendColor];
 }
 
-- (void)setShpex_isExposureDetected:(BOOL)shpex_isExposureDetected
+- (void)setShpex_isExposed:(BOOL)shpex_isExposed
 {
-    [super setShpex_isExposureDetected:shpex_isExposureDetected];
+    [super setShpex_isExposed:shpex_isExposed];
     [self updateBackendColor];
 }
 
 - (void)updateBackendColor
 {
-    if (self.shpex_isExposureDetected) {
+    if (self.shpex_isExposed) {
         self.backgroundColor = [UIColor greenColor];
         return;
     }
     if (self.shpex_lastShowedDate != nil) {
         self.backgroundColor = [UIColor whiteColor];
-        [UIView animateWithDuration:self.shpex_delay delay:0 options:UIViewAnimationOptionCurveLinear | UIViewAnimationOptionAllowUserInteraction animations:^{
+        [UIView animateWithDuration:self.shpex_minDurationOnScreen delay:0 options:UIViewAnimationOptionCurveLinear | UIViewAnimationOptionAllowUserInteraction animations:^{
             self.backgroundColor = [UIColor redColor];
         } completion:nil];
         return;

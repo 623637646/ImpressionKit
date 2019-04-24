@@ -90,13 +90,13 @@ MACRO_SINGLETON_PATTERN_M({
     }
     
     for (UIView *view in views) {
-        if (view.shpex_isExposureDetected) {
+        if (view.shpex_isExposed) {
             // has been exposured
             [self.exposureViewHashTable removeObject:view];
             continue;
         }
         
-        CGFloat ratioOnScreen = [view shpex_ratioOnScreen];
+        CGFloat ratioOnScreen = [view shpex_exposedAreaRatio];
         if (ratioOnScreen < view.shpex_minAreaRatio) {
             // this view is gone
             view.shpex_lastShowedDate = nil;
@@ -109,13 +109,13 @@ MACRO_SINGLETON_PATTERN_M({
         }
         NSDate *lastShowDate = view.shpex_lastShowedDate;
         NSTimeInterval interval = [now timeIntervalSinceDate:lastShowDate];
-        if (interval < view.shpex_delay) {
+        if (interval < view.shpex_minDurationOnScreen) {
             // not enough for exposuree
             continue;
         }
         // exposuree
         view.shpex_lastShowedDate = nil;
-        view.shpex_isExposureDetected = YES;
+        view.shpex_isExposed = YES;
         view.shpex_exposureBlock(ratioOnScreen);
         [self.exposureViewHashTable removeObject:view];
     }

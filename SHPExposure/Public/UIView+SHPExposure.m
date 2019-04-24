@@ -16,24 +16,27 @@ NSString *const SHPExposureErrorDomain = @"com.shopee.SHPExposure";
 
 @implementation UIView (SHPExposure)
 
-- (BOOL)shpex_executeExposureDetection:(SHPExposureBlock)block delay:(NSTimeInterval)delay minAreaRatio:(CGFloat)minAreaRatio error:(NSError**)error
+- (BOOL)shpex_scheduleExposure:(SHPExposureBlock)block
+           minDurationOnScreen:(NSTimeInterval)minDurationOnScreen
+                  minAreaRatio:(CGFloat)minAreaRatio
+                         error:(NSError **)error
 {
     // check parameter
     NSParameterAssert(block != nil);
-    NSParameterAssert(delay >= 0);
+    NSParameterAssert(minDurationOnScreen >= 0);
     NSParameterAssert(minAreaRatio > 0 && minAreaRatio <=1);
     NSParameterAssert(*error == nil);
-    if (block == nil || delay < 0 || (minAreaRatio <= 0 || minAreaRatio > 1) || *error != nil) {
+    if (block == nil || minDurationOnScreen < 0 || (minAreaRatio <= 0 || minAreaRatio > 1) || *error != nil) {
         *error = [NSError errorWithDomain:SHPExposureErrorDomain code:SHPExposureErrorCodeParameterInvaild userInfo:nil];
         return NO;
     }
     
     // reset
-    [self shpex_resetExecution];
+    [self shpex_resetSchedule];
     
     // property
     self.shpex_exposureBlock = block;
-    self.shpex_delay = delay;
+    self.shpex_minDurationOnScreen = minDurationOnScreen;
     self.shpex_minAreaRatio = minAreaRatio;
     
     // aspect
@@ -54,19 +57,19 @@ NSString *const SHPExposureErrorDomain = @"com.shopee.SHPExposure";
     return YES;
 }
 
-- (void)shpex_resetExecution
+- (void)shpex_resetSchedule
 {
-    self.shpex_isExposureDetected = NO;
+    self.shpex_isExposed = NO;
     self.shpex_lastShowedDate = nil;
     if (self.window != nil) {
         [[SHPExposureManager sharedInstance] addView:self];
     }
 }
 
-- (void)shpex_cancelExcution
+- (void)shpex_cancelSchedule
 {
     self.shpex_exposureBlock = nil;
-    self.shpex_delay = 0;
+    self.shpex_minDurationOnScreen = 0;
     self.shpex_minAreaRatio = 0;
     if (self.shpex_token != nil) {
         [self.shpex_token remove];
@@ -77,12 +80,7 @@ NSString *const SHPExposureErrorDomain = @"com.shopee.SHPExposure";
 
 #pragma mark - Helper
 
-- (BOOL)shpex_isShowingOnScreen
-{
-    return [self shpex_ratioOnScreen] > 0;
-}
-
-- (CGFloat)shpex_ratioOnScreen
+- (CGFloat)shpex_exposedAreaRatio
 {
     if (self.hidden || self.alpha <= 0) {
         return 0;
