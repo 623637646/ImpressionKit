@@ -9,7 +9,7 @@
 #import "UIView+YNExposureViewPrivate.h"
 
 @implementation UIView (YNExposureViewPrivate)
-@dynamic ynex_isExposured;
+@dynamic ynex_isExposureDetected;
 @dynamic ynex_lastShowedDate;
 @dynamic ynex_delay;
 @end

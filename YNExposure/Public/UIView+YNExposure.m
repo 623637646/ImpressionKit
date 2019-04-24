@@ -16,7 +16,7 @@ NSString *const YNExposureErrorDomain = @"com.shopee.YNExposure";
 
 @implementation UIView (YNExposure)
 
-- (BOOL)ynex_execute:(YNExposureBlock)block delay:(NSTimeInterval)delay minAreaRatio:(CGFloat)minAreaRatio error:(NSError**)error
+- (BOOL)ynex_executeExposureDetection:(YNExposureBlock)block delay:(NSTimeInterval)delay minAreaRatio:(CGFloat)minAreaRatio error:(NSError**)error
 {
     // check parameter
     NSParameterAssert(block != nil);
@@ -29,7 +29,7 @@ NSString *const YNExposureErrorDomain = @"com.shopee.YNExposure";
     }
     
     // reset
-    [self ynex_resetExecute];
+    [self ynex_resetExecution];
     
     // property
     self.ynex_exposureBlock = block;
@@ -54,16 +54,16 @@ NSString *const YNExposureErrorDomain = @"com.shopee.YNExposure";
     return YES;
 }
 
-- (void)ynex_resetExecute
+- (void)ynex_resetExecution
 {
-    self.ynex_isExposured = NO;
+    self.ynex_isExposureDetected = NO;
     self.ynex_lastShowedDate = nil;
     if (self.window != nil) {
         [[YNExposureManager sharedInstance] addView:self];
     }
 }
 
-- (void)ynex_cancelExecute
+- (void)ynex_cancelExcution
 {
     self.ynex_exposureBlock = nil;
     self.ynex_delay = 0;

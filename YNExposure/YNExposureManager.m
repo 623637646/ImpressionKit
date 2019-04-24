@@ -90,7 +90,7 @@ MACRO_SINGLETON_PATTERN_M({
     }
     
     for (UIView *view in views) {
-        if (view.ynex_isExposured) {
+        if (view.ynex_isExposureDetected) {
             // has been exposured
             [self.exposureViewHashTable removeObject:view];
             continue;
@@ -115,7 +115,7 @@ MACRO_SINGLETON_PATTERN_M({
         }
         // exposuree
         view.ynex_lastShowedDate = nil;
-        view.ynex_isExposured = YES;
+        view.ynex_isExposureDetected = YES;
         view.ynex_exposureBlock(ratioOnScreen);
         [self.exposureViewHashTable removeObject:view];
     }

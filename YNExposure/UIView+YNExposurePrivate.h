@@ -14,7 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface UIView (YNExposurePrivate)
 
-@property (nonatomic, assign) BOOL ynex_isExposured;
+@property (nonatomic, assign) BOOL ynex_isExposureDetected;
 @property (nonatomic, copy, nullable) NSDate *ynex_lastShowedDate;
 
 @property (nonatomic, copy, nullable) YNExposureBlock ynex_exposureBlock;

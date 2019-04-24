@@ -11,14 +11,14 @@
 
 @implementation UIView (YNExposurePrivate)
 
-- (void)setYnex_isExposured:(BOOL)ynex_isExposured
+- (void)setYnex_isExposureDetected:(BOOL)ynex_isExposureDetected
 {
-    objc_setAssociatedObject(self, @selector(ynex_isExposured), @(ynex_isExposured), OBJC_ASSOCIATION_COPY_NONATOMIC);
+    objc_setAssociatedObject(self, @selector(ynex_isExposureDetected), @(ynex_isExposureDetected), OBJC_ASSOCIATION_COPY_NONATOMIC);
 }
 
-- (BOOL)ynex_isExposured
+- (BOOL)ynex_isExposureDetected
 {
-    return [objc_getAssociatedObject(self, @selector(ynex_isExposured)) boolValue];
+    return [objc_getAssociatedObject(self, @selector(ynex_isExposureDetected)) boolValue];
 }
 
 - (void)setYnex_lastShowedDate:(NSDate *)ynex_lastShowedDate

@@ -33,7 +33,7 @@
         
         NSError *error = nil;
         __weak typeof(self) wself = self;
-        [self ynex_execute:^(CGFloat areaRatio) {
+        [self ynex_executeExposureDetection:^(CGFloat areaRatio) {
             __strong typeof(self) self = wself;
             self.label.text = [NSString stringWithFormat:@"%0.1f%%", areaRatio * 100];
         } delay:2 minAreaRatio:0.5 error:&error];
@@ -44,7 +44,7 @@
 
 - (void)reset
 {
-    [self ynex_resetExecute];
+    [self ynex_resetExecution];
     [self.layer removeAllAnimations];
     self.label.text = nil;
     self.backgroundColor = [UIColor whiteColor];
@@ -56,15 +56,15 @@
     [self updateBackendColor];
 }
 
-- (void)setYnex_isExposured:(BOOL)ynex_isExposured
+- (void)setYnex_isExposureDetected:(BOOL)ynex_isExposureDetected
 {
-    [super setYnex_isExposured:ynex_isExposured];
+    [super setYnex_isExposureDetected:ynex_isExposureDetected];
     [self updateBackendColor];
 }
 
 - (void)updateBackendColor
 {
-    if (self.ynex_isExposured) {
+    if (self.ynex_isExposureDetected) {
         self.backgroundColor = [UIColor greenColor];
         return;
     }

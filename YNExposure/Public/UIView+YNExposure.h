@@ -21,16 +21,16 @@ typedef void(^YNExposureBlock)(CGFloat areaRatio);
 
 @interface UIView (YNExposure)
 
-@property (nonatomic, assign, readonly) BOOL ynex_isExposured;
+@property (nonatomic, assign, readonly) BOOL ynex_isExposureDetected;
 
 // block should not be nil, delay should >= 0, minAreaRatio should > 0 and <=1
-- (BOOL)ynex_execute:(YNExposureBlock)block delay:(NSTimeInterval)delay minAreaRatio:(CGFloat)minAreaRatio error:(NSError**)error;
+- (BOOL)ynex_executeExposureDetection:(YNExposureBlock)block delay:(NSTimeInterval)delay minAreaRatio:(CGFloat)minAreaRatio error:(NSError**)error;
 
 // reset
-- (void)ynex_resetExecute;
+- (void)ynex_resetExecution;
 
 // cancel
-- (void)ynex_cancelExecute;
+- (void)ynex_cancelExcution;
 
 #pragma mark - Helper
 

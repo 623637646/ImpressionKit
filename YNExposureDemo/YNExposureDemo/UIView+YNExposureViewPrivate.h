@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface UIView (YNExposureViewPrivate)
-@property (nonatomic, assign) BOOL ynex_isExposured;
+@property (nonatomic, assign) BOOL ynex_isExposureDetected;
 @property (nonatomic, copy) NSDate *ynex_lastShowedDate;
 @property (nonatomic, assign) NSTimeInterval ynex_delay;
 @end
