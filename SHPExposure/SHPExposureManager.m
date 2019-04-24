@@ -96,8 +96,8 @@ MACRO_SINGLETON_PATTERN_M({
             continue;
         }
         
-        CGFloat ratioOnScreen = [view shpex_exposedAreaRatio];
-        if (ratioOnScreen < view.shpex_minAreaRatio) {
+        CGFloat ratioOnScreen = [view shpex_areaRatioInWindow];
+        if (ratioOnScreen < view.shpex_minAreaRatioInWindow) {
             // this view is gone
             view.shpex_lastShowedDate = nil;
             continue;
@@ -109,7 +109,7 @@ MACRO_SINGLETON_PATTERN_M({
         }
         NSDate *lastShowDate = view.shpex_lastShowedDate;
         NSTimeInterval interval = [now timeIntervalSinceDate:lastShowDate];
-        if (interval < view.shpex_minDurationOnScreen) {
+        if (interval < view.shpex_minDurationInWindow) {
             // not enough for exposuree
             continue;
         }

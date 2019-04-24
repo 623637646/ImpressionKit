@@ -36,7 +36,7 @@
         [self shpex_scheduleExposure:^(CGFloat areaRatio) {
             __strong typeof(self) self = wself;
             self.label.text = [NSString stringWithFormat:@"%0.1f%%", areaRatio * 100];
-        } minDurationOnScreen:2 minAreaRatio:0.5 error:&error];
+        } minDurationInWindow:2 minAreaRatioInWindow:0.5 error:&error];
         NSAssert(error == nil, @"error is not nil");
     }
     return self;
@@ -70,7 +70,7 @@
     }
     if (self.shpex_lastShowedDate != nil) {
         self.backgroundColor = [UIColor whiteColor];
-        [UIView animateWithDuration:self.shpex_minDurationOnScreen delay:0 options:UIViewAnimationOptionCurveLinear | UIViewAnimationOptionAllowUserInteraction animations:^{
+        [UIView animateWithDuration:self.shpex_minDurationInWindow delay:0 options:UIViewAnimationOptionCurveLinear | UIViewAnimationOptionAllowUserInteraction animations:^{
             self.backgroundColor = [UIColor redColor];
         } completion:nil];
         return;

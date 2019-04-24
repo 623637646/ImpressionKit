@@ -25,8 +25,8 @@ typedef void(^SHPExposureBlock)(CGFloat areaRatio);
 
 // block should not be nil, delay should >= 0, minAreaRatio should > 0 and <=1
 - (BOOL)shpex_scheduleExposure:(SHPExposureBlock)block
-           minDurationOnScreen:(NSTimeInterval)minDurationOnScreen
-                  minAreaRatio:(CGFloat)minAreaRatio
+           minDurationInWindow:(NSTimeInterval)minDurationInWindow
+          minAreaRatioInWindow:(CGFloat)minAreaRatioInWindow
                          error:(NSError **)error;
 
 // reset
@@ -38,7 +38,7 @@ typedef void(^SHPExposureBlock)(CGFloat areaRatio);
 #pragma mark - Helper
 
 // get ratio on screen
-- (CGFloat)shpex_exposedAreaRatio;
+- (CGFloat)shpex_areaRatioInWindow;
 
 @end
 

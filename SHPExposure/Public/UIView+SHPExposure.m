@@ -17,16 +17,16 @@ NSString *const SHPExposureErrorDomain = @"com.shopee.SHPExposure";
 @implementation UIView (SHPExposure)
 
 - (BOOL)shpex_scheduleExposure:(SHPExposureBlock)block
-           minDurationOnScreen:(NSTimeInterval)minDurationOnScreen
-                  minAreaRatio:(CGFloat)minAreaRatio
+           minDurationInWindow:(NSTimeInterval)minDurationInWindow
+          minAreaRatioInWindow:(CGFloat)minAreaRatioInWindow
                          error:(NSError **)error
 {
     // check parameter
     NSParameterAssert(block != nil);
-    NSParameterAssert(minDurationOnScreen >= 0);
-    NSParameterAssert(minAreaRatio > 0 && minAreaRatio <=1);
+    NSParameterAssert(minDurationInWindow >= 0);
+    NSParameterAssert(minAreaRatioInWindow > 0 && minAreaRatioInWindow <=1);
     NSParameterAssert(*error == nil);
-    if (block == nil || minDurationOnScreen < 0 || (minAreaRatio <= 0 || minAreaRatio > 1) || *error != nil) {
+    if (block == nil || minDurationInWindow < 0 || (minAreaRatioInWindow <= 0 || minAreaRatioInWindow > 1) || *error != nil) {
         *error = [NSError errorWithDomain:SHPExposureErrorDomain code:SHPExposureErrorCodeParameterInvaild userInfo:nil];
         return NO;
     }
@@ -36,8 +36,8 @@ NSString *const SHPExposureErrorDomain = @"com.shopee.SHPExposure";
     
     // property
     self.shpex_exposureBlock = block;
-    self.shpex_minDurationOnScreen = minDurationOnScreen;
-    self.shpex_minAreaRatio = minAreaRatio;
+    self.shpex_minDurationInWindow = minDurationInWindow;
+    self.shpex_minAreaRatioInWindow = minAreaRatioInWindow;
     
     // aspect
     if (self.shpex_token == nil) {
@@ -69,8 +69,8 @@ NSString *const SHPExposureErrorDomain = @"com.shopee.SHPExposure";
 - (void)shpex_cancelSchedule
 {
     self.shpex_exposureBlock = nil;
-    self.shpex_minDurationOnScreen = 0;
-    self.shpex_minAreaRatio = 0;
+    self.shpex_minDurationInWindow = 0;
+    self.shpex_minAreaRatioInWindow = 0;
     if (self.shpex_token != nil) {
         [self.shpex_token remove];
         self.shpex_token = nil;
@@ -80,7 +80,7 @@ NSString *const SHPExposureErrorDomain = @"com.shopee.SHPExposure";
 
 #pragma mark - Helper
 
-- (CGFloat)shpex_exposedAreaRatio
+- (CGFloat)shpex_areaRatioInWindow
 {
     if (self.hidden || self.alpha <= 0) {
         return 0;

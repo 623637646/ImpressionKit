@@ -77,7 +77,7 @@
             __strong typeof(cell) cell = wcell;
             [self.exposuredIndexPaths addObject:indexPath];
             cell.isExposuredByIndex = YES;
-        } minDurationOnScreen:2 minAreaRatio:0.5 error:&error];
+        } minDurationInWindow:2 minAreaRatioInWindow:0.5 error:&error];
         NSAssert(error == nil, @"error is not nil");
     }
     cell.isExposuredByIndex = isExposuredByIndex;

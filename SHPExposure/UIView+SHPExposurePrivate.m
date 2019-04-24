@@ -41,24 +41,24 @@
     return objc_getAssociatedObject(self, @selector(shpex_exposureBlock));
 }
 
-- (void)setShpex_minDurationOnScreen:(NSTimeInterval)shpex_minDurationOnScreen
+- (void)setShpex_minDurationInWindow:(NSTimeInterval)shpex_minDurationInWindow
 {
-    objc_setAssociatedObject(self, @selector(shpex_minDurationOnScreen), @(shpex_minDurationOnScreen), OBJC_ASSOCIATION_COPY_NONATOMIC);
+    objc_setAssociatedObject(self, @selector(shpex_minDurationInWindow), @(shpex_minDurationInWindow), OBJC_ASSOCIATION_COPY_NONATOMIC);
 }
 
-- (NSTimeInterval)shpex_minDurationOnScreen
+- (NSTimeInterval)shpex_minDurationInWindow
 {
-    return [objc_getAssociatedObject(self, @selector(shpex_minDurationOnScreen)) doubleValue];
+    return [objc_getAssociatedObject(self, @selector(shpex_minDurationInWindow)) doubleValue];
 }
 
-- (void)setShpex_minAreaRatio:(CGFloat)shpex_minAreaRatio
+- (void)setShpex_minAreaRatioInWindow:(CGFloat)shpex_minAreaRatioInWindow
 {
-    objc_setAssociatedObject(self, @selector(shpex_minAreaRatio), @(shpex_minAreaRatio), OBJC_ASSOCIATION_COPY_NONATOMIC);
+    objc_setAssociatedObject(self, @selector(shpex_minAreaRatioInWindow), @(shpex_minAreaRatioInWindow), OBJC_ASSOCIATION_COPY_NONATOMIC);
 }
 
-- (CGFloat)shpex_minAreaRatio
+- (CGFloat)shpex_minAreaRatioInWindow
 {
-    return [objc_getAssociatedObject(self, @selector(shpex_minAreaRatio)) floatValue];
+    return [objc_getAssociatedObject(self, @selector(shpex_minAreaRatioInWindow)) floatValue];
 }
 
 - (void)setShpex_token:(id<AspectToken>)shpex_token

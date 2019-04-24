@@ -11,5 +11,5 @@
 @implementation UIView (SHPExposureViewPrivate)
 @dynamic shpex_isExposed;
 @dynamic shpex_lastShowedDate;
-@dynamic shpex_minDurationOnScreen;
+@dynamic shpex_minDurationInWindow;
 @end

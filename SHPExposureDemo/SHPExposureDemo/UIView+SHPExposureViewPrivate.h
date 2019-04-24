@@ -11,5 +11,5 @@
 @interface UIView (SHPExposureViewPrivate)
 @property (nonatomic, assign) BOOL shpex_isExposed;
 @property (nonatomic, copy) NSDate *shpex_lastShowedDate;
-@property (nonatomic, assign) NSTimeInterval shpex_minDurationOnScreen;
+@property (nonatomic, assign) NSTimeInterval shpex_minDurationInWindow;
 @end
