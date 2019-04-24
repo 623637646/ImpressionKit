@@ -8,12 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import "SHPExposureMacro.h"
-#import <SHPUtilityKit/SHPUtilityKit.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface SHPExposureManager : NSObject
-SHP_MACRO_SINGLETON_H
+MACRO_SINGLETON_PATTERN_H
 
 - (void)addView:(UIView *)view;
 - (void)removeView:(UIView *)view;

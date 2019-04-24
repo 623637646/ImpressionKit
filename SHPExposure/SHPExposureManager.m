@@ -19,7 +19,7 @@
 
 @implementation SHPExposureManager
 
-SHP_MACRO_SINGLETON_M({
+MACRO_SINGLETON_PATTERN_M({
     self.queue = dispatch_get_main_queue();
     self.exposureViewHashTable = [NSHashTable<UIView *> weakObjectsHashTable];
     

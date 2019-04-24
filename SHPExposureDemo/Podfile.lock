@@ -4,10 +4,8 @@ PODS:
     - CHTCollectionViewWaterfallLayout/ObjC (= 0.9.7)
   - CHTCollectionViewWaterfallLayout/ObjC (0.9.7)
   - GDPerformanceView (1.3.1)
-  - SHPExposure (0.0.3):
+  - SHPExposure (0.0.1):
     - Aspects (~> 1.4.1)
-    - SHPUtilityKit (~> 0.0.14)
-  - SHPUtilityKit (0.0.14)
 
 DEPENDENCIES:
   - CHTCollectionViewWaterfallLayout (~> 0.9.7)
@@ -15,8 +13,6 @@ DEPENDENCIES:
   - SHPExposure (from `../`)
 
 SPEC REPOS:
-  https://git.garena.com/shopee/ios/shopee-specs-library:
-    - SHPUtilityKit
   https://github.com/cocoapods/specs.git:
     - Aspects
     - CHTCollectionViewWaterfallLayout
@@ -30,9 +26,8 @@ SPEC CHECKSUMS:
   Aspects: 7595ba96a6727a58ebcbfc954497fc5d2fdde546
   CHTCollectionViewWaterfallLayout: 9d11068fafecac106695bb5a5d6d0f738483b598
   GDPerformanceView: d70d646bf7022a3dfd64222e4966f403bfffef19
-  SHPExposure: f16a1f0f62f80a994d17bd45291afd3368960530
-  SHPUtilityKit: ff44e583a374c0dd4c27c323503b06e64cc53b1b
+  SHPExposure: 820d611d5afd9522b2aac25a4397604a5b431ef9
 
-PODFILE CHECKSUM: 77ca326e6ec9525098e45d70f18de888884f9b64
+PODFILE CHECKSUM: 9d321e033909e52fa7422316b3f9e0c09aab0edf
 
 COCOAPODS: 1.6.1

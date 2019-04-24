@@ -1,21 +1,16 @@
 PODS:
   - Aspects (1.4.1)
-  - SHPUtilityKit (0.0.14)
 
 DEPENDENCIES:
   - Aspects (= 1.4.1)
-  - SHPUtilityKit (= 0.0.14)
 
 SPEC REPOS:
-  https://git.garena.com/shopee/ios/shopee-specs-library:
-    - SHPUtilityKit
   https://github.com/cocoapods/specs.git:
     - Aspects
 
 SPEC CHECKSUMS:
   Aspects: 7595ba96a6727a58ebcbfc954497fc5d2fdde546
-  SHPUtilityKit: ff44e583a374c0dd4c27c323503b06e64cc53b1b
 
-PODFILE CHECKSUM: 9eb0b0db08757621ce1cb54156acc47813153aac
+PODFILE CHECKSUM: b906aa791ca13243dfc3385603958e173cd05df6
 
 COCOAPODS: 1.6.1

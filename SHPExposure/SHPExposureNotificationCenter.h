@@ -8,12 +8,11 @@
 
 #import <Foundation/Foundation.h>
 #import "SHPExposureMacro.h"
-#import <SHPUtilityKit/SHPUtilityKit.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface SHPExposureNotificationCenter : NSNotificationCenter
-SHP_MACRO_SINGLETON_H
+MACRO_SINGLETON_PATTERN_H
 
 @property (class, readonly, strong) NSNotificationCenter *defaultCenter NS_UNAVAILABLE;
 
