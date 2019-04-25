@@ -11,6 +11,7 @@
 #import <objc/runtime.h>
 #import <Aspects/Aspects.h>
 #import "SHPExposureManager.h"
+#import "SHPExposureConfig.h"
 
 NSString *const SHPExposureErrorDomain = @"com.shopee.SHPExposure";
 
@@ -25,9 +26,8 @@ NSString *const SHPExposureErrorDomain = @"com.shopee.SHPExposure";
     NSParameterAssert(block != nil);
     NSParameterAssert(minDurationInWindow >= 0);
     NSParameterAssert(minAreaRatioInWindow > 0 && minAreaRatioInWindow <=1);
-    NSParameterAssert(*error == nil);
-    if (block == nil || minDurationInWindow < 0 || (minAreaRatioInWindow <= 0 || minAreaRatioInWindow > 1) || *error != nil) {
-        *error = [NSError errorWithDomain:SHPExposureErrorDomain code:SHPExposureErrorCodeParameterInvaild userInfo:nil];
+    if (block == nil || minDurationInWindow < 0 || (minAreaRatioInWindow <= 0 || minAreaRatioInWindow > 1)) {
+        SHPError(error, SHPExposureErrorCodeParameterInvaild, @"parameter invaild");
         return NO;
     }
     
@@ -50,7 +50,7 @@ NSString *const SHPExposureErrorDomain = @"com.shopee.SHPExposure";
                 [[SHPExposureManager sharedInstance] addView:self];
             }
         } error:error];
-        if (*error != nil) {
+        if (error && *error != nil) {
             return NO;
         }
     }
