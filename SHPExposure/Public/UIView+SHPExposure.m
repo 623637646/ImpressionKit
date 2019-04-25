@@ -11,7 +11,6 @@
 #import <objc/runtime.h>
 #import <Aspects/Aspects.h>
 #import "SHPExposureManager.h"
-#import "SHPExposureConfig.h"
 
 NSString *const SHPExposureErrorDomain = @"com.shopee.SHPExposure";
 

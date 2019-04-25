@@ -61,9 +61,10 @@ return self;\
 }
 
 // log
-// need import "SHPExposureConfig.h"
+#define SHPLoggingEnabled NO
+
 #define SHPLog(...) do {\
-if ([SHPExposureConfig sharedInstance].loggingEnabled) {\
+if (SHPLoggingEnabled) {\
 NSLog(__VA_ARGS__);\
 }\
 }while(0)

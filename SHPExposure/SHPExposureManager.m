@@ -74,7 +74,7 @@ MACRO_SINGLETON_PATTERN_M({
     NSArray *views = self.exposureViewHashTable.allObjects;
     
     // log
-    if ([SHPExposureConfig sharedInstance].loggingEnabled) {
+    if (SHPLoggingEnabled) {
         static NSInteger indexForLog = 0;
         if (indexForLog == (NSInteger)(1 / [SHPExposureConfig sharedInstance].interval)) {
             SHPLog(@"SHPExposureManager has %@ views", @(views.count));
