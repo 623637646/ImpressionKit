@@ -68,13 +68,4 @@ NSLog(__VA_ARGS__);\
 }\
 }while(0)
 
-// error
-// need import "SHPExposureConfig.h" and "UIView+SHPExposure.h"
-#define SHPError(error, errorCode, errorDescription) do { \
-SHPLog(@"SHPExposure: %@", errorDescription); \
-if (error) { \
-*error = [NSError errorWithDomain:SHPExposureErrorDomain code:errorCode userInfo:@{NSLocalizedDescriptionKey: errorDescription}]; \
-}}while(0)
-
-
 #endif /* SHPExposureMacro_h */

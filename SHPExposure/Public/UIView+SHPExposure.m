@@ -27,7 +27,10 @@ NSString *const SHPExposureErrorDomain = @"com.shopee.SHPExposure";
     NSParameterAssert(minDurationInWindow >= 0);
     NSParameterAssert(minAreaRatioInWindow > 0 && minAreaRatioInWindow <=1);
     if (block == nil || minDurationInWindow < 0 || (minAreaRatioInWindow <= 0 || minAreaRatioInWindow > 1)) {
-        SHPError(error, SHPExposureErrorCodeParameterInvaild, @"parameter invaild");
+        SHPLog(@"SHPExposure: %@", @"parameter invaild");
+        if (error) {
+            *error = [NSError errorWithDomain:SHPExposureErrorDomain code:SHPExposureErrorCodeParameterInvaild userInfo:@{NSLocalizedDescriptionKey: @"parameter invaild"}];
+        }
         return NO;
     }
     
