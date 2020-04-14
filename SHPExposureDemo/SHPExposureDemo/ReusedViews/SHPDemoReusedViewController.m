@@ -10,6 +10,8 @@
 #import <SHPExposure/SHPExposure.h>
 #import <CHTCollectionViewWaterfallLayout/CHTCollectionViewWaterfallLayout.h>
 #import "SHPDemoReusedCollectionViewCell.h"
+#import "SHPExposureDemo-Swift.h"
+#import "UIView+SHPExposureViewPrivate.h"
 
 @interface SHPDemoReusedViewController ()<UICollectionViewDataSource, CHTCollectionViewDelegateWaterfallLayout>
 @property (nonatomic, weak) UICollectionView *collectionView;
@@ -68,19 +70,24 @@
     BOOL isExposuredByIndex = [self.exposuredIndexPaths containsObject:indexPath];
     if (isExposuredByIndex) {
         [cell shpex_cancelSchedule];
+        cell.shpex_isExposed = YES;
     } else {
         NSError *error = nil;
         __weak typeof(self) wself = self;
-        __weak typeof(cell) wcell = cell;
         [cell shpex_scheduleExposure:^(CGFloat areaRatio) {
             __strong typeof(self) self = wself;
-            __strong typeof(cell) cell = wcell;
-            [self.exposuredIndexPaths addObject:indexPath];
-            cell.isExposuredByIndex = YES;
-        } minDurationInWindow:2 minAreaRatioInWindow:0.5 error:&error];
+            if (!SHPDemoViewController.retriggerWhenLeftScreen) {
+                [self.exposuredIndexPaths addObject:indexPath];
+            }
+        }
+                 minDurationInWindow:SHPDemoViewController.minDurationInWindow
+                minAreaRatioInWindow:SHPDemoViewController.minAreaRatioInWindow
+             retriggerWhenLeftScreen:SHPDemoViewController.retriggerWhenLeftScreen
+      retriggerWhenRemovedFromWindow:SHPDemoViewController.retriggerWhenRemovedFromWindow
+                               error:&error];
         NSAssert(error == nil, @"error is not nil");
+        cell.shpex_isExposed = NO;
     }
-    cell.isExposuredByIndex = isExposuredByIndex;
     return cell;
 }
 @end

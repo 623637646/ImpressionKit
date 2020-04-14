@@ -10,6 +10,6 @@
 
 @implementation UIView (SHPExposureViewPrivate)
 @dynamic shpex_isExposed;
-@dynamic shpex_lastShowedDate;
+@dynamic shpex_startAppearanceDate;
 @dynamic shpex_minDurationInWindow;
 @end

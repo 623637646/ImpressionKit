@@ -15,11 +15,14 @@ NS_ASSUME_NONNULL_BEGIN
 @interface UIView (SHPExposurePrivate)
 
 @property (nonatomic, assign) BOOL shpex_isExposed;
-@property (nonatomic, copy, nullable) NSDate *shpex_lastShowedDate;
+@property (nonatomic, copy, nullable) NSDate *shpex_startAppearanceDate;
+@property (nonatomic, copy, nullable) NSDate *shpex_startDisappearanceDate;
 
 @property (nonatomic, copy, nullable) SHPExposureBlock shpex_exposureBlock;
 @property (nonatomic, assign) NSTimeInterval shpex_minDurationInWindow;
 @property (nonatomic, assign) CGFloat shpex_minAreaRatioInWindow;
+@property (nonatomic, assign) BOOL shpex_retriggerWhenLeftScreen;
+@property (nonatomic, assign) BOOL shpex_retriggerWhenRemovedFromWindow;
 @property (atomic, strong, nullable) id<AspectToken> shpex_token;
 
 @end

@@ -9,6 +9,7 @@
 #import "SHPDemoNonReusedView.h"
 #import <SHPExposure/SHPExposure.h>
 #import "UIView+SHPExposureViewPrivate.h"
+#import "SHPExposureDemo-Swift.h"
 
 @interface SHPDemoNonReusedView()
 @property (nonatomic, weak) UILabel *label;
@@ -36,7 +37,12 @@
         [self shpex_scheduleExposure:^(CGFloat areaRatio) {
             __strong typeof(self) self = wself;
             self.label.text = [NSString stringWithFormat:@"%0.1f%%", areaRatio * 100];
-        } minDurationInWindow:2 minAreaRatioInWindow:0.5 error:&error];
+        }
+                 minDurationInWindow:SHPDemoViewController.minDurationInWindow
+                minAreaRatioInWindow:SHPDemoViewController.minAreaRatioInWindow
+             retriggerWhenLeftScreen:SHPDemoViewController.retriggerWhenLeftScreen
+      retriggerWhenRemovedFromWindow:SHPDemoViewController.retriggerWhenRemovedFromWindow
+                               error:&error];
         NSAssert(error == nil, @"error is not nil");
     }
     return self;
@@ -50,9 +56,9 @@
     self.backgroundColor = [UIColor whiteColor];
 }
 
-- (void)setShpex_lastShowedDate:(NSDate *)shpex_lastShowedDate
+- (void)setShpex_startAppearanceDate:(NSDate *)shpex_startAppearanceDate
 {
-    [super setShpex_lastShowedDate:shpex_lastShowedDate];
+    [super setShpex_startAppearanceDate:shpex_startAppearanceDate];
     [self updateBackendColor];
 }
 
@@ -68,7 +74,7 @@
         self.backgroundColor = [UIColor greenColor];
         return;
     }
-    if (self.shpex_lastShowedDate != nil) {
+    if (self.shpex_startAppearanceDate) {
         self.backgroundColor = [UIColor whiteColor];
         [UIView animateWithDuration:self.shpex_minDurationInWindow delay:0 options:UIViewAnimationOptionCurveLinear | UIViewAnimationOptionAllowUserInteraction animations:^{
             self.backgroundColor = [UIColor redColor];
@@ -76,6 +82,7 @@
         return;
     }
     self.backgroundColor = [UIColor whiteColor];
+    self.label.text = nil;
 }
 
 @end

@@ -21,14 +21,24 @@
     return [objc_getAssociatedObject(self, @selector(shpex_isExposed)) boolValue];
 }
 
-- (void)setShpex_lastShowedDate:(NSDate *)shpex_lastShowedDate
+- (void)setShpex_startAppearanceDate:(NSDate *)shpex_startAppearanceDate
 {
-    objc_setAssociatedObject(self, @selector(shpex_lastShowedDate), shpex_lastShowedDate, OBJC_ASSOCIATION_COPY_NONATOMIC);
+    objc_setAssociatedObject(self, @selector(shpex_startAppearanceDate), shpex_startAppearanceDate, OBJC_ASSOCIATION_COPY_NONATOMIC);
 }
 
-- (NSDate *)shpex_lastShowedDate
+- (NSDate *)shpex_startAppearanceDate
 {
-    return objc_getAssociatedObject(self, @selector(shpex_lastShowedDate));
+    return objc_getAssociatedObject(self, @selector(shpex_startAppearanceDate));
+}
+
+- (void)setShpex_startDisappearanceDate:(NSDate *)shpex_startDisappearanceDate
+{
+    objc_setAssociatedObject(self, @selector(shpex_startDisappearanceDate), shpex_startDisappearanceDate, OBJC_ASSOCIATION_COPY_NONATOMIC);
+}
+
+- (NSDate *)shpex_startDisappearanceDate
+{
+    return objc_getAssociatedObject(self, @selector(shpex_startDisappearanceDate));
 }
 
 - (void)setShpex_exposureBlock:(SHPExposureBlock)shpex_exposureBlock
@@ -59,6 +69,26 @@
 - (CGFloat)shpex_minAreaRatioInWindow
 {
     return [objc_getAssociatedObject(self, @selector(shpex_minAreaRatioInWindow)) floatValue];
+}
+
+- (void)setShpex_retriggerWhenLeftScreen:(BOOL)shpex_retriggerWhenLeftScreen
+{
+    objc_setAssociatedObject(self, @selector(shpex_retriggerWhenLeftScreen), @(shpex_retriggerWhenLeftScreen), OBJC_ASSOCIATION_COPY_NONATOMIC);
+}
+
+- (BOOL)shpex_retriggerWhenLeftScreen
+{
+    return [objc_getAssociatedObject(self, @selector(shpex_retriggerWhenLeftScreen)) boolValue];
+}
+
+- (void)setShpex_retriggerWhenRemovedFromWindow:(BOOL)shpex_retriggerWhenRemovedFromWindow
+{
+    objc_setAssociatedObject(self, @selector(shpex_retriggerWhenRemovedFromWindow), @(shpex_retriggerWhenRemovedFromWindow), OBJC_ASSOCIATION_COPY_NONATOMIC);
+}
+
+- (BOOL)shpex_retriggerWhenRemovedFromWindow
+{
+    return [objc_getAssociatedObject(self, @selector(shpex_retriggerWhenRemovedFromWindow)) boolValue];
 }
 
 - (void)setShpex_token:(id<AspectToken>)shpex_token

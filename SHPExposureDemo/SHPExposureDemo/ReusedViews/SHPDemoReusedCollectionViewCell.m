@@ -29,25 +29,25 @@
     self.backgroundColor = [UIColor whiteColor];
 }
 
-- (void)setIsExposuredByIndex:(BOOL)isExposuredByIndex
+- (void)setShpex_isExposed:(BOOL)shpex_isExposed
 {
-    _isExposuredByIndex = isExposuredByIndex;
+    [super setShpex_isExposed:shpex_isExposed];
     [self updateBackendColor];
 }
 
-- (void)setShpex_lastShowedDate:(NSDate *)shpex_lastShowedDate
+- (void)setShpex_startAppearanceDate:(NSDate *)shpex_startAppearanceDate
 {
-    [super setShpex_lastShowedDate:shpex_lastShowedDate];
+    [super setShpex_startAppearanceDate:shpex_startAppearanceDate];
     [self updateBackendColor];
 }
 
 - (void)updateBackendColor
 {
-    if (self.isExposuredByIndex) {
+    if (self.shpex_isExposed) {
         self.backgroundColor = [UIColor greenColor];
         return;
     }
-    if (self.shpex_lastShowedDate != nil) {
+    if (self.shpex_startAppearanceDate) {
         self.backgroundColor = [UIColor whiteColor];
         [UIView animateWithDuration:self.shpex_minDurationInWindow delay:0 options:UIViewAnimationOptionCurveLinear | UIViewAnimationOptionAllowUserInteraction animations:^{
             self.backgroundColor = [UIColor redColor];

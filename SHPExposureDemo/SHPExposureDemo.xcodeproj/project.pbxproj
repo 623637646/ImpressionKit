@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		104B7766482598C00FF88520 /* libPods-SHPExposureDemo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 637414D0A1194799B97819B3 /* libPods-SHPExposureDemo.a */; };
+		2A1B6A47244567860082D564 /* SHPDemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A1B6A46244567860082D564 /* SHPDemoViewController.swift */; };
 		5C078620219920AD0076A3BA /* UIView+SHPExposureViewPrivate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C07861F219920AD0076A3BA /* UIView+SHPExposureViewPrivate.m */; };
 		5C0786232199210F0076A3BA /* SHPDemoReusedCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C0786222199210F0076A3BA /* SHPDemoReusedCollectionViewCell.m */; };
 		5C216705218C2C8500371F24 /* SHPDemoReusedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C216704218C2C8500371F24 /* SHPDemoReusedViewController.m */; };
@@ -15,9 +16,7 @@
 		5C29ED6F21E6F93B00F2687D /* SHPDemoCoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C29ED6E21E6F93B00F2687D /* SHPDemoCoverViewController.m */; };
 		5CDED9392188552800065254 /* SHPDemoNonReusedView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CDED9382188552800065254 /* SHPDemoNonReusedView.m */; };
 		5CDED93F2188726400065254 /* SHPDemoNonReusedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CDED93E2188726400065254 /* SHPDemoNonReusedViewController.m */; };
-		5CDED942218874D800065254 /* SHPDemoTitleCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CDED941218874D800065254 /* SHPDemoTitleCollectionViewCell.m */; };
 		5CFF022321806DAE00E322D7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CFF022221806DAE00E322D7 /* AppDelegate.m */; };
-		5CFF022621806DAE00E322D7 /* SHPDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CFF022521806DAE00E322D7 /* SHPDemoViewController.m */; };
 		5CFF022B21806DAE00E322D7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5CFF022A21806DAE00E322D7 /* Assets.xcassets */; };
 		5CFF022E21806DAE00E322D7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5CFF022C21806DAE00E322D7 /* LaunchScreen.storyboard */; };
 		5CFF023121806DAE00E322D7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CFF023021806DAE00E322D7 /* main.m */; };
@@ -25,6 +24,8 @@
 
 /* Begin PBXFileReference section */
 		17DB434E884E75C20DBB4599 /* Pods-YNExposureDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YNExposureDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-YNExposureDemo/Pods-YNExposureDemo.release.xcconfig"; sourceTree = "<group>"; };
+		2A1B6A45244567860082D564 /* SHPExposureDemo-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SHPExposureDemo-Bridging-Header.h"; sourceTree = "<group>"; };
+		2A1B6A46244567860082D564 /* SHPDemoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SHPDemoViewController.swift; sourceTree = "<group>"; };
 		4057F9FAD75CA74791EB6F8B /* Pods-YNExposureDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YNExposureDemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-YNExposureDemo/Pods-YNExposureDemo.debug.xcconfig"; sourceTree = "<group>"; };
 		5C07861E219920AD0076A3BA /* UIView+SHPExposureViewPrivate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIView+SHPExposureViewPrivate.h"; sourceTree = "<group>"; };
 		5C07861F219920AD0076A3BA /* UIView+SHPExposureViewPrivate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIView+SHPExposureViewPrivate.m"; sourceTree = "<group>"; };
@@ -40,13 +41,9 @@
 		5CDED9382188552800065254 /* SHPDemoNonReusedView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SHPDemoNonReusedView.m; sourceTree = "<group>"; };
 		5CDED93D2188726400065254 /* SHPDemoNonReusedViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SHPDemoNonReusedViewController.h; sourceTree = "<group>"; };
 		5CDED93E2188726400065254 /* SHPDemoNonReusedViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SHPDemoNonReusedViewController.m; sourceTree = "<group>"; };
-		5CDED940218874D800065254 /* SHPDemoTitleCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SHPDemoTitleCollectionViewCell.h; sourceTree = "<group>"; };
-		5CDED941218874D800065254 /* SHPDemoTitleCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SHPDemoTitleCollectionViewCell.m; sourceTree = "<group>"; };
 		5CFF021E21806DAE00E322D7 /* SHPExposureDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SHPExposureDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5CFF022121806DAE00E322D7 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		5CFF022221806DAE00E322D7 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		5CFF022421806DAE00E322D7 /* SHPDemoViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SHPDemoViewController.h; sourceTree = "<group>"; };
-		5CFF022521806DAE00E322D7 /* SHPDemoViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SHPDemoViewController.m; sourceTree = "<group>"; };
 		5CFF022A21806DAE00E322D7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5CFF022D21806DAE00E322D7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5CFF022F21806DAE00E322D7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -112,10 +109,7 @@
 		5CDED9432188789600065254 /* MainPage */ = {
 			isa = PBXGroup;
 			children = (
-				5CFF022421806DAE00E322D7 /* SHPDemoViewController.h */,
-				5CFF022521806DAE00E322D7 /* SHPDemoViewController.m */,
-				5CDED940218874D800065254 /* SHPDemoTitleCollectionViewCell.h */,
-				5CDED941218874D800065254 /* SHPDemoTitleCollectionViewCell.m */,
+				2A1B6A46244567860082D564 /* SHPDemoViewController.swift */,
 			);
 			path = MainPage;
 			sourceTree = "<group>";
@@ -159,6 +153,7 @@
 				5C29ED6C21E6F91B00F2687D /* Cover */,
 				5CFF022121806DAE00E322D7 /* AppDelegate.h */,
 				5CFF022221806DAE00E322D7 /* AppDelegate.m */,
+				2A1B6A45244567860082D564 /* SHPExposureDemo-Bridging-Header.h */,
 				5CFF022A21806DAE00E322D7 /* Assets.xcassets */,
 				5CFF022C21806DAE00E322D7 /* LaunchScreen.storyboard */,
 				5CFF022F21806DAE00E322D7 /* Info.plist */,
@@ -210,6 +205,7 @@
 				TargetAttributes = {
 					5CFF021D21806DAE00E322D7 = {
 						CreatedOnToolsVersion = 9.4.1;
+						LastSwiftMigration = 1130;
 					};
 				};
 			};
@@ -270,11 +266,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				5C29ED6F21E6F93B00F2687D /* SHPDemoCoverViewController.m in Sources */,
-				5CFF022621806DAE00E322D7 /* SHPDemoViewController.m in Sources */,
+				2A1B6A47244567860082D564 /* SHPDemoViewController.swift in Sources */,
 				5CDED93F2188726400065254 /* SHPDemoNonReusedViewController.m in Sources */,
 				5CFF023121806DAE00E322D7 /* main.m in Sources */,
 				5CDED9392188552800065254 /* SHPDemoNonReusedView.m in Sources */,
-				5CDED942218874D800065254 /* SHPDemoTitleCollectionViewCell.m in Sources */,
 				5C078620219920AD0076A3BA /* UIView+SHPExposureViewPrivate.m in Sources */,
 				5C29ED6B21E6F7D000F2687D /* SHPDemoDisappearViewController.m in Sources */,
 				5C0786232199210F0076A3BA /* SHPDemoReusedCollectionViewCell.m in Sources */,
@@ -348,7 +343,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -400,7 +395,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
@@ -412,6 +407,7 @@
 			baseConfigurationReference = D8F17C91D5783EDDE3678B45 /* Pods-SHPExposureDemo.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = ZQ7TZ3Q272;
 				INFOPLIST_FILE = SHPExposureDemo/Info.plist;
@@ -421,6 +417,9 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.wangya.yanni.SHPExposureDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "SHPExposureDemo/SHPExposureDemo-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -430,6 +429,7 @@
 			baseConfigurationReference = 9AE85801514B72C302A5A2F0 /* Pods-SHPExposureDemo.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = ZQ7TZ3Q272;
 				INFOPLIST_FILE = SHPExposureDemo/Info.plist;
@@ -439,6 +439,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.wangya.yanni.SHPExposureDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "SHPExposureDemo/SHPExposureDemo-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

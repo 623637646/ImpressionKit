@@ -10,6 +10,4 @@
 
 @interface SHPDemoReusedCollectionViewCell : UICollectionViewCell
 
-@property (nonatomic, assign) BOOL isExposuredByIndex;
-
 @end
