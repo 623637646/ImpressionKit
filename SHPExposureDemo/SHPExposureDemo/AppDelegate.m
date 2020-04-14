@@ -8,8 +8,8 @@
 
 #import "AppDelegate.h"
 #import <SHPExposure/SHPExposure.h>
-#import "SHPDemoViewController.h"
 #import <GDPerformanceView/GDPerformanceMonitor.h>
+#import "SHPExposureDemo-Swift.h"
 
 @interface AppDelegate ()
 
@@ -23,7 +23,12 @@
     
     [SHPExposureConfig sharedInstance].interval = 0.1;
     
-    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:[[SHPDemoViewController alloc] init]];
+    SHPDemoViewController *demoViewController = [[SHPDemoViewController alloc] init];
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:demoViewController];
+    [navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
+    navigationController.navigationBar.shadowImage = [UIImage new];
+    navigationController.navigationBar.translucent = YES;
+    navigationController.view.backgroundColor = [UIColor clearColor];
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.rootViewController = navigationController;

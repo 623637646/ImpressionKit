@@ -20,15 +20,16 @@
 @implementation SHPExposureManager
 
 MACRO_SINGLETON_PATTERN_M({
-    self.queue = dispatch_get_main_queue();
-    self.exposureViewHashTable = [NSHashTable<UIView *> weakObjectsHashTable];
-    
-    __weak typeof(self) wself = self;
-    [[SHPExposureNotificationCenter sharedInstance] addObserverForName:SHPExposureConfigNotificationIntervalChanged object:nil queue:nil usingBlock:^(NSNotification * _Nonnull note) {
-        __strong typeof(self) self = wself;
-        [self resetUpTimer];
-    }];
-})
+                          
+                          self.queue = dispatch_get_main_queue();
+                          self.exposureViewHashTable = [NSHashTable<UIView *> weakObjectsHashTable];
+                          
+                          __weak typeof(self) wself = self;
+                          [[SHPExposureNotificationCenter sharedInstance] addObserverForName:SHPExposureConfigNotificationIntervalChanged object:nil queue:nil usingBlock:^(NSNotification * _Nonnull note) {
+    __strong typeof(self) self = wself;
+    [self resetUpTimer];
+}];
+                          })
 
 - (void)dealloc
 {
@@ -45,10 +46,11 @@ MACRO_SINGLETON_PATTERN_M({
     if (view == nil) {
         return;
     }
+    view.shpex_startAppearanceDate = nil;
+    view.shpex_startDisappearanceDate = nil;
     if ([self.exposureViewHashTable containsObject:view]) {
         return;
     }
-    NSAssert(view.shpex_lastShowedDate == nil, @"view.shpex_lastShowedDate should be nil");
     [self.exposureViewHashTable addObject:view];
     [self updateTimerStatusWhenViewsTableChange];
 }
@@ -58,10 +60,11 @@ MACRO_SINGLETON_PATTERN_M({
     if (view == nil) {
         return;
     }
+    view.shpex_startAppearanceDate = nil;
+    view.shpex_startDisappearanceDate = nil;
     if (![self.exposureViewHashTable containsObject:view]) {
         return;
     }
-    view.shpex_lastShowedDate = nil;
     [self.exposureViewHashTable removeObject:view];
     [self updateTimerStatusWhenViewsTableChange];
 }
@@ -90,33 +93,75 @@ MACRO_SINGLETON_PATTERN_M({
     }
     
     for (UIView *view in views) {
-        if (view.shpex_isExposed) {
-            // has been exposured
+        if (view.shpex_isExposed && !view.shpex_retriggerWhenLeftScreen) {
+            // has been exposured and don't need to tetrigger when left screen
             [self.exposureViewHashTable removeObject:view];
             continue;
         }
         
-        CGFloat ratioOnScreen = [view shpex_areaRatioInWindow];
-        if (ratioOnScreen < view.shpex_minAreaRatioInWindow) {
-            // this view is gone
-            view.shpex_lastShowedDate = nil;
-            continue;
+        CGFloat ratioOnScreen = [view shpex_areaRatioOnScreen];
+        if (view.shpex_startAppearanceDate) {
+            if (ratioOnScreen <= 0) {
+                // from appearance to disappearance
+                view.shpex_startAppearanceDate = nil;
+                view.shpex_startDisappearanceDate = now;
+                view.shpex_isExposed = NO;
+            } else if (ratioOnScreen < view.shpex_minAreaRatioInWindow) {
+                // from appearance to partial appearance
+                view.shpex_startAppearanceDate = nil;
+            } else {
+                // keep appearance
+                [self triggerExposureIfNeed:view now:now ratioOnScreen:ratioOnScreen];
+            }
+        } else if (view.shpex_startDisappearanceDate){
+            if (ratioOnScreen <= 0) {
+                // keep disappearance
+            } else if (ratioOnScreen < view.shpex_minAreaRatioInWindow) {
+                // from disappearance to partial appearance
+                view.shpex_startDisappearanceDate = nil;
+            } else {
+                // from disappearance to appearance
+                view.shpex_startAppearanceDate = now;
+                view.shpex_startDisappearanceDate = nil;
+            }
+        } else {
+            if (ratioOnScreen <= 0) {
+                // from partial appearance to disappearance
+                view.shpex_startDisappearanceDate = now;
+                view.shpex_isExposed = NO;
+            } else if (ratioOnScreen < view.shpex_minAreaRatioInWindow) {
+                // keep partial appearance
+            } else {
+                // from partial appearance to appearance
+                view.shpex_startAppearanceDate = now;
+            }
         }
-        
-        if (view.shpex_lastShowedDate == nil) {
-            // first detected
-            view.shpex_lastShowedDate = now;
-        }
-        NSDate *lastShowDate = view.shpex_lastShowedDate;
-        NSTimeInterval interval = [now timeIntervalSinceDate:lastShowDate];
-        if (interval < view.shpex_minDurationInWindow) {
-            // not enough for exposuree
-            continue;
-        }
-        // exposuree
-        view.shpex_lastShowedDate = nil;
-        view.shpex_isExposed = YES;
-        view.shpex_exposureBlock(ratioOnScreen);
+    }
+}
+
+- (void)triggerExposureIfNeed:(UIView *)view now:(NSDate *)now ratioOnScreen:(CGFloat)ratioOnScreen
+{
+    if (!view || !now || ratioOnScreen <= 0 || ratioOnScreen > 1) {
+        NSParameterAssert(NO);
+        return;
+    }
+    if (view.shpex_isExposed) {
+        return;
+    }
+    NSDate *lastShowDate = view.shpex_startAppearanceDate;
+    NSAssert(lastShowDate, @"lastShowDate is nil");
+    if (!lastShowDate) {
+        return;
+    }
+    NSTimeInterval interval = [now timeIntervalSinceDate:lastShowDate];
+    if (interval < view.shpex_minDurationInWindow) {
+        // not enough for exposuree
+        return;
+    }
+    // exposuree
+    view.shpex_isExposed = YES;
+    view.shpex_exposureBlock(ratioOnScreen);
+    if (!view.shpex_retriggerWhenLeftScreen) {
         [self.exposureViewHashTable removeObject:view];
     }
 }

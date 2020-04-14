@@ -16,9 +16,20 @@ NSString *const SHPExposureErrorDomain = @"com.shopee.SHPExposure";
 
 @implementation UIView (SHPExposure)
 
+
 - (BOOL)shpex_scheduleExposure:(SHPExposureBlock)block
            minDurationInWindow:(NSTimeInterval)minDurationInWindow
           minAreaRatioInWindow:(CGFloat)minAreaRatioInWindow
+                         error:(NSError **)error
+{
+    return [self shpex_scheduleExposure:block minDurationInWindow:minDurationInWindow minAreaRatioInWindow:minAreaRatioInWindow retriggerWhenLeftScreen:NO retriggerWhenRemovedFromWindow:NO error:error];
+}
+
+- (BOOL)shpex_scheduleExposure:(SHPExposureBlock)block
+           minDurationInWindow:(NSTimeInterval)minDurationInWindow
+          minAreaRatioInWindow:(CGFloat)minAreaRatioInWindow
+       retriggerWhenLeftScreen:(BOOL)retriggerWhenLeftScreen
+retriggerWhenRemovedFromWindow:(BOOL)retriggerWhenRemovedFromWindow
                          error:(NSError **)error
 {
     // check parameter
@@ -33,13 +44,15 @@ NSString *const SHPExposureErrorDomain = @"com.shopee.SHPExposure";
         return NO;
     }
     
-    // reset
-    [self shpex_resetSchedule];
-    
     // property
     self.shpex_exposureBlock = block;
     self.shpex_minDurationInWindow = minDurationInWindow;
     self.shpex_minAreaRatioInWindow = minAreaRatioInWindow;
+    self.shpex_retriggerWhenLeftScreen = retriggerWhenLeftScreen;
+    self.shpex_retriggerWhenRemovedFromWindow = retriggerWhenRemovedFromWindow;
+    
+    // reset
+    [self shpex_resetSchedule];
     
     // aspect
     if (self.shpex_token == nil) {
@@ -48,6 +61,9 @@ NSString *const SHPExposureErrorDomain = @"com.shopee.SHPExposure";
             __strong typeof(self) self = wself;
             if (self.window == nil) {
                 [[SHPExposureManager sharedInstance] removeView:self];
+                if (self.shpex_retriggerWhenRemovedFromWindow) {
+                    self.shpex_isExposed = NO;
+                }
             } else {
                 [[SHPExposureManager sharedInstance] addView:self];
             }
@@ -62,7 +78,6 @@ NSString *const SHPExposureErrorDomain = @"com.shopee.SHPExposure";
 - (void)shpex_resetSchedule
 {
     self.shpex_isExposed = NO;
-    self.shpex_lastShowedDate = nil;
     if (self.window != nil) {
         [[SHPExposureManager sharedInstance] addView:self];
     }
@@ -82,7 +97,7 @@ NSString *const SHPExposureErrorDomain = @"com.shopee.SHPExposure";
 
 #pragma mark - Helper
 
-- (CGFloat)shpex_areaRatioInWindow
+- (CGFloat)shpex_areaRatioOnScreen
 {
     if (self.hidden || self.alpha <= 0) {
         return 0;
@@ -95,7 +110,7 @@ NSString *const SHPExposureErrorDomain = @"com.shopee.SHPExposure";
             return 0;
         }
         CGRect intersection = CGRectIntersection(self.frame, screen.bounds);
-        return (intersection.size.width * intersection.size.height) / (self.bounds.size.width * self.bounds.size.height);
+        return [self fixFloatPrecision:(intersection.size.width * intersection.size.height) / (self.bounds.size.width * self.bounds.size.height)];
     } else {
         // Used as a view!
         UIWindow *window = self.window;
@@ -117,8 +132,19 @@ NSString *const SHPExposureErrorDomain = @"com.shopee.SHPExposure";
         CGRect frameInWindow = [self convertRect:self.bounds toView:window];
         CGRect frameInScreen = CGRectMake(frameInWindow.origin.x + window.frame.origin.x, frameInWindow.origin.y + window.frame.origin.y, frameInWindow.size.width, frameInWindow.size.height);
         CGRect intersection = CGRectIntersection(frameInScreen, window.screen.bounds);
-        return (intersection.size.width * intersection.size.height) / (self.bounds.size.width * self.bounds.size.height);
+        return [self fixFloatPrecision:(intersection.size.width * intersection.size.height) / (self.bounds.size.width * self.bounds.size.height)];
     }
+}
+
+- (CGFloat)fixFloatPrecision:(CGFloat)floatNumber
+{
+    // fix float precision
+    if (floatNumber < 0.0001) {
+        floatNumber = 0;
+    } else if (floatNumber > 1 - 0.0001){
+        floatNumber = 1;
+    }
+    return floatNumber;
 }
 
 @end
