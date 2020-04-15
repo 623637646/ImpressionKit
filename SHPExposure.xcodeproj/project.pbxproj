@@ -14,8 +14,6 @@
 		5CAB2B302182F871003B5867 /* SHPExposureMacro.h in Headers */ = {isa = PBXBuildFile; fileRef = 5CAB2B2F2182F871003B5867 /* SHPExposureMacro.h */; };
 		5CEDA0D22189A583000AE742 /* SHPExposureConfig.h in Headers */ = {isa = PBXBuildFile; fileRef = 5CEDA0D02189A583000AE742 /* SHPExposureConfig.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5CEDA0D32189A583000AE742 /* SHPExposureConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CEDA0D12189A583000AE742 /* SHPExposureConfig.m */; };
-		5CEDA0D62189A761000AE742 /* SHPExposureNotificationCenter.h in Headers */ = {isa = PBXBuildFile; fileRef = 5CEDA0D42189A761000AE742 /* SHPExposureNotificationCenter.h */; };
-		5CEDA0D72189A761000AE742 /* SHPExposureNotificationCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CEDA0D52189A761000AE742 /* SHPExposureNotificationCenter.m */; };
 		5CFF020F21806C9700E322D7 /* SHPExposure.h in Headers */ = {isa = PBXBuildFile; fileRef = 5CFF020D21806C9700E322D7 /* SHPExposure.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5CFF023D2180719800E322D7 /* UIView+SHPExposure.h in Headers */ = {isa = PBXBuildFile; fileRef = 5CFF023B2180719800E322D7 /* UIView+SHPExposure.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5CFF023E2180719800E322D7 /* UIView+SHPExposure.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CFF023C2180719800E322D7 /* UIView+SHPExposure.m */; };
@@ -32,8 +30,6 @@
 		5CAB2B2F2182F871003B5867 /* SHPExposureMacro.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SHPExposureMacro.h; sourceTree = "<group>"; };
 		5CEDA0D02189A583000AE742 /* SHPExposureConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SHPExposureConfig.h; sourceTree = "<group>"; };
 		5CEDA0D12189A583000AE742 /* SHPExposureConfig.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SHPExposureConfig.m; sourceTree = "<group>"; };
-		5CEDA0D42189A761000AE742 /* SHPExposureNotificationCenter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SHPExposureNotificationCenter.h; sourceTree = "<group>"; };
-		5CEDA0D52189A761000AE742 /* SHPExposureNotificationCenter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SHPExposureNotificationCenter.m; sourceTree = "<group>"; };
 		5CFF020A21806C9700E322D7 /* SHPExposure.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SHPExposure.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5CFF020D21806C9700E322D7 /* SHPExposure.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SHPExposure.h; sourceTree = "<group>"; };
 		5CFF020E21806C9700E322D7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -96,8 +92,6 @@
 				5C4017B62180774E0041D59C /* UIView+SHPExposurePrivate.m */,
 				5CAB2B2B2182F7BD003B5867 /* SHPExposureManager.h */,
 				5CAB2B2C2182F7BD003B5867 /* SHPExposureManager.m */,
-				5CEDA0D42189A761000AE742 /* SHPExposureNotificationCenter.h */,
-				5CEDA0D52189A761000AE742 /* SHPExposureNotificationCenter.m */,
 				5CFF020E21806C9700E322D7 /* Info.plist */,
 			);
 			path = SHPExposure;
@@ -133,7 +127,6 @@
 				5CFF020F21806C9700E322D7 /* SHPExposure.h in Headers */,
 				5CFF023D2180719800E322D7 /* UIView+SHPExposure.h in Headers */,
 				5CEDA0D22189A583000AE742 /* SHPExposureConfig.h in Headers */,
-				5CEDA0D62189A761000AE742 /* SHPExposureNotificationCenter.h in Headers */,
 				5CAB2B2D2182F7BD003B5867 /* SHPExposureManager.h in Headers */,
 				5C4017B72180774E0041D59C /* UIView+SHPExposurePrivate.h in Headers */,
 				5CAB2B302182F871003B5867 /* SHPExposureMacro.h in Headers */,
@@ -232,7 +225,6 @@
 				5C4017B82180774E0041D59C /* UIView+SHPExposurePrivate.m in Sources */,
 				5CEDA0D32189A583000AE742 /* SHPExposureConfig.m in Sources */,
 				5CAB2B2E2182F7BD003B5867 /* SHPExposureManager.m in Sources */,
-				5CEDA0D72189A761000AE742 /* SHPExposureNotificationCenter.m in Sources */,
 				5CFF023E2180719800E322D7 /* UIView+SHPExposure.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

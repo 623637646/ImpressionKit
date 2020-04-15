@@ -7,7 +7,6 @@
 //
 
 #import "SHPExposureConfig.h"
-#import "SHPExposureNotificationCenter.h"
 
 NSString *const SHPExposureConfigNotificationIntervalChanged = @"SHPExposureConfigNotificationIntervalChanged";
 
@@ -23,7 +22,7 @@ MACRO_SINGLETON_PATTERN_M({
         return;
     }
     _interval = interval;
-    [[SHPExposureNotificationCenter sharedInstance] postNotificationName:SHPExposureConfigNotificationIntervalChanged object:@(_interval)];
+    [[NSNotificationCenter defaultCenter] postNotificationName:SHPExposureConfigNotificationIntervalChanged object:@(_interval)];
 }
 
 @end

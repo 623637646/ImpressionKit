@@ -8,7 +8,6 @@
 
 #import "SHPExposureManager.h"
 #import "UIView+SHPExposurePrivate.h"
-#import "SHPExposureNotificationCenter.h"
 #import "SHPExposureConfig.h"
 
 @interface SHPExposureManager ()
@@ -24,7 +23,7 @@ MACRO_SINGLETON_PATTERN_M({
                           self.exposureViewHashTable = [NSHashTable<UIView *> weakObjectsHashTable];
                           
                           __weak typeof(self) wself = self;
-                          [[SHPExposureNotificationCenter sharedInstance] addObserverForName:SHPExposureConfigNotificationIntervalChanged object:nil queue:nil usingBlock:^(NSNotification * _Nonnull note) {
+                          [[NSNotificationCenter defaultCenter] addObserverForName:SHPExposureConfigNotificationIntervalChanged object:nil queue:nil usingBlock:^(NSNotification * _Nonnull note) {
     __strong typeof(self) self = wself;
     [self resetUpTimer];
     }];
