@@ -61,7 +61,7 @@ return self;\
 }
 
 // log
-#define SHPLoggingEnabled DEBUG
+#define SHPLoggingEnabled NO
 
 #define SHPLog(...) do {\
 if (SHPLoggingEnabled) {\

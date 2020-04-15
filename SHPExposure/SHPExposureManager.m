@@ -20,7 +20,6 @@
 @implementation SHPExposureManager
 
 MACRO_SINGLETON_PATTERN_M({
-                          
                           self.queue = dispatch_get_main_queue();
                           self.exposureViewHashTable = [NSHashTable<UIView *> weakObjectsHashTable];
                           
@@ -28,8 +27,8 @@ MACRO_SINGLETON_PATTERN_M({
                           [[SHPExposureNotificationCenter sharedInstance] addObserverForName:SHPExposureConfigNotificationIntervalChanged object:nil queue:nil usingBlock:^(NSNotification * _Nonnull note) {
     __strong typeof(self) self = wself;
     [self resetUpTimer];
-}];
-                          })
+    }];
+})
 
 - (void)dealloc
 {
