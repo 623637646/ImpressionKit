@@ -4,14 +4,14 @@ PODS:
     - CHTCollectionViewWaterfallLayout/ObjC (= 0.9.8)
   - CHTCollectionViewWaterfallLayout/ObjC (0.9.8)
   - Eureka (5.2.1)
-  - GDPerformanceView (1.3.1)
+  - GDPerformanceView-Swift (2.0.3)
   - SHPExposure (1.1.0):
     - Aspects (~> 1.4.1)
 
 DEPENDENCIES:
   - CHTCollectionViewWaterfallLayout (~> 0.9.7)
   - Eureka (~> 5.2.1)
-  - GDPerformanceView (~> 1.3.1)
+  - GDPerformanceView-Swift (~> 2.0.3)
   - SHPExposure (from `../`)
 
 SPEC REPOS:
@@ -19,7 +19,7 @@ SPEC REPOS:
     - Aspects
     - CHTCollectionViewWaterfallLayout
     - Eureka
-    - GDPerformanceView
+    - GDPerformanceView-Swift
 
 EXTERNAL SOURCES:
   SHPExposure:
@@ -29,9 +29,9 @@ SPEC CHECKSUMS:
   Aspects: 7595ba96a6727a58ebcbfc954497fc5d2fdde546
   CHTCollectionViewWaterfallLayout: 5f241d2480ab4939aa0d1ad4981de9eef1fbe60d
   Eureka: c883105488e05bc65539f583246ecf9657cabbfe
-  GDPerformanceView: d70d646bf7022a3dfd64222e4966f403bfffef19
+  GDPerformanceView-Swift: ef3d05deb103e472a5494d3f60aeca5a58b88a7d
   SHPExposure: 38549c9a016751811f7c5fcf788b6a86d5ee089e
 
-PODFILE CHECKSUM: 24b351cc0b8f3044aae253ad5369884ce4713e16
+PODFILE CHECKSUM: b2f762fa3bc876debdb45dc55b3ca36bafc9da47
 
 COCOAPODS: 1.6.1
