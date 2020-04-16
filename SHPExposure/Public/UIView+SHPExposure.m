@@ -110,7 +110,7 @@ retriggerWhenRemovedFromWindow:(BOOL)retriggerWhenRemovedFromWindow
             return 0;
         }
         CGRect intersection = CGRectIntersection(self.frame, screen.bounds);
-        return [self fixFloatPrecision:(intersection.size.width * intersection.size.height) / (self.bounds.size.width * self.bounds.size.height)];
+        return [self fixRatioPrecision:(intersection.size.width * intersection.size.height) / (self.bounds.size.width * self.bounds.size.height)];
     } else {
         // Used as a view!
         UIWindow *window = self.window;
@@ -132,16 +132,17 @@ retriggerWhenRemovedFromWindow:(BOOL)retriggerWhenRemovedFromWindow
         CGRect frameInWindow = [self convertRect:self.bounds toView:window];
         CGRect frameInScreen = CGRectMake(frameInWindow.origin.x + window.frame.origin.x, frameInWindow.origin.y + window.frame.origin.y, frameInWindow.size.width, frameInWindow.size.height);
         CGRect intersection = CGRectIntersection(frameInScreen, window.screen.bounds);
-        return [self fixFloatPrecision:(intersection.size.width * intersection.size.height) / (self.bounds.size.width * self.bounds.size.height)];
+        return [self fixRatioPrecision:(intersection.size.width * intersection.size.height) / (self.bounds.size.width * self.bounds.size.height)];
     }
 }
 
-- (CGFloat)fixFloatPrecision:(CGFloat)floatNumber
+- (CGFloat)fixRatioPrecision:(CGFloat)floatNumber
 {
-    // fix float precision
-    if (floatNumber < 0.0001) {
+    // As long as the different ratios on screen is within 0.01% (0.0001), then we can consider two ratios as equal. It's sufficient for this case.
+    CGFloat offset = 0.0001;
+    if (floatNumber < offset) {
         floatNumber = 0;
-    } else if (floatNumber > 1 - 0.0001){
+    } else if (floatNumber > 1 - offset){
         floatNumber = 1;
     }
     return floatNumber;
