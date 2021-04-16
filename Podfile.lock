@@ -5,7 +5,7 @@ DEPENDENCIES:
   - Aspects (= 1.4.1)
 
 SPEC REPOS:
-  https://github.com/cocoapods/specs.git:
+  https://github.com/CocoaPods/Specs.git:
     - Aspects
 
 SPEC CHECKSUMS:
@@ -13,4 +13,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: b906aa791ca13243dfc3385603958e173cd05df6
 
-COCOAPODS: 1.6.1
+COCOAPODS: 1.9.3
