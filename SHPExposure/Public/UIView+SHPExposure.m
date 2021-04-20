@@ -9,7 +9,6 @@
 #import "UIView+SHPExposure.h"
 #import "UIView+SHPExposurePrivate.h"
 #import <objc/runtime.h>
-#import <Aspects/Aspects.h>
 #import "SHPExposureManager.h"
 
 NSString *const SHPExposureErrorDomain = @"com.shopee.SHPExposure";
@@ -57,7 +56,7 @@ retriggerWhenRemovedFromWindow:(BOOL)retriggerWhenRemovedFromWindow
     // aspect
     if (self.shpex_token == nil) {
         __weak typeof(self) wself = self;
-        self.shpex_token = [self aspect_hookSelector:@selector(didMoveToWindow) withOptions:AspectPositionAfter usingBlock:^(id<AspectInfo> aspectInfo) {
+        self.shpex_token = [self sh_hookAfterSelector:@selector(didMoveToWindow) error:error closure:^{
             __strong typeof(self) self = wself;
             if (self.window == nil) {
                 [[SHPExposureManager sharedInstance] removeView:self];
@@ -67,7 +66,7 @@ retriggerWhenRemovedFromWindow:(BOOL)retriggerWhenRemovedFromWindow
             } else {
                 [[SHPExposureManager sharedInstance] addView:self];
             }
-        } error:error];
+        }];
         if (error && *error != nil) {
             return NO;
         }
@@ -89,7 +88,7 @@ retriggerWhenRemovedFromWindow:(BOOL)retriggerWhenRemovedFromWindow
     self.shpex_minDurationInWindow = 0;
     self.shpex_minAreaRatioInWindow = 0;
     if (self.shpex_token != nil) {
-        [self.shpex_token remove];
+        [self.shpex_token cancelHook];
         self.shpex_token = nil;
     }
     [[SHPExposureManager sharedInstance] removeView:self];

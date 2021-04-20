@@ -91,12 +91,12 @@
     return [objc_getAssociatedObject(self, @selector(shpex_retriggerWhenRemovedFromWindow)) boolValue];
 }
 
-- (void)setShpex_token:(id<AspectToken>)shpex_token
+- (void)setShpex_token:(OCToken *)shpex_token
 {
     objc_setAssociatedObject(self, @selector(shpex_token), shpex_token, OBJC_ASSOCIATION_RETAIN);
 }
 
-- (id<AspectToken>)shpex_token
+- (OCToken *)shpex_token
 {
     return objc_getAssociatedObject(self, @selector(shpex_token));
 }

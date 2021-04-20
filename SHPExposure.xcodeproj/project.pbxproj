@@ -7,17 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		469C197C7CE040C0F3A94F2C /* Pods_SHPExposure.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6C4A05C60BA8174580C38B6 /* Pods_SHPExposure.framework */; };
 		5C4017B72180774E0041D59C /* UIView+SHPExposurePrivate.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C4017B52180774E0041D59C /* UIView+SHPExposurePrivate.h */; };
 		5C4017B82180774E0041D59C /* UIView+SHPExposurePrivate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C4017B62180774E0041D59C /* UIView+SHPExposurePrivate.m */; };
+		5C83B038262949F80059B895 /* Empty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C83B037262949F80059B895 /* Empty.swift */; };
 		5CAB2B2D2182F7BD003B5867 /* SHPExposureManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 5CAB2B2B2182F7BD003B5867 /* SHPExposureManager.h */; };
 		5CAB2B2E2182F7BD003B5867 /* SHPExposureManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CAB2B2C2182F7BD003B5867 /* SHPExposureManager.m */; };
-		5CAB2B302182F871003B5867 /* SHPExposureMacro.h in Headers */ = {isa = PBXBuildFile; fileRef = 5CAB2B2F2182F871003B5867 /* SHPExposureMacro.h */; };
+		5CAB2B302182F871003B5867 /* SHPExposureMacro.h in Headers */ = {isa = PBXBuildFile; fileRef = 5CAB2B2F2182F871003B5867 /* SHPExposureMacro.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5CEDA0D22189A583000AE742 /* SHPExposureConfig.h in Headers */ = {isa = PBXBuildFile; fileRef = 5CEDA0D02189A583000AE742 /* SHPExposureConfig.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5CEDA0D32189A583000AE742 /* SHPExposureConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CEDA0D12189A583000AE742 /* SHPExposureConfig.m */; };
 		5CFF020F21806C9700E322D7 /* SHPExposure.h in Headers */ = {isa = PBXBuildFile; fileRef = 5CFF020D21806C9700E322D7 /* SHPExposure.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5CFF023D2180719800E322D7 /* UIView+SHPExposure.h in Headers */ = {isa = PBXBuildFile; fileRef = 5CFF023B2180719800E322D7 /* UIView+SHPExposure.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5CFF023E2180719800E322D7 /* UIView+SHPExposure.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CFF023C2180719800E322D7 /* UIView+SHPExposure.m */; };
-		E7CB1F81FC1915801E1C1CA8 /* libPods-SHPExposure.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F59A2C202057907ACD2ABBB4 /* libPods-SHPExposure.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,6 +26,7 @@
 		0864239623B5A7EEB82E1AE6 /* libPods-YNExposure.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-YNExposure.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5C4017B52180774E0041D59C /* UIView+SHPExposurePrivate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIView+SHPExposurePrivate.h"; sourceTree = "<group>"; };
 		5C4017B62180774E0041D59C /* UIView+SHPExposurePrivate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIView+SHPExposurePrivate.m"; sourceTree = "<group>"; };
+		5C83B037262949F80059B895 /* Empty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Empty.swift; sourceTree = "<group>"; };
 		5CAB2B2B2182F7BD003B5867 /* SHPExposureManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SHPExposureManager.h; sourceTree = "<group>"; };
 		5CAB2B2C2182F7BD003B5867 /* SHPExposureManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SHPExposureManager.m; sourceTree = "<group>"; };
 		5CAB2B2F2182F871003B5867 /* SHPExposureMacro.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SHPExposureMacro.h; sourceTree = "<group>"; };
@@ -38,7 +40,7 @@
 		8AFA968848EADF0AF83FDF34 /* Pods-YNExposure.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YNExposure.release.xcconfig"; path = "Pods/Target Support Files/Pods-YNExposure/Pods-YNExposure.release.xcconfig"; sourceTree = "<group>"; };
 		CACBC1CCAFF3BF09F7BBACF5 /* Pods-SHPExposure.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SHPExposure.release.xcconfig"; path = "Pods/Target Support Files/Pods-SHPExposure/Pods-SHPExposure.release.xcconfig"; sourceTree = "<group>"; };
 		D5756178BE7B32B1CCEACE0D /* Pods-SHPExposure.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SHPExposure.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SHPExposure/Pods-SHPExposure.debug.xcconfig"; sourceTree = "<group>"; };
-		F59A2C202057907ACD2ABBB4 /* libPods-SHPExposure.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SHPExposure.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D6C4A05C60BA8174580C38B6 /* Pods_SHPExposure.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SHPExposure.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -46,7 +48,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E7CB1F81FC1915801E1C1CA8 /* libPods-SHPExposure.a in Frameworks */,
+				469C197C7CE040C0F3A94F2C /* Pods_SHPExposure.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -92,6 +94,7 @@
 				5C4017B62180774E0041D59C /* UIView+SHPExposurePrivate.m */,
 				5CAB2B2B2182F7BD003B5867 /* SHPExposureManager.h */,
 				5CAB2B2C2182F7BD003B5867 /* SHPExposureManager.m */,
+				5C83B037262949F80059B895 /* Empty.swift */,
 				5CFF020E21806C9700E322D7 /* Info.plist */,
 			);
 			path = SHPExposure;
@@ -112,7 +115,7 @@
 			isa = PBXGroup;
 			children = (
 				0864239623B5A7EEB82E1AE6 /* libPods-YNExposure.a */,
-				F59A2C202057907ACD2ABBB4 /* libPods-SHPExposure.a */,
+				D6C4A05C60BA8174580C38B6 /* Pods_SHPExposure.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -166,6 +169,7 @@
 				TargetAttributes = {
 					5CFF020921806C9700E322D7 = {
 						CreatedOnToolsVersion = 9.4.1;
+						LastSwiftMigration = 1220;
 					};
 				};
 			};
@@ -225,6 +229,7 @@
 			files = (
 				5C4017B82180774E0041D59C /* UIView+SHPExposurePrivate.m in Sources */,
 				5CEDA0D32189A583000AE742 /* SHPExposureConfig.m in Sources */,
+				5C83B038262949F80059B895 /* Empty.swift in Sources */,
 				5CAB2B2E2182F7BD003B5867 /* SHPExposureManager.m in Sources */,
 				5CFF023E2180719800E322D7 /* UIView+SHPExposure.m in Sources */,
 			);
@@ -353,6 +358,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = D5756178BE7B32B1CCEACE0D /* Pods-SHPExposure.debug.xcconfig */;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
@@ -362,6 +368,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = SHPExposure/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -370,6 +377,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.shopee.yanni.SHPExposure;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -378,6 +387,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = CACBC1CCAFF3BF09F7BBACF5 /* Pods-SHPExposure.release.xcconfig */;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
@@ -387,6 +397,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = SHPExposure/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -395,6 +406,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.shopee.yanni.SHPExposure;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

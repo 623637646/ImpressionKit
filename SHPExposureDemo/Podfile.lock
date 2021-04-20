@@ -1,12 +1,14 @@
 PODS:
-  - Aspects (1.4.1)
   - CHTCollectionViewWaterfallLayout (0.9.8):
     - CHTCollectionViewWaterfallLayout/ObjC (= 0.9.8)
   - CHTCollectionViewWaterfallLayout/ObjC (0.9.8)
+  - EasySwiftHook (3.1.2):
+    - libffi-iOS (~> 3.3.5-iOS)
   - Eureka (5.3.3)
   - GDPerformanceView-Swift (2.0.3)
+  - libffi-iOS (3.3.5-iOS)
   - SHPExposure (1.1.0):
-    - Aspects (~> 1.4.1)
+    - EasySwiftHook (~> 3.1.2)
 
 DEPENDENCIES:
   - CHTCollectionViewWaterfallLayout (~> 0.9.7)
@@ -15,24 +17,25 @@ DEPENDENCIES:
   - SHPExposure (from `../`)
 
 SPEC REPOS:
-  https://github.com/CocoaPods/Specs.git:
-    - Aspects
-    - CHTCollectionViewWaterfallLayout
-    - GDPerformanceView-Swift
   trunk:
+    - CHTCollectionViewWaterfallLayout
+    - EasySwiftHook
     - Eureka
+    - GDPerformanceView-Swift
+    - libffi-iOS
 
 EXTERNAL SOURCES:
   SHPExposure:
     :path: "../"
 
 SPEC CHECKSUMS:
-  Aspects: 7595ba96a6727a58ebcbfc954497fc5d2fdde546
   CHTCollectionViewWaterfallLayout: 5f241d2480ab4939aa0d1ad4981de9eef1fbe60d
+  EasySwiftHook: 691602892f7efb1cf90a702c07bb80b92a0780a3
   Eureka: e6d720290c56bb23333ad1a0e020b2a98a0e9a43
   GDPerformanceView-Swift: ef3d05deb103e472a5494d3f60aeca5a58b88a7d
-  SHPExposure: 38549c9a016751811f7c5fcf788b6a86d5ee089e
+  libffi-iOS: a145c332c8a6bfef1e9b78b8f0fe9938be5317df
+  SHPExposure: 056a2d12bc41ff4b22ed64717393f03fe2008763
 
 PODFILE CHECKSUM: 59fc2a23844b266e3ff8b5749d6f9dd9ae25f9d1
 
-COCOAPODS: 1.9.3
+COCOAPODS: 1.10.1

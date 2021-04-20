@@ -1,16 +1,20 @@
 PODS:
-  - Aspects (1.4.1)
+  - EasySwiftHook (3.1.2):
+    - libffi-iOS (~> 3.3.5-iOS)
+  - libffi-iOS (3.3.5-iOS)
 
 DEPENDENCIES:
-  - Aspects (= 1.4.1)
+  - EasySwiftHook (~> 3.1.2)
 
 SPEC REPOS:
-  https://github.com/CocoaPods/Specs.git:
-    - Aspects
+  trunk:
+    - EasySwiftHook
+    - libffi-iOS
 
 SPEC CHECKSUMS:
-  Aspects: 7595ba96a6727a58ebcbfc954497fc5d2fdde546
+  EasySwiftHook: 691602892f7efb1cf90a702c07bb80b92a0780a3
+  libffi-iOS: a145c332c8a6bfef1e9b78b8f0fe9938be5317df
 
-PODFILE CHECKSUM: b906aa791ca13243dfc3385603958e173cd05df6
+PODFILE CHECKSUM: 3824073a907a16d48835eecbcea427163d987048
 
-COCOAPODS: 1.9.3
+COCOAPODS: 1.10.1

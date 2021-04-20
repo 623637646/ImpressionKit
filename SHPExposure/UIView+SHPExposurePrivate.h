@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "UIView+SHPExposure.h"
-#import <Aspects/Aspects.h>
+@import EasySwiftHook;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -23,7 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) CGFloat shpex_minAreaRatioInWindow;
 @property (nonatomic, assign) BOOL shpex_retriggerWhenLeftScreen;
 @property (nonatomic, assign) BOOL shpex_retriggerWhenRemovedFromWindow;
-@property (atomic, strong, nullable) id<AspectToken> shpex_token;
+@property (atomic, strong, nullable) OCToken *shpex_token;
 
 @end
 
