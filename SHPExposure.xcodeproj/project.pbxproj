@@ -10,7 +10,6 @@
 		469C197C7CE040C0F3A94F2C /* Pods_SHPExposure.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6C4A05C60BA8174580C38B6 /* Pods_SHPExposure.framework */; };
 		5C4017B72180774E0041D59C /* UIView+SHPExposurePrivate.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C4017B52180774E0041D59C /* UIView+SHPExposurePrivate.h */; };
 		5C4017B82180774E0041D59C /* UIView+SHPExposurePrivate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C4017B62180774E0041D59C /* UIView+SHPExposurePrivate.m */; };
-		5C83B038262949F80059B895 /* Empty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C83B037262949F80059B895 /* Empty.swift */; };
 		5CAB2B2D2182F7BD003B5867 /* SHPExposureManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 5CAB2B2B2182F7BD003B5867 /* SHPExposureManager.h */; };
 		5CAB2B2E2182F7BD003B5867 /* SHPExposureManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CAB2B2C2182F7BD003B5867 /* SHPExposureManager.m */; };
 		5CAB2B302182F871003B5867 /* SHPExposureMacro.h in Headers */ = {isa = PBXBuildFile; fileRef = 5CAB2B2F2182F871003B5867 /* SHPExposureMacro.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -26,7 +25,6 @@
 		0864239623B5A7EEB82E1AE6 /* libPods-YNExposure.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-YNExposure.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5C4017B52180774E0041D59C /* UIView+SHPExposurePrivate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIView+SHPExposurePrivate.h"; sourceTree = "<group>"; };
 		5C4017B62180774E0041D59C /* UIView+SHPExposurePrivate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIView+SHPExposurePrivate.m"; sourceTree = "<group>"; };
-		5C83B037262949F80059B895 /* Empty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Empty.swift; sourceTree = "<group>"; };
 		5CAB2B2B2182F7BD003B5867 /* SHPExposureManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SHPExposureManager.h; sourceTree = "<group>"; };
 		5CAB2B2C2182F7BD003B5867 /* SHPExposureManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SHPExposureManager.m; sourceTree = "<group>"; };
 		5CAB2B2F2182F871003B5867 /* SHPExposureMacro.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SHPExposureMacro.h; sourceTree = "<group>"; };
@@ -94,7 +92,6 @@
 				5C4017B62180774E0041D59C /* UIView+SHPExposurePrivate.m */,
 				5CAB2B2B2182F7BD003B5867 /* SHPExposureManager.h */,
 				5CAB2B2C2182F7BD003B5867 /* SHPExposureManager.m */,
-				5C83B037262949F80059B895 /* Empty.swift */,
 				5CFF020E21806C9700E322D7 /* Info.plist */,
 			);
 			path = SHPExposure;
@@ -229,7 +226,6 @@
 			files = (
 				5C4017B82180774E0041D59C /* UIView+SHPExposurePrivate.m in Sources */,
 				5CEDA0D32189A583000AE742 /* SHPExposureConfig.m in Sources */,
-				5C83B038262949F80059B895 /* Empty.swift in Sources */,
 				5CAB2B2E2182F7BD003B5867 /* SHPExposureManager.m in Sources */,
 				5CFF023E2180719800E322D7 /* UIView+SHPExposure.m in Sources */,
 			);
