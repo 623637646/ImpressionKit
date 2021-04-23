@@ -1,6 +1,6 @@
 # ExposureKit
 
-A lib that help to analyze exposure (impression) events for UIView in iOS.
+A library that help to analyze exposure (impression) events for UIView in iOS.
 
 ![ezgif com-gif-maker](https://user-images.githubusercontent.com/5275802/115500293-9b12c680-a2a3-11eb-9fcd-7018a78fce60.gif)
 
