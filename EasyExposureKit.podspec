@@ -15,6 +15,8 @@ Pod::Spec.new do |s|
   s.author       = { "Yanni Wang" => "wy19900729@gmail.com" }
 
   s.platform     = :ios, "10.0"
+  
+  s.swift_versions = "5"
 
   s.source       = { :git => "https://github.com/623637646/ExposureKit.git", :tag => "#{s.version}" }
 

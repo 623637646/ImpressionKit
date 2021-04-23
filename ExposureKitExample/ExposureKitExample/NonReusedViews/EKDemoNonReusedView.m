@@ -9,7 +9,7 @@
 #import "EKDemoNonReusedView.h"
 #import "UIView+ExposureKitExamplePrivate.h"
 #import "ExposureKitExample-Swift.h"
-@import ExposureKit;
+@import EasyExposureKit;
 
 @interface EKDemoNonReusedView()
 @property (nonatomic, weak) UILabel *label;

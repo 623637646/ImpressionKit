@@ -6,7 +6,7 @@
 //
 
 import UIKit
-import ExposureKit
+import EasyExposureKit
 import GDPerformanceView_Swift
 
 @main

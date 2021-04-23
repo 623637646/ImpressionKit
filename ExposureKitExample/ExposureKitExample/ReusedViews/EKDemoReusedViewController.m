@@ -11,7 +11,7 @@
 #import "EKDemoReusedCollectionViewCell.h"
 #import "ExposureKitExample-Swift.h"
 #import "UIView+ExposureKitExamplePrivate.h"
-@import ExposureKit;
+@import EasyExposureKit;
 
 @interface EKDemoReusedViewController ()<UICollectionViewDataSource, CHTCollectionViewDelegateWaterfallLayout>
 @property (nonatomic, weak) UICollectionView *collectionView;

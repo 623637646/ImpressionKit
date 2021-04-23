@@ -3,7 +3,7 @@ platform :ios, '13.0'
 target 'ExposureKitExample' do
 #  use_frameworks!
 
-  pod 'ExposureKit', :path=>'../'
+  pod 'EasyExposureKit', :path=>'../'
   pod 'GDPerformanceView-Swift', '~> 2.0.3'
   pod 'CHTCollectionViewWaterfallLayout', '~> 0.9.7'
   pod 'Eureka'

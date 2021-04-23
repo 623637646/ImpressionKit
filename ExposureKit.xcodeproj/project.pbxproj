@@ -83,6 +83,7 @@
 			isa = PBXGroup;
 			children = (
 				5CF9CF26262FEF610042889E /* Public */,
+				5CF9CF28262FEF610042889E /* ExposureKit.h */,
 				5CF9CF1F262FEF520042889E /* ExposureKitManager.h */,
 				5CF9CF1D262FEF520042889E /* ExposureKitManager.m */,
 				5CF9CF1E262FEF520042889E /* UIView+ExposureKitPrivate.h */,
@@ -95,7 +96,6 @@
 		5CF9CF26262FEF610042889E /* Public */ = {
 			isa = PBXGroup;
 			children = (
-				5CF9CF28262FEF610042889E /* ExposureKit.h */,
 				5CF9CF27262FEF610042889E /* ExposureKitConfig.h */,
 				5CF9CF2A262FEF610042889E /* ExposureKitConfig.m */,
 				5CF9CF29262FEF610042889E /* UIView+ExposureKit.h */,
