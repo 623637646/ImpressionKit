@@ -158,7 +158,11 @@ MACRO_SINGLETON_PATTERN_M({
     }
     // exposuree
     view.ek_isExposed = YES;
-    view.ek_exposureBlock(ratioOnScreen);
+    if (view.ek_exposureBlock) {
+        view.ek_exposureBlock(ratioOnScreen);
+    } else {
+        NSAssert(NO, @"ek_exposureBlock should not be nil");
+    }
     if (!view.ek_retriggerWhenLeftScreen) {
         [self.exposureViewHashTable removeObject:view];
     }

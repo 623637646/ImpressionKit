@@ -77,7 +77,7 @@ retriggerWhenRemovedFromWindow:(BOOL)retriggerWhenRemovedFromWindow
 - (void)ek_resetSchedule
 {
     self.ek_isExposed = NO;
-    if (self.window != nil) {
+    if (self.ek_exposureBlock && self.ek_token && self.window != nil) {
         [[ExposureKitManager sharedInstance] addView:self];
     }
 }
