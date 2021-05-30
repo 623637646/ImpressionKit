@@ -50,10 +50,7 @@ retriggerWhenRemovedFromWindow:(BOOL)retriggerWhenRemovedFromWindow
     self.ek_retriggerWhenLeftScreen = retriggerWhenLeftScreen;
     self.ek_retriggerWhenRemovedFromWindow = retriggerWhenRemovedFromWindow;
     
-    // reset
-    [self ek_resetSchedule];
-    
-    // aspect
+    // hook
     if (self.ek_token == nil) {
         __weak typeof(self) wself = self;
         self.ek_token = [self sh_hookAfterSelector:@selector(didMoveToWindow) error:error closure:^{
@@ -71,6 +68,9 @@ retriggerWhenRemovedFromWindow:(BOOL)retriggerWhenRemovedFromWindow
             return NO;
         }
     }
+    
+    // reset
+    [self ek_resetSchedule];
     return YES;
 }
 
