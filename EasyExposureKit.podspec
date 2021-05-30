@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "EasyExposureKit"
-  s.version      = "1.0.1"
+  s.version      = "1.0.2"
   s.summary      = "Help to analyze exposure events for UIView in iOS."
 
   s.description  = <<-DESC
