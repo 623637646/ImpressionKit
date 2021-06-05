@@ -23,15 +23,13 @@ class CollectionViewDemoViewController: UIViewController, UICollectionViewDataSo
         return view
     }()
     
-    lazy var group = ImpressionGroup.init {[weak self] (_, index, _, state) in
+    lazy var group = ImpressionGroup.init {(_, index: IndexPath, view, state) in
         if state.isImpressed {
             print("impressed index: \(index.row)")
         }
-        guard let self = self,
-              let cell = self.collectionView.cellForItem(at: index) as? Cell else {
-            return
+        if let cell = view as? Cell {
+            cell.updateUI(state: state)
         }
-        cell.updateUI(state: state)
     }
         
     override func viewDidLoad() {
@@ -68,7 +66,6 @@ class CollectionViewDemoViewController: UIViewController, UICollectionViewDataSo
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! Cell
         cell.index = indexPath.row
-        
         self.group.bind(view: cell, index: indexPath)
         return cell
     }

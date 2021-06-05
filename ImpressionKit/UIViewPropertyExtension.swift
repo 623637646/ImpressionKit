@@ -8,23 +8,18 @@
 import UIKit
 import EasySwiftHook
 
-private var impressionClosureKey = 0
 private var stateKey = 0
-
 private var detectionIntervalKey = 0
 private var durationThresholdKey = 0
 private var areaRatioThresholdKey = 0
 private var redetectWhenLeavingScreenKey = 0
 private var redetectWhenViewControllerDidDisappearKey = 0
-
 private var hookingDidMoveToWindowTokenKey = 0
 private var hookingViewDidDisappearTokenKey = 0
 private var timerKey = 0
 
 extension UIView {
-    
-    public typealias ImpressionClosure = (_ view: UIView, _ state: State) -> ()
-    
+           
     // MARK: - Main
     
     public enum State: Equatable {
@@ -44,33 +39,17 @@ extension UIView {
         }
     }
     
-    // The closure which will be triggered when impression happens. nil value means cancel detection
-    public var impressionClosure: ImpressionClosure? {
-        set {
-            self.state = .unknown
-            objc_setAssociatedObject(self, &impressionClosureKey, newValue, .OBJC_ASSOCIATION_COPY_NONATOMIC)
-            if newValue != nil {
-                self.hookDidMoveToWindowIfNeeded()
-                self.startTimerIfNeeded()
-            } else {
-                self.cancelHookingDidMoveToWindowIfNeeded()
-                self.stopTimer()
-            }
-        }
-        
-        get {
-            return objc_getAssociatedObject(self, &impressionClosureKey) as? ImpressionClosure
-        }
-    }
-    
     // Is triggered the impression event.
     public internal(set) var state: State {
         set {
             let old = self.state
             objc_setAssociatedObject(self, &stateKey, newValue, .OBJC_ASSOCIATION_COPY_NONATOMIC)
             if old != newValue {
-                assert(self.impressionClosure != nil)
-                self.impressionClosure?(self, newValue)
+                guard let getCallback = self.getCallback() else {
+                    assert(false)
+                    return
+                }
+                getCallback(self, newValue)
             }
         }
         

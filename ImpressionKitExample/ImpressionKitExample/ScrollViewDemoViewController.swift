@@ -83,11 +83,7 @@ private class CellView: UIView {
         self.addSubview(self.label)
         self.updateUI()
         
-        self.impressionClosure = { view, state in
-            // TODO: can use generic?
-            guard let view = view as? CellView else {
-                return
-            }
+        self.detectImpression { (view, state) in
             view.updateUI()
             if state.isImpressed {
                 print("impressed index: \(view.index)")

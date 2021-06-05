@@ -8,9 +8,42 @@
 import UIKit
 import EasySwiftHook
 
-extension UIView {
+private var impressionCallbackKey = 0
+
+public protocol ImpressionProtocol: UIView {}
+
+extension UIView: ImpressionProtocol {}
+
+public extension ImpressionProtocol {
     
-    // MARK: - public
+    typealias ImpressionCallback<ViewType: UIView> = (_ view: ViewType, _ state: State) -> ()
+    
+    // The callback will be triggered when impression happens. nil value means cancellation of detection
+    func detectImpression(_ block: ImpressionCallback<Self>?) {
+        self.state = .unknown
+        if let block = block {
+            let value = { view, state in
+                guard let view = view as? Self else {
+                    return
+                }
+                block(view, state)
+            } as ImpressionCallback<UIView>
+            objc_setAssociatedObject(self, &impressionCallbackKey, value, .OBJC_ASSOCIATION_COPY_NONATOMIC)
+            self.hookDidMoveToWindowIfNeeded()
+            self.startTimerIfNeeded()
+        } else {
+            objc_setAssociatedObject(self, &impressionCallbackKey, nil, .OBJC_ASSOCIATION_COPY_NONATOMIC)
+            self.cancelHookingDidMoveToWindowIfNeeded()
+            self.stopTimer()
+        }
+    }
+    
+    internal func getCallback() -> ImpressionCallback<UIView>? {
+        return objc_getAssociatedObject(self, &impressionCallbackKey) as? ImpressionCallback<UIView>
+    }
+}
+
+extension UIView {
     
     // redetect impression for the UIView.
     public func redetect() {
@@ -179,7 +212,7 @@ extension UIView {
             }
         }
         guard self.timer == nil,
-              self.impressionClosure != nil,
+              self.getCallback() != nil,
               self.window != nil else {
             return
         }
