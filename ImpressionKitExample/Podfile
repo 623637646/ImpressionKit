@@ -1,0 +1,11 @@
+platform :ios, '10.0'
+
+target 'ImpressionKitExample' do
+  use_frameworks!
+
+  pod 'ImpressionKit', :path=>'../'
+  pod 'GDPerformanceView-Swift', '~> 2.0.3'
+  pod 'CHTCollectionViewWaterfallLayout', '~> 0.9.7'
+  pod 'Eureka'
+
+end
