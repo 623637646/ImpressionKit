@@ -16,6 +16,26 @@ UIView().detectImpression { (view, state) in
 }
 ```
 
+如果视图是在 UICollectionView 或者 UITableView 中，请使用`ImpressionGroup`。
+
+```swift
+
+var group = ImpressionGroup.init {(_, index: IndexPath, view, state) in
+    if state.isImpressed {
+        print("impressed index: \(index.row)")
+    }
+}
+
+...
+
+func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! Cell
+    self.group.bind(view: cell, index: indexPath)
+    return cell
+}
+
+```
+
 查看Demo获取更多API
 
 # How to integrate ImpressionKit
