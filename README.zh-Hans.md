@@ -1,14 +1,12 @@
-[中文](README.zh-Hans.md)
-
 # ImpressionKit
 
-This is a user behavior tracking (UBT) tool to analyze impression events for UIView (exposure of UIView) in iOS.
+这是一个用户行为追踪（UBT）工具。可以方便地检测 UIView 的曝光事件。
 
 ![ezgif com-gif-maker](https://user-images.githubusercontent.com/5275802/120922347-30a2d200-c6fb-11eb-8994-f97c2bbc0ff8.gif)
 
-# How to use ImpressionKit
+# 怎么使用
 
-It's quite simple. 
+非常简单. 
 
 ```swift
 UIView().detectImpression { (view, state) in
@@ -18,7 +16,7 @@ UIView().detectImpression { (view, state) in
 }
 ```
 
-Refer to the Demo for more APIs.
+查看Demo获取更多API
 
 # How to integrate ImpressionKit
 
