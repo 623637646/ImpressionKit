@@ -18,6 +18,26 @@ UIView().detectImpression { (view, state) in
 }
 ```
 
+Use `ImpressionGroup` for UICollectionView or UITableView.
+
+```swift
+
+var group = ImpressionGroup.init {(_, index: IndexPath, view, state) in
+    if state.isImpressed {
+        print("impressed index: \(index.row)")
+    }
+}
+
+...
+
+func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! Cell
+    self.group.bind(view: cell, index: indexPath)
+    return cell
+}
+
+```
+
 Refer to the Demo for more APIs.
 
 # How to integrate ImpressionKit
