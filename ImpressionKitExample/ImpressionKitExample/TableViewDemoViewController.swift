@@ -1,28 +1,22 @@
 //
-//  CollectionViewDemoViewController.swift
+//  TableViewDemoViewController.swift
 //  ImpressionKitExample
 //
-//  Created by Yanni Wang on 31/5/21.
+//  Created by Yanni Wang on 6/6/21.
 //
 
 import UIKit
-import CHTCollectionViewWaterfallLayout
 import ImpressionKit
 
-class CollectionViewDemoViewController: UIViewController, UICollectionViewDataSource, CHTCollectionViewDelegateWaterfallLayout {
+class TableViewDemoViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
-    let collectionView = { () -> UICollectionView in
-        let layout = CHTCollectionViewWaterfallLayout.init()
-        layout.columnCount = 4
-        layout.minimumColumnSpacing = 0
-        layout.minimumInteritemSpacing = 0
-        
-        let view = UICollectionView.init(frame: CGRect.zero, collectionViewLayout: layout)
+    let tableView = { () -> UITableView in
+        let view = UITableView.init()
         view.backgroundColor = .white
-        view.register(Cell.self, forCellWithReuseIdentifier: "Cell")
+        view.register(Cell.self, forCellReuseIdentifier: "Cell")
         return view
     }()
-    
+
     lazy var group = ImpressionGroup.init {(_, index: IndexPath, view, state) in
         if state.isImpressed {
             print("impressed index: \(index.row)")
@@ -41,47 +35,43 @@ class CollectionViewDemoViewController: UIViewController, UICollectionViewDataSo
             UIBarButtonItem.init(title: "redetect", style: .plain, target: self, action: #selector(redetect)),
         ]
         
-        self.collectionView.frame = self.view.bounds
-        self.collectionView.dataSource = self
-        self.collectionView.delegate = self
-        self.view.addSubview(self.collectionView)
+        self.tableView.frame = self.view.bounds
+        self.tableView.dataSource = self
+        self.tableView.delegate = self
+        self.view.addSubview(self.tableView)
     }
-    
+
     @objc private func redetect() {
         self.group.redetect()
     }
-    
+
     @objc private func nextPage() {
         let nextPage = UIViewController()
         nextPage.view.backgroundColor = .white
         self.navigationController?.pushViewController(nextPage, animated: true)
     }
     
-    // UICollectionViewDataSource & CHTCollectionViewDelegateWaterfallLayout
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    // UITableViewDataSource
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 99
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! Cell
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! Cell
         cell.index = indexPath.row
+        cell.updateUI(state: self.group.states[indexPath])
         self.group.bind(view: cell, index: indexPath)
         return cell
     }
     
-    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        (cell as! Cell).updateUI(state: self.group.states[indexPath])
+    // UITableViewDelegate
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 44
     }
     
-    func collectionView(_ collectionView: UICollectionView!, layout collectionViewLayout: UICollectionViewLayout!, sizeForItemAt indexPath: IndexPath!) -> CGSize {
-        let width: CGFloat = 100
-        let height = width + CGFloat.random(in: 0 ..< width)
-        return CGSize.init(width: width, height: height)
-    }
 }
 
-private class Cell: UICollectionViewCell {
+private class Cell: UITableViewCell {
     private var label = { () -> UILabel in
         let view = UILabel.init()
         view.font = UIFont.systemFont(ofSize: 12)
@@ -93,8 +83,8 @@ private class Cell: UICollectionViewCell {
     
     var index: Int = -1
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.contentView.layer.borderColor = UIColor.gray.cgColor
         self.contentView.layer.borderWidth = 0.5
         self.contentView.addSubview(label)
@@ -113,7 +103,7 @@ private class Cell: UICollectionViewCell {
         self.layer.removeAllAnimations()
         switch state {
         case .impressed(_, let areaRatio):
-            self.label.text = String.init(format: "\(self.index)\n\n%0.1f%%", areaRatio * 100)
+            self.label.text = String.init(format: "\(self.index)\n%0.1f%%", areaRatio * 100)
             self.contentView.backgroundColor = .green
         case .inScreen(_):
             self.contentView.backgroundColor = .white
@@ -121,9 +111,8 @@ private class Cell: UICollectionViewCell {
                 self.contentView.backgroundColor = .red
             }, completion: nil)
         default:
-            self.label.text = "\(self.index)\n\n"
+            self.label.text = "\(self.index)\n"
             self.contentView.backgroundColor = .white
         }
     }
 }
-

@@ -101,6 +101,12 @@ class HomeViewController: FormViewController {
                     return CollectionViewDemoViewController()
                 }), onDismiss: nil)
             }
+            <<< ButtonRow("UITableView (resued views)") { row in
+                row.title = row.tag
+                row.presentationMode = .show(controllerProvider: ControllerProvider<UIViewController>.callback(builder: { () -> UIViewController in
+                    return TableViewDemoViewController()
+                }), onDismiss: nil)
+            }
             +++ Section("SETTINGS")
             <<< DecimalRow() {
                 $0.title = "Detection Interval"
