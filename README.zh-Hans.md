@@ -16,7 +16,7 @@ UIView().detectImpression { (view, state) in
 }
 ```
 
-如果视图是在 UICollectionView 或者 UITableView 中，请使用`ImpressionGroup`。
+如果是在 UICollectionView，UITableView 或者其他可复用的视图中，请使用`ImpressionGroup`。
 
 ```swift
 
