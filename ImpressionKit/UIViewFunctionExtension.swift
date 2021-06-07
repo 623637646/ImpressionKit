@@ -38,6 +38,10 @@ public extension ImpressionProtocol {
         }
     }
     
+    func isDetectionOn() -> Bool {
+        return self.getCallback() != nil
+    }
+    
     internal func getCallback() -> ImpressionCallback<UIView>? {
         return objc_getAssociatedObject(self, &impressionCallbackKey) as? ImpressionCallback<UIView>
     }
