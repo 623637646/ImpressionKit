@@ -38,7 +38,7 @@ public extension ImpressionProtocol {
         }
     }
     
-    func isDetectionOn() -> Bool {
+    var isDetectionOn: Bool {
         return self.getCallback() != nil
     }
     
