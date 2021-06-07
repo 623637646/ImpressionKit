@@ -18,7 +18,7 @@ UIView().detectImpression { (view, state) in
 }
 ```
 
-Use `ImpressionGroup` for UICollectionView or UITableView.
+Use `ImpressionGroup` for UICollectionView, UITableView or other reusable view cases.
 
 ```swift
 
