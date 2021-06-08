@@ -15,7 +15,8 @@ class HomeViewController: FormViewController {
     private static let areaRatioThresholdKey = "areaRatioThresholdKey"
     private static let redetectWhenLeavingScreenKey = "redetectWhenLeavingScreenKey"
     private static let redetectWhenViewControllerDidDisappearKey = "redetectWhenViewControllerDidDisappearKey"
-    
+    private static let redetectWhenReceiveSystemNotificationKey = "redetectWhenReceiveSystemNotificationKey"
+
     static var detectionInterval: Float {
         get {
             guard UserDefaults.standard.object(forKey: detectionIntervalKey) != nil else {
@@ -75,6 +76,20 @@ class HomeViewController: FormViewController {
         set {
             UIView.redetectWhenViewControllerDidDisappear = newValue
             UserDefaults.standard.set(newValue, forKey: redetectWhenViewControllerDidDisappearKey)
+        }
+    }
+    static var redetectWhenReceiveSystemNotification: Set<Notification.Name> {
+        get {
+            guard UserDefaults.standard.object(forKey: redetectWhenReceiveSystemNotificationKey) != nil else {
+                return UIView.redetectWhenReceiveSystemNotification
+            }
+            let result = (UserDefaults.standard.object(forKey: redetectWhenReceiveSystemNotificationKey) as? [String] ?? []).map({Notification.Name.init($0)})
+            return Set.init(result)
+        }
+        set {
+            UIView.redetectWhenReceiveSystemNotification = newValue
+            let array = newValue.map({$0.rawValue})
+            UserDefaults.standard.set(array, forKey: redetectWhenReceiveSystemNotificationKey)
         }
     }
     
@@ -153,6 +168,26 @@ class HomeViewController: FormViewController {
             }.onChange({ (row) in
                 HomeViewController.redetectWhenViewControllerDidDisappear = row.value ?? false
             })
+            <<< SwitchRow() {
+                $0.title = "Redetect When didEnterBackground"
+                $0.value = HomeViewController.redetectWhenReceiveSystemNotification.contains(UIApplication.didEnterBackgroundNotification)
+            }.onChange({ (row) in
+                if row.value ?? false {
+                    HomeViewController.redetectWhenReceiveSystemNotification.insert(UIApplication.didEnterBackgroundNotification)
+                } else {
+                    HomeViewController.redetectWhenReceiveSystemNotification.remove(UIApplication.didEnterBackgroundNotification)
+                }
+            })
+            <<< SwitchRow() {
+                $0.title = "Redetect When willResignActive"
+                $0.value = HomeViewController.redetectWhenReceiveSystemNotification.contains(UIApplication.willResignActiveNotification)
+            }.onChange({ (row) in
+                if row.value ?? false {
+                    HomeViewController.redetectWhenReceiveSystemNotification.insert(UIApplication.willResignActiveNotification)
+                } else {
+                    HomeViewController.redetectWhenReceiveSystemNotification.remove(UIApplication.willResignActiveNotification)
+                }
+            })
             <<< ButtonRow(){
                 $0.title = "Reset"
                 $0.cell.tintColor = .red
@@ -162,6 +197,7 @@ class HomeViewController: FormViewController {
                 HomeViewController.areaRatioThreshold = 0.5
                 HomeViewController.redetectWhenLeavingScreen = false
                 HomeViewController.redetectWhenViewControllerDidDisappear = false
+                HomeViewController.redetectWhenReceiveSystemNotification.removeAll()
                 self?.setUpForm()
             }
         CATransaction.commit()

@@ -21,6 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UIView.areaRatioThreshold = HomeViewController.areaRatioThreshold
         UIView.redetectWhenLeavingScreen = HomeViewController.redetectWhenLeavingScreen
         UIView.redetectWhenViewControllerDidDisappear = HomeViewController.redetectWhenViewControllerDidDisappear
+        UIView.redetectWhenReceiveSystemNotification = HomeViewController.redetectWhenReceiveSystemNotification
         
         PerformanceMonitor.shared().start()
         

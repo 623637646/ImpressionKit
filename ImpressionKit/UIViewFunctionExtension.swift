@@ -30,10 +30,12 @@ public extension ImpressionProtocol {
             } as ImpressionCallback<UIView>
             objc_setAssociatedObject(self, &impressionCallbackKey, value, .OBJC_ASSOCIATION_COPY_NONATOMIC)
             self.hookDidMoveToWindowIfNeeded()
+            self.addNotificationObserverIfNeeded()
             self.startTimerIfNeeded()
         } else {
             objc_setAssociatedObject(self, &impressionCallbackKey, nil, .OBJC_ASSOCIATION_COPY_NONATOMIC)
             self.cancelHookingDidMoveToWindowIfNeeded()
+            self.removeNotificationObserverIfNeeded()
             self.stopTimer()
         }
     }
@@ -117,10 +119,48 @@ extension UIView {
         self.hookingViewDidDisappearToken = nil
     }
     
+    // MARK: - observe notifications
+    
+    func addNotificationObserverIfNeeded() {
+        self.removeNotificationObserverIfNeeded()
+        let names = UIView.redetectWhenReceiveSystemNotification.union(self.redetectWhenReceiveSystemNotification)
+        guard names.count > 0 else {
+            return
+        }
+        var tokens = [NSObjectProtocol]()
+        for name in names {
+            var token: NSObjectProtocol?
+            token = NotificationCenter.default.addObserver(forName: name, object: nil, queue: nil, using: {[weak self] notification in
+                guard let self = self,
+                      UIView.redetectWhenReceiveSystemNotification.union(self.redetectWhenReceiveSystemNotification).contains(notification.name) else {
+                    if let token = token {
+                        NotificationCenter.default.removeObserver(token)
+                    }
+                    return
+                }
+                self.state = .receivedNotification(name: notification.name)
+                self.startTimerIfNeeded()
+            })
+            if let token = token {
+                tokens.append(token)
+            }
+        }
+        self.notificationTokens = tokens
+    }
+    
+    func removeNotificationObserverIfNeeded() {
+        self.notificationTokens.forEach { (token) in
+            NotificationCenter.default.removeObserver(token)
+        }
+        self.notificationTokens.removeAll()
+    }
+    
     // MARK: - Algorithm
     
     private func areaRatio() -> Float {
-        guard self.isHidden == false && self.alpha > 0 else {
+        guard UIApplication.shared.applicationState == .active &&
+                self.isHidden == false &&
+                self.alpha > 0 else {
             return 0
         }
         if let window = self as? UIWindow,

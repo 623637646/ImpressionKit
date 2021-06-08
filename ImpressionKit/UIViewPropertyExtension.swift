@@ -14,8 +14,10 @@ private var durationThresholdKey = 0
 private var areaRatioThresholdKey = 0
 private var redetectWhenLeavingScreenKey = 0
 private var redetectWhenViewControllerDidDisappearKey = 0
+private var redetectWhenReceiveSystemNotificationKey = 0
 private var hookingDidMoveToWindowTokenKey = 0
 private var hookingViewDidDisappearTokenKey = 0
+private var notificationTokensKey = 0
 private var timerKey = 0
 
 extension UIView {
@@ -29,6 +31,7 @@ extension UIView {
         case outOfScreen
         case noWindow
         case viewDidDisappear
+        case receivedNotification(name: Notification.Name)
         
         public var isImpressed: Bool {
             if case .impressed = self {
@@ -130,6 +133,26 @@ extension UIView {
         }
     }
     
+    /**
+     Redetect when the notifications with the name of Set<Notification.Name> happen from NotificationCenter.default.
+     `UIView.redetectWhenReceiveSystemNotification.union(self.redetectWhenReceiveSystemNotification)` will be applied.
+     */
+    public static var redetectWhenReceiveSystemNotification = Set<Notification.Name>()
+    
+    /**
+     Redetect when the notifications with the name of Set<Notification.Name> happen from NotificationCenter.default.
+     `UIView.redetectWhenReceiveSystemNotification.union(self.redetectWhenReceiveSystemNotification)` will be applied.
+     */
+    public var redetectWhenReceiveSystemNotification: Set<Notification.Name> {
+        set {
+            objc_setAssociatedObject(self, &redetectWhenReceiveSystemNotificationKey, newValue, .OBJC_ASSOCIATION_COPY_NONATOMIC)
+        }
+        
+        get {
+            return objc_getAssociatedObject(self, &redetectWhenReceiveSystemNotificationKey) as? Set<Notification.Name> ?? []
+        }
+    }
+    
     // MARK: - internal
     
     var hookingDidMoveToWindowToken: Token? {
@@ -149,6 +172,16 @@ extension UIView {
         
         get {
             return objc_getAssociatedObject(self, &hookingViewDidDisappearTokenKey) as? Token
+        }
+    }
+    
+    var notificationTokens: [NSObjectProtocol] {
+        set {
+            objc_setAssociatedObject(self, &notificationTokensKey, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+        }
+        
+        get {
+            return objc_getAssociatedObject(self, &notificationTokensKey) as? [NSObjectProtocol] ?? []
         }
     }
     

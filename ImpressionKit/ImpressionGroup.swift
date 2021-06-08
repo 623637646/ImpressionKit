@@ -27,6 +27,12 @@ public class ImpressionGroup<IndexType: Hashable> {
     // Redetect when the UIViewController the view in did disappear for specified view. `UIView.redetectWhenViewControllerDidDisappear` will be used if it's nil.
     public var redetectWhenViewControllerDidDisappear: Bool?
     
+    /**
+     Redetect when the notifications with the name of Set<Notification.Name> happen from NotificationCenter.default.
+     `UIView.redetectWhenReceiveSystemNotification.union(self.redetectWhenReceiveSystemNotification)` will be applied.
+     */
+    public var redetectWhenReceiveSystemNotification = Set<Notification.Name>()
+    
     // MARK: - public
     public typealias ImpressionGroupCallback = (_ group: ImpressionGroup, _ index: IndexType, _ view: UIView, _ state: UIView.State) -> ()
     
@@ -60,6 +66,7 @@ public class ImpressionGroup<IndexType: Hashable> {
         view.areaRatioThreshold = self.areaRatioThreshold
         view.redetectWhenLeavingScreen = self.redetectWhenLeavingScreen
         view.redetectWhenViewControllerDidDisappear = self.redetectWhenViewControllerDidDisappear
+        view.redetectWhenReceiveSystemNotification = self.redetectWhenReceiveSystemNotification
         
         if view.getCallback() == nil {
             view.detectImpression({ [weak self] (view, state) in
@@ -70,6 +77,11 @@ public class ImpressionGroup<IndexType: Hashable> {
                 if case .viewDidDisappear = state,
                    view.redetectWhenViewControllerDidDisappear ?? UIView.redetectWhenViewControllerDidDisappear {
                     self.redetectWhenViewControllerDidDisappear(view: view)
+                    return
+                }
+                if case .receivedNotification(let name) = state,
+                   UIView.redetectWhenReceiveSystemNotification.union(view.redetectWhenReceiveSystemNotification).contains(name)  {
+                    self.redetectWhenReceiveSystemNotification(view: view, name: name)
                     return
                 }
                 
@@ -105,12 +117,22 @@ public class ImpressionGroup<IndexType: Hashable> {
     
     private func redetectWhenViewControllerDidDisappear(view: UIView) {
         self.states = self.states.mapValues { (_) -> UIView.State in
-            return .unknown
+            return .viewDidDisappear
         }
         guard let index = ImpressionGroup.getIndex(view: view) else {
             return
         }
         self.changeState(index: index, view: view, state: .viewDidDisappear)
+    }
+    
+    private func redetectWhenReceiveSystemNotification(view: UIView, name: Notification.Name) {
+        self.states = self.states.mapValues { (_) -> UIView.State in
+            return .receivedNotification(name: name)
+        }
+        guard let index = ImpressionGroup.getIndex(view: view) else {
+            return
+        }
+        self.changeState(index: index, view: view, state: .receivedNotification(name: name))
     }
     
     private func changeState(index: IndexType, view: UIView, state: UIView.State) {
