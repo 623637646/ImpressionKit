@@ -12,24 +12,23 @@ private var indexKey = 0
 public class ImpressionGroup<IndexType: Hashable> {
     
     // MARK: - config
-    // The detection (scan) interval in seconds.  `UIView.detectionInterval` will be used if it's nil.
+    // Change the detection (scan) interval (in seconds). Smaller detectionInterval means more accuracy and higher CPU consumption. Apply to the group. `UIView.detectionInterval` will be used if it's nil.
     public var detectionInterval: Float?
     
-    // The detection (scan) interval in seconds. `UIView.durationThreshold` will be used if it's nil.
+    // Chage the threshold of duration in screen (in seconds). The view will be impressed if it keeps being in screen after this seconds. Apply to the group. `UIView.durationThreshold` will be used if it's nil.
     public var durationThreshold: Float?
     
-    // The threshold of area ratio in screen for specified UIView. from 0 to 1. `UIView.areaRatioThreshold` will be used if it's nil.
+    // Chage the threshold of area ratio in screen. It's from 0 to 1. The view will be impressed if it's area ratio keeps being bigger than this value. Apply to the group. `UIView.areaRatioThreshold` will be used if it's nil.
     public var areaRatioThreshold: Float?
         
-    // Redetect when this view leaving screen. `UIView.redetectWhenLeavingScreen` will be used if it's nil.
+    // Retrigger the impression event when a view leaving screen. Apply to the group. `UIView.redetectWhenLeavingScreen` will be used if it's nil.
     public var redetectWhenLeavingScreen: Bool?
     
-    // Redetect when the UIViewController the view in did disappear for specified view. `UIView.redetectWhenViewControllerDidDisappear` will be used if it's nil.
+    // Retrigger the impression event when the UIViewController which the view in did disappear. Apply to the group. `UIView.redetectWhenViewControllerDidDisappear` will be used if it's nil.
     public var redetectWhenViewControllerDidDisappear: Bool?
     
-    /**
-     Redetect when the notifications with the name of Set<Notification.Name> happen from NotificationCenter.default.
-     `UIView.redetectWhenReceiveSystemNotification.union(self.redetectWhenReceiveSystemNotification)` will be applied.
+    /* Redetect when the notifications with the name in Set<Notification.Name> happen from NotificationCenter.default. This API is applied the group.
+     `UIView.redetectWhenReceiveSystemNotification.union(yourGroup.redetectWhenReceiveSystemNotification)` will be applied to the view finally.
      */
     public var redetectWhenReceiveSystemNotification = Set<Notification.Name>()
     

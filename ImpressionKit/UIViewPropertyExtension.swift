@@ -63,10 +63,10 @@ extension UIView {
     
     // MARK: - Config
     
-    // The detection (scan) interval in seconds.
+    // Change the detection (scan) interval (in seconds). Smaller detectionInterval means more accuracy and higher CPU consumption. Apply to all views
     public static var detectionInterval: Float = 0.2
     
-    // The detection (scan) interval in seconds. `UIView.detectionInterval` will be used if it's nil.
+    // Change the detection (scan) interval (in seconds). Smaller detectionInterval means more accuracy and higher CPU consumption. Apply to the specific view. `UIView.detectionInterval` will be used if it's nil.
     public var detectionInterval: Float? {
         set {
             objc_setAssociatedObject(self, &detectionIntervalKey, newValue, .OBJC_ASSOCIATION_COPY_NONATOMIC)
@@ -77,10 +77,10 @@ extension UIView {
         }
     }
     
-    // The threshold of duration in screen for all UIViews in seconds.
+    // Chage the threshold of duration in screen (in seconds). The view will be impressed if it keeps being in screen after this seconds. Apply to all views
     public static var durationThreshold: Float = 1
     
-    // The threshold of duration in screen for specified UIView in seconds. `UIView.durationThreshold` will be used if it's nil.
+    // Chage the threshold of duration in screen (in seconds). The view will be impressed if it keeps being in screen after this seconds. Apply to the specific view. `UIView.durationThreshold` will be used if it's nil.
     public var durationThreshold: Float? {
         set {
             objc_setAssociatedObject(self, &durationThresholdKey, newValue, .OBJC_ASSOCIATION_COPY_NONATOMIC)
@@ -91,10 +91,10 @@ extension UIView {
         }
     }
     
-    // The threshold of area ratio in screen for all UIViews. from 0 to 1.
+    // Chage the threshold of area ratio in screen. It's from 0 to 1. The view will be impressed if it's area ratio keeps being bigger than this value. Apply to all views
     public static var areaRatioThreshold: Float = 0.5
     
-    // The threshold of area ratio in screen for specified UIView. from 0 to 1. `UIView.areaRatioThreshold` will be used if it's nil.
+    // Chage the threshold of area ratio in screen. It's from 0 to 1. The view will be impressed if it's area ratio keeps being bigger than this value. Apply to the specific view. `UIView.areaRatioThreshold` will be used if it's nil.
     public var areaRatioThreshold: Float? {
         set {
             objc_setAssociatedObject(self, &areaRatioThresholdKey, newValue, .OBJC_ASSOCIATION_COPY_NONATOMIC)
@@ -105,10 +105,10 @@ extension UIView {
         }
     }
     
-    // Redetect when a view leaving screen.
+    // Retrigger the impression event when a view leaving screen. Apply to all views
     public static var redetectWhenLeavingScreen = false
     
-    // Redetect when this view leaving screen. `UIView.redetectWhenLeavingScreen` will be used if it's nil.
+    // Retrigger the impression event when a view leaving screen. Apply to the specific view. `UIView.redetectWhenLeavingScreen` will be used if it's nil.
     public var redetectWhenLeavingScreen: Bool? {
         set {
             objc_setAssociatedObject(self, &redetectWhenLeavingScreenKey, newValue, .OBJC_ASSOCIATION_COPY_NONATOMIC)
@@ -119,10 +119,10 @@ extension UIView {
         }
     }
     
-    // Redetect when the UIViewController the view in did disappear.
+    // Retrigger the impression event when the UIViewController which the view in did disappear. Apply to all views
     public static var redetectWhenViewControllerDidDisappear = false
     
-    // Redetect when the UIViewController the view in did disappear for specified view. `UIView.redetectWhenViewControllerDidDisappear` will be used if it's nil.
+    // Retrigger the impression event when the UIViewController which the view in did disappear. Apply to the specific view. `UIView.redetectWhenViewControllerDidDisappear` will be used if it's nil.
     public var redetectWhenViewControllerDidDisappear: Bool? {
         set {
             objc_setAssociatedObject(self, &redetectWhenViewControllerDidDisappearKey, newValue, .OBJC_ASSOCIATION_COPY_NONATOMIC)
@@ -133,15 +133,13 @@ extension UIView {
         }
     }
     
-    /**
-     Redetect when the notifications with the name of Set<Notification.Name> happen from NotificationCenter.default.
-     `UIView.redetectWhenReceiveSystemNotification.union(self.redetectWhenReceiveSystemNotification)` will be applied.
+    /* Redetect when the notifications with the name in Set<Notification.Name> happen from NotificationCenter.default. This API is applied to all views.
+     `UIView.redetectWhenReceiveSystemNotification.union(yourView.redetectWhenReceiveSystemNotification)` will be applied to the view finally.
      */
     public static var redetectWhenReceiveSystemNotification = Set<Notification.Name>()
     
-    /**
-     Redetect when the notifications with the name of Set<Notification.Name> happen from NotificationCenter.default.
-     `UIView.redetectWhenReceiveSystemNotification.union(self.redetectWhenReceiveSystemNotification)` will be applied.
+    /* Redetect when the notifications with the name in Set<Notification.Name> happen from NotificationCenter.default. This API is applied the specific view.
+     `UIView.redetectWhenReceiveSystemNotification.union(yourView.redetectWhenReceiveSystemNotification)` will be applied to the view finally.
      */
     public var redetectWhenReceiveSystemNotification: Set<Notification.Name> {
         set {
