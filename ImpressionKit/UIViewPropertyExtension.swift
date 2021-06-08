@@ -70,7 +70,7 @@ extension UIView {
         }
         
         get {
-            return objc_getAssociatedObject(self, &durationThresholdKey) as? Float
+            return objc_getAssociatedObject(self, &detectionIntervalKey) as? Float
         }
     }
     
