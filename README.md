@@ -66,7 +66,7 @@ UIView().areaRatioThreshold = 0.4    // apply to the specific view. `UIView.area
 ImpressionGroup().areaRatioThreshold = 0.4   // apply to the group. `UIView.areaRatioThreshold` will be used if it's nil.
 ```
 
-Retrigger the impression event when a view leaving screen.
+Retrigger the impression event when a view leaving from the screen (The UIViewController (page) is still here, Just the view is out of the screen).
 
 ```swift
 UIView.redetectWhenLeavingScreen = true  // apply to all views
@@ -87,9 +87,9 @@ Retrigger the impression event when the App did enter background.
 ```swift
 UIView.redetectWhenReceiveSystemNotification.insert(UIApplication.didEnterBackgroundNotification)  // apply to all views
 
-UIView().redetectWhenReceiveSystemNotification.insert(UIApplication.didEnterBackgroundNotification)    // apply to the specific view. `UIView.redetectWhenReceiveSystemNotification.union(self.redetectWhenReceiveSystemNotification)` will be applied finally.
+UIView().redetectWhenReceiveSystemNotification.insert(UIApplication.didEnterBackgroundNotification)    // apply to the specific view.
 
-ImpressionGroup().redetectWhenReceiveSystemNotification.insert(UIApplication.didEnterBackgroundNotification)   // apply to the group. `UIView.redetectWhenReceiveSystemNotification.union(self.redetectWhenReceiveSystemNotification)` will be applied finally.
+ImpressionGroup().redetectWhenReceiveSystemNotification.insert(UIApplication.didEnterBackgroundNotification)   // apply to the group.
 ```
 
 Retrigger the impression event when the App will resign active.
@@ -97,9 +97,9 @@ Retrigger the impression event when the App will resign active.
 ```swift
 UIView.redetectWhenReceiveSystemNotification.insert(UIApplication.willResignActiveNotification)  // apply to all views
 
-UIView().redetectWhenReceiveSystemNotification.insert(UIApplication.willResignActiveNotification)    // apply this value to the specific view. `UIView.redetectWhenReceiveSystemNotification.union(self.redetectWhenReceiveSystemNotification)` will be applied finally.
+UIView().redetectWhenReceiveSystemNotification.insert(UIApplication.willResignActiveNotification)    // apply this value to the specific view.
 
-ImpressionGroup().redetectWhenReceiveSystemNotification.insert(UIApplication.willResignActiveNotification)   // apply to the group. `UIView.redetectWhenReceiveSystemNotification.union(self.redetectWhenReceiveSystemNotification)` will be applied finally.
+ImpressionGroup().redetectWhenReceiveSystemNotification.insert(UIApplication.willResignActiveNotification)   // apply to the group.
 ```
 
 Refer to the Demo for more details.
