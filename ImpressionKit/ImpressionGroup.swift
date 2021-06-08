@@ -21,7 +21,7 @@ public class ImpressionGroup<IndexType: Hashable> {
     // Chage the threshold of area ratio in screen. It's from 0 to 1. The view will be impressed if it's area ratio keeps being bigger than this value. Apply to the group. `UIView.areaRatioThreshold` will be used if it's nil.
     public var areaRatioThreshold: Float?
         
-    // Retrigger the impression event when a view leaving screen. Apply to the group. `UIView.redetectWhenLeavingScreen` will be used if it's nil.
+    // Retrigger the impression event when a view leaving from the screen (The UIViewController (page) is still here, Just the view is out of the screen). Apply to the group. `UIView.redetectWhenLeavingScreen` will be used if it's nil.
     public var redetectWhenLeavingScreen: Bool?
     
     // Retrigger the impression event when the UIViewController which the view in did disappear. Apply to the group. `UIView.redetectWhenViewControllerDidDisappear` will be used if it's nil.

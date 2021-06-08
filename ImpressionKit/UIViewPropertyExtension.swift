@@ -105,10 +105,10 @@ extension UIView {
         }
     }
     
-    // Retrigger the impression event when a view leaving screen. Apply to all views
+    // Retrigger the impression event when a view leaving from the screen (The UIViewController (page) is still here, Just the view is out of the screen). Apply to all views
     public static var redetectWhenLeavingScreen = false
     
-    // Retrigger the impression event when a view leaving screen. Apply to the specific view. `UIView.redetectWhenLeavingScreen` will be used if it's nil.
+    // Retrigger the impression event when a view leaving from the screen (The UIViewController (page) is still here, Just the view is out of the screen). Apply to the specific view. `UIView.redetectWhenLeavingScreen` will be used if it's nil.
     public var redetectWhenLeavingScreen: Bool? {
         set {
             objc_setAssociatedObject(self, &redetectWhenLeavingScreenKey, newValue, .OBJC_ASSOCIATION_COPY_NONATOMIC)
