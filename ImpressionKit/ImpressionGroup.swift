@@ -65,17 +65,17 @@ public class ImpressionGroup<IndexType: Hashable> {
                 }
                 if case .viewControllerDidDisappear = state,
                    view.isRedetectionOn(.viewControllerDidDisappear) {
-                    self.redetect(view: view, state: state)
+                    self.updateState(state)
                     return
                 }
                 if case .didEnterBackground = state,
                    view.isRedetectionOn(.didEnterBackground) {
-                    self.redetect(view: view, state: state)
+                    self.updateState(state)
                     return
                 }
                 if case .willResignActive = state,
                    view.isRedetectionOn(.willResignActive) {
-                    self.redetect(view: view, state: state)
+                    self.updateState(state)
                     return
                 }
                 
@@ -109,14 +109,16 @@ public class ImpressionGroup<IndexType: Hashable> {
         }
     }
     
-    private func redetect(view: UIView, state: UIView.State) {
+    private func updateState(_ state: UIView.State) {
+        self.allViews.allObjects.forEach { (view) in
+            guard let index = ImpressionGroup.getIndex(view: view) else {
+                return
+            }
+            self.changeState(index: index, view: view, state: state)
+        }
         self.states = self.states.mapValues { (_) -> UIView.State in
             return state
         }
-        guard let index = ImpressionGroup.getIndex(view: view) else {
-            return
-        }
-        self.changeState(index: index, view: view, state: state)
     }
     
     private func changeState(index: IndexType, view: UIView, state: UIView.State) {
