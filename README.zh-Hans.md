@@ -64,40 +64,26 @@ UIView().areaRatioThreshold = 0.4    // 应用于特定 view. 如果为nil，则
 ImpressionGroup().areaRatioThreshold = 0.4   // 应用于特定 group. 如果为nil，则使用 `UIView.areaRatioThreshold` 。
 ```
 
-当 view 离开屏幕 （页面不变，只是 view 没有显示）时，是否重新触发曝光。
+在某些情况下重新触发曝光事件。
 
 ```swift
-UIView.redetectWhenLeavingScreen = true  // 应用于所有 view。
-UIView().redetectWhenLeavingScreen = true    // 应用于特定 view. 如果为nil，则使用 `UIView.redetectWhenLeavingScreen`。
-ImpressionGroup().redetectWhenLeavingScreen = true   // 应用于特定 group. 如果为nil，则使用 `UIView.redetectWhenLeavingScreen`。
+// 当 view 离开屏幕 （页面不变，只是 view 没有显示）时，重新触发曝光。
+public static let leftScreen = Redetect(rawValue: 1 << 0)
+
+// 当 view 所在 UIViewController 消失时，重新触发曝光。
+public static let viewControllerDidDisappear = Redetect(rawValue: 1 << 1)
+
+// 当 App 进入后台时，重新触发曝光。
+public static let didEnterBackground = Redetect(rawValue: 1 << 2)
+
+// 当 App 将要进入非活跃状态时，重新触发曝光。
+public static let willResignActive = Redetect(rawValue: 1 << 3)
 ```
 
-当 view 所在 UIViewController 消失时，是否重新触发曝光。
-
 ```swift
-UIView.redetectWhenViewControllerDidDisappear = true  // 应用于所有 view。
-UIView().redetectWhenViewControllerDidDisappear = true    // 应用于特定 view. 如果为nil，则使用 `UIView.redetectWhenViewControllerDidDisappear`。
-ImpressionGroup().redetectWhenViewControllerDidDisappear = true   // 应用于特定 group. 如果为nil，则使用 `UIView.redetectWhenViewControllerDidDisappear`
-```
-
-当 App 进入后台时，重新触发曝光。
-
-```swift
-UIView.redetectWhenReceiveSystemNotification.insert(UIApplication.didEnterBackgroundNotification)  // 应用于所有 view。
-
-UIView().redetectWhenReceiveSystemNotification.insert(UIApplication.didEnterBackgroundNotification)    // 应用于特定 view。
-
-ImpressionGroup().redetectWhenReceiveSystemNotification.insert(UIApplication.didEnterBackgroundNotification)   // 应用于特定 group。
-```
-
-当 App 将要进入非活跃状态时，重新触发曝光。
-
-```swift
-UIView.redetectWhenReceiveSystemNotification.insert(UIApplication.willResignActiveNotification)  // 应用于所有 view。
-
-UIView().redetectWhenReceiveSystemNotification.insert(UIApplication.willResignActiveNotification)    // 应用于特定 view。
-
-ImpressionGroup().redetectWhenReceiveSystemNotification.insert(UIApplication.willResignActiveNotification)   // 应用于特定 group。
+UIView.redetectOptions = [.leftScreen, .viewControllerDidDisappear, .didEnterBackground, .willResignActive]  // 应用于所有 view。
+UIView().redetectOptions = [.leftScreen, .viewControllerDidDisappear, .didEnterBackground, .willResignActive]    // 应用于特定 view. 如果为nil，则使用`UIView.redetectOptions`。
+ImpressionGroup().redetectOptions = [.leftScreen, .viewControllerDidDisappear, .didEnterBackground, .willResignActive]   // 应用于特定 group. 如果为nil，则使用 `UIView.redetectOptions`。
 ```
 
 查看Demo获取更多详情。
