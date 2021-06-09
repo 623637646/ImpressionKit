@@ -66,40 +66,26 @@ UIView().areaRatioThreshold = 0.4    // apply to the specific view. `UIView.area
 ImpressionGroup().areaRatioThreshold = 0.4   // apply to the group. `UIView.areaRatioThreshold` will be used if it's nil.
 ```
 
-Retrigger the impression event when a view leaving from the screen (The UIViewController (page) is still here, Just the view is out of the screen).
+Retrigger the impression event in some situations.
 
 ```swift
-UIView.redetectWhenLeavingScreen = true  // apply to all views
-UIView().redetectWhenLeavingScreen = true    // apply to the specific view. `UIView.redetectWhenLeavingScreen` will be used if it's nil.
-ImpressionGroup().redetectWhenLeavingScreen = true   // apply to the group. `UIView.redetectWhenLeavingScreen` will be used if it's nil.
+// Retrigger the impression event when a view has left from the screen (The UIViewController (page) is still here, Just the view is out of the screen).
+public static let leftScreen = Redetect(rawValue: 1 << 0)
+
+// Retrigger the impression event when the UIViewController which the view in did disappear.
+public static let viewControllerDidDisappear = Redetect(rawValue: 1 << 1)
+
+// Retrigger the impression event when the App did enter background.
+public static let didEnterBackground = Redetect(rawValue: 1 << 2)
+
+// Retrigger the impression event when the App will resign active.
+public static let willResignActive = Redetect(rawValue: 1 << 3)
 ```
 
-Retrigger the impression event when the UIViewController which the view in did disappear.
-
 ```swift
-UIView.redetectWhenViewControllerDidDisappear = true  // apply to all views
-UIView().redetectWhenViewControllerDidDisappear = true    // apply to the specific view. `UIView.redetectWhenViewControllerDidDisappear` will be used if it's nil.
-ImpressionGroup().redetectWhenViewControllerDidDisappear = true   // apply to the group. `UIView.redetectWhenViewControllerDidDisappear` will be used if it's nil.
-```
-
-Retrigger the impression event when the App did enter background.
-
-```swift
-UIView.redetectWhenReceiveSystemNotification.insert(UIApplication.didEnterBackgroundNotification)  // apply to all views
-
-UIView().redetectWhenReceiveSystemNotification.insert(UIApplication.didEnterBackgroundNotification)    // apply to the specific view.
-
-ImpressionGroup().redetectWhenReceiveSystemNotification.insert(UIApplication.didEnterBackgroundNotification)   // apply to the group.
-```
-
-Retrigger the impression event when the App will resign active.
-
-```swift
-UIView.redetectWhenReceiveSystemNotification.insert(UIApplication.willResignActiveNotification)  // apply to all views
-
-UIView().redetectWhenReceiveSystemNotification.insert(UIApplication.willResignActiveNotification)    // apply this value to the specific view.
-
-ImpressionGroup().redetectWhenReceiveSystemNotification.insert(UIApplication.willResignActiveNotification)   // apply to the group.
+UIView.redetectOptions = [.leftScreen, .viewControllerDidDisappear, .didEnterBackground, .willResignActive]  // apply to all views
+UIView().redetectOptions = [.leftScreen, .viewControllerDidDisappear, .didEnterBackground, .willResignActive]    // apply to the specific view. `UIView.redetectOptions` will be used if it's nil.
+ImpressionGroup().redetectOptions = [.leftScreen, .viewControllerDidDisappear, .didEnterBackground, .willResignActive]   // apply to the group. `UIView.redetectOptions` will be used if it's nil.
 ```
 
 Refer to the Demo for more details.
