@@ -19,9 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UIView.detectionInterval = HomeViewController.detectionInterval
         UIView.durationThreshold = HomeViewController.durationThreshold
         UIView.areaRatioThreshold = HomeViewController.areaRatioThreshold
-        UIView.redetectWhenLeavingScreen = HomeViewController.redetectWhenLeavingScreen
-        UIView.redetectWhenViewControllerDidDisappear = HomeViewController.redetectWhenViewControllerDidDisappear
-        UIView.redetectWhenReceiveSystemNotification = HomeViewController.redetectWhenReceiveSystemNotification
+        UIView.redetectOptions = HomeViewController.redetectOptions
         
         PerformanceMonitor.shared().start()
         

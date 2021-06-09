@@ -12,9 +12,7 @@ private var stateKey = 0
 private var detectionIntervalKey = 0
 private var durationThresholdKey = 0
 private var areaRatioThresholdKey = 0
-private var redetectWhenLeavingScreenKey = 0
-private var redetectWhenViewControllerDidDisappearKey = 0
-private var redetectWhenReceiveSystemNotificationKey = 0
+private var redetectOptionsKey = 0
 private var hookingDidMoveToWindowTokenKey = 0
 private var hookingViewDidDisappearTokenKey = 0
 private var notificationTokensKey = 0
@@ -30,8 +28,9 @@ extension UIView {
         case inScreen(fromDate: Date)
         case outOfScreen
         case noWindow
-        case viewDidDisappear
-        case receivedNotification(name: Notification.Name)
+        case viewControllerDidDisappear
+        case didEnterBackground
+        case willResignActive
         
         public var isImpressed: Bool {
             if case .impressed = self {
@@ -105,49 +104,37 @@ extension UIView {
         }
     }
     
-    // Retrigger the impression event when a view leaving from the screen (The UIViewController (page) is still here, Just the view is out of the screen). Apply to all views
-    public static var redetectWhenLeavingScreen = false
-    
-    // Retrigger the impression event when a view leaving from the screen (The UIViewController (page) is still here, Just the view is out of the screen). Apply to the specific view. `UIView.redetectWhenLeavingScreen` will be used if it's nil.
-    public var redetectWhenLeavingScreen: Bool? {
-        set {
-            objc_setAssociatedObject(self, &redetectWhenLeavingScreenKey, newValue, .OBJC_ASSOCIATION_COPY_NONATOMIC)
+    public struct Redetect: OptionSet {
+        
+        public let rawValue: Int
+        public init(rawValue: Int) {
+            self.rawValue = rawValue
         }
         
-        get {
-            return objc_getAssociatedObject(self, &redetectWhenLeavingScreenKey) as? Bool
-        }
+        // Retrigger the impression event when a view leaving from the screen (The UIViewController (page) is still here, Just the view is out of the screen).
+        public static let leftScreen = Redetect(rawValue: 1 << 0)
+        
+        // Retrigger the impression event when the UIViewController which the view in did disappear.
+        public static let viewControllerDidDisappear = Redetect(rawValue: 1 << 1)
+        
+        // Retrigger the impression event when the App did enter background.
+        public static let didEnterBackground = Redetect(rawValue: 1 << 2)
+        
+        // Retrigger the impression event when the App will resign active.
+        public static let willResignActive = Redetect(rawValue: 1 << 3)
     }
     
-    // Retrigger the impression event when the UIViewController which the view in did disappear. Apply to all views
-    public static var redetectWhenViewControllerDidDisappear = false
+    // Retrigger the impression. Apply to all views.
+    public static var redetectOptions: Redetect = []
     
-    // Retrigger the impression event when the UIViewController which the view in did disappear. Apply to the specific view. `UIView.redetectWhenViewControllerDidDisappear` will be used if it's nil.
-    public var redetectWhenViewControllerDidDisappear: Bool? {
+    // Retrigger the impression. Apply to the specific view. `UIView.redetectOptions` will be used if it's nil.
+    public var redetectOptions: Redetect? {
         set {
-            objc_setAssociatedObject(self, &redetectWhenViewControllerDidDisappearKey, newValue, .OBJC_ASSOCIATION_COPY_NONATOMIC)
+            objc_setAssociatedObject(self, &redetectOptionsKey, newValue, .OBJC_ASSOCIATION_COPY_NONATOMIC)
         }
         
         get {
-            return objc_getAssociatedObject(self, &redetectWhenViewControllerDidDisappearKey) as? Bool
-        }
-    }
-    
-    /* Redetect when the notifications with the name in Set<Notification.Name> happen from NotificationCenter.default. This API is applied to all views.
-     `UIView.redetectWhenReceiveSystemNotification.union(yourView.redetectWhenReceiveSystemNotification)` will be applied to the view finally.
-     */
-    public static var redetectWhenReceiveSystemNotification = Set<Notification.Name>()
-    
-    /* Redetect when the notifications with the name in Set<Notification.Name> happen from NotificationCenter.default. This API is applied the specific view.
-     `UIView.redetectWhenReceiveSystemNotification.union(yourView.redetectWhenReceiveSystemNotification)` will be applied to the view finally.
-     */
-    public var redetectWhenReceiveSystemNotification: Set<Notification.Name> {
-        set {
-            objc_setAssociatedObject(self, &redetectWhenReceiveSystemNotificationKey, newValue, .OBJC_ASSOCIATION_COPY_NONATOMIC)
-        }
-        
-        get {
-            return objc_getAssociatedObject(self, &redetectWhenReceiveSystemNotificationKey) as? Set<Notification.Name> ?? []
+            return objc_getAssociatedObject(self, &redetectOptionsKey) as? Redetect
         }
     }
     

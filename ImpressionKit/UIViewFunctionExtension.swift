@@ -57,6 +57,11 @@ extension UIView {
         self.startTimerIfNeeded()
     }
     
+    func isRedetectionOn(_ option: Redetect) -> Bool {
+        let redetectOptions = self.redetectOptions ?? UIView.redetectOptions
+        return redetectOptions.contains(option)
+    }
+    
     // MARK: - Hook DidMoveToWindow
     
     func hookDidMoveToWindowIfNeeded() {
@@ -91,7 +96,7 @@ extension UIView {
     
     private func rehookViewDidDisappearIfNeeded() {
         self.cancelHookingViewDidDisappearIfNeeded()
-        guard self.redetectWhenViewControllerDidDisappear ?? UIView.redetectWhenViewControllerDidDisappear else {
+        guard self.isRedetectionOn(.viewControllerDidDisappear) else {
             return
         }
         
@@ -102,11 +107,11 @@ extension UIView {
         var hookingViewDidDisappearToken: Token?
         hookingViewDidDisappearToken = try? hookAfter(object: vc, selector: #selector(UIViewController.viewDidDisappear(_:))) { [weak self] in
             guard let self = self,
-                  self.redetectWhenViewControllerDidDisappear ?? UIView.redetectWhenViewControllerDidDisappear else {
+                  self.isRedetectionOn(.viewControllerDidDisappear) else {
                 hookingViewDidDisappearToken?.cancelHook()
                 return
             }
-            self.state = .viewDidDisappear
+            self.state = .viewControllerDidDisappear
         }
         self.hookingViewDidDisappearToken = hookingViewDidDisappearToken
     }
@@ -123,7 +128,13 @@ extension UIView {
     
     func addNotificationObserverIfNeeded() {
         self.removeNotificationObserverIfNeeded()
-        let names = UIView.redetectWhenReceiveSystemNotification.union(self.redetectWhenReceiveSystemNotification)
+        var names = [Notification.Name]()
+        if self.isRedetectionOn(.didEnterBackground) {
+            names.append(UIApplication.didEnterBackgroundNotification)
+        }
+        if self.isRedetectionOn(.willResignActive) {
+            names.append(UIApplication.willResignActiveNotification)
+        }
         guard names.count > 0 else {
             return
         }
@@ -131,14 +142,20 @@ extension UIView {
         for name in names {
             var token: NSObjectProtocol?
             token = NotificationCenter.default.addObserver(forName: name, object: nil, queue: nil, using: {[weak self] notification in
-                guard let self = self,
-                      UIView.redetectWhenReceiveSystemNotification.union(self.redetectWhenReceiveSystemNotification).contains(notification.name) else {
+                guard let self = self else {
                     if let token = token {
                         NotificationCenter.default.removeObserver(token)
                     }
                     return
                 }
-                self.state = .receivedNotification(name: notification.name)
+                if name == UIApplication.didEnterBackgroundNotification {
+                    self.state = .didEnterBackground
+                } else if name == UIApplication.willResignActiveNotification {
+                    self.state = .willResignActive
+                } else {
+                    assert(false)
+                    return
+                }
                 self.startTimerIfNeeded()
             })
             if let token = token {
@@ -158,9 +175,7 @@ extension UIView {
     // MARK: - Algorithm
     
     private func areaRatio() -> Float {
-        guard UIApplication.shared.applicationState == .active &&
-                self.isHidden == false &&
-                self.alpha > 0 else {
+        guard self.isHidden == false && self.alpha > 0 else {
             return 0
         }
         if let window = self as? UIWindow,
@@ -209,12 +224,27 @@ extension UIView {
     
     private func detect() {
         if self.state.isImpressed  {
-            guard self.redetectWhenLeavingScreen ?? UIView.redetectWhenLeavingScreen else {
+            guard self.isRedetectionOn(.leftScreen) else {
                 // has triggered impression and don't need to retrigger when leaving screen
                 self.stopTimer()
                 return
             }
         }
+        
+        if self.isRedetectionOn(.didEnterBackground) {
+            guard UIApplication.shared.applicationState != .background else {
+                self.state = .didEnterBackground
+                return
+            }
+        }
+        
+        if self.isRedetectionOn(.willResignActive) {
+            guard UIApplication.shared.applicationState != .inactive else {
+                self.state = .willResignActive
+                return
+            }
+        }
+        
         let areaRatio = self.areaRatio()
         let areaRatioThreshold = self.areaRatioThreshold ?? UIView.areaRatioThreshold
         
@@ -227,7 +257,7 @@ extension UIView {
                     // trigger impression
                     self.state = .impressed(atDate: Date(), areaRatio: areaRatio)
                     
-                    let redetectWhenLeavingScreen = self.redetectWhenLeavingScreen ?? UIView.redetectWhenLeavingScreen
+                    let redetectWhenLeavingScreen = self.isRedetectionOn(.leftScreen)
                     if !redetectWhenLeavingScreen {
                         self.stopTimer()
                     }
@@ -251,7 +281,7 @@ extension UIView {
     
     func startTimerIfNeeded() {
         if self.state.isImpressed {
-            guard self.redetectWhenLeavingScreen ?? UIView.redetectWhenLeavingScreen else {
+            guard self.isRedetectionOn(.leftScreen) else {
                 return
             }
         }

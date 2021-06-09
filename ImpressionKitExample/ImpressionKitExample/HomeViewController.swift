@@ -13,9 +13,7 @@ class HomeViewController: FormViewController {
     private static let detectionIntervalKey = "detectionIntervalKey"
     private static let durationThresholdKey = "durationThresholdKey"
     private static let areaRatioThresholdKey = "areaRatioThresholdKey"
-    private static let redetectWhenLeavingScreenKey = "redetectWhenLeavingScreenKey"
-    private static let redetectWhenViewControllerDidDisappearKey = "redetectWhenViewControllerDidDisappearKey"
-    private static let redetectWhenReceiveSystemNotificationKey = "redetectWhenReceiveSystemNotificationKey"
+    private static let redetectOptionsKey = "redetectOptionsKey"
 
     static var detectionInterval: Float {
         get {
@@ -54,42 +52,17 @@ class HomeViewController: FormViewController {
             UserDefaults.standard.set(newValue, forKey: areaRatioThresholdKey)
         }
     }
-    static var redetectWhenLeavingScreen: Bool {
+    static var redetectOptions: UIView.Redetect {
         get {
-            guard UserDefaults.standard.object(forKey: redetectWhenLeavingScreenKey) != nil else {
-                return UIView.redetectWhenLeavingScreen
+            guard UserDefaults.standard.object(forKey: redetectOptionsKey) != nil else {
+                return UIView.redetectOptions
             }
-            return UserDefaults.standard.bool(forKey: redetectWhenLeavingScreenKey)
+            let value = UserDefaults.standard.integer(forKey: redetectOptionsKey)
+            return UIView.Redetect.init(rawValue: value)
         }
         set {
-            UIView.redetectWhenLeavingScreen = newValue
-            UserDefaults.standard.set(newValue, forKey: redetectWhenLeavingScreenKey)
-        }
-    }
-    static var redetectWhenViewControllerDidDisappear: Bool {
-        get {
-            guard UserDefaults.standard.object(forKey: redetectWhenViewControllerDidDisappearKey) != nil else {
-                return UIView.redetectWhenViewControllerDidDisappear
-            }
-            return UserDefaults.standard.bool(forKey: redetectWhenViewControllerDidDisappearKey)
-        }
-        set {
-            UIView.redetectWhenViewControllerDidDisappear = newValue
-            UserDefaults.standard.set(newValue, forKey: redetectWhenViewControllerDidDisappearKey)
-        }
-    }
-    static var redetectWhenReceiveSystemNotification: Set<Notification.Name> {
-        get {
-            guard UserDefaults.standard.object(forKey: redetectWhenReceiveSystemNotificationKey) != nil else {
-                return UIView.redetectWhenReceiveSystemNotification
-            }
-            let result = (UserDefaults.standard.object(forKey: redetectWhenReceiveSystemNotificationKey) as? [String] ?? []).map({Notification.Name.init($0)})
-            return Set.init(result)
-        }
-        set {
-            UIView.redetectWhenReceiveSystemNotification = newValue
-            let array = newValue.map({$0.rawValue})
-            UserDefaults.standard.set(array, forKey: redetectWhenReceiveSystemNotificationKey)
+            UIView.redetectOptions = newValue
+            UserDefaults.standard.set(newValue.rawValue, forKey: redetectOptionsKey)
         }
     }
     
@@ -158,34 +131,42 @@ class HomeViewController: FormViewController {
             })
             <<< SwitchRow() {
                 $0.title = "Redetect When Leaving Screen"
-                $0.value = HomeViewController.redetectWhenLeavingScreen
+                $0.value = HomeViewController.redetectOptions.contains(.leftScreen)
             }.onChange({ (row) in
-                HomeViewController.redetectWhenLeavingScreen = row.value ?? false
+                if row.value ?? false {
+                    HomeViewController.redetectOptions.insert(.leftScreen)
+                } else {
+                    HomeViewController.redetectOptions.remove(.leftScreen)
+                }
             })
             <<< SwitchRow() {
                 $0.title = "Redetect When DidDisappear"
-                $0.value = HomeViewController.redetectWhenViewControllerDidDisappear
+                $0.value = HomeViewController.redetectOptions.contains(.viewControllerDidDisappear)
             }.onChange({ (row) in
-                HomeViewController.redetectWhenViewControllerDidDisappear = row.value ?? false
+                if row.value ?? false {
+                    HomeViewController.redetectOptions.insert(.viewControllerDidDisappear)
+                } else {
+                    HomeViewController.redetectOptions.remove(.viewControllerDidDisappear)
+                }
             })
             <<< SwitchRow() {
                 $0.title = "Redetect When didEnterBackground"
-                $0.value = HomeViewController.redetectWhenReceiveSystemNotification.contains(UIApplication.didEnterBackgroundNotification)
+                $0.value = HomeViewController.redetectOptions.contains(.didEnterBackground)
             }.onChange({ (row) in
                 if row.value ?? false {
-                    HomeViewController.redetectWhenReceiveSystemNotification.insert(UIApplication.didEnterBackgroundNotification)
+                    HomeViewController.redetectOptions.insert(.didEnterBackground)
                 } else {
-                    HomeViewController.redetectWhenReceiveSystemNotification.remove(UIApplication.didEnterBackgroundNotification)
+                    HomeViewController.redetectOptions.remove(.didEnterBackground)
                 }
             })
             <<< SwitchRow() {
                 $0.title = "Redetect When willResignActive"
-                $0.value = HomeViewController.redetectWhenReceiveSystemNotification.contains(UIApplication.willResignActiveNotification)
+                $0.value = HomeViewController.redetectOptions.contains(.willResignActive)
             }.onChange({ (row) in
                 if row.value ?? false {
-                    HomeViewController.redetectWhenReceiveSystemNotification.insert(UIApplication.willResignActiveNotification)
+                    HomeViewController.redetectOptions.insert(.willResignActive)
                 } else {
-                    HomeViewController.redetectWhenReceiveSystemNotification.remove(UIApplication.willResignActiveNotification)
+                    HomeViewController.redetectOptions.remove(.willResignActive)
                 }
             })
             <<< ButtonRow(){
@@ -195,9 +176,7 @@ class HomeViewController: FormViewController {
                 HomeViewController.detectionInterval = 0.2
                 HomeViewController.durationThreshold = 1
                 HomeViewController.areaRatioThreshold = 0.5
-                HomeViewController.redetectWhenLeavingScreen = false
-                HomeViewController.redetectWhenViewControllerDidDisappear = false
-                HomeViewController.redetectWhenReceiveSystemNotification.removeAll()
+                HomeViewController.redetectOptions = []
                 self?.setUpForm()
             }
         CATransaction.commit()
