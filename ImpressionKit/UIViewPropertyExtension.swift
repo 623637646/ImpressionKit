@@ -111,7 +111,7 @@ extension UIView {
             self.rawValue = rawValue
         }
         
-        // Retrigger the impression event when a view leaving from the screen (The UIViewController (page) is still here, Just the view is out of the screen).
+        // Retrigger the impression event when a view has left from the screen (The UIViewController (page) is still here, Just the view is out of the screen).
         public static let leftScreen = Redetect(rawValue: 1 << 0)
         
         // Retrigger the impression event when the UIViewController which the view in did disappear.
