@@ -6,7 +6,11 @@
 //
 
 import UIKit
+#if SWIFT_PACKAGE
+import SwiftHook
+#else
 import EasySwiftHook
+#endif
 
 private var stateKey = 0
 private var detectionIntervalKey = 0
