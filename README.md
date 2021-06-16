@@ -98,6 +98,8 @@ Refer to the Demo for more details.
 pod 'ImpressionKit'
 ```
 
+Or use Swift Package Manager. SPM is supported from 3.1.0.
+
 # Requirements
 
 - iOS 10.0+
