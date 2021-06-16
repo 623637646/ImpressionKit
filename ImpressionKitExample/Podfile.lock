@@ -2,13 +2,13 @@ PODS:
   - CHTCollectionViewWaterfallLayout (0.9.8):
     - CHTCollectionViewWaterfallLayout/ObjC (= 0.9.8)
   - CHTCollectionViewWaterfallLayout/ObjC (0.9.8)
-  - EasySwiftHook (3.1.2):
-    - libffi-iOS (~> 3.3.5-iOS)
+  - EasySwiftHook (3.2.0):
+    - libffi-iOS (~> 3.3.6-iOS)
   - Eureka (5.3.3)
   - GDPerformanceView-Swift (2.0.3)
-  - ImpressionKit (3.0.0):
-    - EasySwiftHook (~> 3.1.2)
-  - libffi-iOS (3.3.5-iOS)
+  - ImpressionKit (3.1.0):
+    - EasySwiftHook (~> 3.2.0)
+  - libffi-iOS (3.3.6-iOS)
 
 DEPENDENCIES:
   - CHTCollectionViewWaterfallLayout (~> 0.9.7)
@@ -30,11 +30,11 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   CHTCollectionViewWaterfallLayout: 5f241d2480ab4939aa0d1ad4981de9eef1fbe60d
-  EasySwiftHook: 691602892f7efb1cf90a702c07bb80b92a0780a3
+  EasySwiftHook: 010aa85ae565fcd34395e31c2feb9c44ae4a27e3
   Eureka: e6d720290c56bb23333ad1a0e020b2a98a0e9a43
   GDPerformanceView-Swift: ef3d05deb103e472a5494d3f60aeca5a58b88a7d
-  ImpressionKit: a8b8b39a27a884ab03395a317c4dbd184068679a
-  libffi-iOS: a145c332c8a6bfef1e9b78b8f0fe9938be5317df
+  ImpressionKit: 4f4d766163b0393b2427832caf18858f8e4a090a
+  libffi-iOS: 2932b5feac77dc5de0eca4a72269e2c9928a26af
 
 PODFILE CHECKSUM: 2df3541967e88e93e33fc9cd4beaa92769cbd848
 
