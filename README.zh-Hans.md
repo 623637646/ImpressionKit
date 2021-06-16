@@ -90,11 +90,13 @@ ImpressionGroup().redetectOptions = [.leftScreen, .viewControllerDidDisappear, .
 
 # How to integrate ImpressionKit
 
-**ImpressionKit** can be integrated by [cocoapods](https://cocoapods.org/). 
+[cocoapods](https://cocoapods.org/). 
 
 ```
 pod 'ImpressionKit'
 ```
+
+或者使用 Swift Package Manager。 3.1.0 版本之后，SPM被支持。
 
 # Requirements
 
