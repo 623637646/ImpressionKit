@@ -10,11 +10,24 @@ import Eureka
 
 class HomeViewController: FormViewController {
     
+    private static let viewHeightRatioKey = "viewHeightRatioKey"
     private static let detectionIntervalKey = "detectionIntervalKey"
     private static let durationThresholdKey = "durationThresholdKey"
     private static let areaRatioThresholdKey = "areaRatioThresholdKey"
     private static let redetectOptionsKey = "redetectOptionsKey"
-
+    
+    static var viewHeightRatio: Float {
+        get {
+            guard UserDefaults.standard.object(forKey: viewHeightRatioKey) != nil else {
+                return 1
+            }
+            return UserDefaults.standard.float(forKey: viewHeightRatioKey)
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: viewHeightRatioKey)
+        }
+    }
+    
     static var detectionInterval: Float {
         get {
             guard UserDefaults.standard.object(forKey: detectionIntervalKey) != nil else {
@@ -117,6 +130,17 @@ class HomeViewController: FormViewController {
                 cell.textField.keyboardType = .numberPad
             }.onChange({ (row) in
                 HomeViewController.durationThreshold = Float(row.value ?? 0)
+            })
+            <<< DecimalRow() {
+                $0.title = "View Height Ratio"
+                $0.value = Double(HomeViewController.viewHeightRatio)
+                $0.formatter = DecimalFormatter()
+                $0.useFormatterDuringInput = true
+                //$0.useFormatterOnDidBeginEditing = true
+            }.cellSetup { cell, _  in
+                cell.textField.keyboardType = .numberPad
+            }.onChange({ (row) in
+                HomeViewController.viewHeightRatio = Float(row.value ?? 0)
             })
             <<< SliderRow() {
                 $0.title = "Area Ratio Threshold"

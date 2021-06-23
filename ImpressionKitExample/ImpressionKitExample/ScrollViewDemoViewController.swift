@@ -22,14 +22,18 @@ class ScrollViewDemoViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = .white
+        self.view.backgroundColor = .gray
         
         self.navigationItem.rightBarButtonItems = [
             UIBarButtonItem.init(title: "nextPage", style: .plain, target: self, action: #selector(nextPage)),
             UIBarButtonItem.init(title: "redetect", style: .plain, target: self, action: #selector(redetect)),
         ]
         
-        self.scrollView.frame = self.view.bounds
+        self.scrollView.frame = CGRect(x: 0,
+                                       y: view.frame
+                                           .height * CGFloat(HomeViewController.viewHeightRatio) *
+                                           (HomeViewController.viewHeightRatio == 1 ? 0 : 0.5),
+                                       width: view.frame.width, height: view.frame.height * CGFloat(HomeViewController.viewHeightRatio))
         self.view.addSubview(self.scrollView)
         
         var bottoms = [CGFloat].init(repeating: 0, count: ScrollViewDemoViewController.column)
