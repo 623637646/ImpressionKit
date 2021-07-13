@@ -14,7 +14,7 @@ let package = Package(
     ],
     dependencies: [
         // Dependencies declare other packages that this package depends on.
-        .package(name: "SwiftHook", url: "https://github.com/623637646/SwiftHook.git", from: "3.2.0")
+        .package(name: "SwiftHook", url: "https://github.com/623637646/SwiftHook.git", "3.3.0"..<"4.0.0")
     ],
     targets: [
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.
