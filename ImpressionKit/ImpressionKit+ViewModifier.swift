@@ -22,6 +22,10 @@ struct ImpressionView: UIViewRepresentable {
     func makeUIView(context: UIViewRepresentableContext<ImpressionView>) -> UIView {
         let view = UIView(frame: .zero)
         view.backgroundColor = .clear
+        view.detectionInterval = detectionInterval
+        view.durationThreshold = durationThreshold
+        view.areaRatioThreshold = areaRatioThreshold
+        view.redetectOptions = redetectOptions
         view.detectImpression { _, state in
             onChanged(state)
         }
