@@ -7,6 +7,7 @@
 
 import Foundation
 import Eureka
+import SwiftUI
 
 class HomeViewController: FormViewController {
     
@@ -93,6 +94,16 @@ class HomeViewController: FormViewController {
                 row.title = row.tag
                 row.presentationMode = .show(controllerProvider: ControllerProvider<UIViewController>.callback(builder: { () -> UIViewController in
                     return TableViewDemoViewController()
+                }), onDismiss: nil)
+            }
+            <<< ButtonRow("SwiftUI (iOS 13+)") { row in
+                row.title = row.tag
+                row.presentationMode = .show(controllerProvider: ControllerProvider<UIViewController>.callback(builder: { () -> UIViewController in
+                    if #available(iOS 13.0, *) {
+                        return UIHostingController(rootView: SwiftUIDemoView())
+                    } else {
+                        return UIViewController()
+                    }
                 }), onDismiss: nil)
             }
             +++ Section("SETTINGS")

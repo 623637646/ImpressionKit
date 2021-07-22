@@ -14,6 +14,7 @@
 		5C87C65C2664DB48006E824E /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C87C65B2664DB48006E824E /* HomeViewController.swift */; };
 		5C87C6612664F2B5006E824E /* ScrollViewDemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C87C6602664F2B5006E824E /* ScrollViewDemoViewController.swift */; };
 		5C87C6662664F327006E824E /* CollectionViewDemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C87C6652664F327006E824E /* CollectionViewDemoViewController.swift */; };
+		62F7F59526A973A9003DF049 /* SwiftUIDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62F7F59426A973A9003DF049 /* SwiftUIDemoView.swift */; };
 		D4966ED1E5098FDCD6CE3B4D /* Pods_ImpressionKitExample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7998D14B4E1928F7426C2FF5 /* Pods_ImpressionKitExample.framework */; };
 /* End PBXBuildFile section */
 
@@ -27,6 +28,7 @@
 		5C87C65B2664DB48006E824E /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		5C87C6602664F2B5006E824E /* ScrollViewDemoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollViewDemoViewController.swift; sourceTree = "<group>"; };
 		5C87C6652664F327006E824E /* CollectionViewDemoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewDemoViewController.swift; sourceTree = "<group>"; };
+		62F7F59426A973A9003DF049 /* SwiftUIDemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIDemoView.swift; sourceTree = "<group>"; };
 		7998D14B4E1928F7426C2FF5 /* Pods_ImpressionKitExample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ImpressionKitExample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D6FDACE8F7FE7BF61899FD4A /* Pods-ImpressionKitExample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ImpressionKitExample.debug.xcconfig"; path = "Target Support Files/Pods-ImpressionKitExample/Pods-ImpressionKitExample.debug.xcconfig"; sourceTree = "<group>"; };
 		E93E5965889DA252ED3ECF35 /* Pods-ImpressionKitExample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ImpressionKitExample.release.xcconfig"; path = "Target Support Files/Pods-ImpressionKitExample/Pods-ImpressionKitExample.release.xcconfig"; sourceTree = "<group>"; };
@@ -78,6 +80,7 @@
 				5C87C6602664F2B5006E824E /* ScrollViewDemoViewController.swift */,
 				5C87C6652664F327006E824E /* CollectionViewDemoViewController.swift */,
 				5C4B30D3266D026900B61135 /* TableViewDemoViewController.swift */,
+				62F7F59426A973A9003DF049 /* SwiftUIDemoView.swift */,
 				5C1ED05626637CB000C68451 /* Assets.xcassets */,
 				5C1ED05826637CB000C68451 /* LaunchScreen.storyboard */,
 				5C1ED05B26637CB000C68451 /* Info.plist */,
@@ -208,6 +211,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5C87C6662664F327006E824E /* CollectionViewDemoViewController.swift in Sources */,
+				62F7F59526A973A9003DF049 /* SwiftUIDemoView.swift in Sources */,
 				5C87C6612664F2B5006E824E /* ScrollViewDemoViewController.swift in Sources */,
 				5C87C65C2664DB48006E824E /* HomeViewController.swift in Sources */,
 				5C4B30D4266D026900B61135 /* TableViewDemoViewController.swift in Sources */,
