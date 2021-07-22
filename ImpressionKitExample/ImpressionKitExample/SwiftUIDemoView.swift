@@ -11,10 +11,19 @@ import SwiftUI
 
 @available(iOS 13.0, *)
 struct SwiftUIDemoView: View {
+    var group = ImpressionGroup.init { (_, index: IndexPath, _, state) in
+        if state.isImpressed {
+            print("impressed index: \(index.row)")
+        }
+    }
+
     var body: some View {
         List(0 ..< 100) { index in
             CellView(index: index)
                 .frame(height: 100)
+                .detectImpressionForGroup(onCreated: { view in
+                    group.bind(view: view, index: IndexPath(row: index, section: 0))
+                })
         }
     }
 }
@@ -24,35 +33,9 @@ extension SwiftUIDemoView {
     struct CellView: View {
         let index: Int
 
-        @State
-        var text: String = ""
-        @State
-        var backgroundColor: Color = .white
-
         var body: some View {
-            Text(text)
+            Text(String(index))
                 .frame(maxWidth: .infinity, alignment: .center)
-                .background(backgroundColor)
-                .detectImpression { state in
-                    updateUI(with: state)
-                    if state.isImpressed {
-                        print("impressed index: \(index)")
-                    }
-                }
-        }
-
-        private func updateUI(with state: UIView.State) {
-            switch state {
-            case let .impressed(_, areaRatio):
-                text = String("\(areaRatio * 100)%")
-                backgroundColor = .green
-            case .inScreen:
-                text = "\(index)"
-                backgroundColor = .red
-            default:
-                text = "\(index)"
-                backgroundColor = .white
-            }
         }
     }
 }
