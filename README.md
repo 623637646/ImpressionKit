@@ -12,12 +12,23 @@ This is a user behavior tracking (UBT) tool to analyze impression events for UIV
 
 It's quite simple. 
 
+
 ```swift
+
+// UIKit
 UIView().detectImpression { (view, state) in
     if state.isImpressed {
         print("This view is impressed to users.")
     }
 }
+
+// SwiftUI
+Color.red
+    .detectImpression { state in
+        if state.isImpressed {
+            print("This view is impressed to users.")
+        }
+    }
 ```
 
 Use `ImpressionGroup` for UICollectionView, UITableView or other reusable view cases.
@@ -102,5 +113,6 @@ Or use Swift Package Manager. SPM is supported from 3.1.0.
 
 # Requirements
 
-- iOS 10.0+
+- iOS 10.0+ (UIKit)
+- iOS 13.0+ (SwiftUI)
 - Xcode 11+
