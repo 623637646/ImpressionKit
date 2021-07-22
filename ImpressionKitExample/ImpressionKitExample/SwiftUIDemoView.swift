@@ -11,9 +11,9 @@ import SwiftUI
 
 @available(iOS 13.0, *)
 struct SwiftUIDemoView: View {
-    var group = ImpressionGroup.init { (_, index: IndexPath, _, state) in
+    var group = ImpressionGroup.init { (_, index: Int, _, state) in
         if state.isImpressed {
-            print("impressed index: \(index.row)")
+            print("impressed index: \(index)")
         }
     }
 
@@ -22,7 +22,7 @@ struct SwiftUIDemoView: View {
             CellView(index: index)
                 .frame(height: 100)
                 .detectImpressionForGroup(onCreated: { view in
-                    group.bind(view: view, index: IndexPath(row: index, section: 0))
+                    group.bind(view: view, index: index)
                 })
         }
     }
