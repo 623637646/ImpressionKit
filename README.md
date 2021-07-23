@@ -16,6 +16,7 @@ It's quite simple.
 ```swift
 
 // UIKit
+
 UIView().detectImpression { (view, state) in
     if state.isImpressed {
         print("This view is impressed to users.")
@@ -23,6 +24,7 @@ UIView().detectImpression { (view, state) in
 }
 
 // SwiftUI
+
 Color.red
     .detectImpression { state in
         if state.isImpressed {
@@ -31,9 +33,10 @@ Color.red
     }
 ```
 
-Use `ImpressionGroup` for UICollectionView, UITableView or other reusable view cases.
+Use `ImpressionGroup` for UICollectionView, UITableView, List or other reusable view cases.
 
 ```swift
+// UIKit
 
 var group = ImpressionGroup.init {(_, index: IndexPath, view, state) in
     if state.isImpressed {
@@ -49,6 +52,23 @@ func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath:
     return cell
 }
 
+// SwiftUI
+
+var group = ImpressionGroup.init { (_, index: Int, _, state) in
+    if state.isImpressed {
+        print("impressed index: \(index)")
+    }
+}
+
+var body: some View {
+    List(0 ..< 100) { index in
+        CellView(index: index)
+            .frame(height: 100)
+            .detectImpressionForGroup(onCreated: { view in
+                group.bind(view: view, index: index)
+            })
+    }
+}
 ```
 
 ### Others APIs
