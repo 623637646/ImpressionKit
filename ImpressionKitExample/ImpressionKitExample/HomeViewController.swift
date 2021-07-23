@@ -78,7 +78,7 @@ class HomeViewController: FormViewController {
         CATransaction.setDisableActions(true)
         form.removeAll()
         form +++ Section("Demos")
-            <<< ButtonRow("UIScrollView (normal views)") { row in
+            <<< ButtonRow("UIScrollView") { row in
                 row.title = row.tag
                 row.presentationMode = .show(controllerProvider: ControllerProvider<UIViewController>.callback(builder: { () -> UIViewController in
                     return ScrollViewDemoViewController()
@@ -96,13 +96,23 @@ class HomeViewController: FormViewController {
                     return TableViewDemoViewController()
                 }), onDismiss: nil)
             }
-            <<< ButtonRow("SwiftUI (iOS 13+)") { row in
+            <<< ButtonRow("SwiftUI ScrollView") { row in
                 row.title = row.tag
                 row.presentationMode = .show(controllerProvider: ControllerProvider<UIViewController>.callback(builder: { () -> UIViewController in
                     if #available(iOS 13.0, *) {
-                        return UIHostingController(rootView: SwiftUIDemoView())
+                        return UIHostingController(rootView: SwiftUIScrollViewDemoView())
                     } else {
-                        return UIViewController()
+                        fatalError()
+                    }
+                }), onDismiss: nil)
+            }
+            <<< ButtonRow("SwiftUI List (resued views)") { row in
+                row.title = row.tag
+                row.presentationMode = .show(controllerProvider: ControllerProvider<UIViewController>.callback(builder: { () -> UIViewController in
+                    if #available(iOS 13.0, *) {
+                        return UIHostingController(rootView: SwiftUIListDemoView())
+                    } else {
+                        fatalError()
                     }
                 }), onDismiss: nil)
             }

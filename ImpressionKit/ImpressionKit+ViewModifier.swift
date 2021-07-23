@@ -8,19 +8,19 @@
 import Foundation
 import UIKit
 #if canImport(SwiftUI)
-    import SwiftUI
+import SwiftUI
 #endif
 
 @available(iOS 13.0, *)
-struct ImpressionView: UIViewRepresentable {
+private struct ImpressionView: UIViewRepresentable {
     let isForGroup: Bool
-    let detectionInterval: Float
-    let durationThreshold: Float
-    let areaRatioThreshold: Float
-    var redetectOptions: UIView.Redetect
+    let detectionInterval: Float?
+    let durationThreshold: Float?
+    let areaRatioThreshold: Float?
+    let redetectOptions: UIView.Redetect?
     let onCreated: ((UIView) -> Void)?
     let onChanged: ((UIView.State) -> Void)?
-
+    
     func makeUIView(context: UIViewRepresentableContext<ImpressionView>) -> UIView {
         let view = UIView(frame: .zero)
         view.backgroundColor = .clear
@@ -36,20 +36,20 @@ struct ImpressionView: UIViewRepresentable {
         onCreated?(view)
         return view
     }
-
+    
     func updateUIView(_ uiView: UIView, context: Context) {}
 }
 
 @available(iOS 13.0, *)
-struct ImpressionTrackableModifier: ViewModifier {
+private struct ImpressionTrackableModifier: ViewModifier {
     let isForGroup: Bool
-    let detectionInterval: Float
-    let durationThreshold: Float
-    let areaRatioThreshold: Float
-    var redetectOptions: UIView.Redetect
+    let detectionInterval: Float?
+    let durationThreshold: Float?
+    let areaRatioThreshold: Float?
+    let redetectOptions: UIView.Redetect?
     let onCreated: ((UIView) -> Void)?
     let onChanged: ((UIView.State) -> Void)?
-
+    
     func body(content: Content) -> some View {
         content
             .overlay(ImpressionView(isForGroup: isForGroup,
@@ -64,11 +64,10 @@ struct ImpressionTrackableModifier: ViewModifier {
 
 @available(iOS 13.0, *)
 public extension View {
-    func detectImpression(detectionInterval: Float = UIView.detectionInterval,
-                          durationThreshold: Float = UIView.durationThreshold,
-                          areaRatioThreshold: Float = UIView.areaRatioThreshold,
-                          redetectOptions: UIView.Redetect = UIView.redetectOptions,
-                          onCreated: ((UIView) -> Void)? = nil,
+    func detectImpression(detectionInterval: Float? = nil,
+                          durationThreshold: Float? = nil,
+                          areaRatioThreshold: Float? = nil,
+                          redetectOptions: UIView.Redetect? = nil,
                           onChanged: @escaping (UIView.State) -> Void) -> some View
     {
         modifier(ImpressionTrackableModifier(isForGroup: false,
@@ -76,22 +75,21 @@ public extension View {
                                              durationThreshold: durationThreshold,
                                              areaRatioThreshold: areaRatioThreshold,
                                              redetectOptions: redetectOptions,
-                                             onCreated: onCreated,
+                                             onCreated: nil,
                                              onChanged: onChanged))
     }
-
-    func detectImpressionForGroup(detectionInterval: Float = UIView.detectionInterval,
-                                  durationThreshold: Float = UIView.durationThreshold,
-                                  areaRatioThreshold: Float = UIView.areaRatioThreshold,
-                                  redetectOptions: UIView.Redetect = UIView.redetectOptions,
-                                  onCreated: ((UIView) -> Void)? = nil) -> some View
+    
+    func detectImpression<T>(group: ImpressionGroup<T>,
+                             index: T) -> some View
     {
         modifier(ImpressionTrackableModifier(isForGroup: true,
-                                             detectionInterval: detectionInterval,
-                                             durationThreshold: durationThreshold,
-                                             areaRatioThreshold: areaRatioThreshold,
-                                             redetectOptions: redetectOptions,
-                                             onCreated: onCreated,
+                                             detectionInterval: group.detectionInterval,
+                                             durationThreshold: group.durationThreshold,
+                                             areaRatioThreshold: group.areaRatioThreshold,
+                                             redetectOptions: group.redetectOptions,
+                                             onCreated: { view in
+                                                group.bind(view: view, index: index)
+                                             },
                                              onChanged: nil))
     }
 }
