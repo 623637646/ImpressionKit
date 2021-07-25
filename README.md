@@ -25,12 +25,11 @@ UIView().detectImpression { (view, state) in
 
 // SwiftUI
 
-Color.red
-    .detectImpression { state in
-        if state.isImpressed {
-            print("This view is impressed to users.")
-        }
+Color.red.detectImpression { state in
+    if state.isImpressed {
+        print("This view is impressed to users.")
     }
+}
 ```
 
 Use `ImpressionGroup` for UICollectionView, UITableView, List or other reusable view cases.
@@ -64,9 +63,7 @@ var body: some View {
     List(0 ..< 100) { index in
         CellView(index: index)
             .frame(height: 100)
-            .detectImpressionForGroup(onCreated: { view in
-                group.bind(view: view, index: index)
-            })
+            .detectImpression(group: group, index: index)
     }
 }
 ```
