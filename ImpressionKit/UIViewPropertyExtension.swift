@@ -17,6 +17,7 @@ private var detectionIntervalKey = 0
 private var durationThresholdKey = 0
 private var areaRatioThresholdKey = 0
 private var redetectOptionsKey = 0
+private var hookingDeallocTokenKey = 0
 private var hookingDidMoveToWindowTokenKey = 0
 private var hookingViewDidDisappearTokenKey = 0
 private var notificationTokensKey = 0
@@ -143,6 +144,16 @@ extension UIView {
     }
     
     // MARK: - internal
+    
+    var hookingDeallocToken: Token? {
+        set {
+            objc_setAssociatedObject(self, &hookingDeallocTokenKey, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+        }
+        
+        get {
+            return objc_getAssociatedObject(self, &hookingDeallocTokenKey) as? Token
+        }
+    }
     
     var hookingDidMoveToWindowToken: Token? {
         set {

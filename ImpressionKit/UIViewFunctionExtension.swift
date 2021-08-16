@@ -33,13 +33,21 @@ public extension ImpressionProtocol {
                 block(view, state)
             } as ImpressionCallback<UIView>
             objc_setAssociatedObject(self, &impressionCallbackKey, value, .OBJC_ASSOCIATION_COPY_NONATOMIC)
+            
+            // hook & notification
+            self.hookDeallocIfNeeded()
             self.hookDidMoveToWindowIfNeeded()
             self.addNotificationObserverIfNeeded()
+            
             self.startTimerIfNeeded()
         } else {
             objc_setAssociatedObject(self, &impressionCallbackKey, nil, .OBJC_ASSOCIATION_COPY_NONATOMIC)
-            self.cancelHookingDidMoveToWindowIfNeeded()
+            
+            // cancel hook & notification
             self.removeNotificationObserverIfNeeded()
+            self.cancelHookingDidMoveToWindowIfNeeded()
+            self.cancelHookingDeallocIfNeeded()
+            
             self.stopTimer()
         }
     }
@@ -64,6 +72,25 @@ extension UIView {
     func isRedetectionOn(_ option: Redetect) -> Bool {
         let redetectOptions = self.redetectOptions ?? UIView.redetectOptions
         return redetectOptions.contains(option)
+    }
+    
+    // MARK: - Hook Dealloc
+    
+    func hookDeallocIfNeeded() {
+        guard self.hookingDeallocToken == nil else {
+            return
+        }
+        self.hookingDeallocToken = try? hookDeallocBefore(object: self) { obj in
+            obj.removeNotificationObserverIfNeeded()
+        }
+    }
+    
+    func cancelHookingDeallocIfNeeded() {
+        guard let token = self.hookingDeallocToken else {
+            return
+        }
+        token.cancelHook()
+        self.hookingDeallocToken = nil
     }
     
     // MARK: - Hook DidMoveToWindow
@@ -144,12 +171,8 @@ extension UIView {
         }
         var tokens = [NSObjectProtocol]()
         for name in names {
-            var token: NSObjectProtocol?
-            token = NotificationCenter.default.addObserver(forName: name, object: nil, queue: nil, using: {[weak self] notification in
+            let token = NotificationCenter.default.addObserver(forName: name, object: nil, queue: nil, using: {[weak self] notification in
                 guard let self = self else {
-                    if let token = token {
-                        NotificationCenter.default.removeObserver(token)
-                    }
                     return
                 }
                 if name == UIApplication.didEnterBackgroundNotification {
@@ -162,14 +185,12 @@ extension UIView {
                 }
                 self.startTimerIfNeeded()
             })
-            if let token = token {
-                tokens.append(token)
-            }
+            tokens.append(token)
         }
         self.notificationTokens = tokens
     }
     
-    func removeNotificationObserverIfNeeded() {
+    fileprivate func removeNotificationObserverIfNeeded() {
         self.notificationTokens.forEach { (token) in
             NotificationCenter.default.removeObserver(token)
         }
