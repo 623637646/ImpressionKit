@@ -130,6 +130,6 @@ Or use Swift Package Manager. SPM is supported from 3.1.0.
 
 # Requirements
 
-- iOS 10.0+ (UIKit)
+- iOS 11.0+ (UIKit)
 - iOS 13.0+ (SwiftUI)
 - Xcode 11+
