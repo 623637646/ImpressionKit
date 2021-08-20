@@ -11,7 +11,18 @@
 非常简单. 
 
 ```swift
+
+// UIKit
+
 UIView().detectImpression { (view, state) in
+    if state.isImpressed {
+        print("This view is impressed to users.")
+    }
+}
+
+// SwiftUI
+
+Color.red.detectImpression { state in
     if state.isImpressed {
         print("This view is impressed to users.")
     }
@@ -21,6 +32,7 @@ UIView().detectImpression { (view, state) in
 如果是在 UICollectionView，UITableView 或者其他可复用的视图中，请使用`ImpressionGroup`。
 
 ```swift
+// UIKit
 
 var group = ImpressionGroup.init {(_, index: IndexPath, view, state) in
     if state.isImpressed {
@@ -36,6 +48,21 @@ func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath:
     return cell
 }
 
+// SwiftUI
+
+var group = ImpressionGroup.init { (_, index: Int, _, state) in
+    if state.isImpressed {
+        print("impressed index: \(index)")
+    }
+}
+
+var body: some View {
+    List(0 ..< 100) { index in
+        CellView(index: index)
+            .frame(height: 100)
+            .detectImpression(group: group, index: index)
+    }
+}
 ```
 
 ### 其他 API
@@ -100,5 +127,6 @@ pod 'ImpressionKit'
 
 # Requirements
 
-- iOS 10.0+
+- iOS 11.0+ (UIKit)
+- iOS 13.0+ (SwiftUI)
 - Xcode 11+
