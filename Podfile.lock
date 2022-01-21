@@ -1,5 +1,5 @@
 PODS:
-  - EasySwiftHook (3.3.0):
+  - EasySwiftHook (3.3.2):
     - libffi-iOS (~> 3.3.6-iOS)
   - libffi-iOS (3.3.6-iOS)
 
@@ -12,9 +12,9 @@ SPEC REPOS:
     - libffi-iOS
 
 SPEC CHECKSUMS:
-  EasySwiftHook: 4b5807b4329aee208fbc19bc1f7e588c5b0b0c5f
+  EasySwiftHook: dfb3d1451aa4630016c9d493742084e2151eb1c2
   libffi-iOS: 2932b5feac77dc5de0eca4a72269e2c9928a26af
 
 PODFILE CHECKSUM: df280f6a5e2f60ea06782c61c7c63bfd90d0db78
 
-COCOAPODS: 1.10.1
+COCOAPODS: 1.11.2
