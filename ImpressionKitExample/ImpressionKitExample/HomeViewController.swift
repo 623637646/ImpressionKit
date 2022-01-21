@@ -15,7 +15,7 @@ class HomeViewController: FormViewController {
     private static let durationThresholdKey = "durationThresholdKey"
     private static let areaRatioThresholdKey = "areaRatioThresholdKey"
     private static let redetectOptionsKey = "redetectOptionsKey"
-
+    
     static var detectionInterval: Float {
         get {
             guard UserDefaults.standard.object(forKey: detectionIntervalKey) != nil else {
@@ -78,128 +78,134 @@ class HomeViewController: FormViewController {
         CATransaction.setDisableActions(true)
         form.removeAll()
         form +++ Section("Demos")
-            <<< ButtonRow("UIScrollView") { row in
-                row.title = row.tag
-                row.presentationMode = .show(controllerProvider: ControllerProvider<UIViewController>.callback(builder: { () -> UIViewController in
-                    return ScrollViewDemoViewController()
-                }), onDismiss: nil)
-            }
-            <<< ButtonRow("UICollectionView (resued views)") { row in
-                row.title = row.tag
-                row.presentationMode = .show(controllerProvider: ControllerProvider<UIViewController>.callback(builder: { () -> UIViewController in
-                    return CollectionViewDemoViewController()
-                }), onDismiss: nil)
-            }
-            <<< ButtonRow("UITableView (resued views)") { row in
-                row.title = row.tag
-                row.presentationMode = .show(controllerProvider: ControllerProvider<UIViewController>.callback(builder: { () -> UIViewController in
-                    return TableViewDemoViewController()
-                }), onDismiss: nil)
-            }
-            <<< ButtonRow("SwiftUI ScrollView") { row in
-                row.title = row.tag
-                row.presentationMode = .show(controllerProvider: ControllerProvider<UIViewController>.callback(builder: { () -> UIViewController in
-                    if #available(iOS 13.0, *) {
-                        return UIHostingController(rootView: SwiftUIScrollViewDemoView())
-                    } else {
-                        fatalError()
-                    }
-                }), onDismiss: nil)
-            }
-            <<< ButtonRow("SwiftUI List (resued views)") { row in
-                row.title = row.tag
-                row.presentationMode = .show(controllerProvider: ControllerProvider<UIViewController>.callback(builder: { () -> UIViewController in
-                    if #available(iOS 13.0, *) {
-                        return UIHostingController(rootView: SwiftUIListDemoView())
-                    } else {
-                        fatalError()
-                    }
-                }), onDismiss: nil)
-            }
-            +++ Section("SETTINGS")
-            <<< DecimalRow() {
-                $0.title = "Detection Interval"
-                $0.value = Double(HomeViewController.detectionInterval)
-                $0.formatter = DecimalFormatter()
-                $0.useFormatterDuringInput = true
-                //$0.useFormatterOnDidBeginEditing = true
-            }.cellSetup { cell, _  in
-                cell.textField.keyboardType = .numberPad
-            }.onChange({ (row) in
-                HomeViewController.detectionInterval = Float(row.value ?? 0)
-            })
-            <<< DecimalRow() {
-                $0.title = "Duration Threshold"
-                $0.value = Double(HomeViewController.durationThreshold)
-                $0.formatter = DecimalFormatter()
-                $0.useFormatterDuringInput = true
-                //$0.useFormatterOnDidBeginEditing = true
-            }.cellSetup { cell, _  in
-                cell.textField.keyboardType = .numberPad
-            }.onChange({ (row) in
-                HomeViewController.durationThreshold = Float(row.value ?? 0)
-            })
-            <<< SliderRow() {
-                $0.title = "Area Ratio Threshold"
-                $0.value = Float(Int(HomeViewController.areaRatioThreshold * 100))
-                $0.cell.slider.minimumValue = 1
-                $0.cell.slider.maximumValue = 100
-                $0.displayValueFor = {
-                    return "\(Int($0 ?? 0))%"
-                }
-            }.onChange({ (row) in
-                HomeViewController.areaRatioThreshold = Float((row.value ?? 0) / 100)
-            })
-            <<< SwitchRow() {
-                $0.title = "Redetect When Leaving Screen"
-                $0.value = HomeViewController.redetectOptions.contains(.leftScreen)
-            }.onChange({ (row) in
-                if row.value ?? false {
-                    HomeViewController.redetectOptions.insert(.leftScreen)
+        <<< ButtonRow("UIScrollView") { row in
+            row.title = row.tag
+            row.presentationMode = .show(controllerProvider: ControllerProvider<UIViewController>.callback(builder: { () -> UIViewController in
+                return ScrollViewDemoViewController()
+            }), onDismiss: nil)
+        }
+        <<< ButtonRow("UICollectionView (resued views)") { row in
+            row.title = row.tag
+            row.presentationMode = .show(controllerProvider: ControllerProvider<UIViewController>.callback(builder: { () -> UIViewController in
+                return CollectionViewDemoViewController()
+            }), onDismiss: nil)
+        }
+        <<< ButtonRow("UICollectionView (only detect 2nd section)") { row in
+            row.title = row.tag
+            row.presentationMode = .show(controllerProvider: ControllerProvider<UIViewController>.callback(builder: { () -> UIViewController in
+                return CollectionViewDemo2ViewController()
+            }), onDismiss: nil)
+        }
+        <<< ButtonRow("UITableView (resued views)") { row in
+            row.title = row.tag
+            row.presentationMode = .show(controllerProvider: ControllerProvider<UIViewController>.callback(builder: { () -> UIViewController in
+                return TableViewDemoViewController()
+            }), onDismiss: nil)
+        }
+        <<< ButtonRow("SwiftUI ScrollView") { row in
+            row.title = row.tag
+            row.presentationMode = .show(controllerProvider: ControllerProvider<UIViewController>.callback(builder: { () -> UIViewController in
+                if #available(iOS 13.0, *) {
+                    return UIHostingController(rootView: SwiftUIScrollViewDemoView())
                 } else {
-                    HomeViewController.redetectOptions.remove(.leftScreen)
+                    fatalError()
                 }
-            })
-            <<< SwitchRow() {
-                $0.title = "Redetect When DidDisappear"
-                $0.value = HomeViewController.redetectOptions.contains(.viewControllerDidDisappear)
-            }.onChange({ (row) in
-                if row.value ?? false {
-                    HomeViewController.redetectOptions.insert(.viewControllerDidDisappear)
+            }), onDismiss: nil)
+        }
+        <<< ButtonRow("SwiftUI List (resued views)") { row in
+            row.title = row.tag
+            row.presentationMode = .show(controllerProvider: ControllerProvider<UIViewController>.callback(builder: { () -> UIViewController in
+                if #available(iOS 13.0, *) {
+                    return UIHostingController(rootView: SwiftUIListDemoView())
                 } else {
-                    HomeViewController.redetectOptions.remove(.viewControllerDidDisappear)
+                    fatalError()
                 }
-            })
-            <<< SwitchRow() {
-                $0.title = "Redetect When didEnterBackground"
-                $0.value = HomeViewController.redetectOptions.contains(.didEnterBackground)
-            }.onChange({ (row) in
-                if row.value ?? false {
-                    HomeViewController.redetectOptions.insert(.didEnterBackground)
-                } else {
-                    HomeViewController.redetectOptions.remove(.didEnterBackground)
-                }
-            })
-            <<< SwitchRow() {
-                $0.title = "Redetect When willResignActive"
-                $0.value = HomeViewController.redetectOptions.contains(.willResignActive)
-            }.onChange({ (row) in
-                if row.value ?? false {
-                    HomeViewController.redetectOptions.insert(.willResignActive)
-                } else {
-                    HomeViewController.redetectOptions.remove(.willResignActive)
-                }
-            })
-            <<< ButtonRow(){
-                $0.title = "Reset"
-                $0.cell.tintColor = .red
-            }.onCellSelection { [weak self] _,_ in
-                HomeViewController.detectionInterval = 0.2
-                HomeViewController.durationThreshold = 1
-                HomeViewController.areaRatioThreshold = 0.5
-                HomeViewController.redetectOptions = []
-                self?.setUpForm()
+            }), onDismiss: nil)
+        }
+        +++ Section("SETTINGS")
+        <<< DecimalRow() {
+            $0.title = "Detection Interval"
+            $0.value = Double(HomeViewController.detectionInterval)
+            $0.formatter = DecimalFormatter()
+            $0.useFormatterDuringInput = true
+            //$0.useFormatterOnDidBeginEditing = true
+        }.cellSetup { cell, _  in
+            cell.textField.keyboardType = .numberPad
+        }.onChange({ (row) in
+            HomeViewController.detectionInterval = Float(row.value ?? 0)
+        })
+        <<< DecimalRow() {
+            $0.title = "Duration Threshold"
+            $0.value = Double(HomeViewController.durationThreshold)
+            $0.formatter = DecimalFormatter()
+            $0.useFormatterDuringInput = true
+            //$0.useFormatterOnDidBeginEditing = true
+        }.cellSetup { cell, _  in
+            cell.textField.keyboardType = .numberPad
+        }.onChange({ (row) in
+            HomeViewController.durationThreshold = Float(row.value ?? 0)
+        })
+        <<< SliderRow() {
+            $0.title = "Area Ratio Threshold"
+            $0.value = Float(Int(HomeViewController.areaRatioThreshold * 100))
+            $0.cell.slider.minimumValue = 1
+            $0.cell.slider.maximumValue = 100
+            $0.displayValueFor = {
+                return "\(Int($0 ?? 0))%"
             }
+        }.onChange({ (row) in
+            HomeViewController.areaRatioThreshold = Float((row.value ?? 0) / 100)
+        })
+        <<< SwitchRow() {
+            $0.title = "Redetect When Leaving Screen"
+            $0.value = HomeViewController.redetectOptions.contains(.leftScreen)
+        }.onChange({ (row) in
+            if row.value ?? false {
+                HomeViewController.redetectOptions.insert(.leftScreen)
+            } else {
+                HomeViewController.redetectOptions.remove(.leftScreen)
+            }
+        })
+        <<< SwitchRow() {
+            $0.title = "Redetect When DidDisappear"
+            $0.value = HomeViewController.redetectOptions.contains(.viewControllerDidDisappear)
+        }.onChange({ (row) in
+            if row.value ?? false {
+                HomeViewController.redetectOptions.insert(.viewControllerDidDisappear)
+            } else {
+                HomeViewController.redetectOptions.remove(.viewControllerDidDisappear)
+            }
+        })
+        <<< SwitchRow() {
+            $0.title = "Redetect When didEnterBackground"
+            $0.value = HomeViewController.redetectOptions.contains(.didEnterBackground)
+        }.onChange({ (row) in
+            if row.value ?? false {
+                HomeViewController.redetectOptions.insert(.didEnterBackground)
+            } else {
+                HomeViewController.redetectOptions.remove(.didEnterBackground)
+            }
+        })
+        <<< SwitchRow() {
+            $0.title = "Redetect When willResignActive"
+            $0.value = HomeViewController.redetectOptions.contains(.willResignActive)
+        }.onChange({ (row) in
+            if row.value ?? false {
+                HomeViewController.redetectOptions.insert(.willResignActive)
+            } else {
+                HomeViewController.redetectOptions.remove(.willResignActive)
+            }
+        })
+        <<< ButtonRow(){
+            $0.title = "Reset"
+            $0.cell.tintColor = .red
+        }.onCellSelection { [weak self] _,_ in
+            HomeViewController.detectionInterval = 0.2
+            HomeViewController.durationThreshold = 1
+            HomeViewController.areaRatioThreshold = 0.5
+            HomeViewController.redetectOptions = []
+            self?.setUpForm()
+        }
         CATransaction.commit()
     }
 }

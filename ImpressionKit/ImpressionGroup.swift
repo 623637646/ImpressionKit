@@ -38,7 +38,15 @@ public class ImpressionGroup<IndexType: Hashable> {
         self.impressionGroupCallback = impressionGroupCallback
     }
     
-    public func bind(view: UIView, index: IndexType) {
+    /**
+     This method must be called every time in
+     1. UICollectionView: `func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell`
+     2. or UITableView: `func cellForRow(at indexPath: IndexPath) -> UITableViewCell?`
+     3. or your customized methods.
+     No call may mean abnormal impression.
+     if a index doesn't need to be impressed.  pass `ignoreDetection = true` to ignore this index.
+     */
+    public func bind(view: UIView, index: IndexType, ignoreDetection: Bool = false) {
         if !allViews.contains(view) {
             allViews.add(view)
         }
@@ -52,6 +60,13 @@ public class ImpressionGroup<IndexType: Hashable> {
         }
         
         ImpressionGroup.setIndex(view: view, index: index)
+        
+        guard ignoreDetection == false else {
+            view.detectImpression(nil)
+            self.changeState(index: index, view: view, state: .unknown)
+            return
+        }
+        
         view.detectionInterval = self.detectionInterval
         view.durationThreshold = self.durationThreshold
         view.areaRatioThreshold = self.areaRatioThreshold
