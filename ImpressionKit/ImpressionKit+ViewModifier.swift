@@ -19,7 +19,7 @@ private struct ImpressionView: UIViewRepresentable {
     let areaRatioThreshold: Float?
     let redetectOptions: UIView.Redetect?
     let onCreated: ((UIView) -> Void)?
-    let onChanged: ((UIView.State) -> Void)?
+    let onChanged: ((UIView.ImpressionState) -> Void)?
     
     func makeUIView(context: UIViewRepresentableContext<ImpressionView>) -> UIView {
         let view = UIView(frame: .zero)
@@ -48,7 +48,7 @@ private struct ImpressionTrackableModifier: ViewModifier {
     let areaRatioThreshold: Float?
     let redetectOptions: UIView.Redetect?
     let onCreated: ((UIView) -> Void)?
-    let onChanged: ((UIView.State) -> Void)?
+    let onChanged: ((UIView.ImpressionState) -> Void)?
     
     func body(content: Content) -> some View {
         content
@@ -68,7 +68,7 @@ public extension View {
                           durationThreshold: Float? = nil,
                           areaRatioThreshold: Float? = nil,
                           redetectOptions: UIView.Redetect? = nil,
-                          onChanged: @escaping (UIView.State) -> Void) -> some View
+                          onChanged: @escaping (UIView.ImpressionState) -> Void) -> some View
     {
         modifier(ImpressionTrackableModifier(isForGroup: false,
                                              detectionInterval: detectionInterval,

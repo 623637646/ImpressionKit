@@ -20,11 +20,11 @@ extension UIView: ImpressionProtocol {}
 
 public extension ImpressionProtocol {
     
-    typealias ImpressionCallback<ViewType: UIView> = (_ view: ViewType, _ state: State) -> ()
+    typealias ImpressionCallback<ViewType: UIView> = (_ view: ViewType, _ state: ImpressionState) -> ()
     
     // The callback will be triggered when impression happens. nil value means cancellation of detection
     func detectImpression(_ block: ImpressionCallback<Self>?) {
-        self.state = .unknown
+        self.impressionState = .unknown
         if let block = block {
             let value = { view, state in
                 guard let view = view as? Self else {
@@ -65,7 +65,7 @@ extension UIView {
     
     // redetect impression for the UIView.
     public func redetect() {
-        self.state = .unknown
+        self.impressionState = .unknown
         self.startTimerIfNeeded()
     }
     
@@ -101,14 +101,14 @@ extension UIView {
         }
         self.hookingDidMoveToWindowToken = try? hookAfter(object: self, selector: #selector(UIView.didMoveToWindow), closure: { view, _ in
             if view.window != nil {
-                if !view.state.isImpressed {
-                    view.state = .unknown
+                if !view.impressionState.isImpressed {
+                    view.impressionState = .unknown
                 }
                 view.rehookViewDidDisappearIfNeeded()
                 view.startTimerIfNeeded()
             } else {
-                if !view.state.isImpressed {
-                    view.state = .noWindow
+                if !view.impressionState.isImpressed {
+                    view.impressionState = .noWindow
                 }
                 view.stopTimer()
             }
@@ -142,7 +142,7 @@ extension UIView {
                 hookingViewDidDisappearToken?.cancelHook()
                 return
             }
-            self.state = .viewControllerDidDisappear
+            self.impressionState = .viewControllerDidDisappear
         }
         self.hookingViewDidDisappearToken = hookingViewDidDisappearToken
     }
@@ -176,9 +176,9 @@ extension UIView {
                     return
                 }
                 if name == UIApplication.didEnterBackgroundNotification {
-                    self.state = .didEnterBackground
+                    self.impressionState = .didEnterBackground
                 } else if name == UIApplication.willResignActiveNotification {
-                    self.state = .willResignActive
+                    self.impressionState = .willResignActive
                 } else {
                     assert(false)
                     return
@@ -255,7 +255,7 @@ extension UIView {
     }
     
     private func detect() {
-        if self.state.isImpressed  {
+        if self.impressionState.isImpressed  {
             guard self.isRedetectionOn(.leftScreen) else {
                 // has triggered impression and don't need to retrigger when leaving screen
                 self.stopTimer()
@@ -265,14 +265,14 @@ extension UIView {
         
         if self.isRedetectionOn(.didEnterBackground) {
             guard UIApplication.shared.applicationState != .background else {
-                self.state = .didEnterBackground
+                self.impressionState = .didEnterBackground
                 return
             }
         }
         
         if self.isRedetectionOn(.willResignActive) {
             guard UIApplication.shared.applicationState != .inactive else {
-                self.state = .willResignActive
+                self.impressionState = .willResignActive
                 return
             }
         }
@@ -280,14 +280,14 @@ extension UIView {
         let areaRatio = self.areaRatio()
         let areaRatioThreshold = self.areaRatioThreshold ?? UIView.areaRatioThreshold
         
-        if case .inScreen(let fromDate) = self.state {
+        if case .inScreen(let fromDate) = self.impressionState {
             if areaRatio >= areaRatioThreshold {
                 // keep appearance
                 let interval = Date().timeIntervalSince(fromDate)
                 let durationThreshold = self.durationThreshold ?? UIView.durationThreshold
                 if Float(interval) >= durationThreshold {
                     // trigger impression
-                    self.state = .impressed(atDate: Date(), areaRatio: areaRatio)
+                    self.impressionState = .impressed(atDate: Date(), areaRatio: areaRatio)
                     
                     let redetectWhenLeavingScreen = self.isRedetectionOn(.leftScreen)
                     if !redetectWhenLeavingScreen {
@@ -296,23 +296,23 @@ extension UIView {
                 }
             } else {
                 // from appearance to disappearance
-                self.state = .outOfScreen
+                self.impressionState = .outOfScreen
             }
         } else if areaRatio >= areaRatioThreshold {
             // appearance
-            if !self.state.isImpressed {
-                self.state = .inScreen(fromDate: Date())
+            if !self.impressionState.isImpressed {
+                self.impressionState = .inScreen(fromDate: Date())
             }
         } else {
             // disappearance
-            self.state = .outOfScreen
+            self.impressionState = .outOfScreen
         }
     }
     
     // MARK: - timer
     
     func startTimerIfNeeded() {
-        if self.state.isImpressed {
+        if self.impressionState.isImpressed {
             guard self.isRedetectionOn(.leftScreen) else {
                 return
             }

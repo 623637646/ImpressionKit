@@ -19,7 +19,7 @@ final class SwiftUIListDemoViewModel: ObservableObject {
     }
     
     @Published
-    var list = (0 ..< 100).map { index in (index, UIView.State.unknown) }
+    var list = (0 ..< 100).map { index in (index, UIView.ImpressionState.unknown) }
 }
 
 @available(iOS 13.0, *)

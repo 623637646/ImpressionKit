@@ -25,9 +25,9 @@ public class ImpressionGroup<IndexType: Hashable> {
     public var redetectOptions: UIView.Redetect?
     
     // MARK: - public
-    public typealias ImpressionGroupCallback = (_ group: ImpressionGroup, _ index: IndexType, _ view: UIView, _ state: UIView.State) -> ()
+    public typealias ImpressionGroupCallback = (_ group: ImpressionGroup, _ index: IndexType, _ view: UIView, _ state: UIView.ImpressionState) -> ()
     
-    public private(set) var states = [IndexType: UIView.State]()
+    public private(set) var states = [IndexType: UIView.ImpressionState]()
     
     // MARK: - private
     private let allViews = NSHashTable<UIView>.weakObjects()
@@ -124,19 +124,19 @@ public class ImpressionGroup<IndexType: Hashable> {
         }
     }
     
-    private func updateState(_ state: UIView.State) {
+    private func updateState(_ state: UIView.ImpressionState) {
         self.allViews.allObjects.forEach { (view) in
             guard let index = ImpressionGroup.getIndex(view: view) else {
                 return
             }
             self.changeState(index: index, view: view, state: state)
         }
-        self.states = self.states.mapValues { (_) -> UIView.State in
+        self.states = self.states.mapValues { (_) -> UIView.ImpressionState in
             return state
         }
     }
     
-    private func changeState(index: IndexType, view: UIView, state: UIView.State) {
+    private func changeState(index: IndexType, view: UIView, state: UIView.ImpressionState) {
         if let previousState = self.states[index] {
             guard previousState != state else {
                 return

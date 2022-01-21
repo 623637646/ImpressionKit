@@ -113,7 +113,7 @@ private class Cell: UICollectionViewCell {
         self.label.frame = self.contentView.bounds
     }
     
-    fileprivate func updateUI(state: UIView.State?) {
+    fileprivate func updateUI(state: UIView.ImpressionState?) {
         self.layer.removeAllAnimations()
         switch state {
         case .impressed(_, let areaRatio):

@@ -23,7 +23,7 @@ struct SwiftUIScrollViewDemoView: View {
 @available(iOS 13.0, *)
 extension SwiftUIScrollViewDemoView {
     struct CellView: View {
-        @State var state: UIView.State = .unknown
+        @State var state: UIView.ImpressionState = .unknown
         var body: some View {
             (state.isImpressed ? Color.green : Color.red)
                 .frame(height: 44)

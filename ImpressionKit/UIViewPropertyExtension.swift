@@ -27,7 +27,7 @@ extension UIView {
            
     // MARK: - Main
     
-    public enum State: Equatable {
+    public enum ImpressionState: Equatable {
         case unknown
         case impressed(atDate: Date, areaRatio: Float)
         case inScreen(fromDate: Date)
@@ -47,9 +47,9 @@ extension UIView {
     }
     
     // Is triggered the impression event.
-    public internal(set) var state: State {
+    public internal(set) var impressionState: ImpressionState {
         set {
-            let old = self.state
+            let old = self.impressionState
             objc_setAssociatedObject(self, &stateKey, newValue, .OBJC_ASSOCIATION_COPY_NONATOMIC)
             if old != newValue {
                 guard let getCallback = self.getCallback() else {
@@ -61,7 +61,7 @@ extension UIView {
         }
         
         get {
-            return (objc_getAssociatedObject(self, &stateKey) as? State ?? .unknown)
+            return (objc_getAssociatedObject(self, &stateKey) as? ImpressionState ?? .unknown)
         }
     }
     

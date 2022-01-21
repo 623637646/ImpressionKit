@@ -102,7 +102,7 @@ private class CellView: UIView {
     
     private func updateUI() {
         self.layer.removeAllAnimations()
-        switch state {
+        switch impressionState {
         case .impressed(_, let areaRatio):
             self.label.text = String.init(format: "\(self.index)\n\n%0.1f%%", areaRatio * 100)
             self.backgroundColor = .green
