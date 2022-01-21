@@ -74,7 +74,7 @@ class CollectionViewDemoViewController: UIViewController, UICollectionViewDataSo
         (cell as! Cell).updateUI(state: self.group.states[indexPath])
     }
     
-    func collectionView(_ collectionView: UICollectionView!, layout collectionViewLayout: UICollectionViewLayout!, sizeForItemAt indexPath: IndexPath!) -> CGSize {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width: CGFloat = 100
         let height = width + CGFloat.random(in: 0 ..< width)
         return CGSize.init(width: width, height: height)
