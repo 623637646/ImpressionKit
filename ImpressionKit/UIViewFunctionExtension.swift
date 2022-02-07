@@ -277,6 +277,14 @@ extension UIView {
             }
         }
         
+        // If presenting (non-full screen) a UIViewController, the viewDidDisappear of it will not be called. We need this logic to udpate the state.
+        if let vc = self.parentViewController {
+            guard vc.presentedViewController == nil else {
+                self.impressionState = .viewControllerDidDisappear
+                return
+            }
+        }
+        
         let areaRatio = self.areaRatio()
         let areaRatioThreshold = self.areaRatioThreshold ?? UIView.areaRatioThreshold
         

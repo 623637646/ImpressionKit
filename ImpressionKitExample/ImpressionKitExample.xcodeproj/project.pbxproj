@@ -16,6 +16,7 @@
 		5C87C6612664F2B5006E824E /* ScrollViewDemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C87C6602664F2B5006E824E /* ScrollViewDemoViewController.swift */; };
 		5C87C6662664F327006E824E /* CollectionViewDemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C87C6652664F327006E824E /* CollectionViewDemoViewController.swift */; };
 		62F7F59526A973A9003DF049 /* SwiftUIListDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62F7F59426A973A9003DF049 /* SwiftUIListDemoView.swift */; };
+		90DD74A827B1231500C9FE67 /* CollectionViewDemo3ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90DD74A727B1231500C9FE67 /* CollectionViewDemo3ViewController.swift */; };
 		9CB13B7526AD634900A510F9 /* SwiftUIScrollViewDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CB13B7426AD634900A510F9 /* SwiftUIScrollViewDemoView.swift */; };
 		D4966ED1E5098FDCD6CE3B4D /* Pods_ImpressionKitExample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7998D14B4E1928F7426C2FF5 /* Pods_ImpressionKitExample.framework */; };
 /* End PBXBuildFile section */
@@ -33,6 +34,7 @@
 		5C87C6652664F327006E824E /* CollectionViewDemoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewDemoViewController.swift; sourceTree = "<group>"; };
 		62F7F59426A973A9003DF049 /* SwiftUIListDemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIListDemoView.swift; sourceTree = "<group>"; };
 		7998D14B4E1928F7426C2FF5 /* Pods_ImpressionKitExample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ImpressionKitExample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		90DD74A727B1231500C9FE67 /* CollectionViewDemo3ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewDemo3ViewController.swift; sourceTree = "<group>"; };
 		9CB13B7426AD634900A510F9 /* SwiftUIScrollViewDemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIScrollViewDemoView.swift; sourceTree = "<group>"; };
 		D6FDACE8F7FE7BF61899FD4A /* Pods-ImpressionKitExample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ImpressionKitExample.debug.xcconfig"; path = "Target Support Files/Pods-ImpressionKitExample/Pods-ImpressionKitExample.debug.xcconfig"; sourceTree = "<group>"; };
 		E93E5965889DA252ED3ECF35 /* Pods-ImpressionKitExample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ImpressionKitExample.release.xcconfig"; path = "Target Support Files/Pods-ImpressionKitExample/Pods-ImpressionKitExample.release.xcconfig"; sourceTree = "<group>"; };
@@ -84,6 +86,7 @@
 				5C87C6602664F2B5006E824E /* ScrollViewDemoViewController.swift */,
 				5C87C6652664F327006E824E /* CollectionViewDemoViewController.swift */,
 				2AA9DA44279A9E7200A9C06A /* CollectionViewDemo2ViewController.swift */,
+				90DD74A727B1231500C9FE67 /* CollectionViewDemo3ViewController.swift */,
 				5C4B30D3266D026900B61135 /* TableViewDemoViewController.swift */,
 				9CB13B7426AD634900A510F9 /* SwiftUIScrollViewDemoView.swift */,
 				62F7F59426A973A9003DF049 /* SwiftUIListDemoView.swift */,
@@ -216,6 +219,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				90DD74A827B1231500C9FE67 /* CollectionViewDemo3ViewController.swift in Sources */,
 				5C87C6662664F327006E824E /* CollectionViewDemoViewController.swift in Sources */,
 				62F7F59526A973A9003DF049 /* SwiftUIListDemoView.swift in Sources */,
 				5C87C6612664F2B5006E824E /* ScrollViewDemoViewController.swift in Sources */,
