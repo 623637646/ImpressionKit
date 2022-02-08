@@ -21,7 +21,7 @@ public class ImpressionKitDebug {
     
     private var viewCount: UInt = 0
     private var loggedViewCount: UInt?
-    
+        
     private init() {}
     private static let dispatchOnce: () = {
         ImpressionKitDebug.shared.hook()
@@ -74,6 +74,49 @@ public class ImpressionKitDebug {
                 ImpressionKitDebug.shared.viewCount -= 1
             }
         }
+        
+        try! hookAfter(targetClass: UIViewController.self, selector:  #selector(UIViewController.viewWillAppear(_:))) { object, selector in
+            guard object == ImpressionKitDebug.shared.currentShowingViewController() else {
+                return
+            }
+            print("[ImpressionKit] Page =======> \(type(of: object))")
+        }
+        
+//        try! hookBefore(targetClass: UIViewController.self, selector:  #selector(UIViewController.viewWillDisappear(_:))) { object, selector in
+//            print("?")
+//        }
+//        
+//        try! hookAfter(targetClass: UIViewController.self, selector:  #selector(UIViewController.viewWillDisappear(_:))) { object, selector in
+//            print("?")
+//        }
+//        
+//        try! hookBefore(targetClass: UIViewController.self, selector:  #selector(UIViewController.viewDidDisappear(_:))) { object, selector in
+//            print("?")
+//        }
+//        
+//        try! hookAfter(targetClass: UIViewController.self, selector:  #selector(UIViewController.viewDidDisappear(_:))) { object, selector in
+//            print("?")
+//        }
+    }
+    
+    private func currentShowingViewController() -> UIViewController? {
+        var vc = UIApplication.shared.keyWindow?.rootViewController
+        while true {
+            if let presented = vc?.presentedViewController { // TODO: 当present一个vc时，然后返回，不会再触发 [ImpressionKit] Page =======>
+                vc = presented
+                continue
+            }
+            if let tab = vc as? UITabBarController {
+                vc = tab.selectedViewController
+                continue
+            }
+            if let nav = vc as? UINavigationController {
+                vc = nav.topViewController
+                continue
+            }
+            break
+        }
+        return vc
     }
     
 }
