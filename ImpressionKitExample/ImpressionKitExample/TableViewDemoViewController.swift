@@ -29,9 +29,11 @@ class TableViewDemoViewController: UIViewController, UITableViewDataSource, UITa
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .white
+        self.title = "UITableView"
         
         self.navigationItem.rightBarButtonItems = [
-            UIBarButtonItem.init(title: "nextPage", style: .plain, target: self, action: #selector(nextPage)),
+            UIBarButtonItem.init(title: "push", style: .plain, target: self, action: #selector(pushNextPage)),
+            UIBarButtonItem.init(title: "present", style: .plain, target: self, action: #selector(presentNextPage)),
             UIBarButtonItem.init(title: "redetect", style: .plain, target: self, action: #selector(redetect)),
         ]
         
@@ -45,10 +47,26 @@ class TableViewDemoViewController: UIViewController, UITableViewDataSource, UITa
         self.group.redetect()
     }
 
-    @objc private func nextPage() {
+    @objc private func pushNextPage() {
         let nextPage = UIViewController()
         nextPage.view.backgroundColor = .white
         self.navigationController?.pushViewController(nextPage, animated: true)
+    }
+    
+    @objc private func presentNextPage() {
+        let nextPage = UIViewController()
+        nextPage.view.backgroundColor = .white
+        let backButton = UIButton.init(frame: CGRect.init(x: 0, y: 0, width: 100, height: 40))
+        backButton.setTitle("back", for: .normal)
+        backButton.setTitleColor(.black, for: .normal)
+        backButton.addTarget(self, action: #selector(back), for: .touchUpInside)
+        backButton.center = CGPoint.init(x: nextPage.view.frame.width / 2, y: nextPage.view.frame.height / 2)
+        nextPage.view.addSubview(backButton)
+        self.present(nextPage, animated: true, completion: nil)
+    }
+    
+    @objc func back(){
+        self.presentedViewController?.dismiss(animated: true, completion: nil)
     }
     
     // UITableViewDataSource
@@ -58,9 +76,9 @@ class TableViewDemoViewController: UIViewController, UITableViewDataSource, UITa
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! Cell
+        self.group.bind(view: cell, index: indexPath)
         cell.index = indexPath.row
         cell.updateUI(state: self.group.states[indexPath])
-        self.group.bind(view: cell, index: indexPath)
         return cell
     }
     

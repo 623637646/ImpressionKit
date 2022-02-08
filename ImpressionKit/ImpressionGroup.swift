@@ -34,6 +34,36 @@ public class ImpressionGroup<IndexType: Hashable> {
     
     private let impressionGroupCallback: ImpressionGroupCallback
     
+    private lazy var impressionBlock: (_ view: UIView, _ state: UIView.ImpressionState) -> () = { [weak self] (view, state) in
+        guard let self = self,
+              let index = ImpressionGroup.getIndex(view: view) else {
+            return
+        }
+        if case .viewControllerDidDisappear = state,
+           view.isRedetectionOn(.viewControllerDidDisappear) {
+            self.updateState(state)
+            return
+        }
+        if case .didEnterBackground = state,
+           view.isRedetectionOn(.didEnterBackground) {
+            self.updateState(state)
+            return
+        }
+        if case .willResignActive = state,
+           view.isRedetectionOn(.willResignActive) {
+            self.updateState(state)
+            return
+        }
+        
+        if let currentState = self.states[index],
+           currentState.isImpressed {
+            guard view.isRedetectionOn(.leftScreen) else {
+                return
+            }
+        }
+        self.changeState(index: index, view: view, state: state)
+    }
+    
     public init(impressionGroupCallback: @escaping ImpressionGroupCallback) {
         self.impressionGroupCallback = impressionGroupCallback
     }
@@ -43,7 +73,7 @@ public class ImpressionGroup<IndexType: Hashable> {
      1. UICollectionView: `func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell`
      2. or UITableView: `func cellForRow(at indexPath: IndexPath) -> UITableViewCell?`
      3. or your customized methods.
-     No call may mean abnormal impression.
+     Non-calling may cause abnormal impression.
      if a index doesn't need to be impressed.  pass `ignoreDetection = true` to ignore this index.
      */
     public func bind(view: UIView, index: IndexType, ignoreDetection: Bool = false) {
@@ -58,57 +88,30 @@ public class ImpressionGroup<IndexType: Hashable> {
                 break
             }
         }
-        
         ImpressionGroup.setIndex(view: view, index: index)
-        
-        guard ignoreDetection == false else {
-            view.detectImpression(nil)
-            self.changeState(index: index, view: view, state: .unknown)
-            return
-        }
         
         view.detectionInterval = self.detectionInterval
         view.durationThreshold = self.durationThreshold
         view.areaRatioThreshold = self.areaRatioThreshold
         view.redetectOptions = self.redetectOptions
+        view.detectImpression(impressionBlock)
         
-        if view.getCallback() == nil {
-            view.detectImpression({ [weak self] (view, state) in
-                guard let self = self,
-                      let index = ImpressionGroup.getIndex(view: view) else {
-                    return
-                }
-                if case .viewControllerDidDisappear = state,
-                   view.isRedetectionOn(.viewControllerDidDisappear) {
-                    self.updateState(state)
-                    return
-                }
-                if case .didEnterBackground = state,
-                   view.isRedetectionOn(.didEnterBackground) {
-                    self.updateState(state)
-                    return
-                }
-                if case .willResignActive = state,
-                   view.isRedetectionOn(.willResignActive) {
-                    self.updateState(state)
-                    return
-                }
-                
-                if let currentState = self.states[index] {
-                    if !currentState.isImpressed || view.isRedetectionOn(.leftScreen) {
-                        self.changeState(index: index, view: view, state: state)
-                    }
-                } else {
-                    self.changeState(index: index, view: view, state: state)
-                }
-            })
+        guard ignoreDetection == false else {
+            view.stopTimer()
+            self.changeState(index: index, view: view, state: .unknown)
+            return
         }
         
         if let currentState = self.states[index],
-           currentState.isImpressed && !view.isRedetectionOn(.leftScreen) {
-            view.stopTimer()
+           currentState.isImpressed {
+            if !view.keepDetectionAfterImpressed() {
+                view.stopTimer()
+            } else if view.isRedetectionOn(.leftScreen) {
+                // reset state
+                self.changeState(index: index, view: view, state: .unknown)
+            }
         } else {
-            view.redetect()
+            // reset state
             self.changeState(index: index, view: view, state: .unknown)
         }
     }

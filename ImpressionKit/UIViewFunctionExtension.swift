@@ -37,7 +37,7 @@ public extension ImpressionProtocol {
             // hook & notification
             self.hookDeallocIfNeeded()
             self.hookDidMoveToWindowIfNeeded()
-            self.addNotificationObserverIfNeeded()
+            self.readdNotificationObserver()
             
             self.startTimerIfNeeded()
         } else {
@@ -74,9 +74,13 @@ extension UIView {
         return redetectOptions.contains(option)
     }
     
+    func keepDetectionAfterImpressed() -> Bool {
+        return self.isRedetectionOn(.leftScreen) || self.isRedetectionOn(.viewControllerDidDisappear)
+    }
+    
     // MARK: - Hook Dealloc
     
-    func hookDeallocIfNeeded() {
+    fileprivate func hookDeallocIfNeeded() {
         guard self.hookingDeallocToken == nil else {
             return
         }
@@ -85,7 +89,7 @@ extension UIView {
         }
     }
     
-    func cancelHookingDeallocIfNeeded() {
+    fileprivate func cancelHookingDeallocIfNeeded() {
         guard let token = self.hookingDeallocToken else {
             return
         }
@@ -95,7 +99,7 @@ extension UIView {
     
     // MARK: - Hook DidMoveToWindow
     
-    func hookDidMoveToWindowIfNeeded() {
+    fileprivate func hookDidMoveToWindowIfNeeded() {
         guard self.hookingDidMoveToWindowToken == nil else {
             return
         }
@@ -115,7 +119,7 @@ extension UIView {
         } as @convention(block) (UIView, Selector) -> Void)
     }
     
-    func cancelHookingDidMoveToWindowIfNeeded() {
+    fileprivate func cancelHookingDidMoveToWindowIfNeeded() {
         guard let token = self.hookingDidMoveToWindowToken else {
             return
         }
@@ -157,7 +161,7 @@ extension UIView {
     
     // MARK: - observe notifications
     
-    func addNotificationObserverIfNeeded() {
+    fileprivate func readdNotificationObserver() {
         self.removeNotificationObserverIfNeeded()
         var names = [Notification.Name]()
         if self.isRedetectionOn(.didEnterBackground) {
@@ -256,35 +260,51 @@ extension UIView {
     
     private func detect() {
         if self.impressionState.isImpressed  {
-            guard self.isRedetectionOn(.leftScreen) else {
-                // has triggered impression and don't need to retrigger when leaving screen
+            guard self.keepDetectionAfterImpressed() else {
+                // The impression has already been triggered. Don't need to retrigger.
                 self.stopTimer()
                 return
             }
         }
         
-        if self.isRedetectionOn(.didEnterBackground) {
-            guard UIApplication.shared.applicationState != .background else {
+        // background
+        if UIApplication.shared.applicationState == .background {
+            guard !self.isRedetectionOn(.didEnterBackground) else {
                 self.impressionState = .didEnterBackground
                 return
             }
         }
         
-        if self.isRedetectionOn(.willResignActive) {
-            guard UIApplication.shared.applicationState != .inactive else {
+        // inactive
+        if UIApplication.shared.applicationState == .inactive {
+            guard !self.isRedetectionOn(.willResignActive) else {
                 self.impressionState = .willResignActive
                 return
             }
         }
         
-        // If presenting (non-full screen) a UIViewController, the viewDidDisappear of it will not be called. We need this logic to udpate the state.
-        if let vc = self.parentViewController {
-            guard vc.presentedViewController == nil else {
+        // presented
+        // If current view controller presented (non-full screen) a UIViewController, the viewDidDisappear of it will not be called. We need this logic to udpate the state.
+        if let vc = self.parentViewController,
+           vc.presentedViewController != nil {
+            guard !self.isRedetectionOn(.viewControllerDidDisappear) else {
                 self.impressionState = .viewControllerDidDisappear
+                return
+            }
+            if !self.impressionState.isImpressed {
+                self.impressionState = .viewControllerDidDisappear
+            }
+            return
+        }
+        
+        // leftScreen
+        if self.impressionState.isImpressed {
+            guard self.isRedetectionOn(.leftScreen) else {
                 return
             }
         }
         
+        // calculate
         let areaRatio = self.areaRatio()
         let areaRatioThreshold = self.areaRatioThreshold ?? UIView.areaRatioThreshold
         
@@ -297,8 +317,7 @@ extension UIView {
                     // trigger impression
                     self.impressionState = .impressed(atDate: Date(), areaRatio: areaRatio)
                     
-                    let redetectWhenLeavingScreen = self.isRedetectionOn(.leftScreen)
-                    if !redetectWhenLeavingScreen {
+                    if !self.keepDetectionAfterImpressed() {
                         self.stopTimer()
                     }
                 }
@@ -319,14 +338,14 @@ extension UIView {
     
     // MARK: - timer
     
-    func startTimerIfNeeded() {
+    fileprivate func startTimerIfNeeded() {
         if self.impressionState.isImpressed {
-            guard self.isRedetectionOn(.leftScreen) else {
+            guard self.keepDetectionAfterImpressed() else {
                 return
             }
         }
         guard self.timer == nil,
-              self.getCallback() != nil,
+              self.isDetectionOn,
               self.window != nil else {
             return
         }

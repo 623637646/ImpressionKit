@@ -96,12 +96,6 @@ class HomeViewController: FormViewController {
                 return CollectionViewDemo2ViewController()
             }), onDismiss: nil)
         }
-        <<< ButtonRow("UICollectionView (present next page)") { row in
-            row.title = row.tag
-            row.presentationMode = .show(controllerProvider: ControllerProvider<UIViewController>.callback(builder: { () -> UIViewController in
-                return CollectionViewDemo3ViewController()
-            }), onDismiss: nil)
-        }
         <<< ButtonRow("UITableView (resued views)") { row in
             row.title = row.tag
             row.presentationMode = .show(controllerProvider: ControllerProvider<UIViewController>.callback(builder: { () -> UIViewController in
@@ -163,7 +157,7 @@ class HomeViewController: FormViewController {
             HomeViewController.areaRatioThreshold = Float((row.value ?? 0) / 100)
         })
         <<< SwitchRow() {
-            $0.title = "Redetect When Leaving Screen"
+            $0.title = "Redetect When Left Screen"
             $0.value = HomeViewController.redetectOptions.contains(.leftScreen)
         }.onChange({ (row) in
             if row.value ?? false {
