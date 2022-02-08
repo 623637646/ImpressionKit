@@ -20,6 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UIView.durationThreshold = HomeViewController.durationThreshold
         UIView.areaRatioThreshold = HomeViewController.areaRatioThreshold
         UIView.redetectOptions = HomeViewController.redetectOptions
+        ImpressionKitDebug.shared.openLogs()
         
         PerformanceMonitor.shared().start()
         

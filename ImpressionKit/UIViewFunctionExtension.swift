@@ -340,7 +340,7 @@ extension UIView {
             guard let self = self else {
                 timer.invalidate()
                 #if DEBUG
-                Debug.shared.timerCount -= 1
+                ImpressionKitDebug.shared.timerCount -= 1
                 #endif
                 return
             }
@@ -357,7 +357,7 @@ extension UIView {
         self.timer = timer
         RunLoop.main.add(timer, forMode: .common)
         #if DEBUG
-        Debug.shared.timerCount += 1
+        ImpressionKitDebug.shared.timerCount += 1
         #endif
     }
     
@@ -366,7 +366,7 @@ extension UIView {
             timer.invalidate()
             self.timer = nil
             #if DEBUG
-            Debug.shared.timerCount -= 1
+            ImpressionKitDebug.shared.timerCount -= 1
             #endif
         }
     }
