@@ -94,25 +94,24 @@ public class ImpressionGroup<IndexType: Hashable> {
         view.durationThreshold = self.durationThreshold
         view.areaRatioThreshold = self.areaRatioThreshold
         view.redetectOptions = self.redetectOptions
-        view.detectImpression(impressionBlock)
+        view.detectImpression(nil)
         
         guard ignoreDetection == false else {
-            view.stopTimer()
             self.changeState(index: index, view: view, state: .unknown)
             return
         }
         
         if let currentState = self.states[index],
            currentState.isImpressed {
-            if !view.keepDetectionAfterImpressed() {
-                view.stopTimer()
-            } else if view.isRedetectionOn(.leftScreen) {
-                // reset state
-                self.changeState(index: index, view: view, state: .unknown)
+            if view.keepDetectionAfterImpressed() {
+                if view.isRedetectionOn(.leftScreen) {
+                    self.changeState(index: index, view: view, state: .unknown)
+                }
+                view.detectImpression(impressionBlock)
             }
         } else {
-            // reset state
             self.changeState(index: index, view: view, state: .unknown)
+            view.detectImpression(impressionBlock)
         }
     }
     
