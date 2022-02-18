@@ -84,7 +84,7 @@ class HomeViewController: FormViewController {
                 return ScrollViewDemoViewController()
             }), onDismiss: nil)
         }
-        <<< ButtonRow("UICollectionView (resued views)") { row in
+        <<< ButtonRow("UICollectionView (reusable views)") { row in
             row.title = row.tag
             row.presentationMode = .show(controllerProvider: ControllerProvider<UIViewController>.callback(builder: { () -> UIViewController in
                 return CollectionViewDemoViewController()
@@ -96,7 +96,7 @@ class HomeViewController: FormViewController {
                 return CollectionViewDemo2ViewController()
             }), onDismiss: nil)
         }
-        <<< ButtonRow("UITableView (resued views)") { row in
+        <<< ButtonRow("UITableView (reusable views)") { row in
             row.title = row.tag
             row.presentationMode = .show(controllerProvider: ControllerProvider<UIViewController>.callback(builder: { () -> UIViewController in
                 return TableViewDemoViewController()
@@ -112,7 +112,7 @@ class HomeViewController: FormViewController {
                 }
             }), onDismiss: nil)
         }
-        <<< ButtonRow("SwiftUI List (resued views)") { row in
+        <<< ButtonRow("SwiftUI List (reusable views)") { row in
             row.title = row.tag
             row.presentationMode = .show(controllerProvider: ControllerProvider<UIViewController>.callback(builder: { () -> UIViewController in
                 if #available(iOS 13.0, *) {
