@@ -7,7 +7,11 @@
 
 #if DEBUG
 import Foundation
+#if SWIFT_PACKAGE
+import SwiftHook
+#else
 import EasySwiftHook
+#endif
 
 public class ImpressionKitDebug {
     
