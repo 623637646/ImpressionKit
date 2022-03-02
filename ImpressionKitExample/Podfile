@@ -7,5 +7,10 @@ target 'ImpressionKitExample' do
   pod 'GDPerformanceView-Swift', '~> 2.0.3'
   pod 'CHTCollectionViewWaterfallLayout', '~> 0.9.7'
   pod 'Eureka'
+  pod 'EarlGreyApp'
 
+end
+
+target 'ImpressionKitExampleUITests' do
+  pod 'EarlGreyTest'
 end

@@ -2,8 +2,12 @@ PODS:
   - CHTCollectionViewWaterfallLayout (0.9.10):
     - CHTCollectionViewWaterfallLayout/Swift (= 0.9.10)
   - CHTCollectionViewWaterfallLayout/Swift (0.9.10)
+  - EarlGreyApp (2.2.1)
+  - EarlGreyTest (2.2.1):
+    - eDistantObject (= 1.0.2)
   - EasySwiftHook (3.3.2):
     - libffi-iOS (~> 3.3.6-iOS)
+  - eDistantObject (1.0.2)
   - Eureka (5.3.4)
   - GDPerformanceView-Swift (2.0.3)
   - ImpressionKit (3.6.2):
@@ -12,6 +16,8 @@ PODS:
 
 DEPENDENCIES:
   - CHTCollectionViewWaterfallLayout (~> 0.9.7)
+  - EarlGreyApp
+  - EarlGreyTest
   - Eureka
   - GDPerformanceView-Swift (~> 2.0.3)
   - ImpressionKit (from `../`)
@@ -19,7 +25,10 @@ DEPENDENCIES:
 SPEC REPOS:
   trunk:
     - CHTCollectionViewWaterfallLayout
+    - EarlGreyApp
+    - EarlGreyTest
     - EasySwiftHook
+    - eDistantObject
     - Eureka
     - GDPerformanceView-Swift
     - libffi-iOS
@@ -30,12 +39,15 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   CHTCollectionViewWaterfallLayout: b989a459788d7657ac010e03bc0f7eedca95a420
+  EarlGreyApp: 77d4157bf1cee4045a52aca04bcb8b053aa23d9e
+  EarlGreyTest: 6acc53bdf703cb5ad5176fafc5182e7ac9ac30c5
   EasySwiftHook: dfb3d1451aa4630016c9d493742084e2151eb1c2
+  eDistantObject: dab9b2c26f14684e32a4e0dc86759a77ea7a7026
   Eureka: 60cf058f86a8fb3ed26165ba5292b9850361b0a6
   GDPerformanceView-Swift: ef3d05deb103e472a5494d3f60aeca5a58b88a7d
   ImpressionKit: 3b4a8b886c31a3ed63588d7ffbec9d8b6ce9a013
   libffi-iOS: 2932b5feac77dc5de0eca4a72269e2c9928a26af
 
-PODFILE CHECKSUM: 0fb51bc441074857cd38b17dd8a664d5d3077d96
+PODFILE CHECKSUM: e7fefc762759247ea238e049359c7b4930db8213
 
 COCOAPODS: 1.11.2
