@@ -6,6 +6,7 @@
 //
 
 import XCTest
+import EarlGreyTest
 
 class ImpressionKitExampleUITests: XCTestCase {
 
