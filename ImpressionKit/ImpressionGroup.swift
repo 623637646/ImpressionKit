@@ -7,8 +7,6 @@
 
 import UIKit
 
-private var indexKey = 0
-
 public class ImpressionGroup<IndexType: Hashable> {
     
     // MARK: - config
@@ -22,7 +20,11 @@ public class ImpressionGroup<IndexType: Hashable> {
     public var areaRatioThreshold: Float?
         
     // Retrigger the impression. Apply to the group. `UIView.redetectOptions` will be used if it's nil.
-    public var redetectOptions: UIView.Redetect?
+    public var redetectOptions: UIView.Redetect? {
+        didSet {
+            readdNotificationObserver()
+        }
+    }
     
     // MARK: - public
     public typealias ImpressionGroupCallback = (_ group: ImpressionGroup, _ index: IndexType, _ view: UIView, _ state: UIView.ImpressionState) -> ()
@@ -30,42 +32,46 @@ public class ImpressionGroup<IndexType: Hashable> {
     public private(set) var states = [IndexType: UIView.ImpressionState]()
     
     // MARK: - private
-    private let allViews = NSHashTable<UIView>.weakObjects()
+    private var views = [IndexType: () -> UIView?]()
+        
+    private var notificationTokens = [NSObjectProtocol]()
     
     private let impressionGroupCallback: ImpressionGroupCallback
     
     private lazy var impressionBlock: (_ view: UIView, _ state: UIView.ImpressionState) -> () = { [weak self] (view, state) in
         guard let self = self,
-              let index = ImpressionGroup.getIndex(view: view) else {
+              let index = self.views.first(where: { $1() == view })?.key else {
             return
         }
-        if case .viewControllerDidDisappear = state,
-           view.isRedetectionOn(.viewControllerDidDisappear) {
-            self.updateState(state)
-            return
+        if let previousSates = self.states[index] {
+            guard previousSates != state else {
+                return
+            }
         }
-        if case .didEnterBackground = state,
-           view.isRedetectionOn(.didEnterBackground) {
-            self.updateState(state)
-            return
-        }
-        if case .willResignActive = state,
-           view.isRedetectionOn(.willResignActive) {
-            self.updateState(state)
+        
+        // Redetection of didEnterBackground & willResignActive are handled by group
+        
+        // redetect viewControllerDidDisappear
+        if view.isRedetectionOn(.viewControllerDidDisappear),
+           case .viewControllerDidDisappear = state {
+            self.resetGroupStateAndRedetect(.viewControllerDidDisappear)
             return
         }
         
-        if let currentState = self.states[index],
-           currentState.isImpressed {
+        // redetect leftScreen
+        if let previousSates = self.states[index],
+           previousSates.isImpressed {
             guard view.isRedetectionOn(.leftScreen) else {
                 return
             }
         }
+        
         self.changeState(index: index, view: view, state: state)
     }
     
     public init(impressionGroupCallback: @escaping ImpressionGroupCallback) {
         self.impressionGroupCallback = impressionGroupCallback
+        readdNotificationObserver()
     }
     
     /**
@@ -77,65 +83,66 @@ public class ImpressionGroup<IndexType: Hashable> {
      if a index doesn't need to be impressed.  pass `ignoreDetection = true` to ignore this index.
      */
     public func bind(view: UIView, index: IndexType, ignoreDetection: Bool = false) {
-        if !allViews.contains(view) {
-            allViews.add(view)
+        if let previousIndex = views.first(where: { $1() == view })?.key {
+            views[previousIndex] = nil
         }
         
-        let enumerator = allViews.objectEnumerator()
-        while let view = enumerator.nextObject() as? UIView {
-            if ImpressionGroup.getIndex(view: view) == index {
-                ImpressionGroup.setIndex(view: view, index: nil)
-                break
-            }
+        if let previousView = views[index]?() {
+            previousView.detectImpression(nil)
         }
-        ImpressionGroup.setIndex(view: view, index: index)
-        
-        view.detectionInterval = self.detectionInterval
-        view.durationThreshold = self.durationThreshold
-        view.areaRatioThreshold = self.areaRatioThreshold
-        view.redetectOptions = self.redetectOptions
-        view.detectImpression(nil)
         
         guard ignoreDetection == false else {
+            view.detectImpression(nil) // Cancel the detection if the view is detecting.
             self.changeState(index: index, view: view, state: .unknown)
             return
         }
         
-        if let currentState = self.states[index],
-           currentState.isImpressed {
-            if view.keepDetectionAfterImpressed() {
-                if view.isRedetectionOn(.leftScreen) {
-                    self.changeState(index: index, view: view, state: .unknown)
-                }
-                view.detectImpression(impressionBlock)
-            }
-        } else {
+        views[index] = { [weak view] in view }
+        
+        // setup views
+        view.detectionInterval = self.detectionInterval
+        view.durationThreshold = self.durationThreshold
+        view.areaRatioThreshold = self.areaRatioThreshold
+        // No need to set .willResignActive and .didEnterBackground for views. Group will handle this.
+        var redetectOptions = self.redetectOptions
+        redetectOptions = redetectOptions?.remove(.willResignActive)
+        redetectOptions = redetectOptions?.remove(.didEnterBackground)
+        view.redetectOptions = redetectOptions
+        
+        guard let currentState = self.states[index],
+              currentState.isImpressed else {
             self.changeState(index: index, view: view, state: .unknown)
             view.detectImpression(impressionBlock)
+            return
         }
+        
+        // The view is impressed.
+        guard view.keepDetectionAfterImpressed() else {
+            view.detectImpression(nil)
+            return
+        }
+        
+        if view.isRedetectionOn(.leftScreen) {
+            self.changeState(index: index, view: view, state: .unknown)
+        }
+        view.detectImpression(impressionBlock)
     }
     
     public func redetect() {
-        self.states.removeAll()
-        self.allViews.allObjects.forEach { (view) in
-            view.redetect()
-            guard let index = ImpressionGroup.getIndex(view: view) else {
-                return
-            }
-            self.changeState(index: index, view: view, state: .unknown)
-        }
+        resetGroupStateAndRedetect(.unknown)
     }
     
-    private func updateState(_ state: UIView.ImpressionState) {
-        self.allViews.allObjects.forEach { (view) in
-            guard let index = ImpressionGroup.getIndex(view: view) else {
+    private func resetGroupStateAndRedetect(_ state: UIView.ImpressionState) {
+        self.views.forEach { (index, closure) in
+            guard let view = closure() else {
+                self.views.removeValue(forKey: index)
                 return
             }
             self.changeState(index: index, view: view, state: state)
+            view.detectImpression(impressionBlock)
+            view.redetect()
         }
-        self.states = self.states.mapValues { (_) -> UIView.ImpressionState in
-            return state
-        }
+        self.states = self.states.mapValues { _ in state }
     }
     
     private func changeState(index: IndexType, view: UIView, state: UIView.ImpressionState) {
@@ -148,12 +155,29 @@ public class ImpressionGroup<IndexType: Hashable> {
         self.impressionGroupCallback(self, index, view, state)
     }
     
-    
-    static private func getIndex(view: UIView) -> IndexType? {
-        return objc_getAssociatedObject(view, &indexKey) as? IndexType
-    }
-    
-    static private func setIndex(view: UIView, index: IndexType?) {
-        objc_setAssociatedObject(view, &indexKey, index, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+    private func readdNotificationObserver() {
+        self.notificationTokens.forEach { (token) in
+            NotificationCenter.default.removeObserver(token)
+        }
+        self.notificationTokens.removeAll()
+        let redetectOptions = self.redetectOptions ?? UIView.redetectOptions
+        if redetectOptions.contains(.willResignActive) {
+            let token = NotificationCenter.default.addObserver(forName: UIApplication.willResignActiveNotification, object: nil, queue: nil) { [weak self] _ in
+                guard let self = self else {
+                    return
+                }
+                self.resetGroupStateAndRedetect(.willResignActive)
+            }
+            self.notificationTokens.append(token)
+        }
+        if redetectOptions.contains(.didEnterBackground) {
+            let token = NotificationCenter.default.addObserver(forName: UIApplication.didEnterBackgroundNotification, object: nil, queue: nil) { [weak self] _ in
+                guard let self = self else {
+                    return
+                }
+                self.resetGroupStateAndRedetect(.didEnterBackground)
+            }
+            self.notificationTokens.append(token)
+        }
     }
 }
