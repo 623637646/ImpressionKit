@@ -26,6 +26,7 @@ public extension ImpressionProtocol {
     func detectImpression(_ block: ImpressionCallback<Self>?) {
         self.impressionState = .unknown
         if let block = block {
+            // set
             let value = { view, state in
                 guard let view = view as? Self else {
                     return
@@ -33,22 +34,23 @@ public extension ImpressionProtocol {
                 block(view, state)
             } as ImpressionCallback<UIView>
             objc_setAssociatedObject(self, &impressionCallbackKey, value, .OBJC_ASSOCIATION_COPY_NONATOMIC)
-            
             // hook & notification
             self.hookDeallocIfNeeded()
             self.hookDidMoveToWindowIfNeeded()
+            self.rehookViewDidDisappearIfNeeded()
             self.readdNotificationObserver()
-            
+            // timer
             self.startTimerIfNeeded()
         } else {
-            objc_setAssociatedObject(self, &impressionCallbackKey, nil, .OBJC_ASSOCIATION_COPY_NONATOMIC)
-            
+            // timer
+            self.stopTimer()
             // cancel hook & notification
             self.removeNotificationObserverIfNeeded()
+            self.cancelHookingViewDidDisappearIfNeeded()
             self.cancelHookingDidMoveToWindowIfNeeded()
             self.cancelHookingDeallocIfNeeded()
-            
-            self.stopTimer()
+            // set
+            objc_setAssociatedObject(self, &impressionCallbackKey, nil, .OBJC_ASSOCIATION_COPY_NONATOMIC)
         }
     }
     
@@ -129,7 +131,7 @@ extension UIView {
     
     // MARK: - Hook ViewDidDisappear
     
-    private func rehookViewDidDisappearIfNeeded() {
+    fileprivate func rehookViewDidDisappearIfNeeded() {
         self.cancelHookingViewDidDisappearIfNeeded()
         guard self.isRedetectionOn(.viewControllerDidDisappear) else {
             return
@@ -151,7 +153,7 @@ extension UIView {
         self.hookingViewDidDisappearToken = hookingViewDidDisappearToken
     }
     
-    private func cancelHookingViewDidDisappearIfNeeded() {
+    fileprivate func cancelHookingViewDidDisappearIfNeeded() {
         guard let token = self.hookingViewDidDisappearToken else {
             return
         }
@@ -179,9 +181,9 @@ extension UIView {
                 guard let self = self else {
                     return
                 }
-                if name == UIApplication.didEnterBackgroundNotification {
+                if notification.name == UIApplication.didEnterBackgroundNotification {
                     self.impressionState = .didEnterBackground
-                } else if name == UIApplication.willResignActiveNotification {
+                } else if notification.name == UIApplication.willResignActiveNotification {
                     self.impressionState = .willResignActive
                 } else {
                     assert(false)
