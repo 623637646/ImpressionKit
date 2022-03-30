@@ -58,7 +58,8 @@ private struct ImpressionTrackableModifier: ViewModifier {
                                     areaRatioThreshold: areaRatioThreshold,
                                     redetectOptions: redetectOptions,
                                     onCreated: onCreated,
-                                    onChanged: onChanged))
+                                    onChanged: onChanged)
+                        .allowsHitTesting(false))
     }
 }
 
