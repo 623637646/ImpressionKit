@@ -24,6 +24,7 @@ public extension ImpressionProtocol {
     
     // The callback will be triggered when impression happens. nil value means cancellation of detection
     func detectImpression(_ block: ImpressionCallback<Self>?) {
+        assert(Thread.isMainThread);
         self.impressionState = .unknown
         if let block = block {
             // set
