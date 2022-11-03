@@ -105,8 +105,8 @@ public class ImpressionGroup<IndexType: Hashable> {
         view.areaRatioThreshold = self.areaRatioThreshold
         // No need to set .willResignActive and .didEnterBackground for views. Group will handle this.
         var redetectOptions = self.redetectOptions
-        redetectOptions = redetectOptions?.remove(.willResignActive)
-        redetectOptions = redetectOptions?.remove(.didEnterBackground)
+        redetectOptions?.remove(.willResignActive)
+        redetectOptions?.remove(.didEnterBackground)
         view.redetectOptions = redetectOptions
         
         guard let currentState = self.states[index],
