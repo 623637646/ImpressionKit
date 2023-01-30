@@ -6,6 +6,8 @@ This is a user behavior tracking (UBT) tool to analyze impression events for UIV
 
 ![ezgif com-gif-maker](https://user-images.githubusercontent.com/5275802/120922347-30a2d200-c6fb-11eb-8994-f97c2bbc0ff8.gif)
 
+How it works: Hook the `didMoveToWindow` method of a UIView by [SwiftHook](https://github.com/623637646/SwiftHook), periodically check the view is on the screen or not.
+
 # How to use ImpressionKit
 
 ### Main APIs
