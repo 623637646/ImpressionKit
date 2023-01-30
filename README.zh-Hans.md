@@ -4,6 +4,8 @@
 
 ![ezgif com-gif-maker](https://user-images.githubusercontent.com/5275802/120922347-30a2d200-c6fb-11eb-8994-f97c2bbc0ff8.gif)
 
+原理：用 [SwiftHook](https://github.com/623637646/SwiftHook) Hook UIView的`didMoveToWindow`方法，定时检测此UIView是否在屏幕上。
+
 # 怎么使用
 
 ### 主要的 API
