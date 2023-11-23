@@ -69,7 +69,7 @@ class HomeViewController: FormViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "Exposure Demo";
+        self.title = "ImpressionKit Demo";
         self.setUpForm()
     }
     
