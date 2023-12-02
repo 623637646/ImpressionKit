@@ -16,8 +16,11 @@ public class ImpressionGroup<IndexType: Hashable> {
     // Chage the threshold of duration in screen (in seconds). The view will be impressed if it keeps being in screen after this seconds. Apply to the group. `UIView.durationThreshold` will be used if it's nil.
     public var durationThreshold: Float?
     
-    // Chage the threshold of area ratio in screen. It's from 0 to 1. The view will be impressed if it's area ratio keeps being bigger than this value. Apply to the group. `UIView.areaRatioThreshold` will be used if it's nil.
+    // Chage the threshold of area ratio in screen. It's from 0 to 1. The view will be impressed if it's area ratio remains equal to or greater than this value. Apply to the group. `UIView.areaRatioThreshold` will be used if it's nil.
     public var areaRatioThreshold: Float?
+    
+    // Chage the threshold of alpha. It's from 0 to 1. The view will be impressed if it's alpha is equal to or greater than this value. Apply to the group. `UIView.alphaThreshold` will be used if it's nil.
+    public var alphaThreshold: Float?
         
     // Retrigger the impression. Apply to the group. `UIView.redetectOptions` will be used if it's nil.
     public var redetectOptions: UIView.Redetect? {
@@ -69,7 +72,17 @@ public class ImpressionGroup<IndexType: Hashable> {
         self.changeState(index: index, view: view, state: state)
     }
     
-    public init(impressionGroupCallback: @escaping ImpressionGroupCallback) {
+    public init(detectionInterval: Float? = nil,
+         durationThreshold: Float? = nil,
+         areaRatioThreshold: Float? = nil,
+         alphaThreshold: Float? = nil,
+         redetectOptions: UIView.Redetect? = nil,
+         impressionGroupCallback: @escaping ImpressionGroupCallback) {
+        self.detectionInterval = detectionInterval
+        self.durationThreshold = durationThreshold
+        self.areaRatioThreshold = areaRatioThreshold
+        self.alphaThreshold = alphaThreshold
+        self.redetectOptions = redetectOptions
         self.impressionGroupCallback = impressionGroupCallback
         readdNotificationObserver()
     }
@@ -103,6 +116,7 @@ public class ImpressionGroup<IndexType: Hashable> {
         view.detectionInterval = self.detectionInterval
         view.durationThreshold = self.durationThreshold
         view.areaRatioThreshold = self.areaRatioThreshold
+        view.alphaThreshold = self.alphaThreshold
         // No need to set .willResignActive and .didEnterBackground for views. Group will handle this.
         var redetectOptions = self.redetectOptions
         redetectOptions?.remove(.willResignActive)

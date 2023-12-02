@@ -67,7 +67,7 @@ var body: some View {
 }
 ```
 
-### 其他 API
+### 更多 API
 
 更改检测间隔 (秒). 更小的 `检测间隔` 代表更高的精确性和更高的CPU消耗。
 
@@ -77,7 +77,7 @@ UIView().detectionInterval = 0.1    // 应用于特定 view. 如果为nil，则�
 ImpressionGroup().detectionInterval = 0.1   // 应用于特定 group. 如果为nil，则使用 `UIView.detectionInterval`。
 ```
 
-更改 view 在屏幕上的持续时间的阈值 (秒)。 如果 view 在屏幕上的持续时间超过此阈值则会触发曝光。
+更改 view 在屏幕上的持续时间的阈值 (秒)。 如果 view 在屏幕上的持续时间超过此阈值则可能会触发曝光。
 
 ```swift
 UIView.durationThreshold = 2  // 应用于所有 view。
@@ -85,12 +85,20 @@ UIView().durationThreshold = 2    // 应用于特定 view. 如果为nil，则使
 ImpressionGroup().durationThreshold = 2   // 应用于特定 group. 如果为nil，则使用 `UIView.durationThreshold`。
 ```
 
-更改 view 在屏幕上的面积比例的阈值（从 0 到 1）。view 在屏幕上的面积的百分比超过此阈值则会触发曝光。
+更改 view 在屏幕上的面积比例的阈值（从 0 到 1）。view 在屏幕上的面积的百分比超过此阈值则可能会触发曝光。
 
 ```swift
 UIView.areaRatioThreshold = 0.4  // 应用于所有 view。
 UIView().areaRatioThreshold = 0.4    // 应用于特定 view. 如果为nil，则使用 `UIView.areaRatioThreshold`。
 ImpressionGroup().areaRatioThreshold = 0.4   // 应用于特定 group. 如果为nil，则使用 `UIView.areaRatioThreshold` 。
+```
+
+更改 view 透明度的阈值（从 0 到 1）。view 透明度超过此阈值则可能会触发曝光。
+
+```swift
+UIView.alphaThreshold = 0.4  // 应用于所有 view。
+UIView().alphaThreshold = 0.4    // 应用于特定 view. 如果为nil，则使用 `UIView.alphaThreshold`。
+ImpressionGroup().alphaThreshold = 0.4   // 应用于特定 group. 如果为nil，则使用 `UIView.alphaThreshold` 。
 ```
 
 在某些情况下重新触发曝光事件。

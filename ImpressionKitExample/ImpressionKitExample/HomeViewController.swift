@@ -14,6 +14,8 @@ class HomeViewController: FormViewController {
     private static let detectionIntervalKey = "detectionIntervalKey"
     private static let durationThresholdKey = "durationThresholdKey"
     private static let areaRatioThresholdKey = "areaRatioThresholdKey"
+    private static let alphaThresholdKey = "alphaThresholdKey"
+    private static let alphaInDemoKey = "alphaInDemoKey"
     private static let redetectOptionsKey = "redetectOptionsKey"
     
     static var detectionInterval: Float {
@@ -51,6 +53,29 @@ class HomeViewController: FormViewController {
         set {
             UIView.areaRatioThreshold = newValue
             UserDefaults.standard.set(newValue, forKey: areaRatioThresholdKey)
+        }
+    }
+    static var alphaThreshold: Float {
+        get {
+            guard UserDefaults.standard.object(forKey: alphaThresholdKey) != nil else {
+                return UIView.alphaThreshold
+            }
+            return UserDefaults.standard.float(forKey: alphaThresholdKey)
+        }
+        set {
+            UIView.alphaThreshold = newValue
+            UserDefaults.standard.set(newValue, forKey: alphaThresholdKey)
+        }
+    }
+    static var alphaInDemo: Float {
+        get {
+            guard UserDefaults.standard.object(forKey: alphaInDemoKey) != nil else {
+                return 1
+            }
+            return UserDefaults.standard.float(forKey: alphaInDemoKey)
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: alphaInDemoKey)
         }
     }
     static var redetectOptions: UIView.Redetect {
@@ -156,6 +181,28 @@ class HomeViewController: FormViewController {
         }.onChange({ (row) in
             HomeViewController.areaRatioThreshold = Float((row.value ?? 0) / 100)
         })
+        <<< SliderRow() {
+            $0.title = "Alpha Threshold"
+            $0.value = Float(Int(HomeViewController.alphaThreshold * 100))
+            $0.cell.slider.minimumValue = 1
+            $0.cell.slider.maximumValue = 100
+            $0.displayValueFor = {
+                return "\(Int($0 ?? 0))%"
+            }
+        }.onChange({ (row) in
+            HomeViewController.alphaThreshold = Float((row.value ?? 0) / 100)
+        })
+        <<< SliderRow() {
+            $0.title = "Alpha of views in Demo"
+            $0.value = Float(Int(HomeViewController.alphaInDemo * 100))
+            $0.cell.slider.minimumValue = 1
+            $0.cell.slider.maximumValue = 100
+            $0.displayValueFor = {
+                return "\(Int($0 ?? 0))%"
+            }
+        }.onChange({ (row) in
+            HomeViewController.alphaInDemo = Float((row.value ?? 0) / 100)
+        })
         <<< SwitchRow() {
             $0.title = "Redetect When Left Screen"
             $0.value = HomeViewController.redetectOptions.contains(.leftScreen)
@@ -203,6 +250,8 @@ class HomeViewController: FormViewController {
             HomeViewController.detectionInterval = 0.2
             HomeViewController.durationThreshold = 1
             HomeViewController.areaRatioThreshold = 0.5
+            HomeViewController.alphaThreshold = 0.1
+            HomeViewController.alphaInDemo = 1
             HomeViewController.redetectOptions = []
             self?.setUpForm()
         }

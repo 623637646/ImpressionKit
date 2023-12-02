@@ -70,9 +70,9 @@ var body: some View {
 }
 ```
 
-### Others APIs
+### More APIs
 
-Change the detection (scan) interval (in seconds). Smaller `detectionInterval` means more accuracy and higher CPU consumption.
+Modify the detection (scan) interval (in seconds). Smaller `detectionInterval` means higher accuracy and higher CPU consumption.
 
 ```swift
 UIView.detectionInterval = 0.1  // apply to all views
@@ -80,7 +80,7 @@ UIView().detectionInterval = 0.1    // apply to the specific view. `UIView.detec
 ImpressionGroup().detectionInterval = 0.1   // apply to the group. `UIView.detectionInterval` will be used if it's nil.
 ```
 
-Chage the threshold of duration in screen (in seconds). The view will be impressed if it keeps being in screen after this seconds.
+Modify the threshold (seconds) for the duration of a view on the screen. If the view's duration on the screen exceeds this threshold, it may trigger an impression.
 
 ```swift
 UIView.durationThreshold = 2  // apply to all views
@@ -88,7 +88,7 @@ UIView().durationThreshold = 2    // apply to the specific view. `UIView.duratio
 ImpressionGroup().durationThreshold = 2   // apply to the group. `UIView.durationThreshold` will be used if it's nil.
 ```
 
-Chage the threshold of area ratio in screen. It's from 0 to 1. The view will be impressed if it's area ratio keeps being bigger than this value.
+Modify the threshold (from 0 to 1) for the area ratio of the view on the screen. If the percentage of the view's area on the screen exceeds this threshold, it may trigger an impression.
 
 ```swift
 UIView.areaRatioThreshold = 0.4  // apply to all views
@@ -96,13 +96,21 @@ UIView().areaRatioThreshold = 0.4    // apply to the specific view. `UIView.area
 ImpressionGroup().areaRatioThreshold = 0.4   // apply to the group. `UIView.areaRatioThreshold` will be used if it's nil.
 ```
 
+Modify the threshold (from 0 to 1) for the view opacity. If the view's opacity exceeds this threshold, it may trigger an impression.
+
+```swift
+UIView.alphaThreshold = 0.4  // apply to all views
+UIView().alphaThreshold = 0.4    // apply to the specific view. `UIView.alphaThreshold` will be used if it's nil.
+ImpressionGroup().alphaThreshold = 0.4   // apply to the group. `UIView.alphaThreshold` will be used if it's nil.
+```
+
 Retrigger the impression event in some situations.
 
 ```swift
-// Retrigger the impression event when a view has left from the screen (The UIViewController (page) is still here, Just the view is out of the screen).
+// Retrigger the impression event when a view left from the screen (The UIViewController (page) is still here, Just the view is out of the screen).
 public static let leftScreen = Redetect(rawValue: 1 << 0)
 
-// Retrigger the impression event when the UIViewController which the view in did disappear.
+// Retrigger the impression event when the UIViewController of the view disappear.
 public static let viewControllerDidDisappear = Redetect(rawValue: 1 << 1)
 
 // Retrigger the impression event when the App did enter background.

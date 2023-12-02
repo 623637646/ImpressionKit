@@ -16,6 +16,7 @@ private var stateKey = 0
 private var detectionIntervalKey = 0
 private var durationThresholdKey = 0
 private var areaRatioThresholdKey = 0
+private var alphaThresholdKey = 0
 private var redetectOptionsKey = 0
 private var hookingDeallocTokenKey = 0
 private var hookingDidMoveToWindowTokenKey = 0
@@ -95,10 +96,10 @@ extension UIView {
         }
     }
     
-    // Chage the threshold of area ratio in screen. It's from 0 to 1. The view will be impressed if it's area ratio keeps being bigger than this value. Apply to all views
+    // Chage the threshold of area ratio in screen. It's from 0 to 1. The view will be impressed if it's area ratio remains equal to or greater than this value. Apply to all views
     public static var areaRatioThreshold: Float = 0.5
     
-    // Chage the threshold of area ratio in screen. It's from 0 to 1. The view will be impressed if it's area ratio keeps being bigger than this value. Apply to the specific view. `UIView.areaRatioThreshold` will be used if it's nil.
+    // Chage the threshold of area ratio in screen. It's from 0 to 1. The view will be impressed if it's area ratio remains equal to or greater than this value. Apply to the specific view. `UIView.areaRatioThreshold` will be used if it's nil.
     public var areaRatioThreshold: Float? {
         set {
             objc_setAssociatedObject(self, &areaRatioThresholdKey, newValue, .OBJC_ASSOCIATION_COPY_NONATOMIC)
@@ -109,6 +110,20 @@ extension UIView {
         }
     }
     
+    // Chage the threshold of alpha. It's from 0 to 1. The view will be impressed if it's alpha is equal to or greater than this value. Apply to all views
+    public static var alphaThreshold: Float = 0.1
+    
+    // Chage the threshold of alpha. It's from 0 to 1. The view will be impressed if it's alpha is equal to or greater than this value. Apply to the specific view. `UIView.alphaThreshold` will be used if it's nil.
+    public var alphaThreshold: Float? {
+        set {
+            objc_setAssociatedObject(self, &alphaThresholdKey, newValue, .OBJC_ASSOCIATION_COPY_NONATOMIC)
+        }
+        
+        get {
+            return objc_getAssociatedObject(self, &alphaThresholdKey) as? Float
+        }
+    }
+    
     public struct Redetect: OptionSet {
         
         public let rawValue: Int
@@ -116,10 +131,10 @@ extension UIView {
             self.rawValue = rawValue
         }
         
-        // Retrigger the impression event when a view has left from the screen (The UIViewController (page) is still here, Just the view is out of the screen).
+        // Retrigger the impression event when a view left from the screen (The UIViewController (page) is still here, Just the view is out of the screen).
         public static let leftScreen = Redetect(rawValue: 1 << 0)
         
-        // Retrigger the impression event when the UIViewController which the view in did disappear.
+        // Retrigger the impression event when the UIViewController of the view disappear.
         public static let viewControllerDidDisappear = Redetect(rawValue: 1 << 1)
         
         // Retrigger the impression event when the App did enter background.
@@ -147,37 +162,43 @@ extension UIView {
     
     var hookingDeallocToken: Token? {
         set {
-            objc_setAssociatedObject(self, &hookingDeallocTokenKey, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+            let closure = { return newValue }
+            objc_setAssociatedObject(self, &hookingDeallocTokenKey, closure, .OBJC_ASSOCIATION_COPY_NONATOMIC)
         }
         
         get {
-            return objc_getAssociatedObject(self, &hookingDeallocTokenKey) as? Token
+            guard let closure = objc_getAssociatedObject(self, &hookingDeallocTokenKey) as? () -> Token? else { return nil }
+            return closure()
         }
     }
     
     var hookingDidMoveToWindowToken: Token? {
         set {
-            objc_setAssociatedObject(self, &hookingDidMoveToWindowTokenKey, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+            let closure = { return newValue }
+            objc_setAssociatedObject(self, &hookingDidMoveToWindowTokenKey, closure, .OBJC_ASSOCIATION_COPY_NONATOMIC)
         }
         
         get {
-            return objc_getAssociatedObject(self, &hookingDidMoveToWindowTokenKey) as? Token
+            guard let closure = objc_getAssociatedObject(self, &hookingDidMoveToWindowTokenKey) as? () -> Token? else { return nil }
+            return closure()
         }
     }
     
     var hookingViewDidDisappearToken: Token? {
         set {
-            objc_setAssociatedObject(self, &hookingViewDidDisappearTokenKey, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+            let closure = { return newValue }
+            objc_setAssociatedObject(self, &hookingViewDidDisappearTokenKey, closure, .OBJC_ASSOCIATION_COPY_NONATOMIC)
         }
         
         get {
-            return objc_getAssociatedObject(self, &hookingViewDidDisappearTokenKey) as? Token
+            guard let closure = objc_getAssociatedObject(self, &hookingViewDidDisappearTokenKey) as? () -> Token? else { return nil }
+            return closure()
         }
     }
     
     var notificationTokens: [NSObjectProtocol] {
         set {
-            objc_setAssociatedObject(self, &notificationTokensKey, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+            objc_setAssociatedObject(self, &notificationTokensKey, newValue, .OBJC_ASSOCIATION_COPY_NONATOMIC)
         }
         
         get {

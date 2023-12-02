@@ -19,6 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UIView.detectionInterval = HomeViewController.detectionInterval
         UIView.durationThreshold = HomeViewController.durationThreshold
         UIView.areaRatioThreshold = HomeViewController.areaRatioThreshold
+        UIView.alphaThreshold = HomeViewController.alphaThreshold
         UIView.redetectOptions = HomeViewController.redetectOptions
         ImpressionKitDebug.shared.openLogs()
         

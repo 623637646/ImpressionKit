@@ -207,7 +207,8 @@ extension UIView {
     // MARK: - Algorithm
     
     private func areaRatio() -> Float {
-        guard self.isHidden == false && self.alpha > 0 else {
+        let alphaThreshold = CGFloat(self.alphaThreshold ?? UIView.alphaThreshold)
+        guard self.isHidden == false && self.alpha >= alphaThreshold else {
             return 0
         }
         if let window = self as? UIWindow,
@@ -219,14 +220,14 @@ extension UIView {
         } else {
             // It's normal view
             guard let window = self.window,
-                  window.isHidden == false && window.alpha > 0 else {
+                  window.isHidden == false && window.alpha >= alphaThreshold else {
                 return 0
             }
-            // If super view hidden or alpha <= 0, self can't show
+            // If super view hidden or alpha < alphaThreshold, self can't show
             var aView = self
             var frameInSuperView = self.bounds
             while let superView = aView.superview {
-                guard superView.isHidden == false && superView.alpha > 0 else {
+                guard superView.isHidden == false && superView.alpha >= alphaThreshold else {
                     return 0
                 }
                 frameInSuperView = aView.convert(frameInSuperView, to: superView)

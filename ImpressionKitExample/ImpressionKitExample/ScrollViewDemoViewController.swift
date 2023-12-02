@@ -96,6 +96,7 @@ private class CellView: UIView {
         super.init(frame: CGRect.zero)
         self.layer.borderColor = UIColor.gray.cgColor
         self.layer.borderWidth = 0.5
+        self.alpha = CGFloat(HomeViewController.alphaInDemo)
         
         self.label.frame = self.bounds
         self.addSubview(self.label)

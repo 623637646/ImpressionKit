@@ -27,7 +27,7 @@ class CollectionViewDemo2ViewController: UIViewController, UICollectionViewDataS
         if state.isImpressed {
             print("impressed index: \(index.section), \(index.row)")
         }
-        if let cell = view as? Cell {
+        if let cell = view.superview as? Cell {
             cell.updateUI(state: state)
         }
     }
@@ -87,7 +87,8 @@ class CollectionViewDemo2ViewController: UIViewController, UICollectionViewDataS
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! Cell
-        self.group.bind(view: cell, index: indexPath, ignoreDetection: indexPath.section != 1)
+        cell.contentView.alpha = CGFloat(HomeViewController.alphaInDemo)
+        self.group.bind(view: cell.contentView, index: indexPath, ignoreDetection: indexPath.section != 1)
         cell.index = indexPath.row
         cell.updateUI(state: self.group.states[indexPath])
         return cell
@@ -136,7 +137,7 @@ private class Cell: UICollectionViewCell {
             self.contentView.backgroundColor = .green
         case .inScreen(_):
             self.contentView.backgroundColor = .white
-            UIView.animate(withDuration: TimeInterval(self.durationThreshold ?? UIView.durationThreshold), delay: 0, options: [.curveLinear, .allowUserInteraction], animations: {
+            UIView.animate(withDuration: TimeInterval(self.contentView.durationThreshold ?? UIView.durationThreshold), delay: 0, options: [.curveLinear, .allowUserInteraction], animations: {
                 self.contentView.backgroundColor = .red
             }, completion: nil)
         default:
