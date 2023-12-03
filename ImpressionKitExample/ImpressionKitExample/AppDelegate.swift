@@ -26,11 +26,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         PerformanceMonitor.shared().start()
         
         let navigationController = UINavigationController(rootViewController: HomeViewController())
-        navigationController.navigationBar.setBackgroundImage(UIImage(), for: .default)
-        navigationController.navigationBar.shadowImage = UIImage()
-        navigationController.navigationBar.isTranslucent = true
-        navigationController.view.backgroundColor = .clear
-        
         let window = UIWindow(frame: UIScreen.main.bounds)
         window.rootViewController = navigationController
         self.window = window
