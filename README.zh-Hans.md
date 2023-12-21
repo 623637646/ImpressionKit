@@ -137,6 +137,6 @@ pod 'ImpressionKit'
 
 # Requirements
 
-- iOS 11.0+ (UIKit)
+- iOS 12.0+ (UIKit)
 - iOS 13.0+ (SwiftUI)
-- Xcode 11+
+- Xcode 15.1+
