@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -16,8 +16,8 @@
 		5C87C6612664F2B5006E824E /* ScrollViewDemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C87C6602664F2B5006E824E /* ScrollViewDemoViewController.swift */; };
 		5C87C6662664F327006E824E /* CollectionViewDemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C87C6652664F327006E824E /* CollectionViewDemoViewController.swift */; };
 		62F7F59526A973A9003DF049 /* SwiftUIListDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62F7F59426A973A9003DF049 /* SwiftUIListDemoView.swift */; };
+		634294AE6E2BB68D33D5D7F6 /* Pods_ImpressionKitExample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E14EEC2186D571924183418 /* Pods_ImpressionKitExample.framework */; };
 		9CB13B7526AD634900A510F9 /* SwiftUIScrollViewDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CB13B7426AD634900A510F9 /* SwiftUIScrollViewDemoView.swift */; };
-		D4966ED1E5098FDCD6CE3B4D /* Pods_ImpressionKitExample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7998D14B4E1928F7426C2FF5 /* Pods_ImpressionKitExample.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,7 +32,7 @@
 		5C87C6602664F2B5006E824E /* ScrollViewDemoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollViewDemoViewController.swift; sourceTree = "<group>"; };
 		5C87C6652664F327006E824E /* CollectionViewDemoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewDemoViewController.swift; sourceTree = "<group>"; };
 		62F7F59426A973A9003DF049 /* SwiftUIListDemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIListDemoView.swift; sourceTree = "<group>"; };
-		7998D14B4E1928F7426C2FF5 /* Pods_ImpressionKitExample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ImpressionKitExample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6E14EEC2186D571924183418 /* Pods_ImpressionKitExample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ImpressionKitExample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9CB13B7426AD634900A510F9 /* SwiftUIScrollViewDemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIScrollViewDemoView.swift; sourceTree = "<group>"; };
 		D6FDACE8F7FE7BF61899FD4A /* Pods-ImpressionKitExample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ImpressionKitExample.debug.xcconfig"; path = "Target Support Files/Pods-ImpressionKitExample/Pods-ImpressionKitExample.debug.xcconfig"; sourceTree = "<group>"; };
 		E93E5965889DA252ED3ECF35 /* Pods-ImpressionKitExample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ImpressionKitExample.release.xcconfig"; path = "Target Support Files/Pods-ImpressionKitExample/Pods-ImpressionKitExample.release.xcconfig"; sourceTree = "<group>"; };
@@ -43,7 +43,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D4966ED1E5098FDCD6CE3B4D /* Pods_ImpressionKitExample.framework in Frameworks */,
+				634294AE6E2BB68D33D5D7F6 /* Pods_ImpressionKitExample.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -53,7 +53,7 @@
 		0AADC43F91C62FB71E41F54E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				7998D14B4E1928F7426C2FF5 /* Pods_ImpressionKitExample.framework */,
+				6E14EEC2186D571924183418 /* Pods_ImpressionKitExample.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -114,7 +114,7 @@
 				5C1ED04626637CB000C68451 /* Sources */,
 				5C1ED04726637CB000C68451 /* Frameworks */,
 				5C1ED04826637CB000C68451 /* Resources */,
-				39A0A1199321267853197928 /* [CP] Embed Pods Frameworks */,
+				BADCF342DB72A74F92A19C9D /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -170,7 +170,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		39A0A1199321267853197928 /* [CP] Embed Pods Frameworks */ = {
+		BADCF342DB72A74F92A19C9D /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -292,7 +292,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -347,7 +347,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;

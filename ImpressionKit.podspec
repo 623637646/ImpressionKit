@@ -1,11 +1,11 @@
 Pod::Spec.new do |s|
 
   s.name         = "ImpressionKit"
-  s.version      = "3.7.3"
-  s.summary      = "A tool to analyze impression events for UIView in iOS (exposure of UIView)."
+  s.version      = "3.7.4"
+  s.summary      = "A tool to detect impression events for UIView (exposure of UIView) in iOS."
 
   s.description  = <<-DESC
-  					This is a library to analyze impression events for UIView in iOS (exposure of UIView).
+  This is a user behavior tracking (UBT) tool to analyze impression events for UIView (exposure of UIView) in iOS.
                    DESC
 
   s.homepage     = "https://github.com/623637646/ImpressionKit"
@@ -14,7 +14,7 @@ Pod::Spec.new do |s|
 
   s.author       = { "Yanni Wang" => "wy19900729@gmail.com" }
 
-  s.platform     = :ios, "11.0"
+  s.platform     = :ios, "12.0"
   
   s.swift_versions = "5"
 
@@ -22,6 +22,6 @@ Pod::Spec.new do |s|
 
   s.source_files  = "ImpressionKit/**/*.{swift}"
 
-  s.dependency "EasySwiftHook", "~> 3.3"
+  s.dependency "EasySwiftHook", "~> 3.4.0"
 
 end
