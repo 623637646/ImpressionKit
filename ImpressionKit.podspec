@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "ImpressionKit"
-  s.version      = "3.7.4"
+  s.version      = "3.7.5"
   s.summary      = "A tool to detect impression events for UIView (exposure of UIView) in iOS."
 
   s.description  = <<-DESC
@@ -22,6 +22,6 @@ Pod::Spec.new do |s|
 
   s.source_files  = "ImpressionKit/**/*.{swift}"
 
-  s.dependency "EasySwiftHook", "~> 3.4.0"
+  s.dependency "EasySwiftHook", "~> 3.5.0"
 
 end
