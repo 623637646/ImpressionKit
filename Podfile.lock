@@ -1,10 +1,10 @@
 PODS:
-  - EasySwiftHook (3.5.0):
-    - libffi_apple (~> 3.4.4)
-  - libffi_apple (3.4.4)
+  - EasySwiftHook (3.5.2):
+    - libffi_apple (~> 3.4.5)
+  - libffi_apple (3.4.5)
 
 DEPENDENCIES:
-  - EasySwiftHook (~> 3.5.0)
+  - EasySwiftHook (~> 3.5.2)
 
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
@@ -12,9 +12,9 @@ SPEC REPOS:
     - libffi_apple
 
 SPEC CHECKSUMS:
-  EasySwiftHook: 44b94b8bcf675f92e0ef0adce048445428b85421
-  libffi_apple: 6e58d4f9faa5111041891ec03d4df8ece1d02f9c
+  EasySwiftHook: ff222cfa146ee3192c88d6bb1c4690b6f4482106
+  libffi_apple: 1b1ccf5c04a53234a73c0eb44981778f74d4da78
 
-PODFILE CHECKSUM: 3cd7ca9b1c02f6de8b1cc44afaf45fc04a522576
+PODFILE CHECKSUM: 1fbacee3e9a6edcfdd541a14e4ac46efa21c9814
 
-COCOAPODS: 1.14.3
+COCOAPODS: 1.15.2

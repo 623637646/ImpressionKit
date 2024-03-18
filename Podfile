@@ -3,6 +3,6 @@ platform :ios, '12.0'
 
 target 'ImpressionKit' do
   use_frameworks!
-  pod 'EasySwiftHook', "~> 3.5.0"
+  pod 'EasySwiftHook', "~> 3.5.2"
 
 end

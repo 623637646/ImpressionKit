@@ -22,6 +22,6 @@ Pod::Spec.new do |s|
 
   s.source_files  = "ImpressionKit/**/*.{swift}"
 
-  s.dependency "EasySwiftHook", "~> 3.5.0"
+  s.dependency "EasySwiftHook", "~> 3.5.2"
 
 end
