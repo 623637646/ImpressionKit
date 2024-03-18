@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "ImpressionKit"
-  s.version      = "3.7.5"
+  s.version      = "3.7.6"
   s.summary      = "A tool to detect impression events for UIView (exposure of UIView) in iOS."
 
   s.description  = <<-DESC
