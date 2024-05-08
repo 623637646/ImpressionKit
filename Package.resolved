@@ -1,25 +1,23 @@
 {
-  "object": {
-    "pins": [
-      {
-        "package": "libffi_iOS",
-        "repositoryURL": "https://github.com/623637646/libffi.git",
-        "state": {
-          "branch": null,
-          "revision": "c006945112296b8dc4c47bf70cd3ad5fc31488cf",
-          "version": "3.3.6-iOS"
-        }
-      },
-      {
-        "package": "SwiftHook",
-        "repositoryURL": "https://github.com/623637646/SwiftHook.git",
-        "state": {
-          "branch": null,
-          "revision": "2c03fa626fd042b5244e75fcf5ab42d6937734a2",
-          "version": "3.3.0"
-        }
+  "pins" : [
+    {
+      "identity" : "libffi",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/623637646/libffi.git",
+      "state" : {
+        "revision" : "bc1dac0c1b522539f21fc28fe1f7e07bb7c2fbd5",
+        "version" : "3.4.5"
       }
-    ]
-  },
-  "version": 1
+    },
+    {
+      "identity" : "swifthook",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/623637646/SwiftHook.git",
+      "state" : {
+        "revision" : "474f80132a3a4e74b3f8a5b87b707d74de387769",
+        "version" : "3.5.2"
+      }
+    }
+  ],
+  "version" : 2
 }
