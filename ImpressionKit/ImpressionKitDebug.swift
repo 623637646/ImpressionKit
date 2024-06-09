@@ -6,7 +6,11 @@
 //
 
 #if DEBUG
+#if canImport(UIKit)
 import UIKit
+#elseif canImport(AppKit)
+import AppKit
+#endif
 #if SWIFT_PACKAGE
 import SwiftHook
 #else
@@ -62,15 +66,16 @@ public class ImpressionKitDebug {
         RunLoop.main.add(timer, forMode: .common)
     }
     
+    #if canImport(UIKit)
     private func hook() {
-        try! hookAfter(targetClass: UIResponder.self, selector:  #selector(UIResponder.init)) { object, selector in
+        try! hookAfter(targetClass: UIResponder.self, selector:  #selector(UIResponder.initialize)) { object, selector in
             if object is UIViewController {
                 ImpressionKitDebug.shared.viewControllerCount += 1
             } else if object is UIView {
                 ImpressionKitDebug.shared.viewCount += 1
             }
         }
-        
+
         try! hookDeallocBefore(targetClass: UIResponder.self) { object in
             if object is UIViewController {
                 ImpressionKitDebug.shared.viewControllerCount -= 1
@@ -79,7 +84,25 @@ public class ImpressionKitDebug {
             }
         }
     }
-    
+    #elseif canImport(AppKit)
+    private func hook() {
+        try! hookAfter(targetClass: NSResponder.self, selector:  #selector(NSResponder.initialize)) { object, selector in
+            if object is NSViewController {
+                ImpressionKitDebug.shared.viewControllerCount += 1
+            } else if object is NSView {
+                ImpressionKitDebug.shared.viewCount += 1
+            }
+        }
+        
+        try! hookDeallocBefore(targetClass: NSResponder.self) { object in
+            if object is NSViewController {
+                ImpressionKitDebug.shared.viewControllerCount -= 1
+            } else if object is NSView {
+                ImpressionKitDebug.shared.viewCount -= 1
+            }
+        }
+    }
+    #endif
 }
 
 #endif
