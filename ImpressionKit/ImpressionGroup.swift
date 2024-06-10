@@ -5,43 +5,41 @@
 //  Created by Yanni Wang on 2/6/21.
 //
 
-import UIKit
-
 public class ImpressionGroup<IndexType: Hashable> {
     
     // MARK: - config
-    // Change the detection (scan) interval (in seconds). Smaller detectionInterval means more accuracy and higher CPU consumption. Apply to the group. `UIView.detectionInterval` will be used if it's nil.
+    // Change the detection (scan) interval (in seconds). Smaller detectionInterval means more accuracy and higher CPU consumption. Apply to the group. `UIView/NSView.detectionInterval` will be used if it's nil.
     public var detectionInterval: Float?
     
-    // Chage the threshold of duration in screen (in seconds). The view will be impressed if it keeps being in screen after this seconds. Apply to the group. `UIView.durationThreshold` will be used if it's nil.
+    // Chage the threshold of duration in screen (in seconds). The view will be impressed if it keeps being in screen after this seconds. Apply to the group. `UIView/NSView.durationThreshold` will be used if it's nil.
     public var durationThreshold: Float?
     
-    // Chage the threshold of area ratio in screen. It's from 0 to 1. The view will be impressed if it's area ratio remains equal to or greater than this value. Apply to the group. `UIView.areaRatioThreshold` will be used if it's nil.
+    // Chage the threshold of area ratio in screen. It's from 0 to 1. The view will be impressed if it's area ratio remains equal to or greater than this value. Apply to the group. `UIView/NSView.areaRatioThreshold` will be used if it's nil.
     public var areaRatioThreshold: Float?
     
-    // Chage the threshold of alpha. It's from 0 to 1. The view will be impressed if it's alpha is equal to or greater than this value. Apply to the group. `UIView.alphaThreshold` will be used if it's nil.
+    // Chage the threshold of alpha. It's from 0 to 1. The view will be impressed if it's alpha is equal to or greater than this value. Apply to the group. `UIView/NSView.alphaThreshold` will be used if it's nil.
     public var alphaThreshold: Float?
         
-    // Retrigger the impression. Apply to the group. `UIView.redetectOptions` will be used if it's nil.
-    public var redetectOptions: UIView.Redetect? {
+    // Retrigger the impression. Apply to the group. `UIView/NSView.redetectOptions` will be used if it's nil.
+    public var redetectOptions: ViewType.Redetect? {
         didSet {
             readdNotificationObserver()
         }
     }
     
     // MARK: - public
-    public typealias ImpressionGroupCallback = (_ group: ImpressionGroup, _ index: IndexType, _ view: UIView, _ state: UIView.ImpressionState) -> ()
+    public typealias ImpressionGroupCallback = (_ group: ImpressionGroup, _ index: IndexType, _ view: ViewType, _ state: ViewType.ImpressionState) -> ()
     
-    public private(set) var states = [IndexType: UIView.ImpressionState]()
+    public private(set) var states = [IndexType: ViewType.ImpressionState]()
     
     // MARK: - private
-    private var views = [IndexType: () -> UIView?]()
+    private var views = [IndexType: () -> ViewType?]()
         
     private var notificationTokens = [NSObjectProtocol]()
     
     private let impressionGroupCallback: ImpressionGroupCallback
     
-    private lazy var impressionBlock: (_ view: UIView, _ state: UIView.ImpressionState) -> () = { [weak self] (view, state) in
+    private lazy var impressionBlock: (_ view: ViewType, _ state: ViewType.ImpressionState) -> () = { [weak self] (view, state) in
         guard let self = self,
               let index = self.views.first(where: { $1() == view })?.key else {
             return
@@ -76,7 +74,7 @@ public class ImpressionGroup<IndexType: Hashable> {
          durationThreshold: Float? = nil,
          areaRatioThreshold: Float? = nil,
          alphaThreshold: Float? = nil,
-         redetectOptions: UIView.Redetect? = nil,
+         redetectOptions: ViewType.Redetect? = nil,
          impressionGroupCallback: @escaping ImpressionGroupCallback) {
         self.detectionInterval = detectionInterval
         self.durationThreshold = durationThreshold
@@ -95,7 +93,7 @@ public class ImpressionGroup<IndexType: Hashable> {
      Non-calling may cause abnormal impression.
      if a index doesn't need to be impressed.  pass `ignoreDetection = true` to ignore this index.
      */
-    public func bind(view: UIView, index: IndexType, ignoreDetection: Bool = false) {
+    public func bind(view: ViewType, index: IndexType, ignoreDetection: Bool = false) {
         if let previousIndex = views.first(where: { $1() == view })?.key {
             views[previousIndex] = nil
         }
@@ -146,7 +144,7 @@ public class ImpressionGroup<IndexType: Hashable> {
         resetGroupStateAndRedetect(.unknown)
     }
     
-    private func resetGroupStateAndRedetect(_ state: UIView.ImpressionState) {
+    private func resetGroupStateAndRedetect(_ state: ViewType.ImpressionState) {
         self.views.forEach { (index, closure) in
             guard let view = closure() else {
                 self.views.removeValue(forKey: index)
@@ -159,7 +157,7 @@ public class ImpressionGroup<IndexType: Hashable> {
         self.states = self.states.mapValues { _ in state }
     }
     
-    private func changeState(index: IndexType, view: UIView, state: UIView.ImpressionState) {
+    private func changeState(index: IndexType, view: ViewType, state: ViewType.ImpressionState) {
         if let previousState = self.states[index] {
             guard previousState != state else {
                 return
@@ -174,9 +172,9 @@ public class ImpressionGroup<IndexType: Hashable> {
             NotificationCenter.default.removeObserver(token)
         }
         self.notificationTokens.removeAll()
-        let redetectOptions = self.redetectOptions ?? UIView.redetectOptions
+        let redetectOptions = self.redetectOptions ?? ViewType.redetectOptions
         if redetectOptions.contains(.willResignActive) {
-            let token = NotificationCenter.default.addObserver(forName: UIApplication.willResignActiveNotification, object: nil, queue: nil) { [weak self] _ in
+            let token = NotificationCenter.default.addObserver(forName: ApplicationType.willResignActiveNotification, object: nil, queue: nil) { [weak self] _ in
                 guard let self = self else {
                     return
                 }
@@ -185,7 +183,7 @@ public class ImpressionGroup<IndexType: Hashable> {
             self.notificationTokens.append(token)
         }
         if redetectOptions.contains(.didEnterBackground) {
-            let token = NotificationCenter.default.addObserver(forName: UIApplication.didEnterBackgroundNotification, object: nil, queue: nil) { [weak self] _ in
+            let token = NotificationCenter.default.addObserver(forName: ApplicationType.didEnterBackgroundNotification, object: nil, queue: nil) { [weak self] _ in
                 guard let self = self else {
                     return
                 }

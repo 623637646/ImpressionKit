@@ -13,6 +13,7 @@
 		5C1ED0812663DD7B00C68451 /* UIViewPropertyExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C1ED0802663DD7B00C68451 /* UIViewPropertyExtension.swift */; };
 		5CDD55322667587B00FBF47E /* ImpressionGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CDD55312667587B00FBF47E /* ImpressionGroup.swift */; };
 		62F7F59326A9708D003DF049 /* ImpressionKit+ViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62F7F59226A9708D003DF049 /* ImpressionKit+ViewModifier.swift */; };
+		A06D8DAC2C168A8D00012C90 /* MacOSSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = A06D8DAB2C168A8D00012C90 /* MacOSSupport.swift */; };
 		FC73BCDA27C99E92008B9765 /* ImpressionKitDebug.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC73BCD927C99E92008B9765 /* ImpressionKitDebug.swift */; };
 /* End PBXBuildFile section */
 
@@ -27,6 +28,7 @@
 		5C1ED0802663DD7B00C68451 /* UIViewPropertyExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewPropertyExtension.swift; sourceTree = "<group>"; };
 		5CDD55312667587B00FBF47E /* ImpressionGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpressionGroup.swift; sourceTree = "<group>"; };
 		62F7F59226A9708D003DF049 /* ImpressionKit+ViewModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ImpressionKit+ViewModifier.swift"; sourceTree = "<group>"; };
+		A06D8DAB2C168A8D00012C90 /* MacOSSupport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacOSSupport.swift; sourceTree = "<group>"; };
 		FC73BCD927C99E92008B9765 /* ImpressionKitDebug.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImpressionKitDebug.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -63,13 +65,14 @@
 		5C1ED03726637C7900C68451 /* ImpressionKit */ = {
 			isa = PBXGroup;
 			children = (
-				FC73BCD927C99E92008B9765 /* ImpressionKitDebug.swift */,
 				5C1ED03826637C7900C68451 /* ImpressionKit.h */,
 				5C1ED0802663DD7B00C68451 /* UIViewPropertyExtension.swift */,
 				5C1ED06A26637D5A00C68451 /* UIViewFunctionExtension.swift */,
 				5CDD55312667587B00FBF47E /* ImpressionGroup.swift */,
-				5C1ED03926637C7900C68451 /* Info.plist */,
 				62F7F59226A9708D003DF049 /* ImpressionKit+ViewModifier.swift */,
+				FC73BCD927C99E92008B9765 /* ImpressionKitDebug.swift */,
+				A06D8DAB2C168A8D00012C90 /* MacOSSupport.swift */,
+				5C1ED03926637C7900C68451 /* Info.plist */,
 			);
 			path = ImpressionKit;
 			sourceTree = "<group>";
@@ -197,6 +200,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5C1ED06B26637D5A00C68451 /* UIViewFunctionExtension.swift in Sources */,
+				A06D8DAC2C168A8D00012C90 /* MacOSSupport.swift in Sources */,
 				FC73BCDA27C99E92008B9765 /* ImpressionKitDebug.swift in Sources */,
 				62F7F59326A9708D003DF049 /* ImpressionKit+ViewModifier.swift in Sources */,
 				5CDD55322667587B00FBF47E /* ImpressionGroup.swift in Sources */,

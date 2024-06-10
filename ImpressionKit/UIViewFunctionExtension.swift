@@ -5,7 +5,6 @@
 //  Created by Yanni Wang on 30/5/21.
 //
 
-import UIKit
 #if SWIFT_PACKAGE
 import SwiftHook
 #else
@@ -14,13 +13,13 @@ import EasySwiftHook
 
 private var impressionCallbackKey = 0
 
-public protocol ImpressionProtocol: UIView {}
+public protocol ImpressionProtocol: ViewType {}
 
-extension UIView: ImpressionProtocol {}
+extension ViewType: ImpressionProtocol {}
 
 public extension ImpressionProtocol {
     
-    typealias ImpressionCallback<ViewType: UIView> = (_ view: ViewType, _ state: ImpressionState) -> ()
+    typealias ImpressionCallback<T: ViewType> = (_ view: T, _ state: ImpressionState) -> ()
     
     // The callback will be triggered when impression happens. nil value means cancellation of detection
     func detectImpression(_ block: ImpressionCallback<Self>?) {
@@ -33,7 +32,7 @@ public extension ImpressionProtocol {
                     return
                 }
                 block(view, state)
-            } as ImpressionCallback<UIView>
+            } as ImpressionCallback<ViewType>
             objc_setAssociatedObject(self, &impressionCallbackKey, value, .OBJC_ASSOCIATION_COPY_NONATOMIC)
             // hook & notification
             self.hookDeallocIfNeeded()
@@ -59,12 +58,12 @@ public extension ImpressionProtocol {
         return self.getCallback() != nil
     }
     
-    internal func getCallback() -> ImpressionCallback<UIView>? {
-        return objc_getAssociatedObject(self, &impressionCallbackKey) as? ImpressionCallback<UIView>
+    internal func getCallback() -> ImpressionCallback<ViewType>? {
+        return objc_getAssociatedObject(self, &impressionCallbackKey) as? ImpressionCallback<ViewType>
     }
 }
 
-extension UIView {
+extension ViewType {
     
     // redetect impression for the UIView.
     public func redetect() {
@@ -73,7 +72,7 @@ extension UIView {
     }
     
     func isRedetectionOn(_ option: Redetect) -> Bool {
-        let redetectOptions = self.redetectOptions ?? UIView.redetectOptions
+        let redetectOptions = self.redetectOptions ?? ViewType.redetectOptions
         return redetectOptions.contains(option)
     }
     
@@ -106,7 +105,7 @@ extension UIView {
         guard self.hookingDidMoveToWindowToken == nil else {
             return
         }
-        self.hookingDidMoveToWindowToken = try? hookAfter(object: self, selector: #selector(UIView.didMoveToWindow), closure: { view, _ in
+        self.hookingDidMoveToWindowToken = try? hookAfter(object: self, selector: #selector(ViewType.viewDidMoveToWindow), closure: { view, _ in
             if view.window != nil {
                 if !view.impressionState.isImpressed {
                     view.impressionState = .unknown
@@ -119,7 +118,7 @@ extension UIView {
                 }
                 view.stopTimer()
             }
-        } as @convention(block) (UIView, Selector) -> Void)
+        } as @convention(block) (ViewType, Selector) -> Void)
     }
     
     fileprivate func cancelHookingDidMoveToWindowIfNeeded() {
@@ -143,7 +142,7 @@ extension UIView {
         }
         
         var hookingViewDidDisappearToken: Token?
-        hookingViewDidDisappearToken = try? hookAfter(object: vc, selector: #selector(UIViewController.viewDidDisappear(_:))) { [weak self] in
+        hookingViewDidDisappearToken = try? hookAfter(object: vc, selector: #selector(ViewControllerType.viewDidDisappear)) { [weak self] in
             guard let self = self,
                   self.isRedetectionOn(.viewControllerDidDisappear) else {
                 hookingViewDidDisappearToken?.cancelHook()
@@ -168,10 +167,10 @@ extension UIView {
         self.removeNotificationObserverIfNeeded()
         var names = [Notification.Name]()
         if self.isRedetectionOn(.didEnterBackground) {
-            names.append(UIApplication.didEnterBackgroundNotification)
+            names.append(ApplicationType.didResignActiveNotification)
         }
         if self.isRedetectionOn(.willResignActive) {
-            names.append(UIApplication.willResignActiveNotification)
+            names.append(ApplicationType.willResignActiveNotification)
         }
         guard names.count > 0 else {
             return
@@ -182,9 +181,9 @@ extension UIView {
                 guard let self = self else {
                     return
                 }
-                if notification.name == UIApplication.didEnterBackgroundNotification {
+                if notification.name == ApplicationType.didResignActiveNotification {
                     self.impressionState = .didEnterBackground
-                } else if notification.name == UIApplication.willResignActiveNotification {
+                } else if notification.name == ApplicationType.willResignActiveNotification {
                     self.impressionState = .willResignActive
                 } else {
                     assert(false)
@@ -207,7 +206,7 @@ extension UIView {
     // MARK: - Algorithm
     
     private func areaRatio() -> Float {
-        let alphaThreshold = CGFloat(self.alphaThreshold ?? UIView.alphaThreshold)
+        let alphaThreshold = CGFloat(self.alphaThreshold ?? ViewType.alphaThreshold)
         guard self.isHidden == false && self.alpha >= alphaThreshold else {
             return 0
         }
@@ -253,10 +252,10 @@ extension UIView {
     private static let ratioPrecisionOffset: Float = 0.0001
     private func fixRatioPrecision(number: Float) -> Float {
         // As long as the different ratios on screen is within 0.01% (0.0001), then we can consider two ratios as equal. It's sufficient for this case.
-        guard number > UIView.ratioPrecisionOffset else {
+        guard number > ViewType.ratioPrecisionOffset else {
             return 0
         }
-        guard number < 1 - UIView.ratioPrecisionOffset else {
+        guard number < 1 - ViewType.ratioPrecisionOffset else {
             return 1
         }
         return number
@@ -272,7 +271,7 @@ extension UIView {
         }
         
         // background
-        if UIApplication.shared.applicationState == .background {
+        if ApplicationType.shared.applicationState == .background {
             guard !self.isRedetectionOn(.didEnterBackground) else {
                 self.impressionState = .didEnterBackground
                 return
@@ -280,7 +279,7 @@ extension UIView {
         }
         
         // inactive
-        if UIApplication.shared.applicationState == .inactive {
+        if ApplicationType.shared.applicationState == .inactive {
             guard !self.isRedetectionOn(.willResignActive) else {
                 self.impressionState = .willResignActive
                 return
@@ -310,13 +309,13 @@ extension UIView {
         
         // calculate
         let areaRatio = self.areaRatio()
-        let areaRatioThreshold = self.areaRatioThreshold ?? UIView.areaRatioThreshold
+        let areaRatioThreshold = self.areaRatioThreshold ?? ViewType.areaRatioThreshold
         
         if case .inScreen(let fromDate) = self.impressionState {
             if areaRatio >= areaRatioThreshold {
                 // keep appearance
                 let interval = Date().timeIntervalSince(fromDate)
-                let durationThreshold = self.durationThreshold ?? UIView.durationThreshold
+                let durationThreshold = self.durationThreshold ?? ViewType.durationThreshold
                 if Float(interval) >= durationThreshold {
                     // trigger impression
                     self.impressionState = .impressed(atDate: Date(), areaRatio: areaRatio)
@@ -357,7 +356,7 @@ extension UIView {
     }
         
     private func startTimer() {
-        let timeInterval = TimeInterval(self.detectionInterval ?? UIView.detectionInterval)
+        let timeInterval = TimeInterval(self.detectionInterval ?? ViewType.detectionInterval)
         let timer = Timer.init(timeInterval: timeInterval, repeats: true, block: { [weak self] (timer) in
             // check self
             guard let self = self else {
@@ -368,7 +367,7 @@ extension UIView {
                 return
             }
             // check timer
-            let currentTimeInterval = TimeInterval(self.detectionInterval ?? UIView.detectionInterval)
+            let currentTimeInterval = TimeInterval(self.detectionInterval ?? ViewType.detectionInterval)
             guard currentTimeInterval.isEqual(to: timeInterval) else {
                 self.stopTimer()
                 self.startTimerIfNeeded()
@@ -396,11 +395,11 @@ extension UIView {
     
     // MARK: - others
     // https://stackoverflow.com/a/24590678/9315497
-    private var parentViewController: UIViewController? {
-        var parentResponder: UIResponder? = self
+    private var parentViewController: ViewControllerType? {
+        var parentResponder: ResponderType? = self
         while parentResponder != nil {
             parentResponder = parentResponder?.next
-            if let viewController = parentResponder as? UIViewController {
+            if let viewController = parentResponder as? ViewControllerType {
                 return viewController
             }
         }

@@ -5,7 +5,6 @@
 //  Created by Yanni Wang on 30/5/21.
 //
 
-import UIKit
 #if SWIFT_PACKAGE
 import SwiftHook
 #else
@@ -24,7 +23,7 @@ private var hookingViewDidDisappearTokenKey = 0
 private var notificationTokensKey = 0
 private var timerKey = 0
 
-extension UIView {
+extension ViewType {
            
     // MARK: - Main
     

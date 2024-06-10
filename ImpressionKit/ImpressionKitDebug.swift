@@ -6,7 +6,6 @@
 //
 
 #if DEBUG
-import UIKit
 #if SWIFT_PACKAGE
 import SwiftHook
 #else
@@ -63,18 +62,18 @@ public class ImpressionKitDebug {
     }
     
     private func hook() {
-        try! hookAfter(targetClass: UIResponder.self, selector:  #selector(UIResponder.init)) { object, selector in
-            if object is UIViewController {
+        try! hookAfter(targetClass: ResponderType.self, selector:  NSSelectorFromString("init")) { object, selector in
+            if object is ViewControllerType {
                 ImpressionKitDebug.shared.viewControllerCount += 1
-            } else if object is UIView {
+            } else if object is ViewType {
                 ImpressionKitDebug.shared.viewCount += 1
             }
         }
         
-        try! hookDeallocBefore(targetClass: UIResponder.self) { object in
-            if object is UIViewController {
+        try! hookDeallocBefore(targetClass: ResponderType.self) { object in
+            if object is ViewControllerType {
                 ImpressionKitDebug.shared.viewControllerCount -= 1
-            } else if object is UIView {
+            } else if object is ViewType {
                 ImpressionKitDebug.shared.viewCount -= 1
             }
         }

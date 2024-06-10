@@ -2,10 +2,10 @@ Pod::Spec.new do |s|
 
   s.name         = "ImpressionKit"
   s.version      = "3.7.6"
-  s.summary      = "A tool to detect impression events for UIView (exposure of UIView) in iOS."
+  s.summary      = "A tool to detect impression events for UIView/NSView (exposure of UIView/NSView) in iOS/MacOS."
 
   s.description  = <<-DESC
-  This is a user behavior tracking (UBT) tool to analyze impression events for UIView (exposure of UIView) in iOS.
+  This is a user behavior tracking (UBT) tool to analyze impression events for UIView/NSView (exposure of UIView/NSView) in iOS/MacOS.
                    DESC
 
   s.homepage     = "https://github.com/623637646/ImpressionKit"
@@ -14,7 +14,7 @@ Pod::Spec.new do |s|
 
   s.author       = { "Yanni Wang" => "wy19900729@gmail.com" }
 
-  s.platform     = :ios, "12.0"
+  s.platforms = { :ios => "12.0", :osx => "11.0", :watchos => "7.0", :tvos => "9.0" }
   
   s.swift_versions = "5"
 
