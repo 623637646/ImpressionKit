@@ -6,7 +6,7 @@ PODS:
     - libffi_apple (~> 3.4.7)
   - Eureka (5.5.0)
   - GDPerformanceView-Swift (2.0.3)
-  - ImpressionKit (3.7.6):
+  - ImpressionKit (3.7.7):
     - EasySwiftHook (~> 3.5.3)
   - libffi_apple (3.4.7)
 
@@ -33,7 +33,7 @@ SPEC CHECKSUMS:
   EasySwiftHook: 60c36c9b65f7e177db97adb8e634a7ce6753f768
   Eureka: 1c18c7fcd8f772cc2ca42d6be36292dffa77eecb
   GDPerformanceView-Swift: ef3d05deb103e472a5494d3f60aeca5a58b88a7d
-  ImpressionKit: 34c03b9bb6ffcb1a543223967cdd800db4570a69
+  ImpressionKit: 717c5ecb48b576ffb0c8f0eb743a6925189e8af5
   libffi_apple: b124fcff981c2cc81100c416b87473f9544bad8b
 
 PODFILE CHECKSUM: c89964fe43fcd7b8702d18e00e485d43e7f9bd63
