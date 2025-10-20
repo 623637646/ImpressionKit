@@ -37,6 +37,7 @@ extension UIView {
         case viewControllerDidDisappear
         case didEnterBackground
         case willResignActive
+        case didBecomeActive
         
         public var isImpressed: Bool {
             if case .impressed = self {
