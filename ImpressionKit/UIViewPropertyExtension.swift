@@ -143,6 +143,9 @@ extension UIView {
         
         // Retrigger the impression event when the App will resign active.
         public static let willResignActive = Redetect(rawValue: 1 << 3)
+        
+        // Retrigger the impression event when the App becomes active.
+        public static let didBecomeActive = Redetect(rawValue: 1 << 4)
     }
     
     // Retrigger the impression. Apply to all views.
