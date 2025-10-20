@@ -193,5 +193,14 @@ public class ImpressionGroup<IndexType: Hashable> {
             }
             self.notificationTokens.append(token)
         }
+        if redetectOptions.contains(.didBecomeActive) {
+            let token = NotificationCenter.default.addObserver(forName: UIApplication.didBecomeActiveNotification, object: nil, queue: nil) { [weak self] _ in
+                guard let self = self else {
+                    return
+                }
+                self.resetGroupStateAndRedetect(.didBecomeActive)
+            }
+            self.notificationTokens.append(token)
+        }
     }
 }
