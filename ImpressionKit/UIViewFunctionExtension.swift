@@ -173,6 +173,9 @@ extension UIView {
         if self.isRedetectionOn(.willResignActive) {
             names.append(UIApplication.willResignActiveNotification)
         }
+        if self.isRedetectionOn(.didBecomeActive) {
+            names.append(UIApplication.didBecomeActiveNotification)
+        }
         guard names.count > 0 else {
             return
         }
@@ -186,6 +189,8 @@ extension UIView {
                     self.impressionState = .didEnterBackground
                 } else if notification.name == UIApplication.willResignActiveNotification {
                     self.impressionState = .willResignActive
+                } else if notification.name == UIApplication.didBecomeActiveNotification {
+                    self.impressionState = .didBecomeActive
                 } else {
                     assert(false)
                     return
