@@ -107,16 +107,17 @@ ImpressionGroup().alphaThreshold = 0.4   // apply to the group. `UIView.alphaThr
 Retrigger the impression event in some situations.
 
 ```swift
-// Retrigger the impression event when a view left from the screen (The UIViewController (page) is still here, Just the view is out of the screen).
+// When a view left from the screen, mark the view to retrigger the impression event when this view come back to the screen.
+// Left screen means the view is out of the screen but the UIViewController is still there.
 public static let leftScreen = Redetect(rawValue: 1 << 0)
 
-// Retrigger the impression event when the UIViewController of the view disappear.
+// When the UIViewController of the view disappear, mark the view to retrigger the impression event when the UIViewController appear again.
 public static let viewControllerDidDisappear = Redetect(rawValue: 1 << 1)
 
-// Retrigger the impression event when the App did enter background.
+// When the app enter background, mark the view to retrigger the impression event when the app enter foreground.
 public static let didEnterBackground = Redetect(rawValue: 1 << 2)
 
-// Retrigger the impression event when the App will resign active.
+// When the app will resign active, mark the view to retrigger the impression event when the app become active.
 public static let willResignActive = Redetect(rawValue: 1 << 3)
 ```
 
